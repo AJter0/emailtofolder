@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Email to Folder | emailtofolder.com</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap">
+<style>
+:root{--bg:#ffffff;--bg2:#f5f5f7;--ink:#1d1d1f;--mute:#6e6e73;--line:rgba(0,0,0,.1);--card:rgba(255,255,255,.7);--brand:#0a84ff;--teal:#30d5c8;--vio:#8a5cff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+
+
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,Prompt,system-ui,sans-serif;line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+html[lang=th] body{font-family:Prompt,Inter,system-ui,sans-serif}
+html[lang=th] .en,html[lang=en] .th{display:none}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+.grad{background:linear-gradient(100deg,var(--brand),var(--teal) 50%,var(--vio));background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sh 6s linear infinite}
+@keyframes sh{to{background-position:200% center}}
+#bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--brand),var(--teal),var(--vio));z-index:60}
+/* nav */
+.nav{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;transform:translateX(-50%);width:min(960px,calc(100% - 24px));z-index:50;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px 8px 18px;border-radius:999px;background:var(--card);border:1px solid var(--line);backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px)}
+.logo{font-weight:700;font-size:15px;display:flex;gap:8px;align-items:center;white-space:nowrap}
+.logo i{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--vio));display:grid;place-items:center;color:#fff;font-style:normal;font-size:13px}
+.links{display:flex;gap:24px;font-size:13px;color:var(--mute)}.links a:hover{color:var(--ink)}
+.r{display:flex;gap:8px;align-items:center}
+.lang{display:flex;background:var(--bg2);border-radius:999px;padding:2px}
+.lang button{border:0;background:none;color:var(--mute);font:600 12px inherit;font-family:inherit;padding:5px 11px;border-radius:999px;cursor:pointer;transition:.3s}
+html[lang=th] [data-l=th],html[lang=en] [data-l=en]{background:var(--ink);color:var(--bg)}
+.btn{position:relative;overflow:hidden;display:inline-block;background:var(--brand);color:#fff;padding:14px 28px;border-radius:999px;font-weight:600;font-size:16px;transition:transform .3s,box-shadow .3s}
+.btn:hover{transform:scale(1.05);box-shadow:0 10px 40px rgba(10,132,255,.5)}
+.btn::after{content:"";position:absolute;top:0;left:-80%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-20deg);animation:shim 3.5s infinite}
+@keyframes shim{0%,60%{left:-80%}100%{left:140%}}
+.btn.sm{padding:9px 18px;font-size:13px}
+.btn.ghost{background:none;color:var(--brand);box-shadow:none}.btn.ghost::after{display:none}
+.btn.ghost:hover{box-shadow:none;background:rgba(10,132,255,.12)}
+/* hero */
+.dk{background:var(--bg);color:var(--ink)}
+.hero{position:relative;overflow:hidden;padding:150px 0 90px;text-align:center}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.25;animation:dr 14s ease-in-out infinite alternate}
+.o1{width:520px;height:520px;background:#0a84ff;top:-120px;left:-120px}
+.o2{width:460px;height:460px;background:#8a5cff;top:80px;right:-140px;animation-delay:-5s}
+.o3{width:380px;height:380px;background:#30d5c8;bottom:-160px;left:35%;animation-delay:-9s;opacity:.35}
+@keyframes dr{to{transform:translate(70px,50px) scale(1.2)}}
+.hero .wrap{position:relative;z-index:2}
+.pill{display:inline-block;padding:6px 16px;border-radius:999px;border:1px solid var(--line);background:var(--card);font-size:13px;color:var(--mute)}
+h1{font-size:clamp(38px,8vw,92px);line-height:1.05;letter-spacing:-.035em;margin:22px auto 20px;font-weight:700;max-width:960px}
+html[lang=th] h1{line-height:1.25;letter-spacing:-.01em}
+.lead{font-size:clamp(17px,2.2vw,22px);color:var(--mute);max-width:700px;margin:0 auto 32px}
+.cta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.stage{position:relative;margin:70px auto 0;max-width:980px;perspective:1400px}
+.float{animation:fl 6s ease-in-out infinite}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.tilt{transition:transform .25s ease-out;transform-style:preserve-3d}
+.app{text-align:left;background:linear-gradient(180deg,#16161a,#0d0d10);border:1px solid rgba(255,255,255,.14);border-radius:18px;box-shadow:0 40px 100px rgba(10,40,100,.28),0 0 0 1px rgba(255,255,255,.04) inset;overflow:hidden;font-size:13px}
+.tb{display:flex;align-items:center;gap:7px;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.08);color:#a1a1a6}
+.tb b{width:11px;height:11px;border-radius:50%;background:#ff5f57}.tb b:nth-child(2){background:#febc2e}.tb b:nth-child(3){background:#28c840}.tb span{margin:0 auto;font-weight:600;font-size:12px;transform:translateX(-24px)}
+.bd{display:grid;grid-template-columns:200px 1.3fr 220px;min-height:340px}
+.cl{padding:16px;border-right:1px solid rgba(255,255,255,.08);min-width:0}.cl:last-child{border:0}
+.cl h6{margin:0 0 10px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#6e6e73}
+.fo{padding:7px 10px;border-radius:8px;color:#a1a1a6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.fo.s{margin-left:14px}
+.ml{padding:11px 12px;border:1px solid rgba(255,255,255,.1);border-radius:12px;margin-bottom:10px;color:#f5f5f7}
+.ml strong{display:block;font-weight:600}.ml p{margin:0;color:#8e8e93;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chip{display:inline-block;margin-top:6px;padding:2px 10px;border-radius:999px;background:rgba(48,213,200,.15);color:#30d5c8;font-size:11px;font-weight:600}
+.ru{padding:10px;border-radius:10px;background:rgba(255,255,255,.05);margin-bottom:10px;color:#a1a1a6;font-size:12px}.ru b{display:block;color:#f5f5f7}
+.ok{color:#30d5c8;font-weight:600;font-size:12px}
+.a1,.a2,.a3,.a4{animation:pick 8s infinite}.a1{animation-delay:0s}.a2{animation-delay:2s}.a3{animation-delay:4s}.a4{animation-delay:6s}
+.ml.a1,.ml.a2,.ml.a3,.ml.a4{animation-name:pick}
+.fo.a1,.fo.a2,.fo.a3,.fo.a4{animation-name:fp}
+@keyframes pick{0%,25%,100%{border-color:rgba(255,255,255,.1);transform:none;box-shadow:none}4%,21%{border-color:#0a84ff;transform:translateX(8px);box-shadow:0 0 0 4px rgba(10,132,255,.18)}}
+@keyframes fp{0%,25%,100%{background:transparent;color:#a1a1a6}4%,21%{background:rgba(10,132,255,.22);color:#6cb4ff}}
+.fc{position:absolute;padding:10px 16px;border-radius:14px;background:rgba(255,255,255,.8);border:1px solid rgba(0,0,0,.08);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);font-size:13px;font-weight:600;color:#1d1d1f;box-shadow:0 20px 50px rgba(0,0,0,.14);animation:fl 5s ease-in-out infinite;white-space:nowrap;z-index:3}
+.c1{left:-4%;top:12%}.c2{right:-3%;top:34%;animation-delay:-1.5s}.c3{left:2%;bottom:6%;animation-delay:-3s}.c4{right:4%;bottom:-4%;animation-delay:-2s}
+/* sections */
+section{padding:clamp(70px,11vw,140px) 0;position:relative}
+.eb{color:var(--brand);font-weight:600;font-size:15px;margin-bottom:10px}
+h2{font-size:clamp(30px,5.4vw,60px);line-height:1.1;letter-spacing:-.03em;margin:0 0 16px;font-weight:700}
+html[lang=th] h2{line-height:1.25;letter-spacing:-.01em}
+.sub{color:var(--mute);font-size:clamp(16px,2vw,21px);max-width:680px;margin:0}
+.mq{overflow:hidden;border-block:1px solid var(--line);padding:18px 0;background:var(--bg2);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.mq div{display:flex;gap:48px;width:max-content;animation:mqa 30s linear infinite;font-weight:600;color:var(--mute);font-size:18px;white-space:nowrap}
+@keyframes mqa{to{transform:translateX(-50%)}}
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;margin-top:50px}
+.bc{position:relative;overflow:hidden;grid-column:span 2;background:var(--bg2);border:1px solid var(--line);border-radius:28px;padding:30px;min-height:260px;transition:transform .5s cubic-bezier(.2,.8,.2,1),border-color .3s}
+.bc.w{grid-column:span 3}.bc.x{grid-column:span 4}
+.bc:hover{transform:translateY(-8px) scale(1.01);border-color:rgba(10,132,255,.5)}
+.bc::before{content:"";position:absolute;inset:0;background:radial-gradient(380px circle at var(--mx,50%) var(--my,0),rgba(10,132,255,.2),transparent 60%);opacity:0;transition:.3s}
+.bc:hover::before{opacity:1}
+.bc>*{position:relative}
+.ic{font-size:38px;display:inline-block;animation:fl 4s ease-in-out infinite}
+.bc h3{font-size:24px;margin:16px 0 8px;letter-spacing:-.02em}.bc p{margin:0;color:var(--mute);font-size:16px}
+.big{font-size:clamp(46px,7vw,82px);font-weight:800;letter-spacing:-.04em;line-height:1}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:56px;position:relative}
+.steps::before{content:"";position:absolute;top:34px;left:8%;right:8%;height:2px;background:linear-gradient(90deg,var(--brand),var(--teal),var(--vio));transform:scaleX(0);transform-origin:left;transition:transform 1.8s ease .3s}
+.steps.in::before{transform:scaleX(1)}
+.st{position:relative;text-align:center}
+.nb{width:68px;height:68px;border-radius:50%;margin:0 auto 20px;display:grid;place-items:center;font-size:24px;font-weight:700;background:var(--bg);border:2px solid var(--brand);color:var(--brand);box-shadow:0 0 0 8px var(--bg),0 0 40px rgba(10,132,255,.4)}
+.st h3{margin:0 0 8px;font-size:22px}.st p{margin:0;color:var(--mute)}
+.glow{position:relative;overflow:hidden;border-radius:36px;padding:2px}
+.glow::before{content:"";position:absolute;inset:-60%;background:conic-gradient(from 0deg,#0a84ff,#30d5c8,#8a5cff,#0a84ff);animation:sp 6s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.gi{position:relative;color:#f5f5f7;background:#0b0b0e;border-radius:34px;padding:clamp(28px,6vw,70px);display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+.gi p{color:#a1a1a6;font-size:19px;margin:0}
+.gi ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.gi li{padding:16px 20px;border-radius:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);font-weight:500;transition:.3s}
+.gi li:hover{transform:translateX(10px);background:rgba(10,132,255,.2)}
+.ct{text-align:center;overflow:hidden}
+.ct h2{font-size:clamp(34px,7vw,80px)}
+.ct .sub{margin:0 auto 36px}
+.mailb{font-size:clamp(16px,2.4vw,20px);padding:18px 38px;max-width:100%}.btn.tel{background:var(--ink)}.btn.tel:hover{box-shadow:0 10px 40px rgba(0,0,0,.3)}
+.gh{background:#0d1117;color:#fff;text-align:center;padding:14px 22px;font-size:14px;font-weight:500}.gh a{display:inline-flex;align-items:center;gap:10px;transition:opacity .3s}.gh a:hover{opacity:.75}.gh svg{width:20px;height:20px;fill:#fff;flex:none}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mute);font-size:13px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.rv{opacity:0;transform:translateY(50px) scale(.97);filter:blur(10px);transition:opacity 1s cubic-bezier(.2,.8,.2,1),transform 1s cubic-bezier(.2,.8,.2,1),filter 1s}
+.rv.in{opacity:1;transform:none;filter:none}
+.d1{transition-delay:.12s}.d2{transition-delay:.24s}.d3{transition-delay:.36s}
+.cg{position:fixed;width:420px;height:420px;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(10,132,255,.14),transparent 65%);transform:translate(-50%,-50%);z-index:1;left:-999px;top:-999px}
+@media(max-width:1024px){.bd{grid-template-columns:170px 1fr}.bd .cl:last-child{display:none}.bc,.bc.w{grid-column:span 3}.bc.x{grid-column:span 6}.fc{display:none}}
+@media(max-width:720px){.links{display:none}.bd{grid-template-columns:1fr}.bd .cl:first-child{display:none}.bc,.bc.w,.bc.x{grid-column:span 6;min-height:0}.steps{grid-template-columns:1fr;gap:40px}.steps::before{display:none}.gi{grid-template-columns:1fr}.hero{padding-top:120px}.logo span{font-size:14px}.btn.sm{display:none}.cg{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none;filter:none}}
+</style>
+</head>
+<body>
+<div id="bar"></div><div class="cg" id="cg"></div>
+<div class="nav">
+<a href="#top" class="logo"><i>✉</i><span>emailtofolder.com</span></a>
+<div class="links"><a href="#features"><span class="th">จุดเด่น</span><span class="en">Features</span></a><a href="#how"><span class="th">วิธีทำงาน</span><span class="en">How it works</span></a><a href="#custom">Custom</a><a href="#contact"><span class="th">ติดต่อ</span><span class="en">Contact</span></a></div>
+<div class="r"><div class="lang"><button data-l="th">TH</button><button data-l="en">EN</button></div><a class="btn sm" href="#contact"><span class="th">ขอราคา</span><span class="en">Get a quote</span></a></div>
+</div>
+
+<main id="top">
+<div class="hero dk">
+<div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+<div class="wrap">
+<span class="pill rv"><span class="th">Enterprise Email Archiving Solution</span><span class="en">Enterprise Email Archiving Solution</span></span>
+<h1 class="rv d1"><span class="th">จัดเก็บอีเมลลงโฟลเดอร์<br>ให้เอง <span class="grad">แบบอัตโนมัติ</span></span><span class="en">Every email.<br>Right <span class="grad">Folder</span>. Automatically.</span></h1>
+<p class="lead rv d2"><span class="th">ซอฟต์แวร์สำหรับองค์กร บันทึกอีเมลและไฟล์แนบลงโฟลเดอร์ตามกฎที่คุณกำหนด ค้นหาง่าย ตรวจสอบย้อนหลังได้ พร้อมทีมงานปรับแต่งและดูแลให้เป็นรายกรณี</span><span class="en">Software and solutions that turn scattered emails into an organized, searchable, auditable archive — supported case by case.</span></p>
+<div class="cta rv d3"><a class="btn" href="#contact"><span class="th">ติดต่อเพื่อขอราคา</span><span class="en">Contact for pricing</span></a><a class="btn ghost" href="#how"><span class="th">ดูวิธีทำงาน ›</span><span class="en">See how it works ›</span></a></div>
+
+<div class="stage rv d3">
+<div class="fc c1">📎 Invoice.pdf</div><div class="fc c2">📂 Finance / Invoices ✓</div><div class="fc c3">✉ Contract_v3.eml</div><div class="fc c4">📊 Report.xlsx</div>
+<div class="float"><div class="tilt" id="tilt"><div class="app">
+<div class="tb"><b></b><b></b><b></b><span>Email to Folder — Enterprise</span></div>
+<div class="bd">
+<div class="cl"><h6><span class="th">โฟลเดอร์ปลายทาง</span><span class="en">Target folders</span></h6>
+<div class="fo a3">📁 Projects / 2026-A</div><div class="fo a1">📁 Finance / Invoices</div><div class="fo a2">📁 Legal / Contracts</div><div class="fo a4">📁 HR</div><div class="fo">📁 Clients</div><div class="fo">📁 Archive</div></div>
+<div class="cl"><h6>Inbox</h6>
+<div class="ml a1"><strong>Invoice #INV-2026-0418</strong><p>accounting@vendor.co.th</p><span class="chip">→ Finance / Invoices</span></div>
+<div class="ml a2"><strong>Contract Draft v3</strong><p>legal@partner.com</p><span class="chip">→ Legal / Contracts</span></div>
+<div class="ml a3"><strong>Site report – Week 41</strong><p>pm@projecta.co.th</p><span class="chip">→ Projects / 2026-A</span></div>
+<div class="ml a4"><strong>Meeting minutes</strong><p>hr@company.com</p><span class="chip">→ HR</span></div></div>
+<div class="cl"><h6><span class="th">กฎอัตโนมัติ</span><span class="en">Auto rules</span></h6>
+<div class="ru"><b>Subject contains "Invoice"</b>→ Finance/Invoices</div>
+<div class="ru"><b>From @projecta.co.th</b>→ 2026-A</div>
+<div class="ok">✓ <span id="cnt">1,284</span> <span class="th">ฉบับที่บันทึกแล้ว</span><span class="en">emails saved</span></div></div>
+</div></div></div></div>
+</div>
+</div></div>
+
+<div class="mq"><div><span>PDF</span><span>DOCX</span><span>XLSX</span><span>EML</span><span>Local Drive</span><span>Network Drive</span><span>Server</span><span>Project</span><span>Department</span><span>Client</span><span>PDF</span><span>DOCX</span><span>XLSX</span><span>EML</span><span>Local Drive</span><span>Network Drive</span><span>Server</span><span>Project</span><span>Department</span><span>Client</span></div></div>
+
+<section id="features"><div class="wrap">
+<div class="eb rv"><span class="th">จุดเด่น</span><span class="en">Features</span></div>
+<h2 class="rv d1"><span class="th">ทำให้เรื่องอีเมล<br><span class="grad">เป็นเรื่องง่าย</span></span><span class="en">Make email <span class="grad">effortless</span>.</span></h2>
+<p class="sub rv d2"><span class="th">ออกแบบมาเพื่อองค์กรที่ต้องการความเป็นระเบียบและทำงานร่วมกันเป็นทีม</span><span class="en">Designed for organizations that need order and smooth teamwork.</span></p>
+<div class="bento">
+<div class="bc x rv"><div class="ic">📥</div><h3><span class="th">บันทึกอัตโนมัติ ตั้งกฎครั้งเดียว</span><span class="en">Automatic saving. Set a rule once.</span></h3><p><span class="th">อีเมลและไฟล์แนบถูกจัดเก็บลงโฟลเดอร์ที่ถูกต้องทันที ไม่ต้องลากวางเอง</span><span class="en">Emails and attachments land in the right folder instantly — no more drag and drop.</span></p></div>
+<div class="bc rv d1"><div class="big grad">24/7</div><h3><span class="th">ทำงานต่อเนื่อง</span><span class="en">Always running</span></h3><p><span class="th">ระบบทำงานเบื้องหลังตลอดเวลา</span><span class="en">Works quietly in the background.</span></p></div>
+<div class="bc w rv"><div class="ic">🗂</div><h3><span class="th">ตามโครงสร้างองค์กร</span><span class="en">Fits your structure</span></h3><p><span class="th">จัดเก็บตามโปรเจกต์ แผนก หรือลูกค้า รองรับ Local, Network Drive และ Server</span><span class="en">File by project, department or client — local, network drive or server.</span></p></div>
+<div class="bc w rv d1"><div class="ic">🔎</div><h3><span class="th">ค้นหาและตรวจสอบย้อนหลัง</span><span class="en">Search and audit</span></h3><p><span class="th">ค้นหาอีเมลเก่าได้รวดเร็ว พร้อมบันทึกประวัติเพื่อการตรวจสอบ</span><span class="en">Find old emails fast, with a storage log for audits.</span></p></div>
+<div class="bc w rv"><div class="ic">🔒</div><h3><span class="th">ปลอดภัย ควบคุมได้</span><span class="en">Secure and in control</span></h3><p><span class="th">กำหนดสิทธิ์การเข้าถึง และเก็บข้อมูลในระบบของคุณเอง</span><span class="en">Set permissions and keep data inside your own environment.</span></p></div>
+<div class="bc w rv d1"><div class="ic">🧩</div><h3><span class="th">ปรับแต่งได้ตามต้องการ</span><span class="en">Fully customizable</span></h3><p><span class="th">ปรับกฎ รูปแบบชื่อไฟล์ และ Workflow ให้เข้ากับงานจริง</span><span class="en">Tune rules, file naming and workflows to your real work.</span></p></div>
+</div></div></section>
+
+<section id="how" style="background:var(--bg2)"><div class="wrap" style="text-align:center">
+<div class="eb rv"><span class="th">วิธีทำงาน</span><span class="en">How it works</span></div>
+<h2 class="rv d1"><span class="th">เริ่มต้นใน <span class="grad">3 ขั้นตอน</span></span><span class="en">Up and running in <span class="grad">3 steps</span></span></h2>
+<p class="sub rv d2" style="margin:0 auto"><span class="th">ทีมของเราช่วยติดตั้งและตั้งค่าให้เหมาะกับองค์กรของคุณ</span><span class="en">Our team installs and configures it for your organization.</span></p>
+<div class="steps rv" id="steps">
+<div class="st"><div class="nb">1</div><h3><span class="th">เชื่อมต่ออีเมล</span><span class="en">Connect your mailbox</span></h3><p><span class="th">เชื่อมกับระบบอีเมลที่องค์กรใช้อยู่</span><span class="en">Link the email system you already use.</span></p></div>
+<div class="st"><div class="nb">2</div><h3><span class="th">กำหนดกฎและโฟลเดอร์</span><span class="en">Define rules and folders</span></h3><p><span class="th">ระบุเงื่อนไขและปลายทางตามงานจริง</span><span class="en">Set conditions and destinations that match your workflow.</span></p></div>
+<div class="st"><div class="nb">3</div><h3><span class="th">ปล่อยให้ระบบทำงาน</span><span class="en">Let it run</span></h3><p><span class="th">อีเมลถูกบันทึกอัตโนมัติ คุณโฟกัสงานหลักได้เต็มที่</span><span class="en">Emails save themselves while you focus on real work.</span></p></div>
+</div></div></section>
+
+<section id="custom"><div class="wrap"><div class="glow rv"><div class="gi dk">
+<div><div class="eb">Case by Case</div><h2><span class="th">ซัพพอร์ตเฉพาะองค์กร<br><span class="grad">Custom ตามที่ต้องการ</span></span><span class="en">Support built around you.<br><span class="grad">Customized your way.</span></span></h2>
+<p><span class="th">ทุกองค์กรมีกระบวนการไม่เหมือนกัน เราจึงปรับฟีเจอร์และ Workflow ให้ตรงกับการใช้งานจริง พร้อมดูแลหลังการติดตั้ง</span><span class="en">Every organization works differently, so we tailor features and workflows to your real use and support you after deployment.</span></p></div>
+<ul>
+<li>✓ <span class="th">ปรับกฎและรูปแบบการตั้งชื่อไฟล์</span><span class="en">Custom rules and file naming</span></li>
+<li>✓ <span class="th">เชื่อมต่อระบบภายในองค์กร</span><span class="en">Integration with internal systems</span></li>
+<li>✓ <span class="th">พัฒนาฟีเจอร์เพิ่มตามโจทย์</span><span class="en">Extra features built to your brief</span></li>
+<li>✓ <span class="th">ทีมซัพพอร์ตดูแลต่อเนื่อง</span><span class="en">Ongoing dedicated support</span></li>
+</ul></div></div></div></section>
+
+<section id="contact" class="ct dk"><div class="orb o1" style="opacity:.3"></div><div class="orb o2" style="opacity:.3"></div>
+<div class="wrap" style="position:relative;z-index:2">
+<h2 class="rv"><span class="th">พร้อมจัดระเบียบ<br>อีเมลองค์กรของคุณ<span class="grad">?</span></span><span class="en">Ready to organize<br>your company email<span class="grad">?</span></span></h2>
+<p class="sub rv d1"><span class="th">ราคาขึ้นอยู่กับขอบเขตและความต้องการ กรุณาติดต่อทีมงานเพื่อรับใบเสนอราคาและคำปรึกษา</span><span class="en">Pricing depends on your scope and requirements. Contact our team for a quote and consultation.</span></p>
+<div class="cta rv d2"><a class="btn mailb" href="mailto:teraphanmail@gmail.com?subject=Email%20to%20Folder%20Inquiry">✉ teraphanmail@gmail.com</a><a class="btn mailb tel" href="tel:+66945620859">📞 Tel: 094-562-0859</a></div>
+</div></section>
+</main>
+
+<div class="gh"><a href="https://github.com" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span class="th">เว็บไซต์นี้โฮสต์ด้วย GitHub</span><span class="en">This website is hosted on GitHub</span></a></div>
+<footer class="dk"><div class="wrap"><div>© 2026 Email to Folder Dev Team · emailtofolder.com</div><div>📍 Bangkok, Thailand · 📞 094-562-0859</div></div></footer>
+
+<script>
+(function(){
+var h=document.documentElement,l="th";
+try{var s=localStorage.getItem("lang");if(s==="th"||s==="en")l=s}catch(e){}
+function set(x){h.lang=x;try{localStorage.setItem("lang",x)}catch(e){}}
+set(l);
+document.querySelectorAll(".lang button").forEach(function(b){b.onclick=function(){set(b.dataset.l)}});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.15});
+document.querySelectorAll(".rv").forEach(function(e){io.observe(e)});
+var bar=document.getElementById("bar");
+function sc(){var m=h.scrollHeight-innerHeight;bar.style.width=(m>0?scrollY/m*100:0)+"%"}
+addEventListener("scroll",sc,{passive:true});sc();
+var fine=matchMedia("(pointer:fine)").matches;
+if(fine){
+var t=document.getElementById("tilt"),st=t.parentNode.parentNode;
+st.addEventListener("pointermove",function(e){var r=st.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;t.style.transform="rotateY("+x*10+"deg) rotateX("+-y*8+"deg)"});
+st.addEventListener("pointerleave",function(){t.style.transform=""});
+var cg=document.getElementById("cg");
+addEventListener("pointermove",function(e){cg.style.left=e.clientX+"px";cg.style.top=e.clientY+"px"},{passive:true});
+document.querySelectorAll(".bc").forEach(function(c){c.addEventListener("pointermove",function(e){var r=c.getBoundingClientRect();c.style.setProperty("--mx",e.clientX-r.left+"px");c.style.setProperty("--my",e.clientY-r.top+"px")})});
+}
+var n=1284,cn=document.getElementById("cnt");
+setInterval(function(){n+=1;cn.textContent=n.toLocaleString("en-US")},2000);
+})();
+</script>
+</body>
+</html>
