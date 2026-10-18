@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     windowMaximize: () => {},
     windowClose: () => {},
     openExternalUrl: async () => true,
+    checkForUpdates: async () => ({ success: true, hasUpdate: false, currentVersion: 'v1.1.0 (Run #2)', remoteVersion: 'v1.1.0 (Run #2)' }),
+    applyPatch: async () => ({ success: true }),
     onEmailSaved: () => {},
     onEngineStatusChanged: () => {},
     onQuotaExceeded: () => {}
@@ -73,6 +75,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       syncing: 'กำลังซิงก์อีเมลจาก Microsoft Outlook Classic และบัญชีที่เชื่อมต่อ...',
       syncSuccess: (n) => `ซิงก์สำเร็จ! บันทึกอีเมลใหม่ลงโฟลเดอร์ ${n} ฉบับ`,
       syncUpToDate: (acct) => `ซิงก์กับ Outlook Classic${acct ? ' (' + acct + ')' : ''} เรียบร้อยแล้ว — ข้อมูลเป็นปัจจุบัน`,
+      checkUpdates: '🔄 ตรวจสอบ Patch',
+      checkingUpdates: '⏳ กำลังตรวจสอบ...',
+      latestVersion: (v) => `✓ คุณกำลังใช้งานเวอร์ชันล่าสุดแล้ว (${v || 'v1.1.0'})`,
       ruleOptions: [
         { value: 'all_emails', text: '🌟 อีเมลขาเข้าทั้งหมด (All Incoming Emails)' },
         { value: 'subject_contains', text: 'หัวข้อมีคำว่า (Subject contains)' },
@@ -114,6 +119,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       syncing: 'Syncing emails from Microsoft Outlook Classic and accounts...',
       syncSuccess: (n) => `Sync successful! Saved ${n} new email(s) to folder`,
       syncUpToDate: (acct) => `Synced with Outlook Classic${acct ? ' (' + acct + ')' : ''} — Up to date`,
+      checkUpdates: '🔄 Check Updates',
+      checkingUpdates: '⏳ Checking...',
+      latestVersion: (v) => `✓ You are on the latest version (${v || 'v1.1.0'})`,
       ruleOptions: [
         { value: 'all_emails', text: '🌟 All Incoming Emails' },
         { value: 'subject_contains', text: 'Subject contains keyword' },
@@ -170,37 +178,78 @@ document.addEventListener('DOMContentLoaded', async () => {
   const titlebarEl = document.querySelector('.titlebar');
   if (titlebarEl) {
     titlebarEl.addEventListener('dblclick', (e) => {
-      if (e.target.closest('.window-controls') || e.target.closest('.lang-switch') || e.target.closest('.patch-pill')) return;
+      if (e.target.closest('.window-controls') || e.target.closest('.lang-switch') || e.target.closest('.patch-pill') || e.target.closest('.theme-toggle-btn')) return;
       api.windowMaximize();
     });
   }
 
+  // Theme Management (Day Mode / Night Mode)
+  let currentTheme = localStorage.getItem('theme') || 'dark';
+  function applyTheme(theme) {
+    currentTheme = theme === 'light' ? 'light' : 'dark';
+    localStorage.setItem('theme', currentTheme);
+    document.body.classList.toggle('light-mode', currentTheme === 'light');
+    document.body.classList.toggle('dark-mode', currentTheme !== 'light');
+
+    const iconEl = document.getElementById('themeToggleIcon');
+    const labelTh = document.getElementById('themeToggleLabel');
+    const labelEn = document.getElementById('themeToggleLabelEn');
+    if (iconEl) iconEl.textContent = currentTheme === 'light' ? '🌙' : '☀️';
+    if (labelTh) labelTh.textContent = currentTheme === 'light' ? 'โหมดกลางคืน' : 'โหมดกลางวัน';
+    if (labelEn) labelEn.textContent = currentTheme === 'light' ? 'Night Mode' : 'Day Mode';
+
+    const settingSelect = document.getElementById('settingThemeMode');
+    if (settingSelect) settingSelect.value = currentTheme;
+  }
+
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', async () => {
+      const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
+      applyTheme(nextTheme);
+      appConfig.theme = nextTheme;
+      await api.saveConfig(appConfig);
+      showToast(nextTheme === 'light'
+        ? (currentLang === 'en' ? '☀️ Switched to Day Mode' : '☀️ เปลี่ยนเป็นโหมดกลางวัน (Day Mode) แล้ว')
+        : (currentLang === 'en' ? '🌙 Switched to Night Mode' : '🌙 เปลี่ยนเป็นโหมดกลางคืน (Night Mode) แล้ว'));
+    });
+  }
+  applyTheme(currentTheme);
+
   // Auto-check for updates / Patch
-  async function checkAppUpdates() {
+  let isPatching = false;
+  async function triggerSeamlessPatch(downloadUrl, remoteVersion) {
+    if (isPatching) return;
+    isPatching = true;
+    showToast(currentLang === 'en'
+      ? `⏳ Downloading & installing Patch ${remoteVersion || ''} automatically...`
+      : `⏳ กำลังดาวน์โหลดและติดตั้ง Patch ${remoteVersion || ''} อัตโนมัติ (โปรแกรมจะรีสตาร์ทเอง)...`);
+    const pRes = await api.applyPatch(downloadUrl);
+    if (!pRes || !pRes.success) {
+      isPatching = false;
+      showToast((pRes && pRes.error) || (currentLang === 'en' ? 'Failed to apply patch' : 'ไม่สามารถติดตั้ง Patch ได้'), true);
+    }
+  }
+
+  async function checkAppUpdates(allowSilentAutoInstall = false) {
     try {
       const res = await api.checkForUpdates();
       if (res && res.hasUpdate) {
         const patchPill = document.getElementById('patchUpdatePill');
         if (patchPill) {
           patchPill.style.display = 'inline-flex';
-          patchPill.textContent = `🚀 Patch ${res.remoteVersion}`;
-          patchPill.title = `มีเวอร์ชันใหม่ ${res.remoteVersion} — คลิกเพื่อดาวน์โหลดและติดตั้ง Patch ทันที`;
-          patchPill.onclick = async () => {
-            if (confirm(`พบการอัปเดตใหม่: ${res.remoteVersion}\n\nต้องการติดตั้ง Patch ทันทีหรือไม่? โปรแกรมจะดาวน์โหลดตัวติดตั้งและอัปเดตให้อัตโนมัติ`)) {
-              showToast('⏳ กำลังดาวน์โหลด Patch และเริ่มการติดตั้ง...');
-              const pRes = await api.applyPatch(res.downloadUrl);
-              if (!pRes.success) {
-                showToast(pRes.error || 'ไม่สามารถติดตั้ง Patch ได้', true);
-              }
-            }
-          };
+          patchPill.textContent = `🚀 อัปเดต ${res.remoteVersion}`;
+          patchPill.title = `มีเวอร์ชันใหม่ ${res.remoteVersion} — คลิกเพื่ออัปเดตทันทีโดยไม่ต้องตั้งค่าเอง`;
+          patchPill.onclick = () => triggerSeamlessPatch(res.downloadUrl, res.remoteVersion);
+        }
+        if (allowSilentAutoInstall && appConfig.autoUpdate !== false) {
+          triggerSeamlessPatch(res.downloadUrl, res.remoteVersion);
         }
       }
     } catch (err) {
       // Offline or network error
     }
   }
-  checkAppUpdates();
 
   // 3. Load Initial Data
   try {
@@ -208,7 +257,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     appConfig = data.config || {};
     historyLogs = data.history || [];
     if (data.outlookEnv) outlookEnv = data.outlookEnv;
+    if (appConfig.theme) applyTheme(appConfig.theme);
     renderAll();
+    checkAppUpdates(false);
+    // Periodic background auto-update check every 10 minutes
+    setInterval(() => checkAppUpdates(true), 10 * 60 * 1000);
   } catch (err) {
     console.error('Failed to load initial data:', err);
   }
@@ -1078,6 +1131,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('settingStartWithWindows').checked = !!appConfig.startWithWindows;
     document.getElementById('settingMinimizeToTray').checked = appConfig.minimizeToTray !== false;
     document.getElementById('settingNotifications').checked = appConfig.notificationsEnabled !== false;
+    const autoUpdEl = document.getElementById('settingAutoUpdate');
+    if (autoUpdEl) autoUpdEl.checked = appConfig.autoUpdate !== false;
+    const themeSelEl = document.getElementById('settingThemeMode');
+    if (themeSelEl) themeSelEl.value = appConfig.theme || currentTheme || 'dark';
+  }
+
+  const settingThemeModeEl = document.getElementById('settingThemeMode');
+  if (settingThemeModeEl) {
+    settingThemeModeEl.addEventListener('change', (e) => {
+      applyTheme(e.target.value);
+    });
   }
 
   document.getElementById('btnSaveSettings').addEventListener('click', async () => {
@@ -1085,6 +1149,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     appConfig.startWithWindows = document.getElementById('settingStartWithWindows').checked;
     appConfig.minimizeToTray = document.getElementById('settingMinimizeToTray').checked;
     appConfig.notificationsEnabled = document.getElementById('settingNotifications').checked;
+    const autoUpdEl = document.getElementById('settingAutoUpdate');
+    if (autoUpdEl) appConfig.autoUpdate = autoUpdEl.checked;
+    const themeSelEl = document.getElementById('settingThemeMode');
+    if (themeSelEl) {
+      appConfig.theme = themeSelEl.value;
+      applyTheme(appConfig.theme);
+    }
 
     await api.saveConfig(appConfig);
     const t = i18n[currentLang] || i18n.en;
@@ -1096,28 +1167,25 @@ document.addEventListener('DOMContentLoaded', async () => {
     btnCheckUpdateManual.addEventListener('click', async () => {
       btnCheckUpdateManual.disabled = true;
       const t = i18n[currentLang] || i18n.en;
-      btnCheckUpdateManual.textContent = t.checkingUpdates;
+      btnCheckUpdateManual.innerHTML = `<span class="th">${i18n.th.checkingUpdates}</span><span class="en">${i18n.en.checkingUpdates}</span>`;
       try {
         const res = await api.checkForUpdates();
-        if (res && res.hasUpdate) {
-          const confirmMsg = currentLang === 'en'
-            ? `New patch found: ${res.remoteVersion}\n\nDownload and apply patch now? The app will update automatically.`
-            : `พบการอัปเดตใหม่: ${res.remoteVersion}\n\nต้องการดาวน์โหลดและติดตั้ง Patch ทันทีหรือไม่?`;
-          if (confirm(confirmMsg)) {
-            showToast(currentLang === 'en' ? '⏳ Downloading patch and starting install...' : '⏳ กำลังดาวน์โหลด Patch และเริ่มการติดตั้ง...');
-            const pRes = await api.applyPatch(res.downloadUrl);
-            if (!pRes.success) {
-              showToast(pRes.error || (currentLang === 'en' ? 'Failed to apply patch' : 'ไม่สามารถติดตั้ง Patch ได้'), true);
-            }
-          }
+        if (!res || !res.success) {
+          showToast((res && res.error) || (currentLang === 'en' ? 'Cannot connect to update server' : 'ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์เพื่อตรวจสอบอัปเดตได้'), true);
+        } else if (res.hasUpdate) {
+          // Immediately download, install silently, and restart without requiring manual installer steps!
+          await triggerSeamlessPatch(res.downloadUrl, res.remoteVersion);
         } else {
-          showToast(t.latestVersion(res ? res.currentVersion : 'v1.1.0'));
+          const latestMsg = typeof t.latestVersion === 'function'
+            ? t.latestVersion(res.currentVersion || 'v1.2.0 (Run #3)')
+            : `✓ คุณกำลังใช้งานเวอร์ชันล่าสุดแล้ว (${res.currentVersion || 'v1.2.0 (Run #3)'})`;
+          showToast(latestMsg);
         }
       } catch (e) {
         showToast(currentLang === 'en' ? 'Cannot connect to update server' : 'ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์เพื่อตรวจสอบอัปเดตได้', true);
       } finally {
         btnCheckUpdateManual.disabled = false;
-        btnCheckUpdateManual.textContent = t.checkUpdates;
+        btnCheckUpdateManual.innerHTML = `<span class="th">🔄 ตรวจสอบ Patch</span><span class="en">🔄 Check Updates</span>`;
       }
     });
   }

@@ -1,11 +1,31 @@
 {
-  "version": "1.1.0",
-  "runNumber": 2,
-  "releaseDate": "2026-10-18 12:55 ICT",
-  "fullVersion": "v1.1.0 (Run #2)",
-  "description": "แก้ไขการเชื่อมต่อ Microsoft Outlook Classic (MAPI/COM) ให้เสถียร 100%, เพิ่มระบบตรวจจับโปรไฟล์ .ost/.pst อัตโนมัติ, เพิ่มปุ่ม Sync Now ซิงก์ทันที, เพิ่มเงื่อนไขกฎ All Incoming Emails และรองรับการลากวางไฟล์ .msg",
-  "descriptionEn": "Fixed Microsoft Outlook Classic (MAPI/COM) connection stability, added automatic .ost/.pst profile detection, 1-click Sync Now button, All Incoming Emails rule condition, and .msg drag-and-drop support.",
+  "version": "1.2.0",
+  "runNumber": 3,
+  "releaseDate": "2026-10-18 18:25 ICT",
+  "fullVersion": "v1.2.0 (Run #3)",
+  "downloadUrl": "https://raw.githubusercontent.com/AJter0/emailtofolder/main/downloads/EmailToFolder-Setup.exe",
+  "description": "เพิ่มโหมดกลางวัน (Day Mode ☀️ / Night Mode 🌙) สลับได้ทันทีบนแถบด้านบนและหน้าตั้งค่า, เพิ่มระบบ Auto-Update อัปเดตและรีสตาร์ทโปรแกรมใหม่อัตโนมัติแบบ Silent (/S) โดยไม่ต้องกดติดตั้งเอง",
+  "descriptionEn": "Added Day Mode (Light Theme ☀️) & Night Mode toggle in titlebar and settings, plus 1-click and background Silent Auto-Update (/S) with automatic app restart.",
   "history": [
+    {
+      "runNumber": 3,
+      "version": "1.2.0",
+      "date": "2026-10-18",
+      "titleTh": "Run #3 — เพิ่มโหมดกลางวัน (Day Mode) & ระบบ Auto-Update อัตโนมัติเต็มรูปแบบ",
+      "titleEn": "Run #3 — Added Day Mode (Light Theme) & Seamless Silent Auto-Update",
+      "changesTh": [
+        "เพิ่มโหมดกลางวัน (☀️ Day Mode) สลับกับโหมดกลางคืน (🌙 Night Mode) ได้ทันทีจากแถบด้านบนและในหน้าตั้งค่า",
+        "ปรับปรุงระบบ Patch Update ให้ดาวน์โหลดและติดตั้งแบบเงียบ (/S) พร้อมเปิดโปรแกรมขึ้นมาใหม่เองอัตโนมัติโดยไม่ต้องกด Next",
+        "เพิ่มตัวเลือก 'อัปเดต Patch อัตโนมัติ (Auto-Update)' ในหน้าตั้งค่าระบบ",
+        "แก้ไขบั๊กปุ่มตรวจสอบ Patch ในหน้าตั้งค่า และเพิ่มระบบดึงเวอร์ชันล่าสุดจาก GitHub Raw แบบ Real-time"
+      ],
+      "changesEn": [
+        "Added Day Mode (☀️ Light Theme) and Night Mode toggle button in the top titlebar and Settings modal",
+        "Upgraded Patch Updater to run silent NSIS installation (/S) and automatically relaunch the app with zero user steps",
+        "Added 'Automatic Patch Updates (Auto-Update)' toggle in Settings",
+        "Fixed manual Check Updates button UI state and added real-time GitHub Raw version check"
+      ]
+    },
     {
       "runNumber": 2,
       "version": "1.1.0",

@@ -19,10 +19,15 @@
     <div class="titlebar-title">
       <img src="../assets/icon.png" class="logo-img" alt="Logo" width="18" height="18">
       <span>Email to Folder</span>
-      <span class="version-pill">v1.1</span>
+      <span class="version-pill" id="titlebarVersionPill">v1.2</span>
       <span class="patch-pill" id="patchUpdatePill" style="display:none;" title="คลิกเพื่ออัปเดต / Patch โปรแกรมทันที">🚀 Patch มีเวอร์ชันใหม่</span>
     </div>
     <div class="titlebar-right">
+      <button class="theme-toggle-btn" id="themeToggleBtn" title="สลับโหมดกลางวัน / กลางคืน (Day / Night Mode)">
+        <span id="themeToggleIcon">☀️</span>
+        <span id="themeToggleLabel" class="th">โหมดกลางวัน</span>
+        <span id="themeToggleLabelEn" class="en">Day Mode</span>
+      </button>
       <div class="lang-switch">
         <button id="langTh" class="active">TH</button>
         <button id="langEn">EN</button>
@@ -403,14 +408,37 @@
 
         <div class="setting-item">
           <div>
+            <strong class="th">โหมดการแสดงผล (Day / Night Mode)</strong>
+            <strong class="en">Appearance Theme (Day / Night Mode)</strong>
+            <p class="th">สลับสีพื้นหลังระหว่างโหมดกลางคืน (Dark Luxury) และโหมดกลางวัน (Day Light)</p>
+            <p class="en">Switch between Dark Luxury mode and clean Day Light mode</p>
+          </div>
+          <select id="settingThemeMode">
+            <option value="dark">🌙 โหมดกลางคืน (Night Mode)</option>
+            <option value="light">☀️ โหมดกลางวัน (Day Mode)</option>
+          </select>
+        </div>
+
+        <div class="setting-item">
+          <div>
+            <strong class="th">อัปเดต Patch อัตโนมัติ (Auto-Update)</strong>
+            <strong class="en">Automatic Patch Updates (Auto-Update)</strong>
+            <p class="th">ตรวจสอบและติดตั้ง Patch เวอร์ชันใหม่จากเซิร์ฟเวอร์ให้อัตโนมัติโดยไม่ต้องกดเอง</p>
+            <p class="en">Automatically download and install new patches in background</p>
+          </div>
+          <input type="checkbox" id="settingAutoUpdate" checked>
+        </div>
+
+        <div class="setting-item">
+          <div>
             <strong class="th">เวอร์ชันและ Patch อัปเดต</strong>
             <strong class="en">Version & Updates</strong>
-            <p class="th">เวอร์ชันปัจจุบัน: v1.1.0 (Run #2) · ตรวจสอบเวอร์ชันล่าสุดจากเซิร์ฟเวอร์</p>
-            <p class="en">Current: v1.1.0 (Run #2) · Check for latest patch & updates</p>
+            <p class="th" id="settingVersionDescTh">เวอร์ชันปัจจุบัน: v1.2.0 (Run #3) · ตรวจสอบเวอร์ชันล่าสุดจากเซิร์ฟเวอร์</p>
+            <p class="en" id="settingVersionDescEn">Current: v1.2.0 (Run #3) · Check for latest patch & updates</p>
           </div>
           <button class="btn sm" id="btnCheckUpdateManual">
             <span class="th">🔄 ตรวจสอบ Patch</span>
-            <span class="en">Check Updates</span>
+            <span class="en">🔄 Check Updates</span>
           </button>
         </div>
 

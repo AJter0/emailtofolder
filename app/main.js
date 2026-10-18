@@ -48,6 +48,8 @@ const defaultConfig = {
   startWithWindows: false,
   minimizeToTray: true,
   notificationsEnabled: true,
+  autoUpdate: true,
+  theme: 'dark',
   accounts: [
     {
       id: 'acc-outlook-local',
@@ -649,56 +651,92 @@ ipcMain.on('window-close', () => {
 
 // Auto-Patch & Update Check Handlers
 ipcMain.handle('check-for-updates', async () => {
-  return new Promise((resolve) => {
-    const https = require('https');
-    const req = https.get('https://emailtofolder.com/version.json', { timeout: 6000 }, (res) => {
-      let data = '';
-      res.on('data', chunk => { data += chunk; });
-      res.on('end', () => {
-        try {
-          const remote = JSON.parse(data);
-          const currentVersion = '1.1.0';
-          const currentRun = 2;
-          const hasUpdate = (remote.runNumber && remote.runNumber > currentRun) ||
-            (remote.version && remote.version !== currentVersion && remote.version > currentVersion);
-          resolve({
-            success: true,
-            hasUpdate: Boolean(hasUpdate),
-            currentVersion: `v${currentVersion} (Run #${currentRun})`,
-            remoteVersion: remote.fullVersion || `v${remote.version}`,
-            description: remote.description || '',
-            downloadUrl: remote.downloadUrl || 'https://emailtofolder.com/downloads/EmailToFolder-Setup.exe'
-          });
-        } catch (e) {
-          resolve({ success: false, error: 'Failed to parse version metadata' });
+  const https = require('https');
+
+  function fetchVersionJson(url) {
+    return new Promise((resolve, reject) => {
+      const req = https.get(url, {
+        timeout: 8000,
+        headers: {
+          'User-Agent': 'EmailToFolder-Updater/1.1.0',
+          'Cache-Control': 'no-cache'
         }
+      }, (res) => {
+        if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+          return fetchVersionJson(res.headers.location).then(resolve).catch(reject);
+        }
+        if (res.statusCode !== 200) {
+          return reject(new Error(`HTTP ${res.statusCode}`));
+        }
+        let data = '';
+        res.on('data', chunk => { data += chunk; });
+        res.on('end', () => {
+          try {
+            resolve(JSON.parse(data));
+          } catch (e) {
+            reject(new Error('Invalid version JSON'));
+          }
+        });
+      });
+      req.on('error', reject);
+      req.on('timeout', () => {
+        req.destroy();
+        reject(new Error('Connection timeout'));
       });
     });
-    req.on('error', (err) => {
-      resolve({ success: false, error: err.message });
-    });
-    req.on('timeout', () => {
-      req.destroy();
-      resolve({ success: false, error: 'Connection timeout' });
-    });
-  });
+  }
+
+  try {
+    let remote;
+    try {
+      // Query GitHub Raw first with cache-buster so freshly pushed releases appear immediately
+      remote = await fetchVersionJson(`https://raw.githubusercontent.com/AJter0/emailtofolder/main/version.json?t=${Date.now()}`);
+    } catch (primaryErr) {
+      remote = await fetchVersionJson(`https://emailtofolder.com/version.json?t=${Date.now()}`);
+    }
+
+    const currentVersion = '1.2.0';
+    const currentRun = 3;
+    const hasUpdate = (remote.runNumber && remote.runNumber > currentRun) ||
+      (remote.version && remote.version !== currentVersion && remote.version > currentVersion);
+
+    return {
+      success: true,
+      hasUpdate: Boolean(hasUpdate),
+      currentVersion: `v${currentVersion} (Run #${currentRun})`,
+      remoteVersion: remote.fullVersion || `v${remote.version}`,
+      description: remote.description || '',
+      descriptionEn: remote.descriptionEn || '',
+      downloadUrl: remote.downloadUrl || 'https://raw.githubusercontent.com/AJter0/emailtofolder/main/downloads/EmailToFolder-Setup.exe'
+    };
+  } catch (err) {
+    return { success: false, error: err.message };
+  }
 });
 
 ipcMain.handle('apply-patch', async (event, downloadUrl) => {
-  const urlToUse = downloadUrl || 'https://emailtofolder.com/downloads/EmailToFolder-Setup.exe';
+  const urlToUse = downloadUrl || 'https://raw.githubusercontent.com/AJter0/emailtofolder/main/downloads/EmailToFolder-Setup.exe';
   const https = require('https');
   const http = require('http');
   const tempPath = path.join(app.getPath('temp'), `EmailToFolder-Patch-${Date.now()}.exe`);
 
   return new Promise((resolve) => {
-    function downloadFile(targetUrl) {
+    function downloadFile(targetUrl, fallbackAttempted = false) {
       const proto = targetUrl.startsWith('https') ? https : http;
-      proto.get(targetUrl, (res) => {
+      const req = proto.get(targetUrl, {
+        headers: {
+          'User-Agent': 'EmailToFolder-Updater/1.2.0',
+          'Cache-Control': 'no-cache'
+        }
+      }, (res) => {
         // Handle redirect if any
         if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-          return downloadFile(res.headers.location);
+          return downloadFile(res.headers.location, fallbackAttempted);
         }
         if (res.statusCode !== 200) {
+          if (!fallbackAttempted && !targetUrl.includes('emailtofolder.com')) {
+            return downloadFile('https://emailtofolder.com/downloads/EmailToFolder-Setup.exe', true);
+          }
           return resolve({ success: false, error: `HTTP ${res.statusCode}` });
         }
         const fileStream = fs.createWriteStream(tempPath);
@@ -706,22 +744,42 @@ ipcMain.handle('apply-patch', async (event, downloadUrl) => {
         fileStream.on('finish', () => {
           fileStream.close(() => {
             try {
-              // Execute installer to patch application
               const { spawn } = require('child_process');
-              const child = spawn(tempPath, [], { detached: true, stdio: 'ignore' });
+              const appExePath = process.execPath;
+              // Create a detached helper script that waits 2s for app to exit, runs NSIS installer silently (/S), and relaunches the updated app!
+              const updaterBat = path.join(app.getPath('temp'), `EmailToFolder-RunPatch-${Date.now()}.bat`);
+              const batContent = [
+                '@echo off',
+                'timeout /t 2 /nobreak >nul',
+                `"${tempPath}" /S`,
+                'timeout /t 2 /nobreak >nul',
+                `start "" "${appExePath}"`,
+                `del "%~f0"`
+              ].join('\r\n');
+              fs.writeFileSync(updaterBat, batContent, 'utf8');
+
+              const child = spawn('cmd.exe', ['/c', updaterBat], {
+                detached: true,
+                stdio: 'ignore',
+                windowsHide: true
+              });
               child.unref();
-              // Exit app to allow patch installer to replace files cleanly
+
               setTimeout(() => {
                 isQuitting = true;
                 app.quit();
-              }, 1200);
-              resolve({ success: true, message: 'กำลังติดตั้ง Patch อัปเดต...' });
+              }, 800);
+              resolve({ success: true, message: 'กำลังติดตั้ง Patch อัปเดตและเปิดโปรแกรมใหม่อัตโนมัติ...' });
             } catch (spawnErr) {
               resolve({ success: false, error: spawnErr.message });
             }
           });
         });
-      }).on('error', (err) => {
+      });
+      req.on('error', (err) => {
+        if (!fallbackAttempted && !targetUrl.includes('emailtofolder.com')) {
+          return downloadFile('https://emailtofolder.com/downloads/EmailToFolder-Setup.exe', true);
+        }
         resolve({ success: false, error: err.message });
       });
     }
