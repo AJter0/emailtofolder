@@ -19,12 +19,16 @@
   margin: 0;
   padding: 0;
   user-select: none;
+  font-family: 'Prompt', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-weight: 300;
 }
 
 body {
   background: var(--bg);
   color: var(--ink);
-  font-family: Inter, Prompt, system-ui, -apple-system, sans-serif;
+  font-family: 'Prompt', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-weight: 300;
+  letter-spacing: 0.01em;
   line-height: 1.5;
   overflow: hidden;
   height: 100vh;
@@ -33,8 +37,13 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-html[lang="th"] body {
-  font-family: Prompt, Inter, system-ui, sans-serif;
+button, input, select, textarea {
+  font-family: 'Prompt', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-weight: 300;
+}
+
+b, strong, h1, h2, h3, h4, h5, h6, th {
+  font-weight: 400;
 }
 
 html[lang="th"] .en,
@@ -84,7 +93,7 @@ html[lang="en"] .th {
   align-items: center;
   gap: 8px;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--mute);
 }
 
@@ -118,7 +127,7 @@ html[lang="en"] .th {
   border: none;
   background: none;
   color: var(--mute);
-  font: 600 11px inherit;
+  font: 400 11px inherit;
   padding: 3px 9px;
   border-radius: 999px;
   cursor: pointer;
@@ -166,7 +175,7 @@ html[lang="en"] .th {
   padding: 5px 11px;
   border-radius: 999px;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 400;
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -303,7 +312,7 @@ html[lang="en"] .th {
   background: var(--card-light);
   border-color: var(--line);
   color: #fff;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .patch-pill {
@@ -316,7 +325,7 @@ html[lang="en"] .th {
   cursor: pointer;
   animation: pulse 2s infinite;
   white-space: nowrap;
-  font-weight: 600;
+  font-weight: 400;
   -webkit-app-region: no-drag;
 }
 
@@ -326,7 +335,7 @@ html[lang="en"] .th {
 }
 
 .tb-title {
-  font-weight: 600;
+  font-weight: 400;
   color: #e1e1e6;
   font-size: 13px;
 }
@@ -419,7 +428,7 @@ html[lang="en"] .th {
 .tb b:nth-child(3) { background: #28c840; }
 
 .tb span {
-  font-weight: 600;
+  font-weight: 400;
   margin-left: 6px;
   color: #fff;
 }
@@ -471,7 +480,7 @@ html[lang="en"] .th {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--mute);
-  font-weight: 700;
+  font-weight: 400;
 }
 
 .icon-btn {
@@ -502,7 +511,7 @@ html[lang="en"] .th {
 }
 
 .fo {
-  padding: 9px 12px;
+  padding: 8px 10px;
   border-radius: 10px;
   color: #a1a1a6;
   font-size: 13px;
@@ -511,8 +520,11 @@ html[lang="en"] .th {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 8px;
   cursor: pointer;
   transition: 0.2s;
+  min-width: 0;
+  width: 100%;
 }
 
 .fo:hover {
@@ -525,17 +537,32 @@ html[lang="en"] .th {
   display: flex;
   align-items: center;
   gap: 8px;
+  min-width: 0;
+  flex: 1 1 auto;
   overflow: hidden;
   white-space: nowrap;
+}
+
+.fo .fo-left .fo-icon {
+  flex-shrink: 0;
+  font-size: 13px;
+}
+
+.fo .fo-left .fo-name {
+  overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
 }
 
 .fo .fo-count {
   font-size: 11px;
   color: var(--teal);
   background: rgba(48, 213, 200, 0.12);
-  padding: 1px 7px;
+  padding: 2px 7px;
   border-radius: 999px;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 /* Column 2: Inbox Feed */
@@ -571,7 +598,7 @@ html[lang="en"] .th {
 }
 
 .ml strong {
-  font-weight: 600;
+  font-weight: 400;
   font-size: 14px;
   color: #f5f5f7;
   display: block;
@@ -604,7 +631,7 @@ html[lang="en"] .th {
   background: rgba(48, 213, 200, 0.15);
   color: #30d5c8;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .files-badge {
@@ -651,11 +678,12 @@ html[lang="en"] .th {
   color: #f5f5f7;
   font-size: 13px;
   margin-bottom: 2px;
+  font-weight: 400;
 }
 
 .ru-dest {
   color: var(--brand);
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .ok-box {
@@ -670,7 +698,7 @@ html[lang="en"] .th {
 
 .ok {
   color: #30d5c8;
-  font-weight: 700;
+  font-weight: 400;
   font-size: 15px;
 }
 
@@ -709,7 +737,7 @@ html[lang="en"] .th {
   border: none;
   padding: 10px 20px;
   border-radius: 999px;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 14px;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
@@ -785,7 +813,7 @@ html[lang="en"] .th {
 
 .modal-header h3 {
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 400;
   color: #fff;
 }
 
@@ -848,7 +876,7 @@ html[lang="en"] .th {
 
 .acc-card-info h4 {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 400;
   margin-bottom: 2px;
   color: #fff;
 }
@@ -868,7 +896,7 @@ html[lang="en"] .th {
 
 .form-row label {
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--mute);
 }
 
@@ -998,7 +1026,7 @@ html[lang="en"] .th {
   background: #111115;
   padding: 10px 12px;
   color: var(--mute);
-  font-weight: 600;
+  font-weight: 400;
   border-bottom: 1px solid var(--line);
   position: sticky;
   top: 0;
@@ -1075,7 +1103,7 @@ html[lang="en"] .th {
   background: rgba(10, 132, 255, 0.16);
   color: #6cb4ff;
   border: 1px solid rgba(10, 132, 255, 0.3);
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .sync-btn {
@@ -1103,7 +1131,7 @@ html[lang="en"] .th {
   background: rgba(48, 213, 200, 0.14);
   border: 1px solid rgba(48, 213, 200, 0.3);
   color: var(--teal);
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .acc-card.outlook-featured {
@@ -1118,7 +1146,7 @@ html[lang="en"] .th {
   background: rgba(48, 213, 200, 0.15);
   color: var(--teal);
   border: 1px solid rgba(48, 213, 200, 0.3);
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .status-pill-sm.offline {

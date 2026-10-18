@@ -38,7 +38,111 @@ document.addEventListener('DOMContentLoaded', async () => {
     }, 4200);
   }
 
-  // 1. Language Support
+  // 1. Language Support & Dictionary
+  const i18n = {
+    th: {
+      searchPlaceholder: 'ค้นหาตามชื่อผู้ส่ง, หัวข้อ, หรือโฟลเดอร์...',
+      ruleNamePlaceholder: 'เช่น ใบแจ้งหนี้ Finance หรือ เก็บอีเมลทั้งหมด',
+      ruleConditionPlaceholder: 'เช่น Invoice, @projecta.co.th (เว้นว่าง=ทั้งหมด)',
+      noTargetFolders: 'ยังไม่มีโฟลเดอร์ที่กำหนด',
+      folderTooltip: 'คลิกเพื่อเปิดโฟลเดอร์ใน Windows Explorer: ',
+      files: 'ไฟล์',
+      waitingEmails: 'รออีเมลใหม่เข้ามา หรือทดสอบลากไฟล์มาวางด้านบน',
+      emailTooltip: 'คลิกเพื่อเปิดโฟลเดอร์ที่เก็บไฟล์นี้',
+      allIncoming: 'All Incoming Emails (ทุกฉบับ)',
+      hasAttachment: 'มีไฟล์แนบใดๆ (Has Attachment)',
+      noHistory: 'ไม่พบข้อมูลประวัติ',
+      openFolder: 'เปิดโฟลเดอร์',
+      edit: 'แก้ไข',
+      delete: 'ลบ',
+      noAccounts: 'ยังไม่ได้เชื่อมบัญชี',
+      outlookRunning: '🟢 เปิดทำงานอยู่',
+      outlookProfile: '✓ พบโปรไฟล์',
+      outlookInstalled: '✓ ติดตั้งบนเครื่องแล้ว',
+      outlookNotFound: 'ไม่พบ Outlook Classic',
+      outlookDesc: (acct) => `ตรวจพบกล่องจดหมาย Outlook Classic: ${acct} — พร้อมดึงอีเมลและไฟล์แนบลงโฟลเดอร์อัตโนมัติ`,
+      outlookSyncRunning: '🟢 Outlook กำลังเปิดทำงาน',
+      outlookSyncReady: 'พร้อมซิงก์อัตโนมัติ',
+      addRuleTitle: 'เพิ่มกฎใหม่',
+      editRuleTitle: (name) => `แก้ไขกฎ: ${name}`,
+      savedRule: (name) => `บันทึกกฎ "${name}" เรียบร้อยแล้ว`,
+      deletedRule: (name) => `ลบกฎ "${name}" เรียบร้อยแล้ว`,
+      savedAccount: 'บันทึกบัญชีอีเมลเรียบร้อยแล้ว',
+      deletedAccount: 'ยกเลิกการเชื่อมต่อบัญชีเรียบร้อยแล้ว',
+      savedSettings: 'บันทึกการตั้งค่าเรียบร้อยแล้ว',
+      syncing: 'กำลังซิงก์อีเมลจาก Microsoft Outlook Classic และบัญชีที่เชื่อมต่อ...',
+      syncSuccess: (n) => `ซิงก์สำเร็จ! บันทึกอีเมลใหม่ลงโฟลเดอร์ ${n} ฉบับ`,
+      syncUpToDate: (acct) => `ซิงก์กับ Outlook Classic${acct ? ' (' + acct + ')' : ''} เรียบร้อยแล้ว — ข้อมูลเป็นปัจจุบัน`,
+      ruleOptions: [
+        { value: 'all_emails', text: '🌟 อีเมลขาเข้าทั้งหมด (All Incoming Emails)' },
+        { value: 'subject_contains', text: 'หัวข้อมีคำว่า (Subject contains)' },
+        { value: 'from_contains', text: 'ส่งมาจาก / โดเมน (From / Domain)' },
+        { value: 'has_attachment', text: 'มีไฟล์แนบใดๆ (Has Attachment)' },
+        { value: 'attachment_name_contains', text: 'ชื่อไฟล์แนบมีคำว่า (Attachment name)' }
+      ]
+    },
+    en: {
+      searchPlaceholder: 'Search by sender, subject, or folder...',
+      ruleNamePlaceholder: 'e.g. Finance Invoices or All Incoming',
+      ruleConditionPlaceholder: 'e.g. Invoice, @projecta.co.th (empty=all)',
+      noTargetFolders: 'No target folders configured yet',
+      folderTooltip: 'Click to open folder in Windows Explorer: ',
+      files: 'files',
+      waitingEmails: 'Waiting for incoming emails...',
+      emailTooltip: 'Click to open destination folder',
+      allIncoming: 'All Incoming Emails',
+      hasAttachment: 'Has any attachment',
+      noHistory: 'No history logs found',
+      openFolder: 'Open Folder',
+      edit: 'Edit',
+      delete: 'Delete',
+      noAccounts: 'No Account Connected',
+      outlookRunning: '🟢 Running',
+      outlookProfile: '✓ Found Profile',
+      outlookInstalled: '✓ Installed on PC',
+      outlookNotFound: 'Outlook Classic Not Found',
+      outlookDesc: (acct) => `Detected Outlook Classic mailbox: ${acct} — Ready to auto-archive emails & attachments.`,
+      outlookSyncRunning: '🟢 Outlook Classic Running',
+      outlookSyncReady: 'Ready to Auto-Sync',
+      addRuleTitle: 'Add New Rule',
+      editRuleTitle: (name) => `Edit Rule: ${name}`,
+      savedRule: (name) => `Saved rule "${name}" successfully`,
+      deletedRule: (name) => `Deleted rule "${name}" successfully`,
+      savedAccount: 'Email account saved successfully',
+      deletedAccount: 'Account disconnected successfully',
+      savedSettings: 'Settings saved successfully',
+      syncing: 'Syncing emails from Microsoft Outlook Classic and accounts...',
+      syncSuccess: (n) => `Sync successful! Saved ${n} new email(s) to folder`,
+      syncUpToDate: (acct) => `Synced with Outlook Classic${acct ? ' (' + acct + ')' : ''} — Up to date`,
+      ruleOptions: [
+        { value: 'all_emails', text: '🌟 All Incoming Emails' },
+        { value: 'subject_contains', text: 'Subject contains keyword' },
+        { value: 'from_contains', text: 'From / Sender domain' },
+        { value: 'has_attachment', text: 'Has any attachment' },
+        { value: 'attachment_name_contains', text: 'Attachment filename contains' }
+      ]
+    }
+  };
+
+  function updateInputPlaceholders() {
+    const t = i18n[currentLang] || i18n.en;
+    const searchInput = document.getElementById('historySearchInput');
+    if (searchInput) searchInput.placeholder = t.searchPlaceholder;
+
+    const ruleNameInput = document.getElementById('ruleNameInput');
+    if (ruleNameInput) ruleNameInput.placeholder = t.ruleNamePlaceholder;
+
+    const ruleCondVal = document.getElementById('ruleConditionValue');
+    if (ruleCondVal) ruleCondVal.placeholder = t.ruleConditionPlaceholder;
+
+    const ruleSelect = document.getElementById('ruleConditionType');
+    if (ruleSelect && t.ruleOptions) {
+      const curVal = ruleSelect.value;
+      ruleSelect.innerHTML = t.ruleOptions.map(o => `<option value="${o.value}">${escapeHtml(o.text)}</option>`).join('');
+      if (curVal) ruleSelect.value = curVal;
+    }
+  }
+
   function setLanguage(lang) {
     currentLang = lang;
     document.documentElement.lang = lang;
@@ -46,6 +150,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     document.getElementById('langTh').classList.toggle('active', lang === 'th');
     document.getElementById('langEn').classList.toggle('active', lang === 'en');
+
+    updateInputPlaceholders();
+    if (typeof renderAll === 'function') {
+      renderAll();
+    }
   }
 
   document.getElementById('langTh').addEventListener('click', () => setLanguage('th'));
@@ -123,12 +232,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     const summaryEl = document.getElementById('accountSummary');
     if (!summaryEl) return;
     summaryEl.innerHTML = '';
+    const t = i18n[currentLang] || i18n.en;
 
     const accounts = (appConfig.accounts || []).filter(a => a.enabled !== false);
     if (accounts.length === 0) {
       const pill = document.createElement('span');
       pill.className = 'acc-pill';
-      pill.textContent = 'ยังไม่ได้เชื่อมบัญชี';
+      pill.textContent = t.noAccounts;
       summaryEl.appendChild(pill);
       return;
     }
@@ -154,21 +264,22 @@ document.addEventListener('DOMContentLoaded', async () => {
     const badge = document.getElementById('outlookDetectBadge');
     const desc = document.getElementById('outlookDetectDesc');
     if (!badge) return;
+    const t = i18n[currentLang] || i18n.en;
 
     if (outlookEnv.running || outlookEnv.account) {
       badge.className = 'status-pill-sm';
       badge.textContent = outlookEnv.running
-        ? `🟢 เปิดทำงานอยู่${outlookEnv.account ? ' (' + outlookEnv.account + ')' : ''}`
-        : `✓ พบโปรไฟล์ ${outlookEnv.account}`;
+        ? `${t.outlookRunning}${outlookEnv.account ? ' (' + outlookEnv.account + ')' : ''}`
+        : `${t.outlookProfile} ${outlookEnv.account}`;
       if (desc && outlookEnv.account) {
-        desc.textContent = `ตรวจพบกล่องจดหมาย Outlook Classic: ${outlookEnv.account} — พร้อมดึงอีเมลและไฟล์แนบลงโฟลเดอร์อัตโนมัติ`;
+        desc.textContent = t.outlookDesc(outlookEnv.account);
       }
     } else if (outlookEnv.installed) {
       badge.className = 'status-pill-sm';
-      badge.textContent = '✓ ติดตั้งบนเครื่องแล้ว';
+      badge.textContent = t.outlookInstalled;
     } else {
       badge.className = 'status-pill-sm offline';
-      badge.textContent = 'ไม่พบ Outlook Classic';
+      badge.textContent = t.outlookNotFound;
     }
   }
 
@@ -263,6 +374,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   function renderTargetFolders() {
     const container = document.getElementById('targetFolderList');
     container.innerHTML = '';
+    const t = i18n[currentLang] || i18n.en;
 
     const folderMap = new Map();
     (appConfig.rules || []).forEach(r => {
@@ -282,20 +394,24 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     if (folderMap.size === 0) {
-      container.innerHTML = '<p class="hint" style="padding:10px;">ยังไม่มีโฟลเดอร์ที่กำหนด</p>';
+      container.innerHTML = `<p class="hint" style="padding:10px;">${t.noTargetFolders}</p>`;
       return;
     }
 
     folderMap.forEach((info) => {
       const div = document.createElement('div');
       div.className = 'fo';
-      div.title = `คลิกเพื่อเปิดโฟลเดอร์ใน Windows Explorer: ${info.path}`;
+      div.title = `${t.folderTooltip}${info.path}`;
+      const countLabel = currentLang === 'en'
+        ? `${info.count} ${info.count === 1 ? 'file' : 'files'}`
+        : `${info.count} ไฟล์`;
+
       div.innerHTML = `
         <div class="fo-left">
-          <span>📁</span>
-          <span>${escapeHtml(info.name)}</span>
+          <span class="fo-icon">📁</span>
+          <span class="fo-name">${escapeHtml(info.name)}</span>
         </div>
-        <span class="fo-count">${info.count} files</span>
+        <span class="fo-count">${countLabel}</span>
       `;
       div.addEventListener('click', () => {
         api.openFolder(info.path);
@@ -308,31 +424,35 @@ document.addEventListener('DOMContentLoaded', async () => {
   function renderFeed() {
     const container = document.getElementById('feedList');
     container.innerHTML = '';
+    const t = i18n[currentLang] || i18n.en;
 
     const items = historyLogs.slice(0, 10);
     if (items.length === 0) {
-      container.innerHTML = '<p class="hint" style="padding:10px;">รออีเมลใหม่เข้ามา หรือทดสอบลากไฟล์มาวางด้านบน</p>';
+      container.innerHTML = `<p class="hint" style="padding:10px;">${t.waitingEmails}</p>`;
       return;
     }
 
     items.forEach(item => {
       const div = document.createElement('div');
       div.className = 'ml';
-      div.title = 'คลิกเพื่อเปิดโฟลเดอร์ที่เก็บไฟล์นี้';
+      div.title = t.emailTooltip;
 
       const timeAgo = formatTimeAgo(item.date);
       const folderShort = (item.targetFolder || '').split(/[\/\\]/).filter(Boolean).slice(-2).join(' / ');
       const filesCount = item.filesSaved ? item.filesSaved.length : 1;
+      const countLabel = currentLang === 'en'
+        ? `📎 ${filesCount} ${filesCount === 1 ? 'file' : 'files'}`
+        : `📎 ${filesCount} ไฟล์`;
 
       div.innerHTML = `
         <div class="ml-top">
-          <strong>${escapeHtml(item.subject || 'No Subject')}</strong>
+          <strong>${escapeHtml(item.subject || (currentLang === 'en' ? 'No Subject' : 'ไม่มีหัวข้อ'))}</strong>
           <span class="ml-time">${timeAgo}</span>
         </div>
-        <p>${escapeHtml(item.from || 'Unknown Sender')}</p>
+        <p>${escapeHtml(item.from || (currentLang === 'en' ? 'Unknown Sender' : 'ไม่ระบุผู้ส่ง'))}</p>
         <div class="ml-bottom">
           <span class="chip">→ ${escapeHtml(folderShort || item.ruleName)}</span>
-          <span class="files-badge">📎 ${filesCount} ไฟล์</span>
+          <span class="files-badge">${countLabel}</span>
         </div>
       `;
 
@@ -343,7 +463,13 @@ document.addEventListener('DOMContentLoaded', async () => {
       container.appendChild(div);
     });
 
-    document.getElementById('todayCount').textContent = `วันนี้ ${(appConfig.stats && appConfig.stats.todaySaved) || 0} ฉบับ`;
+    const todayCountEl = document.getElementById('todayCount');
+    const todayNum = (appConfig.stats && appConfig.stats.todaySaved) || 0;
+    if (todayCountEl) {
+      todayCountEl.textContent = currentLang === 'en'
+        ? `Today: ${todayNum} email${todayNum !== 1 ? 's' : ''}`
+        : `วันนี้ ${todayNum} ฉบับ`;
+    }
   }
 
   // 7. Rules Summary (Column 3)
@@ -356,11 +482,17 @@ document.addEventListener('DOMContentLoaded', async () => {
       const div = document.createElement('div');
       div.className = 'ru';
       let condText = '';
-      if (rule.conditionType === 'all_emails') condText = 'All Incoming Emails (ทุกฉบับ)';
-      else if (rule.conditionType === 'subject_contains') condText = `Subject contains "${rule.conditionValue}"`;
-      else if (rule.conditionType === 'from_contains') condText = `From "${rule.conditionValue}"`;
-      else if (rule.conditionType === 'has_attachment') condText = 'Has any attachment';
-      else if (rule.conditionType === 'attachment_name_contains') condText = `Attachment contains "${rule.conditionValue}"`;
+      if (rule.conditionType === 'all_emails') {
+        condText = currentLang === 'en' ? 'All Incoming Emails' : 'อีเมลขาเข้าทั้งหมด (ทุกฉบับ)';
+      } else if (rule.conditionType === 'subject_contains') {
+        condText = currentLang === 'en' ? `Subject contains "${rule.conditionValue}"` : `หัวข้อมีคำว่า "${rule.conditionValue}"`;
+      } else if (rule.conditionType === 'from_contains') {
+        condText = currentLang === 'en' ? `From "${rule.conditionValue}"` : `ผู้ส่งคือ "${rule.conditionValue}"`;
+      } else if (rule.conditionType === 'has_attachment') {
+        condText = currentLang === 'en' ? 'Has any attachment' : 'มีไฟล์แนบใดๆ';
+      } else if (rule.conditionType === 'attachment_name_contains') {
+        condText = currentLang === 'en' ? `Attachment contains "${rule.conditionValue}"` : `ชื่อไฟล์แนบมี "${rule.conditionValue}"`;
+      }
 
       const destShort = (rule.targetFolder || '').split(/[\/\\]/).filter(Boolean).slice(-2).join('/');
 
@@ -608,7 +740,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('btnConfigureGmail').addEventListener('click', () => {
     document.getElementById('accountForm').style.display = 'block';
     document.getElementById('accFormType').value = 'gmail';
-    document.getElementById('accountFormTitle').textContent = 'ตั้งค่าเชื่อมต่อบัญชี Gmail';
+    document.getElementById('accountFormTitle').innerHTML = '<span class="th">ตั้งค่าเชื่อมต่อบัญชี Gmail</span><span class="en">Setup Gmail Account</span>';
     document.getElementById('imapServerFields').style.display = 'none';
     document.getElementById('accEmail').placeholder = 'yourname@gmail.com';
   });
@@ -616,7 +748,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('btnConfigureImap').addEventListener('click', () => {
     document.getElementById('accountForm').style.display = 'block';
     document.getElementById('accFormType').value = 'imap';
-    document.getElementById('accountFormTitle').textContent = 'ตั้งค่าเชื่อมต่อเซิร์ฟเวอร์ IMAP / Office 365';
+    document.getElementById('accountFormTitle').innerHTML = '<span class="th">ตั้งค่าเชื่อมต่อเซิร์ฟเวอร์ IMAP / Office 365</span><span class="en">Setup IMAP / Office 365</span>';
     document.getElementById('imapServerFields').style.display = 'flex';
     document.getElementById('accEmail').placeholder = 'user@company.com';
   });
@@ -678,10 +810,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   function renderConnectedAccounts() {
     const container = document.getElementById('connectedAccountsList');
     container.innerHTML = '';
+    const t = i18n[currentLang] || i18n.en;
 
     const accounts = appConfig.accounts || [];
     if (accounts.length === 0) {
-      container.innerHTML = '<p class="hint">ยังไม่มีบัญชีที่เชื่อมต่อ (กดเลือกเชื่อมต่อจากตัวเลือกด้านบน)</p>';
+      container.innerHTML = `<p class="hint">${currentLang === 'en' ? 'No connected accounts yet (choose an option above)' : 'ยังไม่มีบัญชีที่เชื่อมต่อ (กดเลือกเชื่อมต่อจากตัวเลือกด้านบน)'}</p>`;
       return;
     }
 
@@ -693,7 +826,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         ? (acc.name || `Microsoft Outlook Classic (${outlookEnv.account || acc.user || 'Local'})`)
         : acc.user;
       const sub = acc.type === 'outlook_local'
-        ? `MAPI LOCAL SYNC · ${outlookEnv.running ? '🟢 Outlook กำลังเปิดทำงาน' : 'พร้อมซิงก์อัตโนมัติ'}`
+        ? `MAPI LOCAL SYNC · ${outlookEnv.running ? t.outlookSyncRunning : t.outlookSyncReady}`
         : acc.type.toUpperCase();
 
       div.innerHTML = `
@@ -701,7 +834,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           <strong>${escapeHtml(title)}</strong>
           <p style="color:#30d5c8; font-size:11px;">${escapeHtml(sub)}</p>
         </div>
-        <button class="btn sm ghost" data-acc-index="${index}">ลบ</button>
+        <button class="btn sm ghost" data-acc-index="${index}">${t.delete}</button>
       `;
 
       div.querySelector('button').addEventListener('click', async () => {
@@ -709,7 +842,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         await api.saveConfig(appConfig);
         renderConnectedAccounts();
         renderAccountSummaryPills();
-        showToast('ยกเลิกการเชื่อมต่อบัญชีเรียบร้อยแล้ว');
+        showToast(t.deletedAccount);
       });
 
       container.appendChild(div);
@@ -738,6 +871,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   function renderRulesManagementList() {
     const container = document.getElementById('rulesManagementList');
     container.innerHTML = '';
+    const t = i18n[currentLang] || i18n.en;
 
     const rules = appConfig.rules || [];
     rules.forEach((rule, index) => {
@@ -746,8 +880,17 @@ document.addEventListener('DOMContentLoaded', async () => {
       div.style.marginBottom = '10px';
 
       let condDesc = `${rule.conditionType}: "${rule.conditionValue || ''}"`;
-      if (rule.conditionType === 'all_emails') condDesc = '🌟 อีเมลขาเข้าทั้งหมด (All Incoming Emails)';
-      else if (rule.conditionType === 'has_attachment') condDesc = '📎 มีไฟล์แนบใดๆ (Has Attachment)';
+      if (rule.conditionType === 'all_emails') {
+        condDesc = currentLang === 'en' ? '🌟 All Incoming Emails' : '🌟 อีเมลขาเข้าทั้งหมด (All Incoming Emails)';
+      } else if (rule.conditionType === 'has_attachment') {
+        condDesc = currentLang === 'en' ? '📎 Has Attachment' : '📎 มีไฟล์แนบใดๆ (Has Attachment)';
+      } else if (rule.conditionType === 'subject_contains') {
+        condDesc = currentLang === 'en' ? `Subject contains "${rule.conditionValue}"` : `หัวข้อมีคำว่า "${rule.conditionValue}"`;
+      } else if (rule.conditionType === 'from_contains') {
+        condDesc = currentLang === 'en' ? `From "${rule.conditionValue}"` : `ส่งมาจาก "${rule.conditionValue}"`;
+      } else if (rule.conditionType === 'attachment_name_contains') {
+        condDesc = currentLang === 'en' ? `Attachment contains "${rule.conditionValue}"` : `ชื่อไฟล์แนบมี "${rule.conditionValue}"`;
+      }
 
       div.innerHTML = `
         <div class="acc-card-info">
@@ -755,9 +898,9 @@ document.addEventListener('DOMContentLoaded', async () => {
           <p>${escapeHtml(condDesc)} → 📁 ${escapeHtml(rule.targetFolder)}</p>
         </div>
         <div style="display:flex; gap:8px; align-items:center;">
-          <button class="btn sm ghost open-rule-folder-btn" title="เปิดโฟลเดอร์ปลายทาง">📂 เปิดโฟลเดอร์</button>
-          <button class="btn sm ghost edit-rule-btn" data-rule-index="${index}">แก้ไข</button>
-          <button class="btn sm ghost delete-rule-btn" data-rule-index="${index}">ลบ</button>
+          <button class="btn sm ghost open-rule-folder-btn" title="${t.openFolder}">📂 ${t.openFolder}</button>
+          <button class="btn sm ghost edit-rule-btn" data-rule-index="${index}">${t.edit}</button>
+          <button class="btn sm ghost delete-rule-btn" data-rule-index="${index}">${t.delete}</button>
         </div>
       `;
 
@@ -773,7 +916,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         appConfig.rules.splice(index, 1);
         await api.saveConfig(appConfig);
         renderAll();
-        showToast(`ลบกฎ "${rule.name}" เรียบร้อยแล้ว`);
+        showToast(t.deletedRule(rule.name));
       });
 
       container.appendChild(div);
@@ -785,7 +928,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     form.style.display = 'block';
 
     if (rule) {
-      document.getElementById('ruleFormTitle').textContent = 'แก้ไขกฎ: ' + rule.name;
+      document.getElementById('ruleFormTitle').innerHTML = `<span class="th">แก้ไขกฎ: ${escapeHtml(rule.name)}</span><span class="en">Edit Rule: ${escapeHtml(rule.name)}</span>`;
       document.getElementById('editRuleId').value = index;
       document.getElementById('ruleNameInput').value = rule.name || '';
       document.getElementById('ruleConditionType').value = rule.conditionType || 'subject_contains';
@@ -795,7 +938,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       document.getElementById('ruleSaveAttachments').checked = rule.saveAttachments !== false;
       document.getElementById('ruleFolderPerEmail').checked = !!rule.folderPerEmail;
     } else {
-      document.getElementById('ruleFormTitle').textContent = 'เพิ่มกฎใหม่';
+      document.getElementById('ruleFormTitle').innerHTML = `<span class="th">+ เพิ่มกฎใหม่</span><span class="en">+ Add New Rule</span>`;
       document.getElementById('editRuleId').value = '-1';
       document.getElementById('ruleNameInput').value = '';
       document.getElementById('ruleConditionType').value = 'all_emails';
@@ -855,7 +998,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
     if (!rule.targetFolder) {
-      showToast('กรุณาเลือกโฟลเดอร์ปลายทางสำหรับจัดเก็บ', true);
+      showToast(currentLang === 'en' ? 'Please select a destination target folder' : 'กรุณาเลือกโฟลเดอร์ปลายทางสำหรับจัดเก็บ', true);
       return;
     }
 
@@ -870,13 +1013,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     await api.saveConfig(appConfig);
     document.getElementById('ruleEditForm').style.display = 'none';
     renderAll();
-    showToast(`บันทึกกฎ "${rule.name}" เรียบร้อยแล้ว`);
+    const t = i18n[currentLang] || i18n.en;
+    showToast(t.savedRule(rule.name));
   });
 
   // 13. History Table
   function renderHistoryTable(filterText = '') {
     const tbody = document.getElementById('historyTableBody');
     tbody.innerHTML = '';
+    const t = i18n[currentLang] || i18n.en;
 
     const filter = filterText.toLowerCase();
     const filtered = historyLogs.filter(h => {
@@ -888,13 +1033,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     if (filtered.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:20px; color:#8e8e93;">ไม่พบข้อมูลประวัติ</td></tr>';
+      tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:20px; color:#8e8e93;">${t.noHistory}</td></tr>`;
       return;
     }
 
     filtered.forEach(item => {
       const tr = document.createElement('tr');
-      const timeStr = new Date(item.date).toLocaleString('th-TH');
+      const timeStr = currentLang === 'en'
+        ? new Date(item.date).toLocaleString('en-US')
+        : new Date(item.date).toLocaleString('th-TH');
       const filesStr = item.filesSaved ? item.filesSaved.join(', ') : '-';
 
       tr.innerHTML = `
@@ -904,7 +1051,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         <td><span class="chip">${escapeHtml(item.ruleName || '-')}</span></td>
         <td><small style="color:#a1a1a6;">${escapeHtml(filesStr)}</small></td>
         <td>
-          <button class="btn sm ghost open-folder-hist-btn">เปิดโฟลเดอร์</button>
+          <button class="btn sm ghost open-folder-hist-btn">${t.openFolder}</button>
         </td>
       `;
 
@@ -940,32 +1087,37 @@ document.addEventListener('DOMContentLoaded', async () => {
     appConfig.notificationsEnabled = document.getElementById('settingNotifications').checked;
 
     await api.saveConfig(appConfig);
-    showToast('บันทึกการตั้งค่าเรียบร้อยแล้ว');
+    const t = i18n[currentLang] || i18n.en;
+    showToast(t.savedSettings);
   });
 
   const btnCheckUpdateManual = document.getElementById('btnCheckUpdateManual');
   if (btnCheckUpdateManual) {
     btnCheckUpdateManual.addEventListener('click', async () => {
       btnCheckUpdateManual.disabled = true;
-      btnCheckUpdateManual.textContent = '⏳ กำลังตรวจสอบ...';
+      const t = i18n[currentLang] || i18n.en;
+      btnCheckUpdateManual.textContent = t.checkingUpdates;
       try {
         const res = await api.checkForUpdates();
         if (res && res.hasUpdate) {
-          if (confirm(`พบการอัปเดตใหม่: ${res.remoteVersion}\n\nต้องการดาวน์โหลดและติดตั้ง Patch ทันทีหรือไม่?`)) {
-            showToast('⏳ กำลังดาวน์โหลด Patch และเริ่มการติดตั้ง...');
+          const confirmMsg = currentLang === 'en'
+            ? `New patch found: ${res.remoteVersion}\n\nDownload and apply patch now? The app will update automatically.`
+            : `พบการอัปเดตใหม่: ${res.remoteVersion}\n\nต้องการดาวน์โหลดและติดตั้ง Patch ทันทีหรือไม่?`;
+          if (confirm(confirmMsg)) {
+            showToast(currentLang === 'en' ? '⏳ Downloading patch and starting install...' : '⏳ กำลังดาวน์โหลด Patch และเริ่มการติดตั้ง...');
             const pRes = await api.applyPatch(res.downloadUrl);
             if (!pRes.success) {
-              showToast(pRes.error || 'ไม่สามารถติดตั้ง Patch ได้', true);
+              showToast(pRes.error || (currentLang === 'en' ? 'Failed to apply patch' : 'ไม่สามารถติดตั้ง Patch ได้'), true);
             }
           }
         } else {
-          showToast(`✓ คุณกำลังใช้งานเวอร์ชันล่าสุดแล้ว (${res ? res.currentVersion : 'v1.1.0'})`);
+          showToast(t.latestVersion(res ? res.currentVersion : 'v1.1.0'));
         }
       } catch (e) {
-        showToast('ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์เพื่อตรวจสอบอัปเดตได้', true);
+        showToast(currentLang === 'en' ? 'Cannot connect to update server' : 'ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์เพื่อตรวจสอบอัปเดตได้', true);
       } finally {
         btnCheckUpdateManual.disabled = false;
-        btnCheckUpdateManual.textContent = '🔄 ตรวจสอบ Patch';
+        btnCheckUpdateManual.textContent = t.checkUpdates;
       }
     });
   }
@@ -974,6 +1126,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   function formatTimeAgo(isoString) {
     if (!isoString) return '';
     const diff = Math.max(0, Math.floor((Date.now() - new Date(isoString).getTime()) / 1000));
+    if (currentLang === 'en') {
+      if (diff < 5) return 'just now';
+      if (diff < 60) return `${diff}s ago`;
+      if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+      if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+      return `${Math.floor(diff / 86400)}d ago`;
+    }
     if (diff < 60) return `${diff} วินาทีที่แล้ว`;
     if (diff < 3600) return `${Math.floor(diff / 60)} นาทีที่แล้ว`;
     if (diff < 86400) return `${Math.floor(diff / 3600)} ชม. ที่แล้ว`;

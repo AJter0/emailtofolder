@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Email to Folder — Enterprise</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Prompt:wght@200;300;400;500&family=Inter:wght@200;300;400;500&display=swap">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="dark-mode">
@@ -106,7 +106,7 @@
         <div class="cl col-feed">
           <div class="cl-header">
             <h6><span class="th">อีเมลล่าสุดที่บันทึกแล้ว</span><span class="en">Latest Archived Emails</span></h6>
-            <span class="badge-counter" id="todayCount">วันนี้ 14 ฉบับ</span>
+            <span class="badge-counter" id="todayCount"><span class="th">วันนี้ 0 ฉบับ</span><span class="en">Today: 0 emails</span></span>
           </div>
           <div class="feed-list" id="feedList">
             <!-- Dynamically populated items -->
@@ -175,7 +175,7 @@
               <p class="th">เชื่อมต่อผ่าน IMAP ด้วย App Password ทำงานเบื้องหลังได้ตลอด 24 ชั่วโมง</p>
               <p class="en">Connect via IMAP with App Password for 24/7 background archiving</p>
             </div>
-            <button class="btn sm ghost" id="btnConfigureGmail">ตั้งค่า Gmail</button>
+            <button class="btn sm ghost" id="btnConfigureGmail"><span class="th">ตั้งค่า Gmail</span><span class="en">Setup Gmail</span></button>
           </div>
 
           <!-- Option C: Outlook.com / Office 365 / IMAP -->
@@ -186,13 +186,13 @@
               <p class="th">เชื่อมต่อเซิร์ฟเวอร์อีเมลองค์กร หรือ IMAP ทั่วไป (เช่น Hostinger, cPanel, Mail Server บริษัท)</p>
               <p class="en">Connect corporate email servers, Office 365 or generic IMAP</p>
             </div>
-            <button class="btn sm ghost" id="btnConfigureImap">ตั้งค่า IMAP</button>
+            <button class="btn sm ghost" id="btnConfigureImap"><span class="th">ตั้งค่า IMAP</span><span class="en">Setup IMAP</span></button>
           </div>
         </div>
 
         <!-- Dynamic Form for adding/editing IMAP / Gmail account -->
         <div class="account-form" id="accountForm" style="display:none;">
-          <h4 id="accountFormTitle">ตั้งค่าบัญชี</h4>
+          <h4 id="accountFormTitle"><span class="th">ตั้งค่าบัญชี</span><span class="en">Account Settings</span></h4>
           <input type="hidden" id="accFormType" value="imap">
           <div class="form-row">
             <label class="th">อีเมล (Email address):</label>
@@ -217,9 +217,9 @@
             </div>
           </div>
           <div class="form-actions">
-            <button class="btn sm ghost" id="btnTestAccount">ทดสอบการเชื่อมต่อ</button>
-            <button class="btn sm" id="btnSaveAccount">บันทึกบัญชีนี้</button>
-            <button class="btn sm ghost" id="btnCancelAccount">ยกเลิก</button>
+            <button class="btn sm ghost" id="btnTestAccount"><span class="th">ทดสอบการเชื่อมต่อ</span><span class="en">Test Connection</span></button>
+            <button class="btn sm" id="btnSaveAccount"><span class="th">บันทึกบัญชีนี้</span><span class="en">Save Account</span></button>
+            <button class="btn sm ghost" id="btnCancelAccount"><span class="th">ยกเลิก</span><span class="en">Cancel</span></button>
           </div>
           <div id="accountTestResult" class="test-result"></div>
         </div>
@@ -245,7 +245,7 @@
         <div class="modal-top-actions">
           <p class="th">ตั้งเงื่อนไขเมื่อมีอีเมลใหม่เข้ามา ระบบจะบันทึกไฟล์อีเมล (.msg/.eml) และไฟล์แนบไปยังโฟลเดอร์ที่ระบุโดยอัตโนมัติ</p>
           <p class="en">Define conditions so incoming emails & attachments are automatically saved to your target folders.</p>
-          <button class="btn sm" id="btnAddNewRule">+ เพิ่มกฎใหม่</button>
+          <button class="btn sm" id="btnAddNewRule"><span class="th">+ เพิ่มกฎใหม่</span><span class="en">+ Add New Rule</span></button>
         </div>
 
         <!-- Rules Table / List -->
@@ -255,7 +255,7 @@
 
         <!-- Rule Edit Form -->
         <div class="rule-edit-form" id="ruleEditForm" style="display:none;">
-          <h4 id="ruleFormTitle">เพิ่ม / แก้ไขกฎ</h4>
+          <h4 id="ruleFormTitle"><span class="th">เพิ่ม / แก้ไขกฎ</span><span class="en">Add / Edit Rule</span></h4>
           <input type="hidden" id="editRuleId" value="">
           <div class="form-row">
             <label class="th">ชื่อกฎ:</label>
@@ -285,7 +285,7 @@
             <label class="en">Target Destination Folder:</label>
             <div class="folder-picker-group">
               <input type="text" id="ruleTargetFolderInput" placeholder="C:\Documents\Finance\Invoices" readonly>
-              <button class="btn sm ghost" id="btnBrowseTargetFolder">เลือกโฟลเดอร์...</button>
+              <button class="btn sm ghost" id="btnBrowseTargetFolder"><span class="th">เลือกโฟลเดอร์...</span><span class="en">Browse...</span></button>
             </div>
           </div>
           <div class="form-options">
@@ -306,8 +306,8 @@
             </label>
           </div>
           <div class="form-actions">
-            <button class="btn sm" id="btnSaveRuleSubmit">บันทึกกฎนี้</button>
-            <button class="btn sm ghost" id="btnCancelRuleEdit">ยกเลิก</button>
+            <button class="btn sm" id="btnSaveRuleSubmit"><span class="th">บันทึกกฎนี้</span><span class="en">Save Rule</span></button>
+            <button class="btn sm ghost" id="btnCancelRuleEdit"><span class="th">ยกเลิก</span><span class="en">Cancel</span></button>
           </div>
         </div>
 
@@ -325,7 +325,7 @@
       <div class="modal-body">
         <div class="history-controls">
           <input type="text" id="historySearchInput" placeholder="ค้นหาตามชื่อผู้ส่ง, หัวข้อ, หรือโฟลเดอร์...">
-          <button class="btn sm ghost" id="btnClearHistorySearch">ล้างค้นหา</button>
+          <button class="btn sm ghost" id="btnClearHistorySearch"><span class="th">ล้างค้นหา</span><span class="en">Clear</span></button>
         </div>
         <div class="history-table-container">
           <table class="history-table">
@@ -415,7 +415,7 @@
         </div>
 
         <div class="form-actions">
-          <button class="btn sm" id="btnSaveSettings">บันทึกการตั้งค่า</button>
+          <button class="btn sm" id="btnSaveSettings"><span class="th">บันทึกการตั้งค่า</span><span class="en">Save Settings</span></button>
         </div>
       </div>
     </div>
