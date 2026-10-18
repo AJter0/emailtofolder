@@ -57,6 +57,42 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('winMinBtn').addEventListener('click', () => api.windowMinimize());
   document.getElementById('winMaxBtn').addEventListener('click', () => api.windowMaximize());
 
+  // Double-click titlebar to maximize / restore window
+  const titlebarEl = document.querySelector('.titlebar');
+  if (titlebarEl) {
+    titlebarEl.addEventListener('dblclick', (e) => {
+      if (e.target.closest('.window-controls') || e.target.closest('.lang-switch') || e.target.closest('.patch-pill')) return;
+      api.windowMaximize();
+    });
+  }
+
+  // Auto-check for updates / Patch
+  async function checkAppUpdates() {
+    try {
+      const res = await api.checkForUpdates();
+      if (res && res.hasUpdate) {
+        const patchPill = document.getElementById('patchUpdatePill');
+        if (patchPill) {
+          patchPill.style.display = 'inline-flex';
+          patchPill.textContent = `🚀 Patch ${res.remoteVersion}`;
+          patchPill.title = `มีเวอร์ชันใหม่ ${res.remoteVersion} — คลิกเพื่อดาวน์โหลดและติดตั้ง Patch ทันที`;
+          patchPill.onclick = async () => {
+            if (confirm(`พบการอัปเดตใหม่: ${res.remoteVersion}\n\nต้องการติดตั้ง Patch ทันทีหรือไม่? โปรแกรมจะดาวน์โหลดตัวติดตั้งและอัปเดตให้อัตโนมัติ`)) {
+              showToast('⏳ กำลังดาวน์โหลด Patch และเริ่มการติดตั้ง...');
+              const pRes = await api.applyPatch(res.downloadUrl);
+              if (!pRes.success) {
+                showToast(pRes.error || 'ไม่สามารถติดตั้ง Patch ได้', true);
+              }
+            }
+          };
+        }
+      }
+    } catch (err) {
+      // Offline or network error
+    }
+  }
+  checkAppUpdates();
+
   // 3. Load Initial Data
   try {
     const data = await api.getInitialData();
@@ -459,54 +495,62 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  // 10. Drag & Drop File Handling
+  // 10. Drag & Drop File Handling (Window-wide drop support)
   const dropZone = document.getElementById('dropZone');
-
-  ['dragenter', 'dragover'].forEach(name => {
-    window.addEventListener(name, (e) => {
-      e.preventDefault();
-      dropZone.classList.add('dragover');
+  if (dropZone) {
+    ['dragenter', 'dragover'].forEach(name => {
+      window.addEventListener(name, (e) => {
+        e.preventDefault();
+        dropZone.classList.add('dragover');
+      });
     });
-  });
 
-  ['dragleave', 'drop'].forEach(name => {
-    window.addEventListener(name, (e) => {
-      e.preventDefault();
-      dropZone.classList.remove('dragover');
+    ['dragleave', 'drop'].forEach(name => {
+      window.addEventListener(name, (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+      });
     });
-  });
+  }
 
+  window.addEventListener('dragover', (e) => e.preventDefault());
   window.addEventListener('drop', async (e) => {
     e.preventDefault();
     if (e.dataTransfer && e.dataTransfer.files.length > 0) {
       for (const file of e.dataTransfer.files) {
         if (file.path) {
+          showToast(`⏳ กำลังประมวลผลไฟล์: ${file.name}...`);
           const res = await api.processManualFile(file.path);
           if (!res.success) {
             showToast(res.error || res.message || res.reason || 'ไม่พบกฎที่ตรงกับอีเมลนี้', true);
+          } else {
+            showToast(`✓ บันทึกสำเร็จ: ${file.name}`);
           }
         }
       }
     }
   });
 
-  document.getElementById('browseFileBtn').addEventListener('click', async () => {
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = '.eml,.msg';
-    input.onchange = async () => {
-      if (input.files.length > 0) {
-        const file = input.files[0];
-        if (file.path) {
-          const res = await api.processManualFile(file.path);
-          if (!res.success) {
-            showToast(res.error || res.message || res.reason || 'ไม่พบกฎที่ตรงกับอีเมลนี้', true);
+  const browseFileBtn = document.getElementById('browseFileBtn');
+  if (browseFileBtn) {
+    browseFileBtn.addEventListener('click', async () => {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = '.eml,.msg';
+      input.onchange = async () => {
+        if (input.files.length > 0) {
+          const file = input.files[0];
+          if (file.path) {
+            const res = await api.processManualFile(file.path);
+            if (!res.success) {
+              showToast(res.error || res.message || res.reason || 'ไม่พบกฎที่ตรงกับอีเมลนี้', true);
+            }
           }
         }
-      }
-    };
-    input.click();
-  });
+      };
+      input.click();
+    });
+  }
 
   // 11. Accounts Management
   document.getElementById('btnConnectOutlookLocal').addEventListener('click', async () => {
@@ -898,6 +942,33 @@ document.addEventListener('DOMContentLoaded', async () => {
     await api.saveConfig(appConfig);
     showToast('บันทึกการตั้งค่าเรียบร้อยแล้ว');
   });
+
+  const btnCheckUpdateManual = document.getElementById('btnCheckUpdateManual');
+  if (btnCheckUpdateManual) {
+    btnCheckUpdateManual.addEventListener('click', async () => {
+      btnCheckUpdateManual.disabled = true;
+      btnCheckUpdateManual.textContent = '⏳ กำลังตรวจสอบ...';
+      try {
+        const res = await api.checkForUpdates();
+        if (res && res.hasUpdate) {
+          if (confirm(`พบการอัปเดตใหม่: ${res.remoteVersion}\n\nต้องการดาวน์โหลดและติดตั้ง Patch ทันทีหรือไม่?`)) {
+            showToast('⏳ กำลังดาวน์โหลด Patch และเริ่มการติดตั้ง...');
+            const pRes = await api.applyPatch(res.downloadUrl);
+            if (!pRes.success) {
+              showToast(pRes.error || 'ไม่สามารถติดตั้ง Patch ได้', true);
+            }
+          }
+        } else {
+          showToast(`✓ คุณกำลังใช้งานเวอร์ชันล่าสุดแล้ว (${res ? res.currentVersion : 'v1.1.0'})`);
+        }
+      } catch (e) {
+        showToast('ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์เพื่อตรวจสอบอัปเดตได้', true);
+      } finally {
+        btnCheckUpdateManual.disabled = false;
+        btnCheckUpdateManual.textContent = '🔄 ตรวจสอบ Patch';
+      }
+    });
+  }
 
   // Utilities
   function formatTimeAgo(isoString) {

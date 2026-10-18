@@ -13,6 +13,10 @@ contextBridge.exposeInMainWorld('api', {
 
   openExternalUrl: (url) => ipcRenderer.invoke('open-external-url', url),
 
+  // Patch & Update Mechanism
+  checkForUpdates: () => ipcRenderer.invoke('check-for-updates'),
+  applyPatch: (downloadUrl) => ipcRenderer.invoke('apply-patch', downloadUrl),
+
   // Window control
   windowMinimize: () => ipcRenderer.send('window-minimize'),
   windowMaximize: () => ipcRenderer.send('window-maximize'),

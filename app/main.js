@@ -234,8 +234,9 @@ function createWindow() {
     icon: process.platform === 'win32' ? appIconIco : appIconPng,
     width: 1180,
     height: 800,
-    minWidth: 960,
-    minHeight: 640,
+    minWidth: 800,
+    minHeight: 520,
+    resizable: true,
     frame: false,
     backgroundColor: '#0b0b0e',
     show: false,
@@ -644,4 +645,87 @@ ipcMain.on('window-maximize', () => {
 
 ipcMain.on('window-close', () => {
   if (mainWindow) mainWindow.close();
+});
+
+// Auto-Patch & Update Check Handlers
+ipcMain.handle('check-for-updates', async () => {
+  return new Promise((resolve) => {
+    const https = require('https');
+    const req = https.get('https://emailtofolder.com/version.json', { timeout: 6000 }, (res) => {
+      let data = '';
+      res.on('data', chunk => { data += chunk; });
+      res.on('end', () => {
+        try {
+          const remote = JSON.parse(data);
+          const currentVersion = '1.1.0';
+          const currentRun = 2;
+          const hasUpdate = (remote.runNumber && remote.runNumber > currentRun) ||
+            (remote.version && remote.version !== currentVersion && remote.version > currentVersion);
+          resolve({
+            success: true,
+            hasUpdate: Boolean(hasUpdate),
+            currentVersion: `v${currentVersion} (Run #${currentRun})`,
+            remoteVersion: remote.fullVersion || `v${remote.version}`,
+            description: remote.description || '',
+            downloadUrl: remote.downloadUrl || 'https://emailtofolder.com/downloads/EmailToFolder-Setup.exe'
+          });
+        } catch (e) {
+          resolve({ success: false, error: 'Failed to parse version metadata' });
+        }
+      });
+    });
+    req.on('error', (err) => {
+      resolve({ success: false, error: err.message });
+    });
+    req.on('timeout', () => {
+      req.destroy();
+      resolve({ success: false, error: 'Connection timeout' });
+    });
+  });
+});
+
+ipcMain.handle('apply-patch', async (event, downloadUrl) => {
+  const urlToUse = downloadUrl || 'https://emailtofolder.com/downloads/EmailToFolder-Setup.exe';
+  const https = require('https');
+  const http = require('http');
+  const tempPath = path.join(app.getPath('temp'), `EmailToFolder-Patch-${Date.now()}.exe`);
+
+  return new Promise((resolve) => {
+    function downloadFile(targetUrl) {
+      const proto = targetUrl.startsWith('https') ? https : http;
+      proto.get(targetUrl, (res) => {
+        // Handle redirect if any
+        if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+          return downloadFile(res.headers.location);
+        }
+        if (res.statusCode !== 200) {
+          return resolve({ success: false, error: `HTTP ${res.statusCode}` });
+        }
+        const fileStream = fs.createWriteStream(tempPath);
+        res.pipe(fileStream);
+        fileStream.on('finish', () => {
+          fileStream.close(() => {
+            try {
+              // Execute installer to patch application
+              const { spawn } = require('child_process');
+              const child = spawn(tempPath, [], { detached: true, stdio: 'ignore' });
+              child.unref();
+              // Exit app to allow patch installer to replace files cleanly
+              setTimeout(() => {
+                isQuitting = true;
+                app.quit();
+              }, 1200);
+              resolve({ success: true, message: 'กำลังติดตั้ง Patch อัปเดต...' });
+            } catch (spawnErr) {
+              resolve({ success: false, error: spawnErr.message });
+            }
+          });
+        });
+      }).on('error', (err) => {
+        resolve({ success: false, error: err.message });
+      });
+    }
+
+    downloadFile(urlToUse);
+  });
 });
