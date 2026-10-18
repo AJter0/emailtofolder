@@ -12,6 +12,8 @@ function runPowerShell(script, timeoutMs = 15000) {
   return new Promise((resolve) => {
     const fullScript = `
       [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+      $OutputEncoding = [System.Text.Encoding]::UTF8
+      [Console]::InputEncoding = [System.Text.Encoding]::UTF8
       $ErrorActionPreference = 'Stop'
       ${script}
     `;
@@ -323,13 +325,15 @@ class OutlookLocalWorker {
           $inbox = $ns.GetDefaultFolder(6)
           $table = $inbox.GetTable()
 
-          # Add MAPI property columns that bypass Object Model Security Guard
+          # Add MAPI property columns that bypass Object Model Security Guard and preserve Unicode/Thai
+          $propSubjectW = 'http://schemas.microsoft.com/mapi/proptag/0x0037001F'
           $propSenderName = 'http://schemas.microsoft.com/mapi/proptag/0x0C1A001F'
           $propSenderSmtp = 'http://schemas.microsoft.com/mapi/proptag/0x5D01001F'
           $propSenderEmail = 'http://schemas.microsoft.com/mapi/proptag/0x0C1F001F'
           $propHasAttach = 'http://schemas.microsoft.com/mapi/proptag/0x0E1B000B'
 
           try { [void]$table.Columns.Add('ReceivedTime') } catch {}
+          try { [void]$table.Columns.Add($propSubjectW) } catch {}
           try { [void]$table.Columns.Add($propSenderName) } catch {}
           try { [void]$table.Columns.Add($propSenderSmtp) } catch {}
           try { [void]$table.Columns.Add($propSenderEmail) } catch {}
@@ -353,7 +357,10 @@ class OutlookLocalWorker {
               $recvStr = (Get-Date).ToString('o')
 
               try { $entryId = [string]$row.Item('EntryID') } catch {}
-              try { $subj = [string]$row.Item('Subject') } catch {}
+              try { $subj = [string]$row.Item($propSubjectW) } catch {}
+              if (-not $subj) {
+                try { $subj = [string]$row.Item('Subject') } catch {}
+              }
               try { $sName = [string]$row.Item($propSenderName) } catch {}
               try { $sSmtp = [string]$row.Item($propSenderSmtp) } catch {}
               try { $sEmail = [string]$row.Item($propSenderEmail) } catch {}
@@ -519,8 +526,77 @@ class OutlookLocalWorker {
         $savedFiles = @()
         if (${saveMsgFlag}) {
           try {
-            $item.SaveAs('${escapedMsgPath}', 3) # 3 = olMSG
+            $targetItem = $item
+            $needsCleanup = $false
+            $html = ''
+            try { $html = [string]$item.HTMLBody } catch {}
+
+            # Option 1: Detect and download external linked images (<img src="http...">), then embed as inline CID attachments
+            if ($html -and ($html -match '(?i)<img\b[^>]*?\bsrc=["'']https?://')) {
+              try {
+                $targetItem = $item.Copy()
+                $needsCleanup = $true
+                $wc = New-Object System.Net.WebClient
+                $wc.Headers.Add('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36')
+
+                $imgRegex = [regex]'(?i)<img\b[^>]*?\bsrc=["''](https?://[^"''\s>]+)["'']'
+                $allMatches = $imgRegex.Matches($html)
+                $tempFiles = @()
+                $seenUrls = @{}
+                $imgIdx = 1
+
+                foreach ($m in $allMatches) {
+                  if ($imgIdx -gt 35) { break }
+                  $imgUrl = $m.Groups[1].Value
+                  if ($seenUrls.ContainsKey($imgUrl)) {
+                    $cid = $seenUrls[$imgUrl]
+                    $html = $html.Replace($imgUrl, "cid:$cid")
+                    continue
+                  }
+
+                  try {
+                    $ext = '.jpg'
+                    if ($imgUrl -match '(?i)\.(png|gif|webp|svg|jpeg|bmp)(\?.*)?$') {
+                      $ext = '.' + $Matches[1]
+                    }
+                    $tmpPath = Join-Path $env:TEMP ("etf_{0}_{1}{2}" -f (Get-Random), $imgIdx, $ext)
+                    $wc.DownloadFile($imgUrl, $tmpPath)
+                    if ((Test-Path $tmpPath) -and (Get-Item $tmpPath).Length -gt 0) {
+                      $cid = "img_{0}_{1}@emailtofolder" -f $imgIdx, (Get-Random)
+                      $att = $targetItem.Attachments.Add($tmpPath, 1, 0, [System.IO.Path]::GetFileName($tmpPath))
+                      try {
+                        # PR_ATTACH_CONTENT_ID (0x3712001F)
+                        $att.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001F", $cid)
+                        # PR_ATTACHMENT_HIDDEN (0x7FFE000B)
+                        $att.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x7FFE000B", $true)
+                        # PR_ATTACH_FLAGS (0x37140003) = 4 (ATT_MHTML_REF)
+                        $att.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x37140003", 4)
+                      } catch {}
+                      $html = $html.Replace($imgUrl, "cid:$cid")
+                      $seenUrls[$imgUrl] = $cid
+                      $tempFiles += $tmpPath
+                      $imgIdx++
+                    }
+                  } catch {}
+                }
+
+                $targetItem.HTMLBody = $html
+
+                foreach ($tf in $tempFiles) {
+                  Remove-Item $tf -Force -ErrorAction SilentlyContinue
+                }
+              } catch {
+                $targetItem = $item
+                $needsCleanup = $false
+              }
+            }
+
+            $targetItem.SaveAs('${escapedMsgPath}', 3) # 3 = olMSG
             $savedFiles += [System.IO.Path]::GetFileName('${escapedMsgPath}')
+
+            if ($needsCleanup -and $targetItem) {
+              try { $targetItem.Delete() } catch {}
+            }
           } catch {
             # Fallback to .eml if .msg SaveAs is blocked
           }
@@ -550,7 +626,7 @@ class OutlookLocalWorker {
       }
     `;
 
-    const { stdout } = await runPowerShell(exportScript, 25000);
+    const { stdout } = await runPowerShell(exportScript, 45000);
     if (stdout.includes('SKIP:ATT_NAME_MISMATCH')) {
       return false;
     }
