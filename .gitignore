@@ -1,0 +1,24 @@
+# Node dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Electron Builder Output
+dist/
+app/dist/
+win-unpacked/
+
+# Test output
+test_output/
+app/test_output/
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# Temporary files
+*.log

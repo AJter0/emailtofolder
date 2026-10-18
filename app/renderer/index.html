@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Email to Folder — Enterprise</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark-mode">
+
+  <!-- Custom Title Bar for Windows Desktop -->
+  <header class="titlebar">
+    <div class="window-controls">
+      <button class="win-btn win-close" id="winCloseBtn" title="Close"></button>
+      <button class="win-btn win-minimize" id="winMinBtn" title="Minimize"></button>
+      <button class="win-btn win-maximize" id="winMaxBtn" title="Maximize"></button>
+    </div>
+    <div class="titlebar-title">
+      <img src="../assets/icon.png" class="logo-img" alt="Logo" width="18" height="18">
+      <span>Email to Folder</span>
+    </div>
+    <div class="titlebar-right">
+      <div class="lang-switch">
+        <button id="langTh" class="active">TH</button>
+        <button id="langEn">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Top Action Navigation Bar -->
+  <nav class="app-nav">
+    <div class="nav-left">
+      <div class="status-badge" id="engineStatusBadge">
+        <span class="status-dot"></span>
+        <span id="engineStatusText" class="th">ระบบกำลังทำงาน (Live)</span>
+        <span id="engineStatusTextEn" class="en">System Running (Live)</span>
+      </div>
+      <button class="btn sm ghost" id="toggleEngineBtn">
+        <span class="th">หยุดชั่วคราว</span>
+        <span class="en">Pause Engine</span>
+      </button>
+
+      <div class="quota-badge" id="quotaBadge" title="โควตาทดลองใช้ฟรี 100 ฉบับ/เดือน (รีเซ็ตใหม่ทุกวันที่ 1 ของเดือน)">
+        <span class="quota-icon">🎁</span>
+        <div class="quota-details">
+          <span class="quota-text"><span class="th">ฟรี: </span><span class="en">Free: </span><b id="quotaUsedText">14</b>/<span id="quotaLimitText">100</span> <span class="th">ฉบับ/เดือน</span><span class="en">/mo</span></span>
+          <div class="quota-progress-bar">
+            <div class="quota-progress-fill" id="quotaProgressFill" style="width: 14%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      <button class="nav-btn active" id="navDashboard">
+        <span>📊</span> <span class="th">ภาพรวม</span><span class="en">Dashboard</span>
+      </button>
+      <button class="nav-btn" id="navAccounts">
+        <span>✉</span> <span class="th">เชื่อมต่อบัญชี</span><span class="en">Accounts</span>
+      </button>
+      <button class="nav-btn" id="navRules">
+        <span>⚡</span> <span class="th">จัดการกฎ</span><span class="en">Rules</span>
+      </button>
+      <button class="nav-btn" id="navHistory">
+        <span>📜</span> <span class="th">ประวัติจัดเก็บ</span><span class="en">History Log</span>
+      </button>
+      <button class="nav-btn" id="navSettings">
+        <span>⚙</span> <span class="th">ตั้งค่า</span><span class="en">Settings</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Application Body -->
+  <main class="app-container">
+    
+    <!-- Drag & Drop Test Banner -->
+    <div class="dropzone-banner" id="dropZone">
+      <div class="dropzone-content">
+        <span class="drop-icon">📥</span>
+        <div>
+          <strong class="th">ทดสอบลากวาง (Drag & Drop Test Zone)</strong>
+          <strong class="en">Drag & Drop Test Zone</strong>
+          <p class="th">ลากไฟล์อีเมล (.eml หรือ .msg) มาปล่อยที่นี่เพื่อทดสอบการคัดแยกลงโฟลเดอร์อัตโนมัติตามกฎ</p>
+          <p class="en">Drop an .eml or .msg file here to test instant auto-routing into target folders</p>
+        </div>
+      </div>
+      <button class="btn sm" id="browseFileBtn">
+        <span class="th">เลือกไฟล์ทดสอบ</span><span class="en">Browse File</span>
+      </button>
+    </div>
+
+    <!-- 3-Column Hero Stage (Identical to Landing Page design) -->
+    <div class="stage-card">
+      <div class="tb">
+        <b></b><b></b><b></b>
+        <span>Email to Folder — Live Monitor</span>
+        <div class="account-summary" id="accountSummary">
+          <span class="acc-pill">Outlook Local ✓</span>
+          <span class="acc-pill">Gmail IMAP ✓</span>
+        </div>
+      </div>
+
+      <div class="bd">
+        <!-- Column 1: Target Folders -->
+        <div class="cl col-folders">
+          <div class="cl-header">
+            <h6><span class="th">โฟลเดอร์ปลายทาง</span><span class="en">Target Folders</span></h6>
+            <button class="icon-btn" id="addFolderBtn" title="เพิ่มโฟลเดอร์">+</button>
+          </div>
+          <div class="folder-list" id="targetFolderList">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Column 2: Inbox / Live Activity Feed -->
+        <div class="cl col-feed">
+          <div class="cl-header">
+            <h6><span class="th">อีเมลล่าสุดที่บันทึกแล้ว</span><span class="en">Latest Archived Emails</span></h6>
+            <span class="badge-counter" id="todayCount">วันนี้ 14 ฉบับ</span>
+          </div>
+          <div class="feed-list" id="feedList">
+            <!-- Dynamically populated items -->
+          </div>
+        </div>
+
+        <!-- Column 3: Auto Rules & Live Counter -->
+        <div class="cl col-rules">
+          <div class="cl-header">
+            <h6><span class="th">กฎอัตโนมัติ</span><span class="en">Auto Rules</span></h6>
+            <button class="icon-btn" id="addRuleQuickBtn" title="เพิ่มกฎ">+</button>
+          </div>
+          <div class="rules-list" id="rulesSummaryList">
+            <!-- Dynamically populated -->
+          </div>
+          <div class="ok-box">
+            <div class="ok">✓ <span id="savedCount">1,284</span> <span class="th">ฉบับที่บันทึกแล้ว</span><span class="en">emails saved</span></div>
+            <p class="ok-sub th">ทำงานอัตโนมัติตลอด 24/7</p>
+            <p class="ok-sub en">Automated 24/7 in background</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating status items (Style element from website) -->
+    <div class="floating-chips-preview">
+      <span class="fc">📎 Invoice.pdf</span>
+      <span class="fc">📂 Finance / Invoices ✓</span>
+      <span class="fc">✉ Contract_v3.eml</span>
+      <span class="fc">📊 Report.xlsx</span>
+    </div>
+
+  </main>
+
+  <!-- MODAL: Accounts Configuration (Outlook, Gmail, IMAP) -->
+  <div class="modal-overlay" id="modalAccounts">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3><span class="th">เชื่อมต่อบัญชีอีเมล (Accounts)</span><span class="en">Connect Email Accounts</span></h3>
+        <button class="close-modal" data-close="modalAccounts">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-desc th">รองรับทั้ง Microsoft Outlook บนเครื่อง, บัญชี Gmail, Outlook.com / Microsoft 365, และเซิร์ฟเวอร์ IMAP ทั่วไป</p>
+        <p class="modal-desc en">Supports local Microsoft Outlook, Gmail, Outlook.com / Microsoft 365, and generic IMAP servers.</p>
+
+        <div class="account-cards">
+          <!-- Option A: Outlook Local Client -->
+          <div class="acc-card" id="cardOutlookLocal">
+            <div class="acc-card-icon">💻</div>
+            <div class="acc-card-info">
+              <h4>Microsoft Outlook (Desktop)</h4>
+              <p class="th">เชื่อมกับโปรแกรม Outlook บนเครื่อง Windows นี้โดยตรง (ดึงอีเมลจาก Inbox อัตโนมัติ)</p>
+              <p class="en">Connect directly to Outlook on this Windows PC (Syncs Inbox automatically)</p>
+            </div>
+            <button class="btn sm" id="btnConnectOutlookLocal">เชื่อมต่อ Outlook</button>
+          </div>
+
+          <!-- Option B: Gmail -->
+          <div class="acc-card" id="cardGmail">
+            <div class="acc-card-icon">🇬</div>
+            <div class="acc-card-info">
+              <h4>Gmail / Google Workspace</h4>
+              <p class="th">เชื่อมต่อผ่าน IMAP ด้วย App Password ทำงานเบื้องหลังได้ตลอด 24 ชั่วโมง</p>
+              <p class="en">Connect via IMAP with App Password for 24/7 background archiving</p>
+            </div>
+            <button class="btn sm ghost" id="btnConfigureGmail">ตั้งค่า Gmail</button>
+          </div>
+
+          <!-- Option C: Outlook.com / Office 365 / IMAP -->
+          <div class="acc-card" id="cardImap">
+            <div class="acc-card-icon">📧</div>
+            <div class="acc-card-info">
+              <h4>Office 365 / IMAP อื่นๆ</h4>
+              <p class="th">เชื่อมต่อเซิร์ฟเวอร์อีเมลองค์กร หรือ IMAP ทั่วไป (เช่น Yahoo, Hostinger, cPanel)</p>
+              <p class="en">Connect corporate email servers, Office 365 or generic IMAP</p>
+            </div>
+            <button class="btn sm ghost" id="btnConfigureImap">ตั้งค่า IMAP</button>
+          </div>
+        </div>
+
+        <!-- Dynamic Form for adding/editing IMAP / Gmail account -->
+        <div class="account-form" id="accountForm" style="display:none;">
+          <h4 id="accountFormTitle">ตั้งค่าบัญชี</h4>
+          <input type="hidden" id="accFormType" value="imap">
+          <div class="form-row">
+            <label class="th">อีเมล (Email address):</label>
+            <label class="en">Email Address:</label>
+            <input type="email" id="accEmail" placeholder="user@company.com">
+          </div>
+          <div class="form-row">
+            <label class="th">รหัสผ่าน / App Password:</label>
+            <label class="en">Password / App Password:</label>
+            <input type="password" id="accPassword" placeholder="••••••••••••••••">
+            <small class="hint th">สำหรับ Gmail ให้สร้าง "App Password" ใน Google Account Security</small>
+            <small class="hint en">For Gmail, create an "App Password" under Google Account Security</small>
+          </div>
+          <div class="form-row-group" id="imapServerFields">
+            <div class="form-row half">
+              <label>IMAP Host:</label>
+              <input type="text" id="accHost" placeholder="imap.yourserver.com">
+            </div>
+            <div class="form-row half">
+              <label>Port:</label>
+              <input type="number" id="accPort" value="993">
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn sm ghost" id="btnTestAccount">ทดสอบการเชื่อมต่อ</button>
+            <button class="btn sm" id="btnSaveAccount">บันทึกบัญชีนี้</button>
+            <button class="btn sm ghost" id="btnCancelAccount">ยกเลิก</button>
+          </div>
+          <div id="accountTestResult" class="test-result"></div>
+        </div>
+
+        <div class="connected-accounts-section">
+          <h5><span class="th">บัญชีที่เปิดใช้งานอยู่</span><span class="en">Active Accounts</span></h5>
+          <div id="connectedAccountsList" class="connected-list">
+            <!-- Connected accounts list -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Rules Editor -->
+  <div class="modal-overlay" id="modalRules">
+    <div class="modal-box modal-wide">
+      <div class="modal-header">
+        <h3><span class="th">จัดการกฎการจัดเก็บอีเมล (Auto Rules)</span><span class="en">Manage Auto Rules</span></h3>
+        <button class="close-modal" data-close="modalRules">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-top-actions">
+          <p class="th">ตั้งเงื่อนไขเมื่อมีอีเมลใหม่เข้ามา ระบบจะบันทึกไฟล์อีเมลและไฟล์แนบไปยังโฟลเดอร์ที่ระบุ</p>
+          <p class="en">Define conditions so incoming emails & attachments are automatically saved to your target folders.</p>
+          <button class="btn sm" id="btnAddNewRule">+ เพิ่มกฎใหม่</button>
+        </div>
+
+        <!-- Rules Table / List -->
+        <div class="rules-management-list" id="rulesManagementList">
+          <!-- Loaded dynamically -->
+        </div>
+
+        <!-- Rule Edit Form -->
+        <div class="rule-edit-form" id="ruleEditForm" style="display:none;">
+          <h4 id="ruleFormTitle">เพิ่ม / แก้ไขกฎ</h4>
+          <input type="hidden" id="editRuleId" value="">
+          <div class="form-row">
+            <label class="th">ชื่อกฎ:</label>
+            <label class="en">Rule Name:</label>
+            <input type="text" id="ruleNameInput" placeholder="เช่น ใบแจ้งหนี้ Finance">
+          </div>
+          <div class="form-row-group">
+            <div class="form-row half">
+              <label class="th">เงื่อนไขตรวจสอบ:</label>
+              <label class="en">Condition Type:</label>
+              <select id="ruleConditionType">
+                <option value="subject_contains">หัวข้อมีคำว่า (Subject contains)</option>
+                <option value="from_contains">ส่งมาจาก / โดเมน (From / Domain)</option>
+                <option value="has_attachment">มีไฟล์แนบใดๆ (Has Attachment)</option>
+                <option value="attachment_name_contains">ชื่อไฟล์แนบมีคำว่า (Attachment name)</option>
+              </select>
+            </div>
+            <div class="form-row half">
+              <label class="th">คำหรือค่าที่ค้นหา:</label>
+              <label class="en">Matching Value:</label>
+              <input type="text" id="ruleConditionValue" placeholder="เช่น Invoice, @projecta.co.th">
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="th">โฟลเดอร์ปลายทาง (Target Folder):</label>
+            <label class="en">Target Destination Folder:</label>
+            <div class="folder-picker-group">
+              <input type="text" id="ruleTargetFolderInput" placeholder="C:\Documents\Finance\Invoices" readonly>
+              <button class="btn sm ghost" id="btnBrowseTargetFolder">เลือกโฟลเดอร์...</button>
+            </div>
+          </div>
+          <div class="form-options">
+            <label class="checkbox-label">
+              <input type="checkbox" id="ruleSaveEml" checked>
+              <span class="th">บันทึกตัวอีเมลฉบับเต็ม (.eml / .msg) ดับเบิ้ลคลิกเปิดใน Outlook ได้</span>
+              <span class="en">Save complete email (.eml / .msg) opens in Outlook</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" id="ruleSaveAttachments" checked>
+              <span class="th">สกัดไฟล์แนบแยกออกมา (PDF, Excel, Word, ภาพ) ลงโฟลเดอร์เดียวกัน</span>
+              <span class="en">Extract attachments (PDF, Excel, Word, Images) into folder</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" id="ruleFolderPerEmail">
+              <span class="th">สร้างโฟลเดอร์ย่อยตามวันที่และหัวข้อสำหรับแต่ละอีเมล</span>
+              <span class="en">Create a subfolder per email (Date + Subject)</span>
+            </label>
+          </div>
+          <div class="form-actions">
+            <button class="btn sm" id="btnSaveRuleSubmit">บันทึกกฎนี้</button>
+            <button class="btn sm ghost" id="btnCancelRuleEdit">ยกเลิก</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: History & Audit Log -->
+  <div class="modal-overlay" id="modalHistory">
+    <div class="modal-box modal-wide">
+      <div class="modal-header">
+        <h3><span class="th">ประวัติการบันทึกอีเมล (Audit Log)</span><span class="en">Archived Email History</span></h3>
+        <button class="close-modal" data-close="modalHistory">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="history-controls">
+          <input type="text" id="historySearchInput" placeholder="ค้นหาตามชื่อผู้ส่ง, หัวข้อ, หรือโฟลเดอร์...">
+          <button class="btn sm ghost" id="btnClearHistorySearch">ล้างค้นหา</button>
+        </div>
+        <div class="history-table-container">
+          <table class="history-table">
+            <thead>
+              <tr>
+                <th><span class="th">วันและเวลา</span><span class="en">Date & Time</span></th>
+                <th><span class="th">หัวข้ออีเมล</span><span class="en">Subject</span></th>
+                <th><span class="th">ผู้ส่ง</span><span class="en">Sender</span></th>
+                <th><span class="th">กฎที่ตรง</span><span class="en">Rule</span></th>
+                <th><span class="th">ไฟล์ที่จัดเก็บ</span><span class="en">Saved Files</span></th>
+                <th><span class="th">การจัดการ</span><span class="en">Action</span></th>
+              </tr>
+            </thead>
+            <tbody id="historyTableBody">
+              <!-- Loaded dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Settings -->
+  <div class="modal-overlay" id="modalSettings">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3><span class="th">ตั้งค่าระบบ (Settings)</span><span class="en">Application Settings</span></h3>
+        <button class="close-modal" data-close="modalSettings">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="setting-item">
+          <div>
+            <strong class="th">ความถี่ในการตรวจสอบอีเมลใหม่</strong>
+            <strong class="en">Check Frequency</strong>
+            <p class="th">ระยะเวลาหน่วงระหว่างการสแกนกล่องจดหมาย</p>
+            <p class="en">Interval between mailbox scans</p>
+          </div>
+          <select id="settingPollInterval">
+            <option value="1">ทุก 1 นาที (แนะนำ)</option>
+            <option value="3">ทุก 3 นาที</option>
+            <option value="5">ทุก 5 นาที</option>
+            <option value="15">ทุก 15 นาที</option>
+          </select>
+        </div>
+
+        <div class="setting-item">
+          <div>
+            <strong class="th">เปิดโปรแกรมอัตโนมัติเมื่อเปิด Windows</strong>
+            <strong class="en">Start with Windows</strong>
+            <p class="th">เริ่มการทำงานใน System Tray อัตโนมัติเมื่อเปิดคอมพิวเตอร์</p>
+            <p class="en">Run in background tray automatically on system boot</p>
+          </div>
+          <input type="checkbox" id="settingStartWithWindows">
+        </div>
+
+        <div class="setting-item">
+          <div>
+            <strong class="th">ย่อลง System Tray เมื่อกดปุ่มปิด (X)</strong>
+            <strong class="en">Minimize to Tray on Close</strong>
+            <p class="th">ให้ระบบยังคงดึงอีเมลในพื้นหลังตลอดเวลา</p>
+            <p class="en">Keep archiving emails in background when window is closed</p>
+          </div>
+          <input type="checkbox" id="settingMinimizeToTray" checked>
+        </div>
+
+        <div class="setting-item">
+          <div>
+            <strong class="th">การแจ้งเตือนบนหน้าจอ Windows</strong>
+            <strong class="en">Desktop Notifications</strong>
+            <p class="th">แสดงการแจ้งเตือนมุมขวาล่างเมื่อมีอีเมลถูกบันทึกสำเร็จ</p>
+            <p class="en">Display desktop notification when an email is saved</p>
+          </div>
+          <input type="checkbox" id="settingNotifications" checked>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn sm" id="btnSaveSettings">บันทึกการตั้งค่า</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Quota Exceeded / Enterprise Upgrade -->
+  <div class="modal-overlay" id="modalQuota">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3><span class="th">โควตาฟรีประจำเดือนครบ 100 ฉบับแล้ว</span><span class="en">Monthly Free Quota Reached</span></h3>
+        <button class="close-modal" data-close="modalQuota">&times;</button>
+      </div>
+      <div class="modal-body" style="text-align:center; padding: 26px 22px;">
+        <div style="font-size: 52px; margin-bottom: 12px;">🎉</div>
+        <h4 style="font-size: 18px; margin-bottom: 8px; color:#fff;">
+          <span class="th">คุณใช้งานครบ 100 ฉบับในเดือนนี้แล้ว</span>
+          <span class="en">You have processed 100 emails this month</span>
+        </h4>
+        <p class="modal-desc th" style="font-size: 14px; margin-bottom: 18px; line-height: 1.6;">
+          ระบบจะ<strong>รีเซ็ตโควตาทดลองใช้ฟรี 100 ฉบับให้อัตโนมัติในวันที่ 1 ของเดือนถัดไป</strong><br>
+          หากองค์กรของคุณต้องการจัดเก็บอีเมลแบบไม่จำกัด (Unlimited), การตั้งค่าเฉพาะทาง หรือการเชื่อมต่อระบบเซิร์ฟเวอร์ภายใน สามารถติดต่อทีมงานเพื่อขอราคาได้ทันทีครับ
+        </p>
+        <p class="modal-desc en" style="font-size: 14px; margin-bottom: 18px; line-height: 1.6;">
+          Your 100-email free quota will automatically reset on the 1st of next month.<br>
+          If your company needs unlimited email archiving, custom rules, or dedicated server deployment, please contact our team.
+        </p>
+        <div style="display:flex; justify-content:center; gap:12px; margin-top: 10px;">
+          <button class="btn" id="btnContactUpgrade">
+            <span class="th">ติดต่อขอเวอร์ชัน Enterprise</span><span class="en">Upgrade to Enterprise</span>
+          </button>
+          <button class="btn ghost close-modal" data-close="modalQuota">
+            <span class="th">ปิดหน้านี้</span><span class="en">Close</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

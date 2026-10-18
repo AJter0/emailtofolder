@@ -1,0 +1,51 @@
+{
+  "name": "email-to-folder",
+  "version": "1.0.0",
+  "description": "Enterprise Email Archiving and Auto-Sorting Software for Outlook, Gmail, and IMAP",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build:exe": "electron-builder --win nsis"
+  },
+  "keywords": [
+    "email",
+    "outlook",
+    "gmail",
+    "imap",
+    "archiving",
+    "folder",
+    "automation"
+  ],
+  "author": "Email to Folder Dev Team",
+  "license": "ISC",
+  "dependencies": {
+    "imapflow": "^1.0.171",
+    "mailparser": "^3.7.2"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.emailtofolder.app",
+    "productName": "Email to Folder",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "build/icon.ico",
+      "signAndEditExecutable": false,
+      "artifactName": "EmailToFolder-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Email to Folder"
+    }
+  }
+}
