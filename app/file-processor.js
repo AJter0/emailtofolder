@@ -10,22 +10,24 @@ function sanitizeFilename(name) {
 
 // Match rule against email metadata
 function matchRule(email, rule) {
-  if (!rule.enabled) return false;
+  if (!rule || !rule.enabled) return false;
 
   const subject = (email.subject || '').toLowerCase();
   const from = (email.from && email.from.text ? email.from.text : email.fromAddress || '').toLowerCase();
   const condVal = (rule.conditionValue || '').toLowerCase().trim();
 
   switch (rule.conditionType) {
+    case 'all_emails':
+      return true;
     case 'subject_contains':
-      return subject.includes(condVal);
+      return !condVal || subject.includes(condVal);
     case 'from_contains':
-      return from.includes(condVal);
+      return !condVal || from.includes(condVal);
     case 'has_attachment':
-      return email.attachments && email.attachments.length > 0;
+      return Boolean(email.attachments && email.attachments.length > 0);
     case 'attachment_name_contains':
       if (!email.attachments || email.attachments.length === 0) return false;
-      return email.attachments.some(att => (att.filename || '').toLowerCase().includes(condVal));
+      return !condVal || email.attachments.some(att => (att.filename || '').toLowerCase().includes(condVal));
     default:
       return false;
   }
@@ -33,7 +35,7 @@ function matchRule(email, rule) {
 
 // Find matching rule for an email
 function findMatchingRule(email, rules) {
-  for (const rule of rules) {
+  for (const rule of rules || []) {
     if (matchRule(email, rule)) {
       return rule;
     }
@@ -42,7 +44,7 @@ function findMatchingRule(email, rules) {
 }
 
 // Save parsed email and its attachments to the target folder
-async function saveEmailToFolder(rawBuffer, parsed, rule, onEmailProcessed) {
+async function saveEmailToFolder(rawBuffer, parsed, rule, onEmailProcessed, originalExt = '.eml') {
   const targetFolder = rule.targetFolder;
   if (!fs.existsSync(targetFolder)) {
     fs.mkdirSync(targetFolder, { recursive: true });
@@ -52,7 +54,6 @@ async function saveEmailToFolder(rawBuffer, parsed, rule, onEmailProcessed) {
     .toISOString()
     .slice(0, 10);
   const cleanSubject = sanitizeFilename(parsed.subject || 'No Subject');
-  const cleanFrom = sanitizeFilename(parsed.from && parsed.from.text ? parsed.from.text : 'Unknown');
 
   // If user requested a subfolder per email:
   let destDir = targetFolder;
@@ -64,16 +65,16 @@ async function saveEmailToFolder(rawBuffer, parsed, rule, onEmailProcessed) {
   }
 
   const savedFiles = [];
+  const extToUse = originalExt === '.msg' ? '.msg' : '.eml';
 
-  // 1. Save .eml file if requested
+  // 1. Save .eml / .msg file if requested
   if (rule.saveEml !== false) {
-    let emlFileName = `${dateStr}_${cleanSubject}.eml`;
+    let emlFileName = `${dateStr}_${cleanSubject}${extToUse}`;
     let emlPath = path.join(destDir, emlFileName);
 
-    // If file already exists, append counter
     let counter = 1;
     while (fs.existsSync(emlPath)) {
-      emlFileName = `${dateStr}_${cleanSubject}_(${counter}).eml`;
+      emlFileName = `${dateStr}_${cleanSubject}_(${counter})${extToUse}`;
       emlPath = path.join(destDir, emlFileName);
       counter++;
     }
@@ -85,6 +86,7 @@ async function saveEmailToFolder(rawBuffer, parsed, rule, onEmailProcessed) {
   // 2. Save attachments if requested
   if (rule.saveAttachments !== false && parsed.attachments && parsed.attachments.length > 0) {
     for (const att of parsed.attachments) {
+      if (!att.content) continue;
       const cleanAttName = sanitizeFilename(att.filename || 'attachment');
       let attPath = path.join(destDir, cleanAttName);
 
@@ -105,7 +107,7 @@ async function saveEmailToFolder(rawBuffer, parsed, rule, onEmailProcessed) {
   const result = {
     subject: parsed.subject || 'No Subject',
     from: parsed.from && parsed.from.text ? parsed.from.text : 'Unknown',
-    date: parsed.date ? parsed.date.toISOString() : new Date().toISOString(),
+    date: parsed.date ? new Date(parsed.date).toISOString() : new Date().toISOString(),
     ruleName: rule.name,
     targetFolder: destDir,
     filesSaved: savedFiles
@@ -149,27 +151,45 @@ function checkMonthlyQuota(config) {
 }
 
 // Process single .eml or raw buffer
-async function processRawEmail(rawBuffer, config, onEmailProcessed) {
+async function processRawEmail(rawBuffer, config, onEmailProcessed, fallbackMeta = {}) {
   const quotaCheck = checkMonthlyQuota(config);
   if (!quotaCheck.allowed) {
     return { success: false, reason: quotaCheck.reason, message: quotaCheck.message, quota: config.quota };
   }
 
-  const parsed = await simpleParser(rawBuffer);
+  let parsed = await simpleParser(rawBuffer);
+
+  // If binary .msg file was dropped and simpleParser couldn't extract subject, use filename/fallback metadata
+  if (!parsed.subject && fallbackMeta.subject) {
+    parsed.subject = fallbackMeta.subject;
+  }
+  if ((!parsed.from || !parsed.from.text) && fallbackMeta.from) {
+    parsed.from = { text: fallbackMeta.from };
+  }
+
   const matchedRule = findMatchingRule(parsed, config.rules || []);
 
   if (!matchedRule) {
-    return { success: false, reason: 'No matching rule found' };
+    return {
+      success: false,
+      reason: `ไม่พบกฎที่ตรงกับอีเมลหัวข้อ "${parsed.subject || 'No Subject'}" (สามารถเพิ่มกฎแบบ "อีเมลขาเข้าทั้งหมด" ได้ในหน้าจัดการกฎ)`
+    };
   }
 
-  return await saveEmailToFolder(rawBuffer, parsed, matchedRule, onEmailProcessed);
+  return await saveEmailToFolder(rawBuffer, parsed, matchedRule, onEmailProcessed, fallbackMeta.ext || '.eml');
 }
 
-// Process dropped file from user drag-and-drop
+// Process dropped file from user drag-and-drop (.eml or .msg)
 async function processEmailFile(filePath, config, onEmailProcessed) {
   try {
     const rawBuffer = fs.readFileSync(filePath);
-    return await processRawEmail(rawBuffer, config, onEmailProcessed);
+    const ext = path.extname(filePath).toLowerCase();
+    const baseSubject = path.basename(filePath, ext);
+    return await processRawEmail(rawBuffer, config, onEmailProcessed, {
+      ext,
+      subject: baseSubject,
+      from: 'Local File Drop'
+    });
   } catch (err) {
     console.error('Error processing file:', err);
     return { success: false, error: err.message };
@@ -181,6 +201,7 @@ module.exports = {
   matchRule,
   findMatchingRule,
   saveEmailToFolder,
+  checkMonthlyQuota,
   processRawEmail,
   processEmailFile
 };

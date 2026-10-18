@@ -7,6 +7,8 @@ contextBridge.exposeInMainWorld('api', {
   selectFolder: () => ipcRenderer.invoke('select-folder'),
   openFolder: (folderPath) => ipcRenderer.invoke('open-folder', folderPath),
   testAccountConnection: (account) => ipcRenderer.invoke('test-account-connection', account),
+  detectOutlook: () => ipcRenderer.invoke('detect-outlook'),
+  syncNow: () => ipcRenderer.invoke('sync-now'),
   processManualFile: (filePath) => ipcRenderer.invoke('process-manual-file', filePath),
 
   openExternalUrl: (url) => ipcRenderer.invoke('open-external-url', url),

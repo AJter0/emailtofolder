@@ -1,24 +1,42 @@
 document.addEventListener('DOMContentLoaded', async () => {
   let appConfig = {};
   let historyLogs = [];
+  let outlookEnv = { installed: true, running: false, account: '' };
   let currentLang = localStorage.getItem('lang') || 'th';
 
   // Fallback safe API object if running in browser during debug
   const api = window.api || {
-    getInitialData: async () => ({ config: {}, history: [] }),
+    getInitialData: async () => ({ config: {}, history: [], outlookEnv: {} }),
     saveConfig: async () => true,
     toggleEngine: async () => true,
     selectFolder: async () => null,
     openFolder: async () => true,
     testAccountConnection: async () => ({ success: true, message: 'Mock OK' }),
+    detectOutlook: async () => ({ installed: true, running: true, account: 'user@outlook.com' }),
+    syncNow: async () => ({ success: true, checked: 0, saved: 0 }),
     processManualFile: async () => ({ success: true }),
     windowMinimize: () => {},
     windowMaximize: () => {},
+    windowClose: () => {},
     openExternalUrl: async () => true,
     onEmailSaved: () => {},
     onEngineStatusChanged: () => {},
     onQuotaExceeded: () => {}
   };
+
+  function showToast(msg, isError = false) {
+    const container = document.getElementById('toastContainer');
+    if (!container) return;
+    const toast = document.createElement('div');
+    toast.className = 'toast' + (isError ? ' error' : '');
+    toast.innerHTML = `<span>${isError ? '⚠️' : '✓'}</span><div>${escapeHtml(msg)}</div>`;
+    container.appendChild(toast);
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transition = 'opacity 0.3s';
+      setTimeout(() => toast.remove(), 300);
+    }, 4200);
+  }
 
   // 1. Language Support
   function setLanguage(lang) {
@@ -44,6 +62,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const data = await api.getInitialData();
     appConfig = data.config || {};
     historyLogs = data.history || [];
+    if (data.outlookEnv) outlookEnv = data.outlookEnv;
     renderAll();
   } catch (err) {
     console.error('Failed to load initial data:', err);
@@ -52,6 +71,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   function renderAll() {
     renderEngineStatus();
     renderQuota();
+    renderAccountSummaryPills();
+    renderOutlookDetectionStatus();
     renderTargetFolders();
     renderFeed();
     renderRulesSummary();
@@ -60,6 +81,59 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderRulesManagementList();
     renderHistoryTable();
     loadSettingsInputs();
+  }
+
+  function renderAccountSummaryPills() {
+    const summaryEl = document.getElementById('accountSummary');
+    if (!summaryEl) return;
+    summaryEl.innerHTML = '';
+
+    const accounts = (appConfig.accounts || []).filter(a => a.enabled !== false);
+    if (accounts.length === 0) {
+      const pill = document.createElement('span');
+      pill.className = 'acc-pill';
+      pill.textContent = 'ยังไม่ได้เชื่อมบัญชี';
+      summaryEl.appendChild(pill);
+      return;
+    }
+
+    accounts.forEach(acc => {
+      const pill = document.createElement('span');
+      pill.className = 'acc-pill online';
+      if (acc.type === 'outlook_local') {
+        const acctLabel = outlookEnv.account || (acc.user && acc.user !== 'Outlook Classic (Auto-Detect)' ? acc.user : '');
+        pill.textContent = acctLabel
+          ? `🟢 Outlook Classic (${acctLabel}) ✓`
+          : '🟢 Outlook Classic ✓';
+      } else if (acc.type === 'gmail') {
+        pill.textContent = `🟢 Gmail (${acc.user}) ✓`;
+      } else {
+        pill.textContent = `🟢 IMAP (${acc.user}) ✓`;
+      }
+      summaryEl.appendChild(pill);
+    });
+  }
+
+  function renderOutlookDetectionStatus() {
+    const badge = document.getElementById('outlookDetectBadge');
+    const desc = document.getElementById('outlookDetectDesc');
+    if (!badge) return;
+
+    if (outlookEnv.running || outlookEnv.account) {
+      badge.className = 'status-pill-sm';
+      badge.textContent = outlookEnv.running
+        ? `🟢 เปิดทำงานอยู่${outlookEnv.account ? ' (' + outlookEnv.account + ')' : ''}`
+        : `✓ พบโปรไฟล์ ${outlookEnv.account}`;
+      if (desc && outlookEnv.account) {
+        desc.textContent = `ตรวจพบกล่องจดหมาย Outlook Classic: ${outlookEnv.account} — พร้อมดึงอีเมลและไฟล์แนบลงโฟลเดอร์อัตโนมัติ`;
+      }
+    } else if (outlookEnv.installed) {
+      badge.className = 'status-pill-sm';
+      badge.textContent = '✓ ติดตั้งบนเครื่องแล้ว';
+    } else {
+      badge.className = 'status-pill-sm offline';
+      badge.textContent = 'ไม่พบ Outlook Classic';
+    }
   }
 
   // Quota Display
@@ -83,7 +157,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  // 4. Engine Status
+  // 4. Engine Status & Sync Now
   function renderEngineStatus() {
     const isRunning = appConfig.isRunning !== false;
     const badge = document.getElementById('engineStatusBadge');
@@ -106,7 +180,43 @@ document.addEventListener('DOMContentLoaded', async () => {
     await api.toggleEngine(newStatus);
     appConfig.isRunning = newStatus;
     renderEngineStatus();
+    showToast(newStatus ? 'เริ่มการทำงานระบบดึงอีเมลอัตโนมัติแล้ว' : 'หยุดการทำงานชั่วคราวแล้ว');
   });
+
+  async function handleManualSync() {
+    const syncIcon = document.getElementById('syncIcon');
+    if (syncIcon) syncIcon.classList.add('spinning');
+    showToast('กำลังซิงก์อีเมลจาก Microsoft Outlook Classic และบัญชีที่เชื่อมต่อ...');
+
+    try {
+      const res = await api.syncNow();
+      if (res && res.outlookEnv) {
+        outlookEnv = res.outlookEnv;
+        renderOutlookDetectionStatus();
+        renderAccountSummaryPills();
+      }
+      if (res && res.saved > 0) {
+        showToast(`ซิงก์สำเร็จ! บันทึกอีเมลใหม่ลงโฟลเดอร์ ${res.saved} ฉบับ`);
+      } else {
+        const acctInfo = (res && res.outlookEnv && res.outlookEnv.account) ? ` (${res.outlookEnv.account})` : '';
+        showToast(`ซิงก์กับ Outlook Classic${acctInfo} เรียบร้อยแล้ว — ข้อมูลเป็นปัจจุบัน`);
+      }
+    } catch (err) {
+      showToast('เกิดข้อผิดพลาดในการซิงก์: ' + err.message, true);
+    } finally {
+      if (syncIcon) syncIcon.classList.remove('spinning');
+    }
+  }
+
+  const syncNowBtn = document.getElementById('syncNowBtn');
+  if (syncNowBtn) {
+    syncNowBtn.addEventListener('click', handleManualSync);
+  }
+
+  const btnSyncOutlookModal = document.getElementById('btnSyncOutlookModal');
+  if (btnSyncOutlookModal) {
+    btnSyncOutlookModal.addEventListener('click', handleManualSync);
+  }
 
   api.onEngineStatusChanged((running) => {
     appConfig.isRunning = running;
@@ -122,8 +232,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     (appConfig.rules || []).forEach(r => {
       if (r.targetFolder) {
         const folderName = r.targetFolder.split(/[\/\\]/).filter(Boolean).slice(-2).join(' / ');
-        const currentCount = folderMap.get(r.targetFolder) || 0;
-        folderMap.set(r.targetFolder, { name: folderName || r.targetFolder, path: r.targetFolder, count: currentCount });
+        if (!folderMap.has(r.targetFolder)) {
+          folderMap.set(r.targetFolder, { name: folderName || r.targetFolder, path: r.targetFolder, count: 0 });
+        }
       }
     });
 
@@ -142,11 +253,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     folderMap.forEach((info) => {
       const div = document.createElement('div');
       div.className = 'fo';
-      div.title = `คลิกเพื่อเปิดโฟลเดอร์: ${info.path}`;
+      div.title = `คลิกเพื่อเปิดโฟลเดอร์ใน Windows Explorer: ${info.path}`;
       div.innerHTML = `
         <div class="fo-left">
           <span>📁</span>
-          <span>${info.name}</span>
+          <span>${escapeHtml(info.name)}</span>
         </div>
         <span class="fo-count">${info.count} files</span>
       `;
@@ -162,7 +273,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const container = document.getElementById('feedList');
     container.innerHTML = '';
 
-    const items = historyLogs.slice(0, 8);
+    const items = historyLogs.slice(0, 10);
     if (items.length === 0) {
       container.innerHTML = '<p class="hint" style="padding:10px;">รออีเมลใหม่เข้ามา หรือทดสอบลากไฟล์มาวางด้านบน</p>';
       return;
@@ -204,12 +315,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     const container = document.getElementById('rulesSummaryList');
     container.innerHTML = '';
 
-    const rules = (appConfig.rules || []).slice(0, 5);
+    const rules = (appConfig.rules || []).filter(r => r.enabled !== false).slice(0, 6);
     rules.forEach(rule => {
       const div = document.createElement('div');
       div.className = 'ru';
       let condText = '';
-      if (rule.conditionType === 'subject_contains') condText = `Subject contains "${rule.conditionValue}"`;
+      if (rule.conditionType === 'all_emails') condText = 'All Incoming Emails (ทุกฉบับ)';
+      else if (rule.conditionType === 'subject_contains') condText = `Subject contains "${rule.conditionValue}"`;
       else if (rule.conditionType === 'from_contains') condText = `From "${rule.conditionValue}"`;
       else if (rule.conditionType === 'has_attachment') condText = 'Has any attachment';
       else if (rule.conditionType === 'attachment_name_contains') condText = `Attachment contains "${rule.conditionValue}"`;
@@ -234,7 +346,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   api.onEmailSaved((data) => {
     historyLogs.unshift({
       id: 'hist-' + Date.now(),
-      date: new Date().toISOString(),
+      date: data.date || new Date().toISOString(),
       subject: data.subject,
       from: data.from,
       ruleName: data.ruleName,
@@ -259,6 +371,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderStats();
     renderQuota();
     renderHistoryTable();
+    showToast(`บันทึกอีเมล "${data.subject}" ลงโฟลเดอร์เรียบร้อยแล้ว`);
   });
 
   // Quota Exceeded event from engine
@@ -285,7 +398,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function closeAllModals() {
-    Object.values(modals).forEach(m => m.classList.remove('active'));
+    Object.values(modals).forEach(m => m && m.classList.remove('active'));
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   }
 
@@ -294,9 +407,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('navDashboard').classList.add('active');
   });
 
-  document.getElementById('navAccounts').addEventListener('click', () => {
+  document.getElementById('navAccounts').addEventListener('click', async () => {
     openModal('accounts');
     document.getElementById('navAccounts').classList.add('active');
+    try {
+      outlookEnv = await api.detectOutlook();
+      renderOutlookDetectionStatus();
+    } catch (e) {}
   });
 
   document.getElementById('navRules').addEventListener('click', () => {
@@ -306,6 +423,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   document.getElementById('addRuleQuickBtn').addEventListener('click', () => {
     openModal('rules');
+    document.getElementById('navRules').classList.add('active');
     showRuleEditForm();
   });
 
@@ -365,7 +483,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (file.path) {
           const res = await api.processManualFile(file.path);
           if (!res.success) {
-            alert(res.error || res.reason || 'ไม่พบกฎที่ตรงกับอีเมลนี้');
+            showToast(res.error || res.message || res.reason || 'ไม่พบกฎที่ตรงกับอีเมลนี้', true);
           }
         }
       }
@@ -376,13 +494,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = '.eml,.msg';
-    input.onchange = async (e) => {
+    input.onchange = async () => {
       if (input.files.length > 0) {
         const file = input.files[0];
         if (file.path) {
           const res = await api.processManualFile(file.path);
           if (!res.success) {
-            alert(res.error || res.reason || 'ไม่พบกฎที่ตรงกับอีเมลนี้');
+            showToast(res.error || res.message || res.reason || 'ไม่พบกฎที่ตรงกับอีเมลนี้', true);
           }
         }
       }
@@ -392,20 +510,54 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // 11. Accounts Management
   document.getElementById('btnConnectOutlookLocal').addEventListener('click', async () => {
-    const result = await api.testAccountConnection({ type: 'outlook_local' });
-    alert(result.message);
-    if (result.success) {
-      if (!appConfig.accounts) appConfig.accounts = [];
-      if (!appConfig.accounts.some(a => a.type === 'outlook_local')) {
-        appConfig.accounts.push({
-          id: 'acc-outlook-local',
-          type: 'outlook_local',
-          name: 'Microsoft Outlook (Local)',
-          enabled: true
-        });
+    const outResultBox = document.getElementById('outlookTestResult');
+    const btn = document.getElementById('btnConnectOutlookLocal');
+    btn.disabled = true;
+    if (outResultBox) {
+      outResultBox.className = 'test-result';
+      outResultBox.style.display = 'block';
+      outResultBox.textContent = '⏳ กำลังตรวจสอบและเชื่อมต่อกับ Microsoft Outlook Classic...';
+    }
+
+    try {
+      const result = await api.testAccountConnection({ type: 'outlook_local' });
+      if (result.success) {
+        if (outResultBox) {
+          outResultBox.className = 'test-result success';
+          outResultBox.textContent = '✓ ' + result.message;
+        }
+        showToast(result.message);
+
+        if (!appConfig.accounts) appConfig.accounts = [];
+        const acctUser = result.accountName || outlookEnv.account || 'Outlook Classic (Local)';
+        const existing = appConfig.accounts.find(a => a.type === 'outlook_local');
+        if (existing) {
+          existing.enabled = true;
+          existing.user = acctUser;
+          existing.name = `Microsoft Outlook Classic (${acctUser})`;
+        } else {
+          appConfig.accounts.unshift({
+            id: 'acc-outlook-local',
+            type: 'outlook_local',
+            name: `Microsoft Outlook Classic (${acctUser})`,
+            user: acctUser,
+            enabled: true
+          });
+        }
         await api.saveConfig(appConfig);
+        outlookEnv = await api.detectOutlook();
+        renderOutlookDetectionStatus();
         renderConnectedAccounts();
+        renderAccountSummaryPills();
+      } else {
+        if (outResultBox) {
+          outResultBox.className = 'test-result error';
+          outResultBox.textContent = '✗ ' + result.message;
+        }
+        showToast(result.message, true);
       }
+    } finally {
+      btn.disabled = false;
     }
   });
 
@@ -420,7 +572,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('btnConfigureImap').addEventListener('click', () => {
     document.getElementById('accountForm').style.display = 'block';
     document.getElementById('accFormType').value = 'imap';
-    document.getElementById('accountFormTitle').textContent = 'ตั้งค่าเชื่อมต่อเซิร์ฟเวอร์ IMAP';
+    document.getElementById('accountFormTitle').textContent = 'ตั้งค่าเชื่อมต่อเซิร์ฟเวอร์ IMAP / Office 365';
     document.getElementById('imapServerFields').style.display = 'flex';
     document.getElementById('accEmail').placeholder = 'user@company.com';
   });
@@ -433,7 +585,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const resultBox = document.getElementById('accountTestResult');
     resultBox.className = 'test-result';
     resultBox.style.display = 'block';
-    resultBox.textContent = 'กำลังทดสอบการเชื่อมต่อ...';
+    resultBox.textContent = '⏳ กำลังทดสอบการเชื่อมต่อ...';
 
     const acc = {
       type: document.getElementById('accFormType').value,
@@ -465,7 +617,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
     if (!acc.user || !acc.password) {
-      alert('กรุณากรอกอีเมลและรหัสผ่าน');
+      showToast('กรุณากรอกอีเมลและรหัสผ่าน', true);
       return;
     }
 
@@ -475,7 +627,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     document.getElementById('accountForm').style.display = 'none';
     renderConnectedAccounts();
-    alert('บันทึกบัญชีเรียบร้อยแล้ว');
+    renderAccountSummaryPills();
+    showToast('บันทึกบัญชีอีเมลเรียบร้อยแล้ว');
   });
 
   function renderConnectedAccounts() {
@@ -491,21 +644,28 @@ document.addEventListener('DOMContentLoaded', async () => {
     accounts.forEach((acc, index) => {
       const div = document.createElement('div');
       div.className = 'acc-card';
-      div.style.padding = '8px 12px';
+      div.style.padding = '10px 14px';
+      const title = acc.type === 'outlook_local'
+        ? (acc.name || `Microsoft Outlook Classic (${outlookEnv.account || acc.user || 'Local'})`)
+        : acc.user;
+      const sub = acc.type === 'outlook_local'
+        ? `MAPI LOCAL SYNC · ${outlookEnv.running ? '🟢 Outlook กำลังเปิดทำงาน' : 'พร้อมซิงก์อัตโนมัติ'}`
+        : acc.type.toUpperCase();
+
       div.innerHTML = `
         <div class="acc-card-info">
-          <strong>${acc.type === 'outlook_local' ? 'Microsoft Outlook (Desktop)' : acc.user}</strong>
-          <p>${acc.type.toUpperCase()}</p>
+          <strong>${escapeHtml(title)}</strong>
+          <p style="color:#30d5c8; font-size:11px;">${escapeHtml(sub)}</p>
         </div>
         <button class="btn sm ghost" data-acc-index="${index}">ลบ</button>
       `;
 
       div.querySelector('button').addEventListener('click', async () => {
-        if (confirm('คุณต้องการยกเลิกการเชื่อมต่อบัญชีนี้หรือไม่?')) {
-          appConfig.accounts.splice(index, 1);
-          await api.saveConfig(appConfig);
-          renderConnectedAccounts();
-        }
+        appConfig.accounts.splice(index, 1);
+        await api.saveConfig(appConfig);
+        renderConnectedAccounts();
+        renderAccountSummaryPills();
+        showToast('ยกเลิกการเชื่อมต่อบัญชีเรียบร้อยแล้ว');
       });
 
       container.appendChild(div);
@@ -513,6 +673,24 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   // 12. Rules Management
+  const ruleCondSelect = document.getElementById('ruleConditionType');
+  const ruleCondValGroup = document.getElementById('ruleConditionValueGroup');
+  function updateConditionValueVisibility() {
+    if (!ruleCondSelect || !ruleCondValGroup) return;
+    const val = ruleCondSelect.value;
+    if (val === 'all_emails' || val === 'has_attachment') {
+      ruleCondValGroup.style.opacity = '0.4';
+      document.getElementById('ruleConditionValue').disabled = true;
+      document.getElementById('ruleConditionValue').value = '';
+    } else {
+      ruleCondValGroup.style.opacity = '1';
+      document.getElementById('ruleConditionValue').disabled = false;
+    }
+  }
+  if (ruleCondSelect) {
+    ruleCondSelect.addEventListener('change', updateConditionValueVisibility);
+  }
+
   function renderRulesManagementList() {
     const container = document.getElementById('rulesManagementList');
     container.innerHTML = '';
@@ -523,27 +701,35 @@ document.addEventListener('DOMContentLoaded', async () => {
       div.className = 'acc-card';
       div.style.marginBottom = '10px';
 
+      let condDesc = `${rule.conditionType}: "${rule.conditionValue || ''}"`;
+      if (rule.conditionType === 'all_emails') condDesc = '🌟 อีเมลขาเข้าทั้งหมด (All Incoming Emails)';
+      else if (rule.conditionType === 'has_attachment') condDesc = '📎 มีไฟล์แนบใดๆ (Has Attachment)';
+
       div.innerHTML = `
         <div class="acc-card-info">
           <h4>${escapeHtml(rule.name)}</h4>
-          <p>${rule.conditionType}: "${escapeHtml(rule.conditionValue || '')}" → 📁 ${escapeHtml(rule.targetFolder)}</p>
+          <p>${escapeHtml(condDesc)} → 📁 ${escapeHtml(rule.targetFolder)}</p>
         </div>
-        <div style="display:flex; gap:8px;">
+        <div style="display:flex; gap:8px; align-items:center;">
+          <button class="btn sm ghost open-rule-folder-btn" title="เปิดโฟลเดอร์ปลายทาง">📂 เปิดโฟลเดอร์</button>
           <button class="btn sm ghost edit-rule-btn" data-rule-index="${index}">แก้ไข</button>
           <button class="btn sm ghost delete-rule-btn" data-rule-index="${index}">ลบ</button>
         </div>
       `;
+
+      div.querySelector('.open-rule-folder-btn').addEventListener('click', () => {
+        if (rule.targetFolder) api.openFolder(rule.targetFolder);
+      });
 
       div.querySelector('.edit-rule-btn').addEventListener('click', () => {
         showRuleEditForm(rule, index);
       });
 
       div.querySelector('.delete-rule-btn').addEventListener('click', async () => {
-        if (confirm(`คุณต้องการลบกฎ "${rule.name}" หรือไม่?`)) {
-          appConfig.rules.splice(index, 1);
-          await api.saveConfig(appConfig);
-          renderAll();
-        }
+        appConfig.rules.splice(index, 1);
+        await api.saveConfig(appConfig);
+        renderAll();
+        showToast(`ลบกฎ "${rule.name}" เรียบร้อยแล้ว`);
       });
 
       container.appendChild(div);
@@ -568,6 +754,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       document.getElementById('ruleFormTitle').textContent = 'เพิ่มกฎใหม่';
       document.getElementById('editRuleId').value = '-1';
       document.getElementById('ruleNameInput').value = '';
+      document.getElementById('ruleConditionType').value = 'all_emails';
       document.getElementById('ruleConditionValue').value = '';
       document.getElementById('ruleTargetFolderInput').value = '';
       document.getElementById('ruleSaveEml').checked = true;
@@ -575,6 +762,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       document.getElementById('ruleFolderPerEmail').checked = false;
     }
 
+    updateConditionValueVisibility();
     form.scrollIntoView({ behavior: 'smooth' });
   }
 
@@ -598,7 +786,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (folder) {
       showRuleEditForm({
         name: 'Auto save to ' + folder.split(/[\/\\]/).filter(Boolean).pop(),
-        conditionType: 'subject_contains',
+        conditionType: 'all_emails',
         conditionValue: '',
         targetFolder: folder,
         saveEml: true,
@@ -612,7 +800,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const index = parseInt(document.getElementById('editRuleId').value);
     const rule = {
       id: index >= 0 && appConfig.rules[index] ? appConfig.rules[index].id : 'rule-' + Date.now(),
-      name: document.getElementById('ruleNameInput').value.trim() || 'Untitled Rule',
+      name: document.getElementById('ruleNameInput').value.trim() || 'Auto Archive Rule',
       enabled: true,
       conditionType: document.getElementById('ruleConditionType').value,
       conditionValue: document.getElementById('ruleConditionValue').value.trim(),
@@ -623,7 +811,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
     if (!rule.targetFolder) {
-      alert('กรุณาเลือกโฟลเดอร์ปลายทางสำหรับจัดเก็บ');
+      showToast('กรุณาเลือกโฟลเดอร์ปลายทางสำหรับจัดเก็บ', true);
       return;
     }
 
@@ -632,13 +820,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (index >= 0) {
       appConfig.rules[index] = rule;
     } else {
-      appConfig.rules.push(rule);
+      appConfig.rules.unshift(rule);
     }
 
     await api.saveConfig(appConfig);
     document.getElementById('ruleEditForm').style.display = 'none';
     renderAll();
-    alert('บันทึกกฎเรียบร้อยแล้ว');
+    showToast(`บันทึกกฎ "${rule.name}" เรียบร้อยแล้ว`);
   });
 
   // 13. History Table
@@ -708,13 +896,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     appConfig.notificationsEnabled = document.getElementById('settingNotifications').checked;
 
     await api.saveConfig(appConfig);
-    alert('บันทึกการตั้งค่าเรียบร้อยแล้ว');
+    showToast('บันทึกการตั้งค่าเรียบร้อยแล้ว');
   });
 
   // Utilities
   function formatTimeAgo(isoString) {
     if (!isoString) return '';
-    const diff = Math.floor((Date.now() - new Date(isoString).getTime()) / 1000);
+    const diff = Math.max(0, Math.floor((Date.now() - new Date(isoString).getTime()) / 1000));
     if (diff < 60) return `${diff} วินาทีที่แล้ว`;
     if (diff < 3600) return `${Math.floor(diff / 60)} นาทีที่แล้ว`;
     if (diff < 86400) return `${Math.floor(diff / 3600)} ชม. ที่แล้ว`;
@@ -723,7 +911,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   function escapeHtml(str) {
     if (!str) return '';
-    return str
+    return String(str)
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')

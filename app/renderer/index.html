@@ -19,6 +19,7 @@
     <div class="titlebar-title">
       <img src="../assets/icon.png" class="logo-img" alt="Logo" width="18" height="18">
       <span>Email to Folder</span>
+      <span class="version-pill">v1.1</span>
     </div>
     <div class="titlebar-right">
       <div class="lang-switch">
@@ -39,6 +40,11 @@
       <button class="btn sm ghost" id="toggleEngineBtn">
         <span class="th">หยุดชั่วคราว</span>
         <span class="en">Pause Engine</span>
+      </button>
+      <button class="btn sm sync-btn" id="syncNowBtn" title="ดึงอีเมลใหม่จาก Outlook Classic และ IMAP ทันที">
+        <span class="sync-icon" id="syncIcon">🔄</span>
+        <span class="th">ซิงก์ตอนนี้</span>
+        <span class="en">Sync Now</span>
       </button>
 
       <div class="quota-badge" id="quotaBadge" title="โควตาทดลองใช้ฟรี 100 ฉบับ/เดือน (รีเซ็ตใหม่ทุกวันที่ 1 ของเดือน)">
@@ -81,7 +87,7 @@
         <div>
           <strong class="th">ทดสอบลากวาง (Drag & Drop Test Zone)</strong>
           <strong class="en">Drag & Drop Test Zone</strong>
-          <p class="th">ลากไฟล์อีเมล (.eml หรือ .msg) มาปล่อยที่นี่เพื่อทดสอบการคัดแยกลงโฟลเดอร์อัตโนมัติตามกฎ</p>
+          <p class="th">ลากไฟล์อีเมล (.eml หรือ .msg) จาก Outlook หรือเครื่องคอมพิวเตอร์มาปล่อยที่นี่เพื่อคัดแยกลงโฟลเดอร์ทันที</p>
           <p class="en">Drop an .eml or .msg file here to test instant auto-routing into target folders</p>
         </div>
       </div>
@@ -96,8 +102,7 @@
         <b></b><b></b><b></b>
         <span>Email to Folder — Live Monitor</span>
         <div class="account-summary" id="accountSummary">
-          <span class="acc-pill">Outlook Local ✓</span>
-          <span class="acc-pill">Gmail IMAP ✓</span>
+          <span class="acc-pill online" id="outlookHeaderPill">🟢 Outlook Classic ✓</span>
         </div>
       </div>
 
@@ -160,19 +165,30 @@
         <button class="close-modal" data-close="modalAccounts">&times;</button>
       </div>
       <div class="modal-body">
-        <p class="modal-desc th">รองรับทั้ง Microsoft Outlook บนเครื่อง, บัญชี Gmail, Outlook.com / Microsoft 365, และเซิร์ฟเวอร์ IMAP ทั่วไป</p>
-        <p class="modal-desc en">Supports local Microsoft Outlook, Gmail, Outlook.com / Microsoft 365, and generic IMAP servers.</p>
+        <p class="modal-desc th">รองรับทั้ง Microsoft Outlook Classic บนเครื่อง, บัญชี Gmail, Outlook.com / Microsoft 365, และเซิร์ฟเวอร์ IMAP ทั่วไป</p>
+        <p class="modal-desc en">Supports local Microsoft Outlook Classic, Gmail, Outlook.com / Microsoft 365, and generic IMAP servers.</p>
 
         <div class="account-cards">
           <!-- Option A: Outlook Local Client -->
-          <div class="acc-card" id="cardOutlookLocal">
+          <div class="acc-card outlook-featured" id="cardOutlookLocal">
             <div class="acc-card-icon">💻</div>
             <div class="acc-card-info">
-              <h4>Microsoft Outlook (Desktop)</h4>
-              <p class="th">เชื่อมกับโปรแกรม Outlook บนเครื่อง Windows นี้โดยตรง (ดึงอีเมลจาก Inbox อัตโนมัติ)</p>
-              <p class="en">Connect directly to Outlook on this Windows PC (Syncs Inbox automatically)</p>
+              <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                <h4>Microsoft Outlook Classic (Desktop)</h4>
+                <span class="status-pill-sm" id="outlookDetectBadge">กำลังตรวจสอบ...</span>
+              </div>
+              <p class="th" id="outlookDetectDesc">เชื่อมต่อกับโปรแกรม Outlook Classic บนเครื่อง Windows นี้โดยตรงผ่าน MAPI (ไม่ต้องใช้รหัสผ่าน)</p>
+              <p class="en">Connect directly to Outlook Classic on this Windows PC via MAPI (No password required)</p>
+              <div id="outlookTestResult" class="test-result" style="display:none; margin-top:8px;"></div>
             </div>
-            <button class="btn sm" id="btnConnectOutlookLocal">เชื่อมต่อ Outlook</button>
+            <div style="display:flex; flex-direction:column; gap:6px; flex-shrink:0;">
+              <button class="btn sm" id="btnConnectOutlookLocal">
+                <span class="th">เชื่อมต่อ Outlook</span><span class="en">Connect Outlook</span>
+              </button>
+              <button class="btn sm ghost" id="btnSyncOutlookModal">
+                <span class="th">🔄 ดึงอีเมลทันที</span><span class="en">🔄 Sync Now</span>
+              </button>
+            </div>
           </div>
 
           <!-- Option B: Gmail -->
@@ -191,7 +207,7 @@
             <div class="acc-card-icon">📧</div>
             <div class="acc-card-info">
               <h4>Office 365 / IMAP อื่นๆ</h4>
-              <p class="th">เชื่อมต่อเซิร์ฟเวอร์อีเมลองค์กร หรือ IMAP ทั่วไป (เช่น Yahoo, Hostinger, cPanel)</p>
+              <p class="th">เชื่อมต่อเซิร์ฟเวอร์อีเมลองค์กร หรือ IMAP ทั่วไป (เช่น Hostinger, cPanel, Mail Server บริษัท)</p>
               <p class="en">Connect corporate email servers, Office 365 or generic IMAP</p>
             </div>
             <button class="btn sm ghost" id="btnConfigureImap">ตั้งค่า IMAP</button>
@@ -211,8 +227,8 @@
             <label class="th">รหัสผ่าน / App Password:</label>
             <label class="en">Password / App Password:</label>
             <input type="password" id="accPassword" placeholder="••••••••••••••••">
-            <small class="hint th">สำหรับ Gmail ให้สร้าง "App Password" ใน Google Account Security</small>
-            <small class="hint en">For Gmail, create an "App Password" under Google Account Security</small>
+            <small class="hint th">สำหรับ Gmail ให้สร้าง "App Password" (รหัสผ่านสำหรับแอป 16 หลัก) ในหน้า Google Account Security</small>
+            <small class="hint en">For Gmail, create a 16-digit "App Password" under Google Account Security</small>
           </div>
           <div class="form-row-group" id="imapServerFields">
             <div class="form-row half">
@@ -251,7 +267,7 @@
       </div>
       <div class="modal-body">
         <div class="modal-top-actions">
-          <p class="th">ตั้งเงื่อนไขเมื่อมีอีเมลใหม่เข้ามา ระบบจะบันทึกไฟล์อีเมลและไฟล์แนบไปยังโฟลเดอร์ที่ระบุ</p>
+          <p class="th">ตั้งเงื่อนไขเมื่อมีอีเมลใหม่เข้ามา ระบบจะบันทึกไฟล์อีเมล (.msg/.eml) และไฟล์แนบไปยังโฟลเดอร์ที่ระบุโดยอัตโนมัติ</p>
           <p class="en">Define conditions so incoming emails & attachments are automatically saved to your target folders.</p>
           <button class="btn sm" id="btnAddNewRule">+ เพิ่มกฎใหม่</button>
         </div>
@@ -268,23 +284,24 @@
           <div class="form-row">
             <label class="th">ชื่อกฎ:</label>
             <label class="en">Rule Name:</label>
-            <input type="text" id="ruleNameInput" placeholder="เช่น ใบแจ้งหนี้ Finance">
+            <input type="text" id="ruleNameInput" placeholder="เช่น ใบแจ้งหนี้ Finance หรือ เก็บอีเมลทั้งหมด">
           </div>
           <div class="form-row-group">
             <div class="form-row half">
               <label class="th">เงื่อนไขตรวจสอบ:</label>
               <label class="en">Condition Type:</label>
               <select id="ruleConditionType">
+                <option value="all_emails">🌟 อีเมลขาเข้าทั้งหมด (All Incoming Emails)</option>
                 <option value="subject_contains">หัวข้อมีคำว่า (Subject contains)</option>
                 <option value="from_contains">ส่งมาจาก / โดเมน (From / Domain)</option>
                 <option value="has_attachment">มีไฟล์แนบใดๆ (Has Attachment)</option>
                 <option value="attachment_name_contains">ชื่อไฟล์แนบมีคำว่า (Attachment name)</option>
               </select>
             </div>
-            <div class="form-row half">
+            <div class="form-row half" id="ruleConditionValueGroup">
               <label class="th">คำหรือค่าที่ค้นหา:</label>
               <label class="en">Matching Value:</label>
-              <input type="text" id="ruleConditionValue" placeholder="เช่น Invoice, @projecta.co.th">
+              <input type="text" id="ruleConditionValue" placeholder="เช่น Invoice, @projecta.co.th (เว้นว่าง=ทั้งหมด)">
             </div>
           </div>
           <div class="form-row">
@@ -298,8 +315,8 @@
           <div class="form-options">
             <label class="checkbox-label">
               <input type="checkbox" id="ruleSaveEml" checked>
-              <span class="th">บันทึกตัวอีเมลฉบับเต็ม (.eml / .msg) ดับเบิ้ลคลิกเปิดใน Outlook ได้</span>
-              <span class="en">Save complete email (.eml / .msg) opens in Outlook</span>
+              <span class="th">บันทึกตัวอีเมลฉบับเต็ม (.msg / .eml) ดับเบิ้ลคลิกเปิดใน Outlook ได้</span>
+              <span class="en">Save complete email (.msg / .eml) opens in Outlook</span>
             </label>
             <label class="checkbox-label">
               <input type="checkbox" id="ruleSaveAttachments" checked>
@@ -447,6 +464,9 @@
       </div>
     </div>
   </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container"></div>
 
   <script src="app.js"></script>
 </body>

@@ -34,24 +34,26 @@
 ## 🌟 ฟีเจอร์หลัก (Key Features)
 
 ### 1. รองรับหลายระบบอีเมล (Multi-Provider Support)
-- **Microsoft Outlook Desktop (Windows MAPI/COM):** เชื่อมกับโปรแกรม Outlook ที่เปิดใช้งานอยู่บนเครื่อง Windows ดึงอีเมลจาก Inbox และบันทึกไฟล์ `.msg` พร้อมไฟล์แนบได้โดยไม่ต้องกรอกรหัสผ่าน
+- **Microsoft Outlook Classic (Windows MAPI/COM):** ตรวจจับโปรไฟล์และสถานะการเปิดโปรแกรม Outlook Classic บนเครื่อง Windows อัตโนมัติ (ผ่าน `-EncodedCommand` STA COM + MAPI Table โดยไม่ติดหน้าต่างบล็อกความปลอดภัย Object Model Guard) ดึงอีเมลจาก Inbox และบันทึกไฟล์ `.msg` / `.eml` พร้อมไฟล์แนบได้โดยไม่ต้องกรอกรหัสผ่าน
+- **ปุ่ม "🔄 ซิงก์ตอนนี้ (Sync Now)":** สามารถกดดึงข้อมูลอีเมลล่าสุดจาก Outlook Classic และ IMAP ได้ทันทีตามต้องการ
 - **Gmail / Google Workspace:** รองรับการเชื่อมต่อผ่าน IMAP ด้วย App Password ทำงานเบื้องหลังได้ตลอด 24 ชั่วโมง
 - **Office 365 / Outlook.com / Exchange:** รองรับการเชื่อมต่อแบบ IMAP Secure
 - **Custom IMAP Servers:** รองรับอีเมลบริษัท, cPanel, Webmail องค์กรทุกชนิด
 
 ### 2. บันทึกเหมือนการลากวาง (Drag & Drop Simulation)
 - เมื่อมีอีเมลใหม่เข้ามาระบบจะ:
-  1. บันทึกไฟล์อีเมลฉบับเต็ม (`.eml` หรือ `.msg`) ที่สามารถดับเบิ้ลคลิกเปิดดูใน Microsoft Outlook หรือโปรแกรมอีเมลอื่นๆ ได้ทันที
+  1. บันทึกไฟล์อีเมลฉบับเต็ม (`.msg` หรือ `.eml`) ที่สามารถดับเบิ้ลคลิกเปิดดูใน Microsoft Outlook หรือโปรแกรมอีเมลอื่นๆ ได้ทันที
   2. สกัดไฟล์แนบทั้งหมด (เช่น `Invoice.pdf`, `Report.xlsx`, `Contract.docx`, รูปภาพ) ออกมาบันทึกไว้ในโฟลเดอร์ปลายทาง
-  3. ตั้งชื่อไฟล์ตามวันที่และหัวข้ออย่างเป็นระเบียบ เช่น `2026-10-17_Invoice #INV-2026-0418.eml`
+  3. ตั้งชื่อไฟล์ตามวันที่และหัวข้ออย่างเป็นระเบียบ เช่น `2026-10-17_Invoice #INV-2026-0418.msg`
   4. เลือกได้ว่าจะให้สร้างโฟลเดอร์ย่อยตามวันที่และหัวข้อของอีเมลแต่ละฉบับหรือไม่
 
 ### 3. ระบบกฎอัตโนมัติ (Rule Engine)
 - กำหนดเงื่อนไขการคัดแยกได้หลากหลาย:
-  - หัวข้ออีเมลมีคำว่า (Subject contains) เช่น `"Invoice"`, `"Contract"`, `"Report"`
-  - ส่งมาจากอีเมลหรือโดเมน (From / Domain) เช่น `"@projecta.co.th"`, `"accounting@vendor.com"`
-  - มีไฟล์แนบใดๆ (Has any attachment)
-  - ชื่อไฟล์แนบมีคำว่า (Attachment name contains) เช่น `".pdf"`, `"PO_"`
+  - **อีเมลขาเข้าทั้งหมด (All Incoming Emails):** บันทึกทุกอีเมลที่เข้ามาใน Inbox ลงโฟลเดอร์ที่กำหนดโดยอัตโนมัติ
+  - **หัวข้ออีเมลมีคำว่า (Subject contains):** เช่น `"Invoice"`, `"Contract"`, `"Report"`
+  - **ส่งมาจากอีเมลหรือโดเมน (From / Domain):** เช่น `"@projecta.co.th"`, `"accounting@vendor.com"`
+  - **มีไฟล์แนบใดๆ (Has any attachment)**
+  - **ชื่อไฟล์แนบมีคำว่า (Attachment name contains):** เช่น `".pdf"`, `"PO_"`
 - กำหนดโฟลเดอร์ปลายทางได้ทั้ง **Local Drive (C:, D:)**, **Network Drive**, **NAS**, และ **File Server** (`\\server\share\...`)
 
 ### 4. หน้าตาโปรแกรมตามธีมเว็บไซต์ (UI Replica)

@@ -36,14 +36,27 @@ if (!fs.existsSync(dataDir)) {
 const configFilePath = path.join(dataDir, 'config.json');
 const historyFilePath = path.join(dataDir, 'history.json');
 
-// Default initial configuration matching the demo site
+function getCurrentMonthString() {
+  const now = new Date();
+  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+}
+
+// Default initial configuration matching the demo site + pre-connected Outlook Classic
 const defaultConfig = {
-  isRunning: false,
+  isRunning: true,
   pollIntervalMinutes: 1,
   startWithWindows: false,
   minimizeToTray: true,
   notificationsEnabled: true,
-  accounts: [],
+  accounts: [
+    {
+      id: 'acc-outlook-local',
+      type: 'outlook_local',
+      name: 'Microsoft Outlook Classic (Local)',
+      user: 'Outlook Classic (Auto-Detect)',
+      enabled: true
+    }
+  ],
   rules: [
     {
       id: 'rule-1',
@@ -88,6 +101,17 @@ const defaultConfig = {
       saveEml: true,
       saveAttachments: true,
       folderPerEmail: false
+    },
+    {
+      id: 'rule-5',
+      name: 'General Inbox Auto-Archive',
+      enabled: true,
+      conditionType: 'all_emails',
+      conditionValue: '',
+      targetFolder: path.join(app.getPath('documents'), 'EmailArchive', 'Inbox'),
+      saveEml: true,
+      saveAttachments: true,
+      folderPerEmail: false
     }
   ],
   stats: {
@@ -97,15 +121,10 @@ const defaultConfig = {
   quota: {
     limit: 100,
     used: 14,
-    month: new Date().toISOString().slice(0, 7),
+    month: getCurrentMonthString(),
     isUnlimited: false
   }
 };
-
-function getCurrentMonthString() {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
-}
 
 function loadConfig() {
   try {
@@ -120,12 +139,18 @@ function loadConfig() {
         cfg.quota.month = currentMonth;
         cfg.quota.used = 0;
       }
+      if (!Array.isArray(cfg.accounts) || cfg.accounts.length === 0) {
+        cfg.accounts = [...defaultConfig.accounts];
+      }
+      if (!Array.isArray(cfg.rules) || cfg.rules.length === 0) {
+        cfg.rules = [...defaultConfig.rules];
+      }
       return cfg;
     }
   } catch (err) {
     console.error('Failed to load config, using default:', err);
   }
-  return { ...defaultConfig };
+  return JSON.parse(JSON.stringify(defaultConfig));
 }
 
 function saveConfig(cfg) {
@@ -207,8 +232,8 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     title: 'Email to Folder',
     icon: process.platform === 'win32' ? appIconIco : appIconPng,
-    width: 1140,
-    height: 780,
+    width: 1180,
+    height: 800,
     minWidth: 960,
     minHeight: 640,
     frame: false,
@@ -306,6 +331,12 @@ function updateTrayMenu() {
       }
     },
     {
+      label: '🔄 ซิงก์อีเมลทันที (Sync Now)',
+      click: async () => {
+        await performManualSync();
+      }
+    },
+    {
       label: isRunning ? 'หยุดทำงานชั่วคราว' : 'เริ่มทำงานอัตโนมัติ',
       click: () => {
         toggleEngine(!appConfig.isRunning);
@@ -342,15 +373,17 @@ function toggleEngine(running) {
 
 function startEngine() {
   console.log('Starting Email to Folder engine...');
-  // Initialize IMAP worker
   if (!imapWorker) {
     imapWorker = new ImapWorker(appConfig, onEmailProcessed);
+  } else {
+    imapWorker.config = appConfig;
   }
   imapWorker.start();
 
-  // Initialize Outlook Local worker
   if (!outlookLocalWorker) {
-    outlookLocalWorker = new OutlookLocalWorker(appConfig, onEmailProcessed);
+    outlookLocalWorker = new OutlookLocalWorker(appConfig, onEmailProcessed, dataDir);
+  } else {
+    outlookLocalWorker.config = appConfig;
   }
   outlookLocalWorker.start();
 }
@@ -365,7 +398,39 @@ function stopEngine() {
   }
 }
 
+async function performManualSync() {
+  if (!outlookLocalWorker) {
+    outlookLocalWorker = new OutlookLocalWorker(appConfig, onEmailProcessed, dataDir);
+  } else {
+    outlookLocalWorker.config = appConfig;
+  }
+
+  if (!imapWorker) {
+    imapWorker = new ImapWorker(appConfig, onEmailProcessed);
+  } else {
+    imapWorker.config = appConfig;
+  }
+
+  const outlookRes = await outlookLocalWorker.poll(true);
+  await imapWorker.pollAllAccounts();
+  const envInfo = await outlookLocalWorker.detectEnvironment();
+
+  return {
+    success: true,
+    checked: outlookRes.checked || 0,
+    saved: outlookRes.saved || 0,
+    outlookEnv: envInfo
+  };
+}
+
 function onEmailProcessed(eventData) {
+  if (eventData && eventData.quotaExceeded) {
+    if (mainWindow) {
+      mainWindow.webContents.send('quota-exceeded', { quota: appConfig.quota });
+    }
+    return;
+  }
+
   // Check and update monthly quota
   const currentMonth = getCurrentMonthString();
   if (!appConfig.quota) {
@@ -391,8 +456,8 @@ function onEmailProcessed(eventData) {
 
   // Append history
   appendHistory({
-    id: 'hist-' + Date.now(),
-    date: new Date().toISOString(),
+    id: 'hist-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
+    date: eventData.date || new Date().toISOString(),
     subject: eventData.subject,
     from: eventData.from,
     ruleName: eventData.ruleName,
@@ -428,7 +493,7 @@ app.whenReady().then(() => {
   createWindow();
   createTray();
 
-  if (appConfig.isRunning) {
+  if (appConfig.isRunning !== false) {
     startEngine();
   }
 
@@ -451,18 +516,38 @@ app.on('before-quit', () => {
 });
 
 // IPC Communication Handlers
-ipcMain.handle('get-initial-data', () => {
+ipcMain.handle('get-initial-data', async () => {
+  if (!outlookLocalWorker) {
+    outlookLocalWorker = new OutlookLocalWorker(appConfig, onEmailProcessed, dataDir);
+  }
+  const outlookEnv = await outlookLocalWorker.detectEnvironment();
+  if (outlookEnv.account) {
+    const olAcc = (appConfig.accounts || []).find(a => a.type === 'outlook_local');
+    if (olAcc) {
+      olAcc.user = outlookEnv.account;
+      olAcc.name = `Microsoft Outlook Classic (${outlookEnv.account})`;
+    }
+  }
   return {
     config: appConfig,
-    history: loadHistory()
+    history: loadHistory(),
+    outlookEnv
   };
 });
 
 ipcMain.handle('save-config', (event, newConfig) => {
   appConfig = { ...appConfig, ...newConfig };
   saveConfig(appConfig);
+
+  if (process.platform === 'win32') {
+    try {
+      app.setLoginItemSettings({
+        openAtLogin: Boolean(appConfig.startWithWindows)
+      });
+    } catch (e) {}
+  }
+
   if (appConfig.isRunning) {
-    // Restart engine with new rules/accounts
     stopEngine();
     startEngine();
   }
@@ -486,17 +571,34 @@ ipcMain.handle('select-folder', async () => {
 });
 
 ipcMain.handle('open-folder', async (event, folderPath) => {
-  if (fs.existsSync(folderPath)) {
-    await shell.openPath(folderPath);
-    return true;
+  if (!fs.existsSync(folderPath)) {
+    try {
+      fs.mkdirSync(folderPath, { recursive: true });
+    } catch (e) {
+      return false;
+    }
   }
-  return false;
+  await shell.openPath(folderPath);
+  return true;
+});
+
+ipcMain.handle('detect-outlook', async () => {
+  if (!outlookLocalWorker) {
+    outlookLocalWorker = new OutlookLocalWorker(appConfig, onEmailProcessed, dataDir);
+  }
+  return await outlookLocalWorker.detectEnvironment();
+});
+
+ipcMain.handle('sync-now', async () => {
+  return await performManualSync();
 });
 
 ipcMain.handle('test-account-connection', async (event, account) => {
   if (account.type === 'outlook_local') {
-    const testWorker = new OutlookLocalWorker(appConfig);
-    return await testWorker.testConnection();
+    if (!outlookLocalWorker) {
+      outlookLocalWorker = new OutlookLocalWorker(appConfig, onEmailProcessed, dataDir);
+    }
+    return await outlookLocalWorker.testConnection();
   } else {
     const testWorker = new ImapWorker(appConfig);
     return await testWorker.testConnection(account);
@@ -506,7 +608,7 @@ ipcMain.handle('test-account-connection', async (event, account) => {
 // Manual File Drop Ingest: When user drags an .eml or .msg file onto the app window!
 ipcMain.handle('process-manual-file', async (event, filePath) => {
   if (!fs.existsSync(filePath)) return { success: false, error: 'File does not exist' };
-  
+
   const ext = path.extname(filePath).toLowerCase();
   if (ext !== '.eml' && ext !== '.msg') {
     return { success: false, error: 'รองรับไฟล์อีเมลนามสกุล .eml หรือ .msg เท่านั้น' };
