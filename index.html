@@ -222,7 +222,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
           <span class="en">📥 Download Setup.exe Free (~82 MB)</span>
         </a>
         <div style="font-size:11px; color:var(--mute); text-align:center; margin-top:8px;">
-          Windows 10 / 11 (64-bit) · v1.1.0 (Latest — Enhanced Outlook Classic MAPI)
+          Windows 10 / 11 (64-bit) · <strong style="color:var(--mint);">v1.1.0 (Run #2)</strong> · Updated 2026-10-18
         </div>
       </div>
 
@@ -271,6 +271,58 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
         <div style="font-size:26px; margin-bottom:8px;">🏢</div>
         <h3 style="font-size:18px; margin:0 0 6px;"><span class="th">Office 365 & Mail Server</span><span class="en">Office 365 & Custom IMAP</span></h3>
         <p style="font-size:13px;"><span class="th">รองรับเซิร์ฟเวอร์อีเมลบริษัททุกรูปแบบ จัดเก็บลงได้ทั้ง Local Folder, Network Share และ NAS</span><span class="en">Works with any corporate IMAP server and saves directly to Local Drives, Network Shares, or NAS.</span></p>
+      </div>
+    </div>
+
+    <!-- Version Description & Build Run History -->
+    <div class="bc rv" style="margin-top:24px; text-align:left; min-height:0; padding:28px; border:1px solid rgba(0,224,164,.25); background:linear-gradient(180deg,rgba(0,224,164,.05),rgba(17,17,22,.95));">
+      <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px; margin-bottom:18px; padding-bottom:14px; border-bottom:1px solid var(--line);">
+        <div>
+          <span class="chip" style="margin-top:0; font-size:11px; padding:3px 10px; background:rgba(0,224,164,.16); color:var(--mint);">RELEASE NOTES &amp; BUILD LOG</span>
+          <h3 style="font-size:20px; margin:8px 0 0;">
+            <span class="th">รายละเอียดเวอร์ชัน (Version Description) — </span><span class="en">Version Description — </span>
+            <span class="grad">v1.1.0 · Run #2</span>
+          </h3>
+        </div>
+        <div style="font-size:12px; color:var(--mute); text-align:right;">
+          <div><strong>Build ID:</strong> <code style="color:var(--mint);">Run #2 (20261018.2)</code></div>
+          <div><strong>Installer:</strong> <code>EmailToFolder-Setup.exe</code> (~82.9 MB)</div>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:20px; font-size:13px;">
+        <div style="background:rgba(255,255,255,.03); border:1px solid var(--line); border-radius:14px; padding:18px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <strong style="color:var(--mint); font-size:14px;">🚀 Run #2 · v1.1.0 (Latest Release)</strong>
+            <span style="font-size:11px; color:var(--mute);">2026-10-18</span>
+          </div>
+          <p style="font-size:12.5px; color:#d4d4dc; margin:0 0 10px;">
+            <span class="th">อัปเกรดระบบเชื่อมต่อ Outlook Classic (MAPI Engine) และเพิ่มปุ่มซิงก์อีเมลทันที:</span>
+            <span class="en">Enhanced Outlook Classic MAPI Engine &amp; Instant Sync:</span>
+          </p>
+          <ul style="margin:0; padding-left:18px; color:var(--mute); display:grid; gap:6px; font-size:12.5px;">
+            <li><span class="th">แก้ไขปัญหาติดต่อ Outlook Classic ไม่ได้ โดยเปลี่ยนไปใช้ PowerShell <code>-EncodedCommand</code> (STA COM) และระบบปลุก ROT อัตโนมัติ</span><span class="en">Fixed Outlook Classic connection via PowerShell <code>-EncodedCommand</code> STA COM &amp; ROT Wake helper</span></li>
+            <li><span class="th">ดึงข้อมูล Inbox ผ่าน MAPI Table โดยตรง เร็วขึ้น 100 เท่า ไม่ติดหน้าต่างเตือนความปลอดภัย (Object Model Guard)</span><span class="en">Direct MAPI Table Inbox scanning (100x faster, bypasses Outlook Security Guard prompts)</span></li>
+            <li><span class="th">รองรับการดึงทั้งอีเมลที่เปิดอ่านแล้ว (Read) และยังไม่ได้อ่าน (Unread) พร้อมบันทึกเป็นไฟล์ <code>.msg</code> แท้</span><span class="en">Archives both Read and Unread emails into native <code>.msg</code> format + extracts attachments</span></li>
+            <li><span class="th">เพิ่มปุ่ม <strong>🔄 ซิงก์ตอนนี้ (Sync Now)</strong> บนแถบด้านบน และเพิ่มกฎ <strong>All Incoming Emails (ดึงอีเมลขาเข้าทั้งหมด)</strong></span><span class="en">Added <strong>🔄 Sync Now</strong> button in top bar &amp; <strong>All Incoming Emails</strong> rule condition</span></li>
+          </ul>
+        </div>
+
+        <div style="background:rgba(255,255,255,.02); border:1px solid var(--line); border-radius:14px; padding:18px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <strong style="color:#e1e1e6; font-size:14px;">📦 Run #1 · v1.0.0 (Initial Build)</strong>
+            <span style="font-size:11px; color:var(--mute);">2026-10-18</span>
+          </div>
+          <p style="font-size:12.5px; color:#d4d4dc; margin:0 0 10px;">
+            <span class="th">เปิดตัวโปรแกรมติดตั้งสำหรับ Windows และระบบคัดแยกอีเมลอัตโนมัติ:</span>
+            <span class="en">Initial Windows Setup.exe &amp; Multi-Provider Auto-Archiver:</span>
+          </p>
+          <ul style="margin:0; padding-left:18px; color:var(--mute); display:grid; gap:6px; font-size:12.5px;">
+            <li><span class="th">ตัวติดตั้ง <code>EmailToFolder-Setup.exe</code> รองรับ Outlook, Gmail, Office 365 และ IMAP</span><span class="en">Windows NSIS Installer supporting Outlook, Gmail, Office 365 &amp; IMAP</span></li>
+            <li><span class="th">ระบบทดลองใช้ฟรี 100 ฉบับ/เดือน พร้อมรีเซ็ตโควตาอัตโนมัติทุกวันที่ 1 ของเดือน</span><span class="en">Free Trial tier (100 emails/month) with automatic monthly reset</span></li>
+            <li><span class="th">หน้าจอควบคุม 3 คอลัมน์, โซนทดสอบ Drag &amp; Drop และไอคอนทำงานเบื้องหลังบน System Tray</span><span class="en">3-Column Dark Luxury UI, Drag &amp; Drop test zone &amp; System Tray background service</span></li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>

@@ -1,8 +1,17 @@
-# Email to Folder — Enterprise Desktop Application
+# Email to Folder — Enterprise Desktop Application (`v1.1.0 · Run #2`)
 
 ซอฟต์แวร์จัดเก็บและคัดแยกอีเมลลงโฟลเดอร์อัตโนมัติ สำหรับ **Microsoft Outlook**, **Gmail**, **Office 365** และเซิร์ฟเวอร์ **IMAP** โดยจำลองการทำงานเหมือนการลากเมาส์ (Drag & Drop) อีเมลจากโปรแกรมลงมาที่โฟลเดอร์บนเครื่องคอมพิวเตอร์หรือ Network Drive ทันทีที่มีอีเมลใหม่เข้ามา
 
 หน้าตาโปรแกรมออกแบบตามเว็บไซต์ [emailtofolder.com](index.html) ในรูปแบบ Dark Luxury UI พร้อมระบบมอนิเตอร์แบบ 3 คอลัมน์แบบเรียลไทม์
+
+---
+
+## 🏷️ รายละเอียดเวอร์ชันและประวัติการอัปเดต (Version Description & Run Number)
+
+| Run Number | Version | Build ID | วันที่อัปเดต | รายละเอียดการเปลี่ยนแปลง (Version Description) |
+| :--- | :--- | :--- | :--- | :--- |
+| **Run #2** *(Latest)* | **`v1.1.0`** | `20261018.2` | `2026-10-18` | **Enhanced Outlook Classic MAPI Engine & Instant Sync:**<br>• แก้ไขปัญหาติดต่อ Outlook Classic ไม่ได้เมื่อเปิดโปรแกรมอยู่ โดยเปลี่ยนไปใช้ PowerShell `-EncodedCommand` (STA COM) และตัวช่วยปลุก ROT (`WM_ACTIVATEAPP`)<br>• ดึงรายการอีเมลจาก Inbox ผ่าน **MAPI Table** ความเร็วสูง ไม่ติดหน้าต่างเตือนความปลอดภัย (Object Model Security Guard)<br>• รองรับการดึงทั้งอีเมลที่อ่านแล้ว (Read) และยังไม่ได้อ่าน (Unread) บันทึกเป็นไฟล์ `.msg` แท้พร้อมแยกไฟล์แนบ<br>• เพิ่มปุ่ม **🔄 ซิงก์ตอนนี้ (Sync Now)** บนแถบด้านบน และเงื่อนไขกฎ **อีเมลขาเข้าทั้งหมด (All Incoming Emails)**<br>• เพิ่มการตรวจจับบัญชี Outlook Classic และสร้างกฎเริ่มต้นให้อัตโนมัติทันทีที่เปิดแอป |
+| **Run #1** | **`v1.0.0`** | `20261018.1` | `2026-10-18` | **Initial Release — Multi-Provider Auto Email Archiver:**<br>• เปิดตัวไฟล์ติดตั้ง `EmailToFolder-Setup.exe` รองรับ Outlook, Gmail, Office 365 และ IMAP<br>• ระบบทดลองใช้ฟรี 100 ฉบับ/เดือน พร้อมรีเซ็ตโควตาอัตโนมัติทุกวันที่ 1 ของเดือน<br>• หน้าจอควบคุม 3 คอลัมน์, โซนทดสอบ Drag & Drop และไอคอนทำงานเบื้องหลังบน System Tray |
 
 ---
 

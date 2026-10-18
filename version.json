@@ -1,0 +1,50 @@
+{
+  "version": "1.1.0",
+  "runNumber": 2,
+  "releaseDate": "2026-10-18 12:55 ICT",
+  "fullVersion": "v1.1.0 (Run #2)",
+  "description": "แก้ไขการเชื่อมต่อ Microsoft Outlook Classic (MAPI/COM) ให้เสถียร 100%, เพิ่มระบบตรวจจับโปรไฟล์ .ost/.pst อัตโนมัติ, เพิ่มปุ่ม Sync Now ซิงก์ทันที, เพิ่มเงื่อนไขกฎ All Incoming Emails และรองรับการลากวางไฟล์ .msg",
+  "descriptionEn": "Fixed Microsoft Outlook Classic (MAPI/COM) connection stability, added automatic .ost/.pst profile detection, 1-click Sync Now button, All Incoming Emails rule condition, and .msg drag-and-drop support.",
+  "history": [
+    {
+      "runNumber": 2,
+      "version": "1.1.0",
+      "date": "2026-10-18",
+      "titleTh": "Run #2 — ปรับปรุงระบบเชื่อมต่อ Outlook Classic (MAPI) & ปุ่ม Sync Now",
+      "titleEn": "Run #2 — Enhanced Outlook Classic (MAPI) Connection & Sync Now",
+      "changesTh": [
+        "แก้ไขคำสั่ง PowerShell COM Interop (-Sta -EncodedCommand) แก้ปัญหาเชื่อมต่อ Outlook Classic ไม่ได้",
+        "เปลี่ยนระบบอ่าน Inbox เป็น MAPI Table ($inbox.GetTable) เร็วขึ้นและไม่ติดหน้าต่างบล็อกความปลอดภัย Object Model Guard",
+        "ตรวจจับโปรไฟล์ Outlook Classic (.ost/.pst) และสถานะการทำงานอัตโนมัติทันทีที่เปิดแอป",
+        "เพิ่มปุ่ม '🔄 ซิงก์ตอนนี้ (Sync Now)' บนแถบด้านบนและในหน้าตั้งค่าบัญชี",
+        "เพิ่มเงื่อนไขกฎ '🌟 อีเมลขาเข้าทั้งหมด (All Incoming Emails)' และรองรับการลากวางไฟล์ .msg"
+      ],
+      "changesEn": [
+        "Fixed PowerShell STA COM Interop (-EncodedCommand) for reliable Outlook Classic connection",
+        "Switched Inbox polling to MAPI Table ($inbox.GetTable) bypassing Object Model Security Guard",
+        "Added automatic Outlook Classic profile (.ost/.pst) & active process detection on startup",
+        "Added 1-click 'Sync Now' button in top bar and Accounts modal",
+        "Added 'All Incoming Emails' rule condition and native .msg drag-and-drop support"
+      ]
+    },
+    {
+      "runNumber": 1,
+      "version": "1.0.0",
+      "date": "2026-10-17",
+      "titleTh": "Run #1 — เปิดตัวโปรแกรม Email to Folder & ระบบโควตาทดลองใช้ฟรี 100 ฉบับ/เดือน",
+      "titleEn": "Run #1 — Initial Release & 100 Emails/Month Free Trial Quota",
+      "changesTh": [
+        "เปิดตัวโปรแกรม Desktop สำหรับ Windows 10/11 (Setup.exe) ดีไซน์ Dark Luxury ตามเว็บไซต์",
+        "รองรับการเชื่อมต่อ Outlook, Gmail และ IMAP พร้อมสกัดไฟล์แนบลงโฟลเดอร์อัตโนมัติ",
+        "ระบบโควตาทดลองใช้ฟรี 100 ฉบับ/เดือน พร้อมรีเซ็ตเป็น 0/100 อัตโนมัติทุกวันที่ 1 ของเดือน",
+        "ระบบทำงานเบื้องหลังใน Windows System Tray พร้อมไอคอนและเมนูควบคุม"
+      ],
+      "changesEn": [
+        "Initial Windows 10/11 Desktop Installer (Setup.exe) with Dark Luxury UI",
+        "Outlook, Gmail, and IMAP auto-archiving with attachment extraction",
+        "100 emails/month free trial quota with automatic monthly reset on the 1st",
+        "Background Windows System Tray integration with status menu"
+      ]
+    }
+  ]
+}
