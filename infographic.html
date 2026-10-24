@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Email to Folder — Interactive Workflow Infographic</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Prompt', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Custom glow & animations */
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.05); }
+    }
+    .animate-glow {
+      animation: pulseGlow 3s infinite ease-in-out;
+    }
+
+    @keyframes flowLine {
+      0% { stroke-dashoffset: 100; }
+      100% { stroke-dashoffset: 0; }
+    }
+    .flow-path {
+      stroke-dasharray: 8 6;
+      animation: flowDash 1.2s linear infinite;
+    }
+    @keyframes flowDash {
+      to { stroke-dashoffset: -28; }
+    }
+
+    /* Scroll styling */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0,0,0,0.2);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.2);
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(48,213,200,0.5);
+    }
+
+    .step-card {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .step-card.active {
+      border-color: #30d5c8;
+      box-shadow: 0 10px 30px -10px rgba(48, 213, 200, 0.3);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body class="bg-[#0b0b0e] text-[#ededed] min-h-screen p-4 md:p-8 antialiased selection:bg-[#30d5c8]/30">
+
+  <!-- Header Section -->
+  <header class="max-w-6xl mx-auto mb-8 text-center relative">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#30d5c8]/10 border border-[#30d5c8]/30 text-[#30d5c8] text-xs font-medium mb-3">
+      <span class="w-2 h-2 rounded-full bg-[#30d5c8] animate-ping"></span>
+      Interactive System Architecture · v1.3.0
+    </div>
+    <h1 class="text-3xl md:text-5xl font-bold tracking-tight mb-3">
+      การทำงานของ <span class="bg-gradient-to-r from-[#30d5c8] via-[#a78bfa] to-[#60a5fa] bg-clip-text text-transparent">Email to Folder</span>
+    </h1>
+    <p class="text-[#9ca3af] max-w-2xl mx-auto text-sm md:text-base font-light">
+      กราฟฟิกจำลองการตรวจจับ คัดแยก และจัดเก็บอีเมลลงโฟลเดอร์อัตโนมัติแบบเรียลไทม์ 
+      เลื่อน Scroll เพื่อติดตามแต่ละขั้นตอน หรือกดปุ่มจำลองอีเมลเพื่อดูการทำงาน
+    </p>
+
+    <!-- Top Action Bar & Simulator Controls -->
+    <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+      <span class="text-xs text-[#6b7280]">ทดสอบจำลองอีเมล:</span>
+      <button onclick="selectScenario('invoice')" id="btnScenarioInvoice" class="px-3 py-1.5 rounded-lg text-xs font-medium border border-[#30d5c8] bg-[#30d5c8]/20 text-[#30d5c8] hover:bg-[#30d5c8]/30 transition">
+        📄 ใบแจ้งหนี้ (Invoice PDF)
+      </button>
+      <button onclick="selectScenario('contract')" id="btnScenarioContract" class="px-3 py-1.5 rounded-lg text-xs font-medium border border-[#4b5563] bg-[#18181f] text-[#d1d5db] hover:border-[#a78bfa] hover:text-[#a78bfa] transition">
+        📜 สัญญาฝ่ายกฎหมาย (Contract)
+      </button>
+      <button onclick="selectScenario('report')" id="btnScenarioReport" class="px-3 py-1.5 rounded-lg text-xs font-medium border border-[#4b5563] bg-[#18181f] text-[#d1d5db] hover:border-[#60a5fa] hover:text-[#60a5fa] transition">
+        📊 รายงานโครงการ (Excel Report)
+      </button>
+      <button onclick="triggerSimulation()" class="px-4 py-1.5 rounded-lg text-xs font-semibold bg-gradient-to-r from-[#30d5c8] to-[#0ea5e9] text-black hover:opacity-90 shadow-lg shadow-[#30d5c8]/20 transition flex items-center gap-1.5">
+        <span>🚀</span> รันแอนิเมชันทันที
+      </button>
+    </div>
+
+    <!-- Progress Indicator -->
+    <div class="max-w-md mx-auto mt-6 bg-[#16161d] h-2 rounded-full overflow-hidden border border-[#272732]">
+      <div id="progressBar" class="h-full bg-gradient-to-r from-[#30d5c8] to-[#a78bfa] transition-all duration-300 w-1/5"></div>
+    </div>
+  </header>
+
+  <!-- Main Interactive Layout -->
+  <main class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+    <!-- Left Column: Interactive Story Steps (Scrollable Container) -->
+    <div class="lg:col-span-5 space-y-6" id="stepsContainer">
+
+      <!-- Step 1 -->
+      <div class="step-card active p-6 rounded-2xl bg-[#121217] border border-[#272732] cursor-pointer" onclick="goToStep(1)">
+        <div class="flex items-center justify-between mb-3">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-xs font-semibold bg-[#30d5c8]/10 text-[#30d5c8] border border-[#30d5c8]/20">
+            STEP 01
+          </span>
+          <span class="text-xs text-[#9ca3af]">ตรวจจับอีเมลขาเข้า</span>
+        </div>
+        <h3 class="text-lg font-semibold text-white mb-2 flex items-center gap-2">
+          <span>📨</span> รับอีเมลขาเข้าแบบ Real-Time
+        </h3>
+        <p class="text-xs text-[#9ca3af] leading-relaxed mb-3">
+          เชื่อมต่อกับ <b>Microsoft Outlook Classic</b> ผ่าน MAPI Table ไร้หน้าต่างแจ้งเตือน หรือรับผ่าน <b>IMAP IDLE Push</b> (Gmail, Office 365) โดยไม่ต้องรอยิง polling
+        </p>
+        <div class="text-[11px] bg-[#181822] p-2.5 rounded-xl border border-[#272734] space-y-1">
+          <div class="flex justify-between text-[#d1d5db]"><span>หัวข้อ (Subject):</span> <b id="step1Subject" class="text-[#30d5c8]">Invoice #INV-2026-0418</b></div>
+          <div class="flex justify-between text-[#9ca3af]"><span>ผู้ส่ง (From):</span> <span id="step1From">accounting@vendor.co.th</span></div>
+          <div class="flex justify-between text-[#9ca3af]"><span>มีไฟล์แนบ:</span> <span id="step1Attach" class="text-emerald-400">✓ มี (Invoice.pdf)</span></div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step-card p-6 rounded-2xl bg-[#121217] border border-[#272732] cursor-pointer" onclick="goToStep(2)">
+        <div class="flex items-center justify-between mb-3">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-xs font-semibold bg-[#a78bfa]/10 text-[#a78bfa] border border-[#a78bfa]/20">
+            STEP 02
+          </span>
+          <span class="text-xs text-[#9ca3af]">คัดแยกตามกฎ</span>
+        </div>
+        <h3 class="text-lg font-semibold text-white mb-2 flex items-center gap-2">
+          <span>⚡</span> วิเคราะห์ด้วย Rule Engine
+        </h3>
+        <p class="text-xs text-[#9ca3af] leading-relaxed mb-3">
+          ระบบสแกนข้อมูลเทียบกับกฎที่ตั้งไว้: หัวข้อ (Subject), ผู้ส่ง (From), ผู้รับ (To/CC), หรือ <b>เนื้อหาข้อความ (Body)</b> พร้อมโควตาตรวจสอบรายเดือน
+        </p>
+        <div class="text-[11px] bg-[#181822] p-2.5 rounded-xl border border-[#272734] space-y-1.5">
+          <div class="flex items-center gap-2 text-xs">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="text-[#e5e7eb] font-medium" id="step2RuleName">กฎ: Invoice to Finance</span>
+          </div>
+          <div class="text-[#9ca3af] pl-4 border-l border-[#2e2e3e]" id="step2Condition">
+            เงื่อนไข: หัวข้อมีคำว่า "Invoice" + เนื้อหามีเลขที่เอกสาร
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step-card p-6 rounded-2xl bg-[#121217] border border-[#272732] cursor-pointer" onclick="goToStep(3)">
+        <div class="flex items-center justify-between mb-3">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-xs font-semibold bg-[#60a5fa]/10 text-[#60a5fa] border border-[#60a5fa]/20">
+            STEP 03
+          </span>
+          <span class="text-xs text-[#9ca3af]">สกัดและประมวลผลไฟล์</span>
+        </div>
+        <h3 class="text-lg font-semibold text-white mb-2 flex items-center gap-2">
+          <span>📦</span> สกัดไฟล์แนบ & บันทึก .MSG แท้
+        </h3>
+        <p class="text-xs text-[#9ca3af] leading-relaxed mb-3">
+          จำลองการลากวาง (Drag & Drop): บันทึกไฟล์อีเมลฉบับเต็ม (`.msg` / `.eml`) พร้อมสกัดไฟล์แนบ (PDF, Excel, Docs) และดาวน์โหลดรูปภาพลิงก์ภายนอกแปลงเป็น Inline CID อัตโนมัติ
+        </p>
+        <div class="text-[11px] bg-[#181822] p-2.5 rounded-xl border border-[#272734] space-y-1 text-[#9ca3af]">
+          <div>✓ สกัด: <span class="text-white font-mono" id="step3ExtractedMsg">2026-10-25_Invoice.msg</span></div>
+          <div>✓ ไฟล์แนบ: <span class="text-emerald-400 font-mono" id="step3ExtractedAtt">Invoice.pdf</span></div>
+          <div>✓ จัดการชื่อไฟล์ซ้ำ: เติมหมายเลขลำดับ _(1) อัตโนมัติ</div>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="step-card p-6 rounded-2xl bg-[#121217] border border-[#272732] cursor-pointer" onclick="goToStep(4)">
+        <div class="flex items-center justify-between mb-3">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-xs font-semibold bg-[#f59e0b]/10 text-[#f59e0b] border border-[#f59e0b]/20">
+            STEP 04
+          </span>
+          <span class="text-xs text-[#9ca3af]">จัดระเบียบลงโฟลเดอร์</span>
+        </div>
+        <h3 class="text-lg font-semibold text-white mb-2 flex items-center gap-2">
+          <span>📁</span> บันทึกลงโฟลเดอร์โครงสร้างที่ต้องการ
+        </h3>
+        <p class="text-xs text-[#9ca3af] leading-relaxed mb-3">
+          ย้ายไฟล์เข้าโฟลเดอร์ Local Drive (C:, D:), Network Share (`\\server\share`) หรือ NAS โดยเลือกโครงสร้าง: แยกตามปี/เดือน (`YYYY/MM`), ตามชื่อผู้ส่ง, หรือแยกรายอีเมล
+        </p>
+        <div class="text-[11px] bg-[#181822] p-2.5 rounded-xl border border-[#272734] font-mono text-amber-300 truncate" id="step4Path">
+          \\FileServer\Finance\Invoices\2026\10\
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="step-card p-6 rounded-2xl bg-[#121217] border border-[#272732] cursor-pointer" onclick="goToStep(5)">
+        <div class="flex items-center justify-between mb-3">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-xs font-semibold bg-[#10b981]/10 text-[#10b981] border border-[#10b981]/20">
+            STEP 05
+          </span>
+          <span class="text-xs text-[#9ca3af]">บันทึกประวัติ & แจ้งเตือน</span>
+        </div>
+        <h3 class="text-lg font-semibold text-white mb-2 flex items-center gap-2">
+          <span>📜</span> บันทึก Audit Log & ส่งออก CSV
+        </h3>
+        <p class="text-xs text-[#9ca3af] leading-relaxed mb-3">
+          อัปเดตสถิติ Real-time, แจ้งเตือน Native Windows Notification และบันทึก Audit History พร้อมกดส่งออกเป็นไฟล์ CSV รองรับภาษาไทยใน Microsoft Excel ได้ทันที
+        </p>
+        <div class="text-[11px] bg-[#181822] p-2.5 rounded-xl border border-[#272734] flex justify-between items-center text-xs">
+          <span class="text-emerald-400">✓ บันทึกสำเร็จ</span>
+          <span class="text-[#9ca3af]">โควตาเดือนนี้: 15/100</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Column: Interactive Visual Canvas (Sticky Demonstration) -->
+    <div class="lg:col-span-7 sticky top-6">
+      <div class="bg-[#121217] rounded-3xl border border-[#272732] p-6 shadow-2xl relative overflow-hidden">
+        
+        <!-- Background Ambient Glow -->
+        <div id="ambientGlow" class="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-[#30d5c8]/10 blur-3xl pointer-events-none transition-all duration-700"></div>
+
+        <!-- Stage Title Header -->
+        <div class="flex items-center justify-between border-b border-[#22222d] pb-4 mb-6">
+          <div>
+            <div class="text-xs font-mono text-[#30d5c8]" id="stageCode">STAGE 01 / 05</div>
+            <h2 class="text-xl font-bold text-white" id="stageTitle">ตรวจจับอีเมลขาเข้า (Mail Ingestion)</h2>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-[#1e1e28] text-[#9ca3af] border border-[#2f2f3d]">
+              Live Simulation
+            </span>
+          </div>
+        </div>
+
+        <!-- Interactive Diagram Box -->
+        <div class="min-h-[380px] flex flex-col justify-center items-center relative py-6">
+
+          <!-- STAGE 1: INGESTION VISUAL -->
+          <div id="visualStage1" class="w-full flex flex-col items-center gap-6 transition-all duration-500">
+            <div class="grid grid-cols-2 gap-4 w-full max-w-sm">
+              <div class="p-3.5 rounded-xl bg-[#181822] border border-[#2d2d3e] flex items-center gap-3">
+                <span class="text-2xl">📧</span>
+                <div>
+                  <div class="text-xs font-semibold text-white">Outlook Classic</div>
+                  <div class="text-[10px] text-cyan-400">MAPI Table Engine</div>
+                </div>
+              </div>
+              <div class="p-3.5 rounded-xl bg-[#181822] border border-[#2d2d3e] flex items-center gap-3">
+                <span class="text-2xl">☁️</span>
+                <div>
+                  <div class="text-xs font-semibold text-white">Gmail / O365</div>
+                  <div class="text-[10px] text-purple-400">IMAP IDLE Push</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Animated Mail Flying -->
+            <div class="relative py-4 flex flex-col items-center">
+              <svg width="240" height="70" class="overflow-visible">
+                <path d="M 120 0 L 120 70" stroke="#30d5c8" stroke-width="2" class="flow-path" />
+              </svg>
+              <div id="flyingEmailCard" class="absolute top-1/2 -translate-y-1/2 p-3 bg-gradient-to-r from-[#1c1c27] to-[#252536] border border-[#30d5c8] rounded-xl shadow-lg shadow-[#30d5c8]/20 flex items-center gap-2.5 animate-bounce">
+                <span class="text-lg">✉️</span>
+                <div class="text-left">
+                  <div class="text-xs font-bold text-white truncate max-w-[150px]" id="simCardSubject">Invoice #INV-2026</div>
+                  <div class="text-[10px] text-[#9ca3af]" id="simCardSender">accounting@vendor.co.th</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Email to Folder Daemon Node -->
+            <div class="w-full max-w-xs p-4 rounded-2xl bg-gradient-to-b from-[#181824] to-[#12121c] border border-[#30d5c8]/50 shadow-lg text-center">
+              <div class="w-10 h-10 mx-auto mb-2 rounded-xl bg-[#30d5c8]/10 border border-[#30d5c8]/30 flex items-center justify-center text-[#30d5c8] text-lg">
+                ⚙️
+              </div>
+              <div class="text-xs font-bold text-white">Email to Folder Engine</div>
+              <div class="text-[10px] text-[#30d5c8]">Listening on Windows Service / Tray</div>
+            </div>
+          </div>
+
+          <!-- STAGE 2: RULE ENGINE VISUAL -->
+          <div id="visualStage2" class="w-full flex-col items-center gap-4 hidden transition-all duration-500">
+            <div class="w-full max-w-md bg-[#161622] p-4 rounded-2xl border border-[#2d2d3e]">
+              <div class="text-xs font-semibold text-[#a78bfa] mb-3 flex items-center justify-between">
+                <span>Rule Matching Evaluation</span>
+                <span class="text-[10px] bg-[#272738] px-2 py-0.5 rounded text-gray-300">Fast Match < 2ms</span>
+              </div>
+              
+              <div class="space-y-2">
+                <div class="p-2.5 rounded-lg bg-[#1f1f2e] border border-emerald-500/50 flex items-center justify-between text-xs">
+                  <div class="flex items-center gap-2">
+                    <span class="text-emerald-400">✓</span>
+                    <span class="text-white" id="evalRuleActive">Rule: Invoice to Finance</span>
+                  </div>
+                  <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono">MATCHED</span>
+                </div>
+                <div class="p-2.5 rounded-lg bg-[#1a1a24] border border-[#2d2d3c] opacity-40 flex items-center justify-between text-xs">
+                  <div class="flex items-center gap-2">
+                    <span class="text-gray-500">✗</span>
+                    <span class="text-gray-400">Rule: Contracts & Legal</span>
+                  </div>
+                  <span class="text-[10px] text-gray-500">SKIPPED</span>
+                </div>
+                <div class="p-2.5 rounded-lg bg-[#1a1a24] border border-[#2d2d3c] opacity-40 flex items-center justify-between text-xs">
+                  <div class="flex items-center gap-2">
+                    <span class="text-gray-500">✗</span>
+                    <span class="text-gray-400">Rule: Human Resources</span>
+                  </div>
+                  <span class="text-[10px] text-gray-500">SKIPPED</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Checked Conditions Badge Matrix -->
+            <div class="grid grid-cols-3 gap-2 w-full max-w-md text-center text-[10px]">
+              <div class="p-2 rounded bg-[#171720] border border-[#2b2b3a] text-cyan-300">
+                Subject Filter<br><b>MATCHED</b>
+              </div>
+              <div class="p-2 rounded bg-[#171720] border border-[#2b2b3a] text-purple-300">
+                Body / Recipient<br><b>VERIFIED</b>
+              </div>
+              <div class="p-2 rounded bg-[#171720] border border-[#2b2b3a] text-emerald-300">
+                Monthly Quota<br><b>ALLOWED (15/100)</b>
+              </div>
+            </div>
+          </div>
+
+          <!-- STAGE 3: EXTRACTION VISUAL -->
+          <div id="visualStage3" class="w-full flex-col items-center gap-6 hidden transition-all duration-500">
+            <div class="flex items-center gap-4">
+              <!-- Raw MIME Source -->
+              <div class="p-4 rounded-xl bg-[#161622] border border-[#3b3b4f] text-center w-36">
+                <span class="text-3xl mb-1 block">✉️</span>
+                <span class="text-xs font-bold text-white block">Raw Email Stream</span>
+                <span class="text-[10px] text-gray-400">COM / MIME Buffer</span>
+              </div>
+
+              <!-- Unbundling Arrow -->
+              <div class="flex flex-col items-center">
+                <span class="text-cyan-400 font-bold text-xl">➔</span>
+                <span class="text-[10px] text-cyan-300 font-mono">Dissect</span>
+              </div>
+
+              <!-- Extracted Artifacts -->
+              <div class="space-y-2">
+                <div class="p-2.5 px-3.5 rounded-lg bg-[#1a1a26] border border-cyan-500/40 flex items-center gap-2.5 text-xs">
+                  <span class="text-cyan-400 text-base">📑</span>
+                  <div>
+                    <div class="font-bold text-white" id="visMsgFile">2026-10-25_Invoice.msg</div>
+                    <div class="text-[9px] text-gray-400">Complete MSG (Outlook native)</div>
+                  </div>
+                </div>
+                <div class="p-2.5 px-3.5 rounded-lg bg-[#1a1a26] border border-emerald-500/40 flex items-center gap-2.5 text-xs">
+                  <span class="text-emerald-400 text-base">📎</span>
+                  <div>
+                    <div class="font-bold text-emerald-300" id="visAttFile">Invoice.pdf</div>
+                    <div class="text-[9px] text-gray-400">Extracted Clean Attachment</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CID Inliner Badge -->
+            <div class="p-2.5 rounded-xl bg-[#181822] border border-purple-500/30 text-[11px] text-purple-300 flex items-center gap-2 max-w-sm">
+              <span>🖼️</span>
+              <span><b>Inline Image Fix:</b> ดึงภาพภายนอกแปลงเป็น CID แนบใน .msg ให้เปิดออฟไลน์รูปไม่หาย</span>
+            </div>
+          </div>
+
+          <!-- STAGE 4: FOLDER ROUTING VISUAL -->
+          <div id="visualStage4" class="w-full flex-col items-center gap-5 hidden transition-all duration-500">
+            <div class="w-full max-w-md bg-[#161622] rounded-2xl border border-[#2c2c3e] p-4 text-xs">
+              <div class="flex items-center justify-between mb-3 text-amber-400 font-semibold">
+                <span>📁 Destination Directory Tree</span>
+                <span class="text-[10px] bg-amber-400/10 px-2 py-0.5 rounded text-amber-300">Hierarchy Mode</span>
+              </div>
+
+              <!-- Folder Tree Visualization -->
+              <div class="space-y-1 font-mono text-[11px]">
+                <div class="text-gray-400">📂 \\FileServer\Finance\Invoices</div>
+                <div class="pl-4 text-gray-400">└── 📂 2026 <span class="text-gray-500">(Year)</span></div>
+                <div class="pl-8 text-amber-300 font-bold">└── 📂 10 <span class="text-gray-500">(Month)</span></div>
+                <div class="pl-12 text-cyan-300">├── 📄 2026-10-25_Invoice #INV-2026-0418.msg</div>
+                <div class="pl-12 text-emerald-400">└── 📎 Invoice.pdf</div>
+              </div>
+            </div>
+
+            <!-- Storage Destination Options -->
+            <div class="flex gap-2 text-[10px] text-gray-300">
+              <span class="px-2 py-1 rounded bg-[#1e1e28] border border-[#30303e]">💻 Local C: / D:</span>
+              <span class="px-2 py-1 rounded bg-[#1e1e28] border border-[#30303e]">🖧 Network Share</span>
+              <span class="px-2 py-1 rounded bg-[#1e1e28] border border-[#30303e]">🗄️ NAS File Server</span>
+            </div>
+          </div>
+
+          <!-- STAGE 5: AUDIT & NOTIFICATION VISUAL -->
+          <div id="visualStage5" class="w-full flex-col items-center gap-5 hidden transition-all duration-500">
+            <!-- Mock Windows Notification Toast -->
+            <div class="w-full max-w-sm p-3.5 rounded-2xl bg-[#1f1f2e] border border-cyan-500/40 shadow-xl flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-base shrink-0">
+                ✓
+              </div>
+              <div class="text-xs">
+                <div class="font-bold text-white">Email to Folder — บันทึกสำเร็จ</div>
+                <div class="text-[#9ca3af] text-[11px] truncate" id="toastDesc">"Invoice #INV-2026-0418" บันทึกลง Invoices เรียบร้อยแล้ว</div>
+              </div>
+            </div>
+
+            <!-- Audit Log Row Preview -->
+            <div class="w-full max-w-md bg-[#161622] rounded-xl border border-[#2b2b3a] p-3 text-[11px]">
+              <div class="flex justify-between text-gray-400 border-b border-[#242432] pb-1.5 mb-2">
+                <span>Date & Time</span>
+                <span>Rule</span>
+                <span>Audit Action</span>
+              </div>
+              <div class="flex justify-between items-center text-white">
+                <span class="font-mono text-[10px] text-gray-300">2026-10-25 00:50</span>
+                <span class="text-cyan-400">Invoice to Finance</span>
+                <button class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px] border border-emerald-500/30">
+                  📊 Export CSV
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Navigation Slider & Buttons -->
+        <div class="mt-6 pt-4 border-t border-[#22222d] flex items-center justify-between">
+          <button onclick="prevStep()" class="px-3 py-1.5 rounded-lg text-xs font-medium text-[#9ca3af] hover:text-white bg-[#1a1a24] border border-[#292938]">
+            ← ก่อนหน้า (Prev)
+          </button>
+          
+          <div class="flex items-center gap-1.5" id="stepDots">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#30d5c8] cursor-pointer" onclick="goToStep(1)"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[#272734] cursor-pointer" onclick="goToStep(2)"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[#272734] cursor-pointer" onclick="goToStep(3)"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[#272734] cursor-pointer" onclick="goToStep(4)"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[#272734] cursor-pointer" onclick="goToStep(5)"></span>
+          </div>
+
+          <button onclick="nextStep()" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-black bg-[#30d5c8] hover:bg-[#28b8ac] transition shadow">
+            ถัดไป (Next) →
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    let currentStep = 1;
+    let currentScenario = 'invoice';
+
+    const scenarios = {
+      invoice: {
+        subject: 'Invoice #INV-2026-0418',
+        from: 'accounting@vendor.co.th',
+        rule: 'Invoice to Finance',
+        condition: 'หัวข้อมีคำว่า "Invoice" + มีไฟล์แนบ PDF',
+        msgFile: '2026-10-25_Invoice #INV-2026-0418.msg',
+        attFile: 'Invoice.pdf',
+        path: '\\\\FileServer\\Finance\\Invoices\\2026\\10\\',
+        toast: '"Invoice #INV-2026-0418" บันทึกลง Invoices เรียบร้อยแล้ว'
+      },
+      contract: {
+        subject: 'Contract Draft Partnership v3',
+        from: 'legal@partner.com',
+        rule: 'Contracts & Legal',
+        condition: 'หัวข้อมีคำว่า "Contract" หรือส่งจาก @partner.com',
+        msgFile: '2026-10-25_Contract Draft Partnership v3.msg',
+        attFile: 'Partnership_Contract_v3.pdf',
+        path: 'D:\\Legal\\Contracts\\2026\\10\\',
+        toast: '"Contract Draft Partnership v3" บันทึกลง Legal เรียบร้อยแล้ว'
+      },
+      report: {
+        subject: 'Site Progress Report – Week 42',
+        from: 'pm@projecta.co.th',
+        rule: 'Project A Correspondence',
+        condition: 'ผู้ส่งคือ @projecta.co.th + จัดกลุ่มตามชื่อผู้ส่ง',
+        msgFile: '2026-10-25_Site Progress Report.msg',
+        attFile: 'Report_W42.xlsx',
+        path: 'C:\\Projects\\2026-A\\pm_projecta\\',
+        toast: '"Site Progress Report" บันทึกลง Project A เรียบร้อยแล้ว'
+      }
+    };
+
+    function selectScenario(type) {
+      currentScenario = type;
+      const sc = scenarios[type];
+
+      // Update button styles
+      ['invoice', 'contract', 'report'].forEach(t => {
+        const btn = document.getElementById('btnScenario' + t.charAt(0).toUpperCase() + t.slice(1));
+        if (t === type) {
+          btn.className = 'px-3 py-1.5 rounded-lg text-xs font-medium border border-[#30d5c8] bg-[#30d5c8]/20 text-[#30d5c8]';
+        } else {
+          btn.className = 'px-3 py-1.5 rounded-lg text-xs font-medium border border-[#4b5563] bg-[#18181f] text-[#d1d5db]';
+        }
+      });
+
+      // Update card texts
+      document.getElementById('step1Subject').textContent = sc.subject;
+      document.getElementById('step1From').textContent = sc.from;
+      document.getElementById('simCardSubject').textContent = sc.subject;
+      document.getElementById('simCardSender').textContent = sc.from;
+      document.getElementById('step2RuleName').textContent = 'กฎ: ' + sc.rule;
+      document.getElementById('step2Condition').textContent = 'เงื่อนไข: ' + sc.condition;
+      document.getElementById('evalRuleActive').textContent = 'Rule: ' + sc.rule;
+      document.getElementById('step3ExtractedMsg').textContent = sc.msgFile;
+      document.getElementById('step3ExtractedAtt').textContent = sc.attFile;
+      document.getElementById('visMsgFile').textContent = sc.msgFile;
+      document.getElementById('visAttFile').textContent = sc.attFile;
+      document.getElementById('step4Path').textContent = sc.path;
+      document.getElementById('toastDesc').textContent = sc.toast;
+
+      goToStep(1);
+    }
+
+    function goToStep(step) {
+      currentStep = step;
+      
+      // Update Step Cards active state
+      const cards = document.querySelectorAll('.step-card');
+      cards.forEach((c, idx) => {
+        if (idx + 1 === step) {
+          c.classList.add('active');
+          c.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else {
+          c.classList.remove('active');
+        }
+      });
+
+      // Update progress bar
+      document.getElementById('progressBar').style.width = (step * 20) + '%';
+
+      // Update Dots
+      const dots = document.getElementById('stepDots').children;
+      for (let i = 0; i < dots.length; i++) {
+        dots[i].className = (i + 1 === step)
+          ? 'w-2.5 h-2.5 rounded-full bg-[#30d5c8] cursor-pointer'
+          : 'w-2.5 h-2.5 rounded-full bg-[#272734] cursor-pointer';
+      }
+
+      // Hide all visual stages, show current
+      for (let s = 1; s <= 5; s++) {
+        const el = document.getElementById('visualStage' + s);
+        if (el) {
+          if (s === step) {
+            el.classList.remove('hidden');
+            el.classList.add('flex');
+          } else {
+            el.classList.add('hidden');
+            el.classList.remove('flex');
+          }
+        }
+      }
+
+      // Update stage headers & ambient glow colors
+      const glow = document.getElementById('ambientGlow');
+      const stageCode = document.getElementById('stageCode');
+      const stageTitle = document.getElementById('stageTitle');
+
+      stageCode.textContent = `STAGE 0${step} / 05`;
+      
+      const titles = [
+        'ตรวจจับอีเมลขาเข้า (Mail Ingestion)',
+        'วิเคราะห์ด้วย Rule Engine (Rule Matching)',
+        'สกัดไฟล์และแปลงรูปแบบ (.msg & Attachments)',
+        'จัดระเบียบโครงสร้างโฟลเดอร์ (Folder Hierarchy)',
+        'บันทึก Audit Log & การแจ้งเตือน (Audit & Notify)'
+      ];
+      stageTitle.textContent = titles[step - 1];
+
+      const glows = [
+        'bg-[#30d5c8]/10',
+        'bg-[#a78bfa]/15',
+        'bg-[#60a5fa]/15',
+        'bg-[#f59e0b]/15',
+        'bg-[#10b981]/15'
+      ];
+      glow.className = `absolute -top-24 -right-24 w-80 h-80 rounded-full blur-3xl pointer-events-none transition-all duration-700 ${glows[step - 1]}`;
+    }
+
+    function nextStep() {
+      if (currentStep < 5) goToStep(currentStep + 1);
+      else goToStep(1);
+    }
+
+    function prevStep() {
+      if (currentStep > 1) goToStep(currentStep - 1);
+      else goToStep(5);
+    }
+
+    // Auto-simulation run
+    let simTimer = null;
+    function triggerSimulation() {
+      if (simTimer) clearInterval(simTimer);
+      goToStep(1);
+      let s = 1;
+      simTimer = setInterval(() => {
+        s++;
+        if (s <= 5) {
+          goToStep(s);
+        } else {
+          clearInterval(simTimer);
+          simTimer = null;
+        }
+      }, 1600);
+    }
+
+    // Scroll-driven trigger when user scrolls the steps container or window
+    window.addEventListener('scroll', () => {
+      const cards = document.querySelectorAll('.step-card');
+      const mid = window.innerHeight / 2;
+      cards.forEach((card, idx) => {
+        const rect = card.getBoundingClientRect();
+        if (rect.top <= mid && rect.bottom >= mid) {
+          if (currentStep !== idx + 1) {
+            goToStep(idx + 1);
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
