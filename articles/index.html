@@ -3,116 +3,135 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>คลังความรู้และบทความการจัดการอีเมลองค์กร | Email to Folder</title>
-<meta name="description" content="รวมบทความ คู่มือ และเทคนิคการจัดการอีเมลองค์กร ความปลอดภัย (Email Security), PDPA Compliance, วิธีจัดระเบียบ Zero Inbox และทริคประหยัดเวลาสำหรับฝ่ายบัญชี การเงิน และจัดซื้อ">
-<meta name="keywords" content="บทความอีเมล, Email Security, จัดระเบียบ Outlook, Zero Inbox, PDPA อีเมล, แบ็กอัปอีเมลองค์กร, สกัดไฟล์แนบ, ทริคบัญชีการเงิน">
-<meta name="author" content="Email to Folder Team">
+<title>คลังความรู้และการจัดการอีเมลสำหรับองค์กร | Email to Folder Articles</title>
+<meta name="description" content="รวมบทความ คู่มือ และเทคนิคการจัดการอีเมลองค์กร: ความปลอดภัย PDPA, เทคนิค Zero-Inbox, วิธีแก้ Outlook PST/OST เต็ม, การสำรองข้อมูลลง NAS, ป้องกัน Phishing/BEC และระบบสกัด Invoice อัตโนมัติ">
+<meta name="keywords" content="วิธีจัดระเบียบอีเมล, Outlook ช้า, ป้องกัน Phishing, แก้ PST เต็ม, สำรองอีเมลลง NAS Synology, Gmail App Password, Email to Folder, Zero Inbox">
+<meta name="author" content="Email to Folder Tech Team">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://emailtofolder.com/articles/">
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://emailtofolder.com/articles/">
-<meta property="og:title" content="คลังความรู้และบทความการจัดการอีเมลองค์กร | Email to Folder">
-<meta property="og:description" content="รวมบทความ คู่มือ และเทคนิคการจัดการอีเมลองค์กร ความปลอดภัย (Email Security), PDPA Compliance, วิธีจัดระเบียบ Zero Inbox และทริคประหยัดเวลา">
+<meta property="og:title" content="คลังความรู้และการจัดการอีเมลสำหรับองค์กร | Email to Folder Articles">
+<meta property="og:description" content="รวมคู่มือ เทคนิคจัดระเบียบอีเมล ความปลอดภัยองค์กร ป้องกันฟิชชิ่ง และแก้ปัญหา Outlook ช้า">
 <meta property="og:image" content="https://emailtofolder.com/favicon.png">
-<meta property="og:site_name" content="Email to Folder">
-<meta property="og:locale" content="th_TH">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="คลังความรู้และบทความการจัดการอีเมลองค์กร | Email to Folder">
-<meta name="twitter:description" content="รวมบทความ คู่มือ และเทคนิคการจัดการอีเมลองค์กร ความปลอดภัย (Email Security), PDPA Compliance, วิธีจัดระเบียบ Zero Inbox">
+<meta name="twitter:url" content="https://emailtofolder.com/articles/">
+<meta name="twitter:title" content="คลังความรู้และการจัดการอีเมลสำหรับองค์กร | Email to Folder Articles">
+<meta name="twitter:description" content="รวมคู่มือ เทคนิคจัดระเบียบอีเมล ความปลอดภัยองค์กร ป้องกันฟิชชิ่ง และแก้ปัญหา Outlook ช้า">
 <meta name="twitter:image" content="https://emailtofolder.com/favicon.png">
 
 <link rel="icon" type="image/png" href="../favicon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap">
 
-<!-- Structured Data (JSON-LD) -->
+<!-- Structured Data (JSON-LD BreadcrumbList & CollectionPage) -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  "name": "คลังความรู้และบทความการจัดการอีเมลองค์กร",
-  "description": "รวมบทความ คู่มือ และเทคนิคการจัดการอีเมลองค์กร ความปลอดภัย (Email Security), PDPA Compliance, วิธีจัดระเบียบ Zero Inbox",
+  "name": "Email to Folder Knowledge Hub",
+  "description": "Enterprise email guides, security best practices, and automation tutorials.",
   "url": "https://emailtofolder.com/articles/",
   "publisher": {
     "@type": "Organization",
     "name": "Email to Folder",
-    "url": "https://emailtofolder.com"
-  },
-  "breadcrumb": {
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "หน้าแรก (Home)",
-        "item": "https://emailtofolder.com/"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "บทความ (Articles)",
-        "item": "https://emailtofolder.com/articles/"
-      }
-    ]
+    "logo": "https://emailtofolder.com/favicon.png"
   }
 }
 </script>
 
 <style>
-:root{--bg:#ffffff;--bg2:#f5f5f7;--ink:#1d1d1f;--mute:#6e6e73;--line:rgba(0,0,0,.1);--card:rgba(255,255,255,.7);--brand:#0a84ff;--teal:#30d5c8;--vio:#8a5cff}
+:root{
+  --bg:#ffffff;
+  --bg2:#f5f5f7;
+  --ink:#1d1d1f;
+  --mute:#6e6e73;
+  --line:rgba(0,0,0,.08);
+  --card:rgba(255,255,255,.75);
+  --brand:#0a84ff;
+  --teal:#30d5c8;
+  --vio:#8a5cff;
+}
 html{scroll-behavior:smooth}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,Prompt,system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:Inter,Prompt,system-ui,sans-serif;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
 html[lang=th] body{font-family:Prompt,Inter,system-ui,sans-serif}
 html[lang=th] .en,html[lang=en] .th{display:none}
+
 a{color:inherit;text-decoration:none}
-.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
-.grad{background:linear-gradient(100deg,var(--brand),var(--teal) 50%,var(--vio));background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
 
 /* nav */
-.nav{position:fixed;top:12px;left:50%;transform:translateX(-50%);width:min(960px,calc(100% - 24px));z-index:50;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px 8px 18px;border-radius:999px;background:var(--card);border:1px solid var(--line);backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px)}
-.logo{font-weight:700;font-size:15px;display:flex;gap:8px;align-items:center;white-space:nowrap}
-.logo i{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--vio));display:grid;place-items:center;color:#fff;font-style:normal;font-size:13px}
-.links{display:flex;gap:24px;font-size:13px;color:var(--mute)}.links a:hover{color:var(--ink)}
+.nav{
+  position:fixed;top:14px;left:50%;transform:translateX(-50%);
+  width:min(1080px,calc(100% - 24px));
+  z-index:50;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:10px 14px 10px 22px;border-radius:999px;
+  background:var(--card);border:1px solid var(--line);
+  backdrop-filter:saturate(180%) blur(24px);-webkit-backdrop-filter:saturate(180%) blur(24px);
+}
+.logo{font-weight:700;font-size:16px;display:flex;gap:10px;align-items:center}
+.logo i{
+  width:28px;height:28px;border-radius:9px;
+  background:linear-gradient(135deg,var(--brand),var(--vio));
+  display:grid;place-items:center;color:#fff;font-style:normal;font-size:14px;
+}
+.links{display:flex;gap:24px;font-size:14px;color:var(--mute)}
+.links a{transition:color .2s}.links a:hover{color:var(--ink)}
 .links a.active{color:var(--brand);font-weight:600}
 .r{display:flex;gap:8px;align-items:center}
 .lang{display:flex;background:var(--bg2);border-radius:999px;padding:2px}
-.lang button{border:0;background:none;color:var(--mute);font:600 12px inherit;font-family:inherit;padding:5px 11px;border-radius:999px;cursor:pointer;transition:.3s}
+.lang button{border:0;background:none;color:var(--mute);font:600 12px inherit;padding:5px 12px;border-radius:999px;cursor:pointer;transition:.2s}
 html[lang=th] [data-l=th],html[lang=en] [data-l=en]{background:var(--ink);color:var(--bg)}
-.btn{display:inline-block;background:var(--brand);color:#fff;padding:12px 24px;border-radius:999px;font-weight:600;font-size:15px;transition:transform .3s,box-shadow .3s}
-.btn:hover{transform:scale(1.03);box-shadow:0 8px 30px rgba(10,132,255,.4)}
-.btn.sm{padding:8px 16px;font-size:13px}
-.btn.ghost{background:none;color:var(--brand);border:1px solid var(--line)}
+.btn{display:inline-block;background:var(--brand);color:#fff;padding:12px 24px;border-radius:999px;font-weight:600;font-size:14px;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:scale(1.02);box-shadow:0 8px 24px rgba(10,132,255,.3)}
+.btn.sm{padding:7px 16px;font-size:13px}
 
-/* header */
-.header-hero{padding:140px 0 60px;text-align:center;background:radial-gradient(circle at 50% 20%,rgba(10,132,255,.08),transparent 70%)}
-.badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:999px;background:rgba(48,213,200,.12);color:#0d9488;font-size:12px;font-weight:600;border:1px solid rgba(48,213,200,.25);margin-bottom:16px}
-h1{font-size:clamp(32px,5vw,56px);font-weight:700;line-height:1.2;margin:0 auto 16px;letter-spacing:-.02em}
-.lead{font-size:clamp(16px,2vw,19px);color:var(--mute);max-width:720px;margin:0 auto}
+/* hero */
+.header-hero{padding:140px 0 50px;text-align:center;background:radial-gradient(circle at 50% 15%,rgba(10,132,255,.07),transparent 65%)}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:999px;background:rgba(48,213,200,.12);color:#0d9488;font-size:12px;font-weight:600;border:1px solid rgba(48,213,200,.25);margin-bottom:18px}
+h1{font-size:clamp(32px,5vw,52px);font-weight:800;line-height:1.22;margin:0 auto 16px;letter-spacing:-.02em}
+.grad{background:linear-gradient(135deg,var(--brand),var(--vio));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.lead{font-size:clamp(15px,2vw,18px);color:var(--mute);max-width:760px;margin:0 auto}
+
+/* filter tabs */
+.filter-bar{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:36px 0 20px}
+.filter-btn{border:1px solid var(--line);background:var(--bg2);color:var(--mute);padding:8px 18px;border-radius:999px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit}
+.filter-btn:hover{background:#e8e8ed;color:var(--ink)}
+.filter-btn.active{background:var(--ink);color:#fff;border-color:var(--ink)}
 
 /* articles grid */
-.articles-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:24px;margin:50px 0 100px}
-.art-card{display:flex;flex-direction:column;background:var(--bg2);border:1px solid var(--line);border-radius:24px;overflow:hidden;transition:transform .3s,box-shadow .3s,border-color .3s}
-.art-card:hover{transform:translateY(-6px);border-color:rgba(10,132,255,.4);box-shadow:0 20px 40px rgba(0,0,0,.06)}
-.art-thumb{height:200px;background:#15151b;position:relative;display:flex;align-items:center;justify-content:center;color:#fff;font-size:54px;overflow:hidden}
-.art-thumb::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at center,rgba(10,132,255,.25),transparent 70%)}
-.art-body{padding:26px;flex:1;display:flex;flex-direction:column}
+.articles-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:24px;margin:30px 0 80px}
+.art-card{display:flex;flex-direction:column;background:#ffffff;border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:transform .25s,box-shadow .25s,border-color .25s;box-shadow:0 2px 8px rgba(0,0,0,.03)}
+.art-card:hover{transform:translateY(-5px);border-color:rgba(10,132,255,.35);box-shadow:0 16px 32px rgba(0,0,0,.08)}
+.art-thumb{height:160px;background:linear-gradient(135deg,#131625,#1f2438);position:relative;display:flex;align-items:center;justify-content:center;color:#fff;font-size:46px;overflow:hidden}
+.art-thumb::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at center,rgba(10,132,255,.2),transparent 70%)}
+.art-body{padding:24px;flex:1;display:flex;flex-direction:column}
 .art-meta{display:flex;gap:10px;align-items:center;font-size:12px;color:var(--mute);margin-bottom:12px}
 .tag{padding:3px 10px;border-radius:999px;font-weight:600;font-size:11px}
 .tag.sec{background:rgba(239,68,68,.12);color:#dc2626}
 .tag.how{background:rgba(10,132,255,.12);color:var(--brand)}
 .tag.tip{background:rgba(138,92,255,.12);color:var(--vio)}
-.art-title{font-size:20px;font-weight:700;line-height:1.35;margin:0 0 12px;color:var(--ink)}
-.art-desc{font-size:14px;color:var(--mute);line-height:1.6;margin:0 0 20px;flex:1}
-.read-more{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:14px;color:var(--brand)}
+.tag.sto{background:rgba(13,148,136,.12);color:#0d9488}
+.art-title{font-size:18px;font-weight:700;line-height:1.4;margin:0 0 10px;color:var(--ink)}
+.art-title a:hover{color:var(--brand)}
+.art-desc{font-size:13.5px;color:var(--mute);line-height:1.65;margin:0 0 18px;flex:1}
+.read-more{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:13px;color:var(--brand);margin-top:auto}
 
 /* cta bar */
-.cta-banner{background:linear-gradient(135deg,#0d0d12,#181824);color:#fff;border-radius:28px;padding:50px 40px;text-align:center;margin-bottom:80px;border:1px solid rgba(255,255,255,.1)}
-.cta-banner h2{font-size:32px;margin:0 0 12px;color:#fff}
-.cta-banner p{color:#a1a1a6;font-size:16px;max-width:600px;margin:0 auto 24px}
+.cta-banner{background:linear-gradient(135deg,#0d0d14,#1a1a2b);color:#fff;border-radius:24px;padding:48px 36px;text-align:center;margin-bottom:80px;border:1px solid rgba(255,255,255,.1)}
+.cta-banner h2{font-size:clamp(22px,3.5vw,30px);margin:0 0 12px;color:#fff}
+.cta-banner p{color:#a1a1a6;font-size:15px;max-width:620px;margin:0 auto 24px}
 
 footer{padding:40px 0;border-top:1px solid var(--line);font-size:13px;color:var(--mute);text-align:center}
 </style>
@@ -130,7 +149,7 @@ footer{padding:40px 0;border-top:1px solid var(--line);font-size:13px;color:var(
       <a href="../#how"><span class="th">การทำงาน</span><span class="en">How it Works</span></a>
       <a href="../infographic.html"><span class="th">อินโฟกราฟิก</span><span class="en">Infographic</span></a>
       <a href="./" class="active"><span class="th">บทความ & คลังความรู้</span><span class="en">Articles</span></a>
-      <a href="../#download"><span class="th">ดาวน์โหลด</span><span class="en">Download</span></a>
+      <a href="../#faq"><span class="th">คำถามพบบ่อย</span><span class="en">FAQ</span></a>
     </div>
     <div class="r">
       <div class="lang">
@@ -149,17 +168,26 @@ footer{padding:40px 0;border-top:1px solid var(--line);font-size:13px;color:var(
     <div class="wrap">
       <div class="badge">
         <span>📚</span>
-        <span class="th">Email Knowledge Hub & Security Best Practices</span>
-        <span class="en">Email Knowledge Hub & Security Best Practices</span>
+        <span class="th">Email Knowledge Hub & IT Guides</span>
+        <span class="en">Email Knowledge Hub & IT Guides</span>
       </div>
       <h1>
         <span class="th">คลังความรู้และการจัดการ<br><span class="grad">อีเมลสำหรับองค์กรยุคใหม่</span></span>
         <span class="en">Enterprise Email Knowledge &<br><span class="grad">Modern Management Guides</span></span>
       </h1>
       <p class="lead">
-        <span class="th">รวบรวมแนวทางด้านความปลอดภัย (Security), การปฏิบัติตามกฎหมาย PDPA, เทคนิค Zero-Inbox และทริคประหยัดเวลาที่จะช่วยเปลี่ยนกล่องจดหมายของคุณให้เป็นคลังเอกสารอัตโนมัติ</span>
-        <span class="en">Guides on enterprise email security, PDPA compliance, Zero-Inbox workflows, and time-saving automation tricks for finance and IT teams.</span>
+        <span class="th">รวบรวมแนวทางด้านความปลอดภัย (Security), การปฏิบัติตามกฎหมาย PDPA, เทคนิค Zero-Inbox, การสำรองข้อมูลลงเซิร์ฟเวอร์ NAS และทริคสกัดเอกสารอัตโนมัติ</span>
+        <span class="en">Guides on enterprise email security, PDPA compliance, Zero-Inbox workflows, NAS backup, and time-saving automation tricks for finance and IT teams.</span>
       </p>
+
+      <!-- Category Filter Tabs -->
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterCat('all')"><span class="th">ทั้งหมด (9)</span><span class="en">All Guides (9)</span></button>
+        <button class="filter-btn" onclick="filterCat('security')"><span class="th">🔒 ความปลอดภัย & PDPA</span><span class="en">🔒 Security & PDPA</span></button>
+        <button class="filter-btn" onclick="filterCat('storage')"><span class="th">💾 จัดการความจุ & NAS</span><span class="en">💾 Storage & NAS</span></button>
+        <button class="filter-btn" onclick="filterCat('productivity')"><span class="th">⚡ บัญชี & ออโตเมชั่น</span><span class="en">⚡ Productivity & Workflow</span></button>
+        <button class="filter-btn" onclick="filterCat('howto')"><span class="th">🛠️ วิธีตั้งค่า & แก้ปัญหา</span><span class="en">🛠️ How-To & Fixes</span></button>
+      </div>
     </div>
   </header>
 
@@ -168,7 +196,7 @@ footer{padding:40px 0;border-top:1px solid var(--line);font-size:13px;color:var(
     <div class="articles-grid">
 
       <!-- Article 1: Security & Compliance -->
-      <article class="art-card">
+      <article class="art-card" data-cat="security">
         <div class="art-thumb">
           <span>🛡️</span>
         </div>
@@ -176,7 +204,6 @@ footer{padding:40px 0;border-top:1px solid var(--line);font-size:13px;color:var(
           <div class="art-meta">
             <span class="tag sec">Security & PDPA</span>
             <span>⏱ 6 นาทีอ่าน</span>
-            <span>📅 25 ต.ค. 2026</span>
           </div>
           <h2 class="art-title">
             <a href="email-security-compliance-guide.html">
@@ -195,16 +222,42 @@ footer{padding:40px 0;border-top:1px solid var(--line);font-size:13px;color:var(
         </div>
       </article>
 
-      <!-- Article 2: How-To Zero Inbox -->
-      <article class="art-card">
+      <!-- Article 2: Phishing & BEC -->
+      <article class="art-card" data-cat="security">
+        <div class="art-thumb">
+          <span>🎣</span>
+        </div>
+        <div class="art-body">
+          <div class="art-meta">
+            <span class="tag sec">Security & Fraud</span>
+            <span>⏱ 7 นาทีอ่าน</span>
+          </div>
+          <h2 class="art-title">
+            <a href="email-phishing-and-bec-prevention-guide.html">
+              <span class="th">เตือนภัยอีเมลหลอกลวง (Phishing) และ BEC Scam: 7 วิธีตรวจสอบก่อนกดโอนเงิน</span>
+              <span class="en">Phishing & BEC Scam Defense: 7 Ways to Detect Fake Emails Before Paying</span>
+            </a>
+          </h2>
+          <p class="art-desc">
+            <span class="th">ทำความรู้จักภัยคุกคาม Business Email Compromise (BEC) ปลอมแปลงใบแจ้งหนี้คู่ค้า พร้อม Checklist 7 จุดจับผิดอีเมลปลอม และขั้นตอนปฏิบัติเมื่อพนักงานเผลอกดลิงก์</span>
+            <span class="en">Learn how attackers forge vendor invoices in Business Email Compromise (BEC) attacks, 7 red flags to check, and incident response steps.</span>
+          </p>
+          <a class="read-more" href="email-phishing-and-bec-prevention-guide.html">
+            <span class="th">อ่านบทความฉบับเต็ม →</span>
+            <span class="en">Read Article →</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Article 3: Zero Inbox -->
+      <article class="art-card" data-cat="productivity">
         <div class="art-thumb">
           <span>📥</span>
         </div>
         <div class="art-body">
           <div class="art-meta">
-            <span class="tag how">How-To Guide</span>
+            <span class="tag how">How-To & Inbox</span>
             <span>⏱ 5 นาทีอ่าน</span>
-            <span>📅 25 ต.ค. 2026</span>
           </div>
           <h2 class="art-title">
             <a href="how-to-organize-outlook-zero-inbox.html">
@@ -223,16 +276,69 @@ footer{padding:40px 0;border-top:1px solid var(--line);font-size:13px;color:var(
         </div>
       </article>
 
-      <!-- Article 3: Tricks for Accounting & Finance -->
-      <article class="art-card">
+      <!-- Article 4: PST / OST Limit Fix -->
+      <article class="art-card" data-cat="storage">
+        <div class="art-thumb">
+          <span>⚠️</span>
+        </div>
+        <div class="art-body">
+          <div class="art-meta">
+            <span class="tag sto">Storage & Troubleshooting</span>
+            <span>⏱ 6 นาทีอ่าน</span>
+          </div>
+          <h2 class="art-title">
+            <a href="how-to-fix-outlook-pst-ost-file-size-limit.html">
+              <span class="th">วิธีแก้ปัญหาไฟล์ Outlook PST / OST เต็มขนาด 50GB และ Outlook ค้าง</span>
+              <span class="en">Fix Outlook PST / OST 50GB Size Limit and Free Up Disk Space</span>
+            </a>
+          </h2>
+          <p class="art-desc">
+            <span class="th">วิธีแก้ปัญหาขึ้นเตือน Outlook Data File reached maximum size เทคนิค Compact Now, การขยายเพดาน Registry และวิธีแยกไฟล์แนบออกจากกล่องจดหมายอย่างถาวร</span>
+            <span class="en">Fix Outlook 50GB file cap, prevent corrupted PST files, learn Compact Now techniques, and decouple attachments to shared disks.</span>
+          </p>
+          <a class="read-more" href="how-to-fix-outlook-pst-ost-file-size-limit.html">
+            <span class="th">อ่านบทความฉบับเต็ม →</span>
+            <span class="en">Read Article →</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Article 5: NAS Backup Guide -->
+      <article class="art-card" data-cat="storage">
+        <div class="art-thumb">
+          <span>🖴</span>
+        </div>
+        <div class="art-body">
+          <div class="art-meta">
+            <span class="tag sto">NAS & Archiving</span>
+            <span>⏱ 6 นาทีอ่าน</span>
+          </div>
+          <h2 class="art-title">
+            <a href="email-backup-to-nas-synology-qnap-guide.html">
+              <span class="th">คู่มือสำรองอีเมลลงเซิร์ฟเวอร์ NAS (Synology, QNAP, Windows Server) สำหรับแผนกและองค์กร</span>
+              <span class="en">Complete Guide: Backup Emails to Synology & QNAP NAS</span>
+            </a>
+          </h2>
+          <p class="art-desc">
+            <span class="th">ออกแบบระบบสำรองอีเมลแผนกอย่างเป็นระบบผ่าน SMB/NFS Share พร้อมกฎการตั้งสิทธิ์ (ACL Permission) และกฎการสำรองข้อมูล 3-2-1 ป้องกัน Ransomware</span>
+            <span class="en">Step-by-step setup for centralized email archiving to Synology/QNAP NAS with SMB shares, granular ACL permissions, and 3-2-1 backup strategy.</span>
+          </p>
+          <a class="read-more" href="email-backup-to-nas-synology-qnap-guide.html">
+            <span class="th">อ่านบทความฉบับเต็ม →</span>
+            <span class="en">Read Article →</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Article 6: Accounting & Finance Tricks -->
+      <article class="art-card" data-cat="productivity">
         <div class="art-thumb">
           <span>💼</span>
         </div>
         <div class="art-body">
           <div class="art-meta">
-            <span class="tag tip">Productivity Tricks</span>
+            <span class="tag tip">Finance & Productivity</span>
             <span>⏱ 7 นาทีอ่าน</span>
-            <span>📅 25 ต.ค. 2026</span>
           </div>
           <h2 class="art-title">
             <a href="5-email-tricks-for-accounting-finance.html">
@@ -251,14 +357,95 @@ footer{padding:40px 0;border-top:1px solid var(--line);font-size:13px;color:var(
         </div>
       </article>
 
+      <!-- Article 7: Invoice & PO Automation -->
+      <article class="art-card" data-cat="productivity">
+        <div class="art-thumb">
+          <span>🧾</span>
+        </div>
+        <div class="art-body">
+          <div class="art-meta">
+            <span class="tag tip">Workflow Automation</span>
+            <span>⏱ 6 นาทีอ่าน</span>
+          </div>
+          <h2 class="art-title">
+            <a href="automate-invoice-and-po-email-sorting.html">
+              <span class="th">วิธีตั้งค่าดึงไฟล์ใบแจ้งหนี้ (Invoice) และใบสั่งซื้อ (PO) จากอีเมลลงโฟลเดอร์บัญชีอัตโนมัติ</span>
+              <span class="en">Automate Invoice & Purchase Order (PO) Extraction to Accounting Folders</span>
+            </a>
+          </h2>
+          <p class="art-desc">
+            <span class="th">บอกลางานซ้ำซากที่ต้องคอยคลิกเซฟไฟล์แนบ PDF ทีละฉบับ ด้วยเทคนิค Content Filter กรองคำสำคัญและแยกโฟลเดอร์คู่ค้าอัตโนมัติ</span>
+            <span class="en">Eliminate manual attachment downloads with automated content-based sorting for invoices, tax receipts, and purchase orders.</span>
+          </p>
+          <a class="read-more" href="automate-invoice-and-po-email-sorting.html">
+            <span class="th">อ่านบทความฉบับเต็ม →</span>
+            <span class="en">Read Article →</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Article 8: Gmail App Password -->
+      <article class="art-card" data-cat="howto">
+        <div class="art-thumb">
+          <span>🔑</span>
+        </div>
+        <div class="art-body">
+          <div class="art-meta">
+            <span class="tag how">Setup & Security</span>
+            <span>⏱ 4 นาทีอ่าน</span>
+          </div>
+          <h2 class="art-title">
+            <a href="gmail-app-password-imap-setup-guide.html">
+              <span class="th">วิธีเปิดใช้งาน IMAP และสร้าง Gmail App Password เพื่อเชื่อมต่อโปรแกรมภายนอกอย่างปลอดภัย</span>
+              <span class="en">How to Enable IMAP & Generate Gmail App Password Securely</span>
+            </a>
+          </h2>
+          <p class="art-desc">
+            <span class="th">คู่มือฉบับสมบูรณ์แก้ปัญหาเชื่อมต่อ Gmail ไม่ได้หลัง Google ปิด Less Secure Apps สอนเปิด 2-Step Verification และสร้าง 16-Digit App Password ใน 2 นาที</span>
+            <span class="en">Fix 'Invalid Credentials' errors in Gmail. Complete walkthrough on 2-Step Verification and generating 16-character App Passwords.</span>
+          </p>
+          <a class="read-more" href="gmail-app-password-imap-setup-guide.html">
+            <span class="th">อ่านบทความฉบับเต็ม →</span>
+            <span class="en">Read Article →</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Article 9: MSG vs EML -->
+      <article class="art-card" data-cat="storage">
+        <div class="art-thumb">
+          <span>📑</span>
+        </div>
+        <div class="art-body">
+          <div class="art-meta">
+            <span class="tag sto">Storage & Formats</span>
+            <span>⏱ 6 นาทีอ่าน</span>
+          </div>
+          <h2 class="art-title">
+            <a href="msg-vs-eml-difference-and-best-format.html">
+              <span class="th">.MSG vs .EML ต่างกันอย่างไร? เลือกฟอร์แมตไหนดีสำหรับการจัดเก็บอีเมลระยะยาว</span>
+              <span class="en">MSG vs EML: What is the Difference and Which Format is Best for Email Archiving?</span>
+            </a>
+          </h2>
+          <p class="art-desc">
+            <span class="th">เปรียบเทียบเชิงลึกด้านสถาปัตยกรรมไฟล์, ความเข้ากันได้กับ Windows/Mac, การเปิดดูเอกสาร และการตรวจสอบทางกฎหมาย e-Discovery</span>
+            <span class="en">Deep comparison between Microsoft MSG binary format and standard RFC 5322 EML format for long-term legal and corporate archival.</span>
+          </p>
+          <a class="read-more" href="msg-vs-eml-difference-and-best-format.html">
+            <span class="th">อ่านบทความฉบับเต็ม →</span>
+            <span class="en">Read Article →</span>
+          </a>
+        </div>
+      </article>
+
     </div>
 
     <!-- CTA Section -->
     <div class="cta-banner">
       <h2><span class="th">พร้อมเริ่มจัดระเบียบอีเมลของคุณแล้วหรือยัง?</span><span class="en">Ready to automate your email sorting?</span></h2>
       <p>
-        <span class="th">ดาวน์โหลด Email to Folder ทดลองใช้ฟรี 100 ฉบับต่อเดือน ติดตั้งง่าย ใช้งานได้กับทั้ง Outlook Classic, Gmail และ Office 365</span>
-        <span class="en">Download Email to Folder for free (100 emails/month). Works seamlessly with Outlook Classic, Gmail, and Office 365.</span>
+        <span class="th">ดาวน์โหลด Email to Folder ฟรี แยกไฟล์แนบ จัดหมวดหมู่ลงโฟลเดอร์ และเก็บบันทึกบนเครื่องของคุณ 100% ไม่ส่งข้อมูลออกนอกเครื่อง</span>
+        <span class="en">Download Email to Folder for free. Extract attachments, organize directories, and keep 100% data privacy on your local machine.</span>
       </p>
       <a class="btn" href="../downloads/EmailToFolder-Setup.exe" download>
         <span class="th">📥 ดาวน์โหลด Setup.exe ฟรี (~82 MB)</span>
@@ -281,6 +468,19 @@ footer{padding:40px 0;border-top:1px solid var(--line);font-size:13px;color:var(
       set(l);
       document.querySelectorAll(".lang button").forEach(function(b){b.onclick=function(){set(b.dataset.l)}});
     })();
+
+    function filterCat(cat) {
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.closest('.filter-btn').classList.add('active');
+      const cards = document.querySelectorAll('.art-card');
+      cards.forEach(card => {
+        if (cat === 'all' || card.getAttribute('data-cat') === cat) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
   </script>
 </body>
 </html>

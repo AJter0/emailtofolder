@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>คู่มือแบ็กอัปอีเมลองค์กรลง NAS (Synology / QNAP) | Email to Folder</title>
+<meta name="description" content="วิธีแบ็กอัปอีเมลและสกัดไฟล์แนบจาก Microsoft Outlook, Gmail และ Office 365 ลงอุปกรณ์ NAS (Synology, QNAP) หรือ Network File Server แบบอัตโนมัติ เพื่อความปลอดภัยและแชร์ข้อมูลในทีม">
+<meta name="keywords" content="แบ็กอัปอีเมลลง NAS, สำรองข้อมูล Outlook ลง Synology, เก็บอีเมลลง QNAP, Network Drive Email Backup, NAS Archive, แชร์เอกสารในองค์กร, Email to Folder">
+<meta name="author" content="Email to Folder Infrastructure Team">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://emailtofolder.com/articles/email-backup-to-nas-synology-qnap-guide.html">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://emailtofolder.com/articles/email-backup-to-nas-synology-qnap-guide.html">
+<meta property="og:title" content="คู่มือแบ็กอัปอีเมลองค์กรลง NAS (Synology / QNAP) | Email to Folder">
+<meta property="og:description" content="วิธีแบ็กอัปอีเมลและสกัดไฟล์แนบลง NAS (Synology, QNAP) หรือ Network File Server แบบอัตโนมัติ">
+<meta property="og:image" content="https://emailtofolder.com/favicon.png">
+<meta property="og:site_name" content="Email to Folder">
+<meta property="article:published_time" content="2026-10-25T01:15:00+07:00">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="คู่มือแบ็กอัปอีเมลองค์กรลง NAS (Synology / QNAP)">
+<meta name="twitter:description" content="วิธีแบ็กอัปอีเมลและสกัดไฟล์แนบลง NAS หรือ Network File Server อัตโนมัติ">
+<meta name="twitter:image" content="https://emailtofolder.com/favicon.png">
+
+<link rel="icon" type="image/png" href="../favicon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap">
+
+<!-- Structured Data (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "คู่มือแบ็กอัปอีเมลองค์กรลง NAS (Synology / QNAP): สกัดอีเมลและไฟล์แนบเป็นโฟลเดอร์ส่วนกลาง",
+  "description": "วิธีแบ็กอัปอีเมลและสกัดไฟล์แนบจาก Microsoft Outlook, Gmail และ Office 365 ลงอุปกรณ์ NAS แบบอัตโนมัติ",
+  "image": "https://emailtofolder.com/favicon.png",
+  "datePublished": "2026-10-25T01:15:00+07:00",
+  "dateModified": "2026-10-25T01:15:00+07:00",
+  "author": {
+    "@type": "Organization",
+    "name": "Email to Folder Infrastructure Team"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Email to Folder",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://emailtofolder.com/favicon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://emailtofolder.com/articles/email-backup-to-nas-synology-qnap-guide.html"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://emailtofolder.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Articles",
+      "item": "https://emailtofolder.com/articles/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "NAS Email Backup Guide",
+      "item": "https://emailtofolder.com/articles/email-backup-to-nas-synology-qnap-guide.html"
+    }
+  ]
+}
+</script>
+
+<style>
+:root{--bg:#ffffff;--bg2:#f5f5f7;--ink:#1d1d1f;--mute:#6e6e73;--line:rgba(0,0,0,.1);--card:rgba(255,255,255,.7);--brand:#0a84ff;--teal:#30d5c8;--vio:#8a5cff}
+html{scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,Prompt,system-ui,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+html[lang=th] body{font-family:Prompt,Inter,system-ui,sans-serif}
+html[lang=th] .en,html[lang=en] .th{display:none}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:880px;margin:0 auto;padding:0 22px}
+.nav{position:fixed;top:12px;left:50%;transform:translateX(-50%);width:min(960px,calc(100% - 24px));z-index:50;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px 8px 18px;border-radius:999px;background:var(--card);border:1px solid var(--line);backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px)}
+.logo{font-weight:700;font-size:15px;display:flex;gap:8px;align-items:center}
+.logo i{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--vio));display:grid;place-items:center;color:#fff;font-style:normal;font-size:13px}
+.links{display:flex;gap:24px;font-size:13px;color:var(--mute)}.links a:hover{color:var(--ink)}
+.r{display:flex;gap:8px;align-items:center}
+.lang{display:flex;background:var(--bg2);border-radius:999px;padding:2px}
+.lang button{border:0;background:none;color:var(--mute);font:600 12px inherit;padding:5px 11px;border-radius:999px;cursor:pointer}
+html[lang=th] [data-l=th],html[lang=en] [data-l=en]{background:var(--ink);color:var(--bg)}
+.btn{display:inline-block;background:var(--brand);color:#fff;padding:12px 24px;border-radius:999px;font-weight:600;font-size:15px;transition:transform .3s}
+.btn:hover{transform:scale(1.03)}
+.btn.sm{padding:8px 16px;font-size:13px}
+.art-header{padding:130px 0 40px;border-bottom:1px solid var(--line)}
+.breadcrumbs{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--mute);margin-bottom:16px}
+.breadcrumbs a:hover{color:var(--brand)}
+.post-tag{display:inline-block;padding:4px 12px;border-radius:999px;background:rgba(48,213,200,.15);color:#0d9488;font-size:12px;font-weight:600;margin-bottom:16px}
+h1{font-size:clamp(28px,4.5vw,44px);line-height:1.25;font-weight:700;letter-spacing:-.02em;margin:0 0 18px}
+.post-meta{display:flex;gap:18px;align-items:center;font-size:13px;color:var(--mute)}
+.art-content{padding:40px 0 80px;font-size:17px}
+.art-content h2{font-size:24px;font-weight:700;line-height:1.3;margin:42px 0 16px;color:var(--ink)}
+.art-content p{margin:0 0 20px;color:#333336}
+.art-content ul,.art-content ol{margin:0 0 24px;padding-left:26px;color:#333336}
+.art-content li{margin-bottom:8px}
+.callout{background:var(--bg2);border-left:4px solid var(--teal);padding:20px 24px;border-radius:12px;margin:28px 0}
+.callout strong{display:block;margin-bottom:6px;color:var(--ink)}
+.toc-box{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:24px;margin:28px 0 40px}
+.toc-box h4{margin:0 0 12px;font-size:16px;color:var(--ink)}
+.toc-box ul{list-style:none;padding:0;margin:0}
+.toc-box li{margin-bottom:8px}
+.toc-box a{color:var(--brand);text-decoration:none}
+.cta-box{background:linear-gradient(135deg,#121217,#1f1f2e);color:#fff;border-radius:24px;padding:40px 32px;text-align:center;margin:60px 0;border:1px solid rgba(255,255,255,.1)}
+.cta-box h3{color:#fff;font-size:26px;margin:0 0 12px}
+.cta-box p{color:#a1a1a6;font-size:15px;max-width:540px;margin:0 auto 24px}
+footer{padding:40px 0;border-top:1px solid var(--line);font-size:13px;color:var(--mute);text-align:center}
+</style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="../" class="logo"><i>✉</i><span>Email to Folder</span></a>
+    <div class="links">
+      <a href="../#features"><span class="th">ฟีเจอร์</span><span class="en">Features</span></a>
+      <a href="../infographic.html"><span class="th">อินโฟกราฟิก</span><span class="en">Infographic</span></a>
+      <a href="./"><span class="th">บทความทั้งหมด</span><span class="en">All Articles</span></a>
+      <a href="../#download"><span class="th">ดาวน์โหลด</span><span class="en">Download</span></a>
+    </div>
+    <div class="r">
+      <div class="lang"><button data-l="th">TH</button><button data-l="en">EN</button></div>
+      <a class="btn sm" href="../downloads/EmailToFolder-Setup.exe" download><span class="th">ดาวน์โหลดฟรี</span><span class="en">Free Trial</span></a>
+    </div>
+  </nav>
+
+  <article class="wrap">
+    <header class="art-header">
+      <div class="breadcrumbs">
+        <a href="../">หน้าแรก</a> <span>/</span>
+        <a href="./">บทความ</a> <span>/</span>
+        <span>Storage & Infrastructure</span>
+      </div>
+      <span class="post-tag">Enterprise NAS Storage</span>
+      <h1>
+        <span class="th">คู่มือแบ็กอัปอีเมลองค์กรลง NAS (Synology / QNAP): สกัดอีเมลและไฟล์แนบเป็นโฟลเดอร์ส่วนกลาง</span>
+        <span class="en">How to Auto-Archive Emails & Attachments to Synology / QNAP NAS</span>
+      </h1>
+      <div class="post-meta">
+        <span>✍️ โดย Email to Folder Infrastructure Team</span>
+        <span>📅 25 ตุลาคม 2026</span>
+        <span>⏱ ใช้เวลาอ่าน 6 นาที</span>
+      </div>
+    </header>
+
+    <div class="art-content">
+      <div class="toc-box">
+        <h4>📋 สารบัญบทความ (Table of Contents)</h4>
+        <ul>
+          <li><a href="#sec1">1. ทำไมองค์กรส่วนใหญ่ถึงเลือกเก็บอีเมลสำคัญลง NAS Storage</a></li>
+          <li><a href="#sec2">2. ปัญหาของการแบ็กอัปอีเมลด้วยการคัดลอกไฟล์ PST ทั้งก้อน</a></li>
+          <li><a href="#sec3">3. ข้อดีของการสกัดเป็นไฟล์เอกสารแยก (.msg + PDF + Excel) ลง NAS</a></li>
+          <li><a href="#sec4">4. ขั้นตอนการตั้งค่าแชร์โฟลเดอร์บน Synology / QNAP เพื่อรับอีเมล</a></li>
+          <li><a href="#sec5">5. การตั้งค่าสิทธิ์เข้าถึง (Permission & Security) ตามแผนก</a></li>
+        </ul>
+      </div>
+
+      <p class="lead" style="font-size:19px; color:var(--ink); font-weight:500;">
+        ในองค์กรธุรกิจขนาดกลางและขนาดย่อม (SME) ไปจนถึงองค์กรขนาดใหญ่ อุปกรณ์จัดเก็บข้อมูลบนเครือข่ายหรือ <b>NAS (Network Attached Storage)</b> เช่น Synology และ QNAP คือกระดูกสันหลังของการจัดเก็บข้อมูล แต่คำถามคือ: <i>เราจะดึงอีเมลและไฟล์แนบจากกล่องจดหมายพนักงานมาเก็บไว้บน NAS แบบอัตโนมัติได้อย่างไร?</i>
+      </p>
+
+      <h2 id="sec1">1. ทำไมองค์กรส่วนใหญ่ถึงเลือกเก็บอีเมลสำคัญลง NAS Storage</h2>
+      <p>
+        การย้ายข้อมูลอีเมลและเอกสารแนบจาก Inbox ของพนักงานมาไว้บน NAS มีข้อดีมหาศาล:
+      </p>
+      <ul>
+        <li><b>มีระบบ RAID ป้องกันฮาร์ดดิสก์เสีย:</b> แม้ฮาร์ดดิสก์เครื่องใดเครื่องหนึ่งจะพัง ข้อมูลเอกสารสัญญาและใบแจ้งหนี้ยังคงปลอดภัย 100%</li>
+        <li><b>ควบคุมความเป็นเจ้าของข้อมูล (Data Sovereignty):</b> ข้อมูลถูกเก็บอยู่ภายในอาคารสำนักงานขององค์กรเอง ไม่มีความเสี่ยงเรื่องค่าเช่าคลาวด์ที่ปรับขึ้นทุกปี</li>
+        <li><b>เชื่อมต่อกับระบบสำรองข้อมูลภายนอกได้ง่าย:</b> เช่น การทำ Snapshot หรือสำรองข้อมูลข้ามไซต์ (Offsite Backup)</li>
+      </ul>
+
+      <h2 id="sec2">2. ปัญหาของการแบ็กอัปอีเมลด้วยการคัดลอกไฟล์ PST ทั้งก้อน</h2>
+      <p>
+        แอดมินหลายคนคุ้นเคยกับการเขียนสคริปต์ Copy ไฟล์ `.pst` ขนาด 20-40 GB ไปเก็บไว้บน NAS ทุกคืน แต่วิธีนี้มีข้อเสียร้ายแรง:
+      </p>
+      <ul>
+        <li>ไม่สามารถ Copy ได้ขณะที่ผู้ใช้เปิดโปรแกรม Outlook อยู่ (ไฟล์จะติด Lock)</li>
+        <li>กินแบนด์วิธเครือข่ายสูงมาก เพราะต้องส่งไฟล์หลายสิบกิกะไบต์ใหม่ทุกวัน</li>
+        <li><b>ค้นหาเอกสารยากมาก:</b> หากต้องการเปิดดูใบแจ้งหนี้ฉบับเดียว แอดมินต้องดาวน์โหลดไฟล์ `.pst` 30 GB กลับมา Mount ลงเครื่องเพื่อเปิดหา</li>
+      </ul>
+
+      <h2 id="sec3">3. ข้อดีของการสกัดเป็นไฟล์เอกสารแยก (.msg + PDF + Excel) ลง NAS</h2>
+      <p>
+        แนวทางใหม่ที่ชาญฉลาดกว่าคือการใช้ <b>Email to Folder</b> เพื่อทำ <i>Continuous Live Ingest</i>:
+      </p>
+      <div class="callout">
+        <strong>💡 การจัดเก็บแบบแยกไฟล์ (Granular Archiving):</strong>
+        เมื่อมีอีเมลใหม่เข้ามา ระบบจะสกัดเฉพาะอีเมลฉบับนั้นบันทึกเป็น `.msg` พร้อมดึงไฟล์แนบ (เช่น `Invoice.pdf`) ไปวางในโฟลเดอร์ `\\NAS\Finance\Invoices\2026\10\` ทันที ทำให้ผู้ใช้งานทุกคนในเครือข่ายสามารถเปิดอ่านหรือค้นหาผ่าน Windows Search หรือ Synology Universal Search ได้ในเวลาไม่ถึง 1 วินาที!
+      </div>
+
+      <h2 id="sec4">4. ขั้นตอนการตั้งค่าแชร์โฟลเดอร์บน Synology / QNAP เพื่อรับอีเมล</h2>
+      <ol>
+        <li><b>สร้าง Shared Folder:</b> บนระบบ DSM ของ Synology หรือ QTS ของ QNAP ให้สร้างโฟลเดอร์ เช่น `Corporate_Archive` และโฟลเดอร์ย่อยตามแผนก เช่น `Finance`, `Legal`, `HR`</li>
+        <li><b>กำหนด UNC Path:</b> เช่น `\\192.168.1.100\Corporate_Archive\Finance` หรือ Map เป็นไดรฟ์เน็ตเวิร์ก เช่น `Z:\Finance`</li>
+        <li><b>ตั้งค่าในโปรแกรม Email to Folder:</b> ในหน้าจัดการกฎ ให้เลือก Target Folder ไปยังไดรฟ์หรือ UNC Path ดังกล่าว และเลือกโหมดโครงสร้างโฟลเดอร์ย่อยเป็น <i>"จัดกลุ่มตามปีและเดือน (Year/Month)"</i></li>
+      </ol>
+
+      <h2 id="sec5">5. การตั้งค่าสิทธิ์เข้าถึง (Permission & Security) ตามแผนก</h2>
+      <p>
+        เพื่อความปลอดภัยตามมาตรฐาน PDPA คุณสามารถใช้ระบบ Permission บน NAS (เช่น Windows ACL):
+      </p>
+      <ul>
+        <li>ให้เฉพาะฝ่ายการเงินและผู้บริหารมีสิทธิ์ Read/Write ในโฟลเดอร์ `Finance`</li>
+        <li>พนักงานแผนกอื่นไม่สามารถมองเห็นเอกสารเงินเดือนหรือใบแจ้งหนี้คู่ค้าได้</li>
+        <li>เปิดใช้งานฟังก์ชัน <b>Recycle Bin บน NAS</b> เพื่อป้องกันพนักงานเผลอกดลบไฟล์โดยไม่ตั้งใจ</li>
+      </ul>
+
+      <div class="cta-box">
+        <h3>เปลี่ยน NAS ในออฟฟิศของคุณให้เป็นคลังเอกสารอัจฉริยะ</h3>
+        <p>เชื่อมต่ออีเมลกับโฟลเดอร์บน NAS ได้ใน 3 นาที ทดลองใช้ฟรี 100 ฉบับต่อเดือน</p>
+        <a class="btn" href="../downloads/EmailToFolder-Setup.exe" download>
+          <span>📥 ดาวน์โหลด Setup.exe ฟรี (~82 MB)</span>
+        </a>
+      </div>
+
+    </div>
+  </article>
+
+  <footer>
+    <div class="wrap">
+      <p>© 2026 Email to Folder Dev Team · <a href="../">emailtofolder.com</a> · Bangkok, Thailand</p>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      var h=document.documentElement,l="th";
+      try{var s=localStorage.getItem("lang");if(s==="th"||s==="en")l=s}catch(e){}
+      function set(x){h.lang=x;try{localStorage.setItem("lang",x)}catch(e)}
+      set(l);
+      document.querySelectorAll(".lang button").forEach(function(b){b.onclick=function(){set(b.dataset.l)}});
+    })();
+  </script>
+</body>
+</html>
