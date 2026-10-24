@@ -12,6 +12,8 @@ contextBridge.exposeInMainWorld('api', {
   processManualFile: (filePath) => ipcRenderer.invoke('process-manual-file', filePath),
 
   openExternalUrl: (url) => ipcRenderer.invoke('open-external-url', url),
+  exportHistoryCsv: () => ipcRenderer.invoke('export-history-csv'),
+  clearHistory: () => ipcRenderer.invoke('clear-history'),
 
   // Patch & Update Mechanism
   checkForUpdates: () => ipcRenderer.invoke('check-for-updates'),

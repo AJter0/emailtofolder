@@ -330,6 +330,7 @@ class OutlookLocalWorker {
           $propSenderName = 'http://schemas.microsoft.com/mapi/proptag/0x0C1A001F'
           $propSenderSmtp = 'http://schemas.microsoft.com/mapi/proptag/0x5D01001F'
           $propSenderEmail = 'http://schemas.microsoft.com/mapi/proptag/0x0C1F001F'
+          $propDisplayTo = 'http://schemas.microsoft.com/mapi/proptag/0x0E04001F'
           $propHasAttach = 'http://schemas.microsoft.com/mapi/proptag/0x0E1B000B'
 
           try { [void]$table.Columns.Add('ReceivedTime') } catch {}
@@ -337,6 +338,7 @@ class OutlookLocalWorker {
           try { [void]$table.Columns.Add($propSenderName) } catch {}
           try { [void]$table.Columns.Add($propSenderSmtp) } catch {}
           try { [void]$table.Columns.Add($propSenderEmail) } catch {}
+          try { [void]$table.Columns.Add($propDisplayTo) } catch {}
           try { [void]$table.Columns.Add($propHasAttach) } catch {}
 
           try { $table.Sort('ReceivedTime', $true) } catch {}
@@ -353,6 +355,7 @@ class OutlookLocalWorker {
               $sName = ''
               $sSmtp = ''
               $sEmail = ''
+              $toRecip = ''
               $hasAtt = $false
               $recvStr = (Get-Date).ToString('o')
 
@@ -364,6 +367,7 @@ class OutlookLocalWorker {
               try { $sName = [string]$row.Item($propSenderName) } catch {}
               try { $sSmtp = [string]$row.Item($propSenderSmtp) } catch {}
               try { $sEmail = [string]$row.Item($propSenderEmail) } catch {}
+              try { $toRecip = [string]$row.Item($propDisplayTo) } catch {}
               try { $hasAtt = [bool]$row.Item($propHasAttach) } catch {}
               try {
                 $rt = $row.Item('ReceivedTime')
@@ -377,6 +381,7 @@ class OutlookLocalWorker {
                 Subject = $subj
                 SenderEmail = $finalEmail
                 SenderName = $sName
+                To = $toRecip
                 ReceivedTime = $recvStr
                 HasAttachment = $hasAtt
               }
@@ -441,12 +446,20 @@ class OutlookLocalWorker {
       subject: mailSummary.Subject || '',
       from: { text: senderDisplay },
       fromAddress: mailSummary.SenderEmail || mailSummary.SenderName || '',
+      to: { text: mailSummary.To || '' },
+      toAddress: mailSummary.To || '',
       attachments: mailSummary.HasAttachment ? [{ filename: 'attachment' }] : []
     };
 
     // Match against enabled rules
     let matchedRule = null;
     for (const rule of this.config.rules || []) {
+      if (!rule || !rule.enabled) continue;
+      // If rule checks body, let it proceed to exportScript where body is verified
+      if (rule.conditionType === 'body_contains') {
+        matchedRule = rule;
+        break;
+      }
       if (matchRule(emailMeta, rule)) {
         matchedRule = rule;
         break;
@@ -460,17 +473,24 @@ class OutlookLocalWorker {
       fs.mkdirSync(baseTargetFolder, { recursive: true });
     }
 
-    const dateStr = (mailSummary.ReceivedTime ? new Date(mailSummary.ReceivedTime) : new Date())
-      .toISOString()
-      .slice(0, 10);
+    const dateObj = mailSummary.ReceivedTime ? new Date(mailSummary.ReceivedTime) : new Date();
+    const dateStr = dateObj.toISOString().slice(0, 10);
     const cleanSubject = sanitizeFilename(mailSummary.Subject || 'No Subject');
 
     let destDir = baseTargetFolder;
-    if (matchedRule.folderPerEmail) {
+    if (matchedRule.subfolderMode === 'year_month') {
+      const yyyy = String(dateObj.getFullYear());
+      const mm = String(dateObj.getMonth() + 1).padStart(2, '0');
+      destDir = path.join(baseTargetFolder, yyyy, mm);
+    } else if (matchedRule.subfolderMode === 'sender') {
+      const sName = sanitizeFilename((mailSummary.SenderName || mailSummary.SenderEmail || 'Unknown').replace(/<.*?>/, '').trim());
+      destDir = path.join(baseTargetFolder, sName || 'Unknown');
+    } else if (matchedRule.folderPerEmail || matchedRule.subfolderMode === 'email') {
       destDir = path.join(baseTargetFolder, `${dateStr}_${cleanSubject}`);
-      if (!fs.existsSync(destDir)) {
-        fs.mkdirSync(destDir, { recursive: true });
-      }
+    }
+
+    if (!fs.existsSync(destDir)) {
+      fs.mkdirSync(destDir, { recursive: true });
     }
 
     const msgBaseName = `${dateStr}_${cleanSubject}`;
@@ -519,6 +539,30 @@ class OutlookLocalWorker {
           }
           if (-not $matchedAtt) {
             Write-Output 'SKIP:ATT_NAME_MISMATCH'
+            exit
+          }
+        }
+
+        # If rule filters by email body
+        if ('${filterCondType}' -eq 'body_contains') {
+          $bodyText = ''
+          try { $bodyText = [string]$item.Body } catch {}
+          if (-not $bodyText) {
+            try { $bodyText = [string]$item.HTMLBody } catch {}
+          }
+          if (-not ($bodyText.ToLower().Contains('${filterCondVal}'))) {
+            Write-Output 'SKIP:BODY_MISMATCH'
+            exit
+          }
+        }
+
+        # If rule filters by recipient (To / CC)
+        if ('${filterCondType}' -eq 'to_contains') {
+          $toText = ''
+          try { $toText = [string]$item.To } catch {}
+          try { $toText += ' ' + [string]$item.CC } catch {}
+          if (-not ($toText.ToLower().Contains('${filterCondVal}'))) {
+            Write-Output 'SKIP:TO_MISMATCH'
             exit
           }
         }
@@ -627,7 +671,7 @@ class OutlookLocalWorker {
     `;
 
     const { stdout } = await runPowerShell(exportScript, 45000);
-    if (stdout.includes('SKIP:ATT_NAME_MISMATCH')) {
+    if (stdout.includes('SKIP:ATT_NAME_MISMATCH') || stdout.includes('SKIP:BODY_MISMATCH') || stdout.includes('SKIP:TO_MISMATCH')) {
       return false;
     }
 

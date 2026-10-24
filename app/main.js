@@ -377,7 +377,7 @@ function toggleEngine(running) {
 function startEngine() {
   console.log('Starting Email to Folder engine...');
   if (!imapWorker) {
-    imapWorker = new ImapWorker(appConfig, onEmailProcessed);
+    imapWorker = new ImapWorker(appConfig, onEmailProcessed, dataDir);
   } else {
     imapWorker.config = appConfig;
   }
@@ -409,7 +409,7 @@ async function performManualSync() {
   }
 
   if (!imapWorker) {
-    imapWorker = new ImapWorker(appConfig, onEmailProcessed);
+    imapWorker = new ImapWorker(appConfig, onEmailProcessed, dataDir);
   } else {
     imapWorker.config = appConfig;
   }
@@ -630,6 +630,57 @@ ipcMain.handle('open-external-url', async (event, url) => {
   return false;
 });
 
+// Export audit history to CSV (Excel compatible with UTF-8 BOM)
+ipcMain.handle('export-history-csv', async () => {
+  const history = loadHistory();
+  if (!history || history.length === 0) {
+    return { success: false, message: 'ไม่มีข้อมูลประวัติสำหรับส่งออก' };
+  }
+
+  const { filePath } = await dialog.showSaveDialog(mainWindow, {
+    title: 'ส่งออกประวัติการจัดเก็บอีเมล (Export to CSV)',
+    defaultPath: `EmailToFolder_History_${new Date().toISOString().slice(0, 10)}.csv`,
+    filters: [
+      { name: 'CSV File (*.csv)', extensions: ['csv'] }
+    ]
+  });
+
+  if (!filePath) return { success: false, canceled: true };
+
+  try {
+    const BOM = '\uFEFF';
+    const headers = ['"Date & Time"', '"Subject"', '"From"', '"Rule Name"', '"Target Folder"', '"Saved Files"', '"Status"'];
+    const escapeCsv = (val) => `"${String(val || '').replace(/"/g, '""')}"`;
+
+    const rows = history.map(item => [
+      escapeCsv(new Date(item.date).toLocaleString('th-TH')),
+      escapeCsv(item.subject),
+      escapeCsv(item.from),
+      escapeCsv(item.ruleName),
+      escapeCsv(item.targetFolder),
+      escapeCsv(Array.isArray(item.filesSaved) ? item.filesSaved.join(', ') : item.filesSaved),
+      escapeCsv(item.status || 'success')
+    ].join(','));
+
+    const csvContent = BOM + [headers.join(','), ...rows].join('\r\n');
+    fs.writeFileSync(filePath, csvContent, 'utf8');
+
+    return { success: true, filePath, count: history.length };
+  } catch (err) {
+    return { success: false, error: err.message };
+  }
+});
+
+// Clear audit history
+ipcMain.handle('clear-history', async () => {
+  try {
+    fs.writeFileSync(historyFilePath, JSON.stringify([], null, 2), 'utf8');
+    return { success: true };
+  } catch (err) {
+    return { success: false, error: err.message };
+  }
+});
+
 // Window controls (Custom Title Bar)
 ipcMain.on('window-minimize', () => {
   if (mainWindow) mainWindow.minimize();
@@ -695,8 +746,8 @@ ipcMain.handle('check-for-updates', async () => {
       remote = await fetchVersionJson(`https://emailtofolder.com/version.json?t=${Date.now()}`);
     }
 
-    const currentVersion = '1.2.0';
-    const currentRun = 3;
+    const currentVersion = '1.3.0';
+    const currentRun = 4;
     const hasUpdate = (remote.runNumber && remote.runNumber > currentRun) ||
       (remote.version && remote.version !== currentVersion && remote.version > currentVersion);
 

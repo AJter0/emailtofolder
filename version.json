@@ -1,12 +1,33 @@
 {
-  "version": "1.2.0",
-  "runNumber": 3,
-  "releaseDate": "2026-10-18 18:25 ICT",
-  "fullVersion": "v1.2.0 (Run #3)",
+  "version": "1.3.0",
+  "runNumber": 4,
+  "releaseDate": "2026-10-25 00:50 ICT",
+  "fullVersion": "v1.3.0 (Run #4)",
   "downloadUrl": "https://raw.githubusercontent.com/AJter0/emailtofolder/main/downloads/EmailToFolder-Setup.exe",
-  "description": "เพิ่มโหมดกลางวัน (Day Mode ☀️ / Night Mode 🌙) สลับได้ทันทีบนแถบด้านบนและหน้าตั้งค่า, เพิ่มระบบ Auto-Update อัปเดตและรีสตาร์ทโปรแกรมใหม่อัตโนมัติแบบ Silent (/S) โดยไม่ต้องกดติดตั้งเอง",
-  "descriptionEn": "Added Day Mode (Light Theme ☀️) & Night Mode toggle in titlebar and settings, plus 1-click and background Silent Auto-Update (/S) with automatic app restart.",
+  "description": "เพิ่มเงื่อนไขกฎใหม่: คัดแยกจากเนื้อหาอีเมล (Body contains) และ ผู้รับ/สำเนา (To/CC), เพิ่มระบบแยกโฟลเดอร์ย่อยตามปี/เดือนและชื่อผู้ส่ง, เพิ่มปุ่มส่งออกประวัติเป็นไฟล์ CSV รองรับ Excel ภาษาไทย (UTF-8 BOM), ตัวกรองประวัติตามกฎ, และระบบจดจำ IMAP ID ป้องกันการบันทึกเมลซ้ำ",
+  "descriptionEn": "Added new rule conditions: Email body contains keyword & To/CC recipient, subfolder organization by Year/Month & Sender, Audit Log CSV Export with Excel-compatible UTF-8 BOM, history filter by rule, and persistent IMAP message tracking.",
   "history": [
+    {
+      "runNumber": 4,
+      "version": "1.3.0",
+      "date": "2026-10-25",
+      "titleTh": "Run #4 — เพิ่มเงื่อนไขกฎ Body & To/CC, จัดการโฟลเดอร์ปี/เดือน, ส่งออก CSV & ป้องกันเมลซ้ำ",
+      "titleEn": "Run #4 — Added Body & To/CC Rule Conditions, Subfolder Year/Month Organization, Audit Log CSV Export & Anti-Duplicate IMAP Tracker",
+      "changesTh": [
+        "เพิ่มเงื่อนไขกฎใหม่: 'เนื้อหาอีเมลมีคำว่า (Body contains)' และ 'ส่งถึง / สำเนาถึง (To / CC contains)' ทั้งใน Outlook Classic MAPI และ IMAP",
+        "เพิ่มการจัดโครงสร้างโฟลเดอร์ย่อย: จัดตามปี/เดือน (Year/Month เช่น 2026/10) และจัดตามชื่อผู้ส่ง (By Sender) นอกเหนือจาก Date + Subject",
+        "เพิ่มฟังก์ชัน 'ส่งออกประวัติเป็น CSV (Export CSV)' ในหน้าต่าง Audit Log รองรับภาษาไทยสมบูรณ์ด้วย UTF-8 BOM สำหรับเปิดใน Excel",
+        "เพิ่มตัวกรองประวัติตามชื่อกฎ (Filter by Rule) และปุ่มล้างประวัติการบันทึก (Clear Log)",
+        "เพิ่มระบบ Persistent Message ID Tracker ใน IMAP Worker ป้องกันการบันทึกอีเมลซ้ำซ้อนเมื่อรีสตาร์ทโปรแกรม"
+      ],
+      "changesEn": [
+        "Added new rule conditions: 'Email body contains' and 'To / CC recipient contains' for both Outlook Classic and IMAP",
+        "Added flexible subfolder organization: Year/Month hierarchy (e.g. 2026/10) and By Sender name, in addition to Date + Subject",
+        "Added 1-click 'Export to CSV' in Audit Log modal with Excel-ready UTF-8 BOM support",
+        "Added History Filter by Rule and Clear History Log feature",
+        "Added persistent IMAP processed message ID tracking to prevent duplicate archiving across app restarts"
+      ]
+    },
     {
       "runNumber": 3,
       "version": "1.2.0",

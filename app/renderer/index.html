@@ -19,7 +19,7 @@
     <div class="titlebar-title">
       <img src="../assets/icon.png" class="logo-img" alt="Logo" width="18" height="18">
       <span>Email to Folder</span>
-      <span class="version-pill" id="titlebarVersionPill">v1.2</span>
+      <span class="version-pill" id="titlebarVersionPill">v1.3</span>
       <span class="patch-pill" id="patchUpdatePill" style="display:none;" title="คลิกเพื่ออัปเดต / Patch โปรแกรมทันที">🚀 Patch มีเวอร์ชันใหม่</span>
     </div>
     <div class="titlebar-right">
@@ -275,6 +275,8 @@
                 <option value="all_emails">🌟 อีเมลขาเข้าทั้งหมด (All Incoming Emails)</option>
                 <option value="subject_contains">หัวข้อมีคำว่า (Subject contains)</option>
                 <option value="from_contains">ส่งมาจาก / โดเมน (From / Domain)</option>
+                <option value="to_contains">ส่งถึง / สำเนาถึง (To / CC contains)</option>
+                <option value="body_contains">เนื้อหาอีเมลมีคำว่า (Body contains)</option>
                 <option value="has_attachment">มีไฟล์แนบใดๆ (Has Attachment)</option>
                 <option value="attachment_name_contains">ชื่อไฟล์แนบมีคำว่า (Attachment name)</option>
               </select>
@@ -293,6 +295,17 @@
               <button class="btn sm ghost" id="btnBrowseTargetFolder"><span class="th">เลือกโฟลเดอร์...</span><span class="en">Browse...</span></button>
             </div>
           </div>
+          <div class="form-row">
+            <label class="th">โครงสร้างโฟลเดอร์ย่อย (Subfolder Organization):</label>
+            <label class="en">Subfolder Organization:</label>
+            <select id="ruleSubfolderMode">
+              <option value="none">จัดเก็บลงโฟลเดอร์ปลายทางโดยตรง (Directly in Target Folder)</option>
+              <option value="email">แยกโฟลเดอร์ย่อยตามวันที่และหัวข้อ (Date + Subject)</option>
+              <option value="year_month">จัดกลุ่มตามปีและเดือน (Year/Month เช่น 2026/10)</option>
+              <option value="sender">จัดกลุ่มแยกโฟลเดอร์ตามชื่อผู้ส่ง (By Sender Name)</option>
+            </select>
+            <input type="checkbox" id="ruleFolderPerEmail" style="display:none;">
+          </div>
           <div class="form-options">
             <label class="checkbox-label">
               <input type="checkbox" id="ruleSaveEml" checked>
@@ -303,11 +316,6 @@
               <input type="checkbox" id="ruleSaveAttachments" checked>
               <span class="th">สกัดไฟล์แนบแยกออกมา (PDF, Excel, Word, ภาพ) ลงโฟลเดอร์เดียวกัน</span>
               <span class="en">Extract attachments (PDF, Excel, Word, Images) into folder</span>
-            </label>
-            <label class="checkbox-label">
-              <input type="checkbox" id="ruleFolderPerEmail">
-              <span class="th">สร้างโฟลเดอร์ย่อยตามวันที่และหัวข้อสำหรับแต่ละอีเมล</span>
-              <span class="en">Create a subfolder per email (Date + Subject)</span>
             </label>
           </div>
           <div class="form-actions">
@@ -330,7 +338,17 @@
       <div class="modal-body">
         <div class="history-controls">
           <input type="text" id="historySearchInput" placeholder="ค้นหาตามชื่อผู้ส่ง, หัวข้อ, หรือโฟลเดอร์...">
+          <select id="historyRuleFilter" class="history-rule-select">
+            <option value="">ทุกกฎ (All Rules)</option>
+          </select>
           <button class="btn sm ghost" id="btnClearHistorySearch"><span class="th">ล้างค้นหา</span><span class="en">Clear</span></button>
+          <div style="flex:1;"></div>
+          <button class="btn sm" id="btnExportHistoryCsv" title="ส่งออกข้อมูลประวัติเป็นไฟล์ CSV นำเข้า Excel ได้ทันที">
+            <span>📊</span> <span class="th">ส่งออก CSV</span><span class="en">Export CSV</span>
+          </button>
+          <button class="btn sm ghost" id="btnClearHistoryLogs" title="ล้างประวัติการจัดเก็บทั้งหมด">
+            <span>🗑</span> <span class="th">ล้างประวัติ</span><span class="en">Clear Log</span>
+          </button>
         </div>
         <div class="history-table-container">
           <table class="history-table">
@@ -433,8 +451,8 @@
           <div>
             <strong class="th">เวอร์ชันและ Patch อัปเดต</strong>
             <strong class="en">Version & Updates</strong>
-            <p class="th" id="settingVersionDescTh">เวอร์ชันปัจจุบัน: v1.2.0 (Run #3) · ตรวจสอบเวอร์ชันล่าสุดจากเซิร์ฟเวอร์</p>
-            <p class="en" id="settingVersionDescEn">Current: v1.2.0 (Run #3) · Check for latest patch & updates</p>
+            <p class="th" id="settingVersionDescTh">เวอร์ชันปัจจุบัน: v1.3.0 (Run #4) · ตรวจสอบเวอร์ชันล่าสุดจากเซิร์ฟเวอร์</p>
+            <p class="en" id="settingVersionDescEn">Current: v1.3.0 (Run #4) · Check for latest patch & updates</p>
           </div>
           <button class="btn sm" id="btnCheckUpdateManual">
             <span class="th">🔄 ตรวจสอบ Patch</span>

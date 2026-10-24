@@ -19,7 +19,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     windowMaximize: () => {},
     windowClose: () => {},
     openExternalUrl: async () => true,
-    checkForUpdates: async () => ({ success: true, hasUpdate: false, currentVersion: 'v1.1.0 (Run #2)', remoteVersion: 'v1.1.0 (Run #2)' }),
+    exportHistoryCsv: async () => ({ success: true, count: 0 }),
+    clearHistory: async () => ({ success: true }),
+    checkForUpdates: async () => ({ success: true, hasUpdate: false, currentVersion: 'v1.3.0 (Run #4)', remoteVersion: 'v1.3.0 (Run #4)' }),
     applyPatch: async () => ({ success: true }),
     onEmailSaved: () => {},
     onEngineStatusChanged: () => {},
@@ -77,11 +79,17 @@ document.addEventListener('DOMContentLoaded', async () => {
       syncUpToDate: (acct) => `ซิงก์กับ Outlook Classic${acct ? ' (' + acct + ')' : ''} เรียบร้อยแล้ว — ข้อมูลเป็นปัจจุบัน`,
       checkUpdates: '🔄 ตรวจสอบ Patch',
       checkingUpdates: '⏳ กำลังตรวจสอบ...',
-      latestVersion: (v) => `✓ คุณกำลังใช้งานเวอร์ชันล่าสุดแล้ว (${v || 'v1.1.0'})`,
+      latestVersion: (v) => `✓ คุณกำลังใช้งานเวอร์ชันล่าสุดแล้ว (${v || 'v1.3.0'})`,
+      allRules: 'ทุกกฎ (All Rules)',
+      confirmClearHistory: 'คุณแน่ใจหรือไม่ว่าต้องการล้างประวัติการบันทึกทั้งหมด?',
+      historyCleared: 'ล้างประวัติการบันทึกเรียบร้อยแล้ว',
+      historyExported: (n) => `ส่งออกประวัติ ${n} รายการเป็นไฟล์ CSV เรียบร้อยแล้ว`,
       ruleOptions: [
         { value: 'all_emails', text: '🌟 อีเมลขาเข้าทั้งหมด (All Incoming Emails)' },
         { value: 'subject_contains', text: 'หัวข้อมีคำว่า (Subject contains)' },
         { value: 'from_contains', text: 'ส่งมาจาก / โดเมน (From / Domain)' },
+        { value: 'to_contains', text: 'ส่งถึง / สำเนาถึง (To / CC contains)' },
+        { value: 'body_contains', text: 'เนื้อหาอีเมลมีคำว่า (Body contains)' },
         { value: 'has_attachment', text: 'มีไฟล์แนบใดๆ (Has Attachment)' },
         { value: 'attachment_name_contains', text: 'ชื่อไฟล์แนบมีคำว่า (Attachment name)' }
       ]
@@ -121,11 +129,17 @@ document.addEventListener('DOMContentLoaded', async () => {
       syncUpToDate: (acct) => `Synced with Outlook Classic${acct ? ' (' + acct + ')' : ''} — Up to date`,
       checkUpdates: '🔄 Check Updates',
       checkingUpdates: '⏳ Checking...',
-      latestVersion: (v) => `✓ You are on the latest version (${v || 'v1.1.0'})`,
+      latestVersion: (v) => `✓ You are on the latest version (${v || 'v1.3.0'})`,
+      allRules: 'All Rules',
+      confirmClearHistory: 'Are you sure you want to clear all archived history logs?',
+      historyCleared: 'Archived history logs cleared successfully',
+      historyExported: (n) => `Exported ${n} records to CSV successfully`,
       ruleOptions: [
         { value: 'all_emails', text: '🌟 All Incoming Emails' },
         { value: 'subject_contains', text: 'Subject contains keyword' },
         { value: 'from_contains', text: 'From / Sender domain' },
+        { value: 'to_contains', text: 'To / CC recipient contains' },
+        { value: 'body_contains', text: 'Email body contains keyword' },
         { value: 'has_attachment', text: 'Has any attachment' },
         { value: 'attachment_name_contains', text: 'Attachment filename contains' }
       ]
@@ -277,6 +291,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderStats();
     renderConnectedAccounts();
     renderRulesManagementList();
+    updateHistoryRuleFilterOptions();
     renderHistoryTable();
     loadSettingsInputs();
   }
@@ -541,6 +556,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         condText = currentLang === 'en' ? `Subject contains "${rule.conditionValue}"` : `หัวข้อมีคำว่า "${rule.conditionValue}"`;
       } else if (rule.conditionType === 'from_contains') {
         condText = currentLang === 'en' ? `From "${rule.conditionValue}"` : `ผู้ส่งคือ "${rule.conditionValue}"`;
+      } else if (rule.conditionType === 'to_contains') {
+        condText = currentLang === 'en' ? `To/CC "${rule.conditionValue}"` : `ส่งถึง/สำเนา "${rule.conditionValue}"`;
+      } else if (rule.conditionType === 'body_contains') {
+        condText = currentLang === 'en' ? `Body contains "${rule.conditionValue}"` : `เนื้อหามีคำว่า "${rule.conditionValue}"`;
       } else if (rule.conditionType === 'has_attachment') {
         condText = currentLang === 'en' ? 'Has any attachment' : 'มีไฟล์แนบใดๆ';
       } else if (rule.conditionType === 'attachment_name_contains') {
@@ -591,6 +610,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderTargetFolders();
     renderStats();
     renderQuota();
+    updateHistoryRuleFilterOptions();
     renderHistoryTable();
     showToast(`บันทึกอีเมล "${data.subject}" ลงโฟลเดอร์เรียบร้อยแล้ว`);
   });
@@ -941,13 +961,26 @@ document.addEventListener('DOMContentLoaded', async () => {
         condDesc = currentLang === 'en' ? `Subject contains "${rule.conditionValue}"` : `หัวข้อมีคำว่า "${rule.conditionValue}"`;
       } else if (rule.conditionType === 'from_contains') {
         condDesc = currentLang === 'en' ? `From "${rule.conditionValue}"` : `ส่งมาจาก "${rule.conditionValue}"`;
+      } else if (rule.conditionType === 'to_contains') {
+        condDesc = currentLang === 'en' ? `To/CC "${rule.conditionValue}"` : `ส่งถึง/สำเนา "${rule.conditionValue}"`;
+      } else if (rule.conditionType === 'body_contains') {
+        condDesc = currentLang === 'en' ? `Body contains "${rule.conditionValue}"` : `เนื้อหามีคำว่า "${rule.conditionValue}"`;
       } else if (rule.conditionType === 'attachment_name_contains') {
         condDesc = currentLang === 'en' ? `Attachment contains "${rule.conditionValue}"` : `ชื่อไฟล์แนบมี "${rule.conditionValue}"`;
       }
 
+      let subfolderTag = '';
+      if (rule.subfolderMode === 'year_month') {
+        subfolderTag = `<span class="files-badge" style="margin-left:6px;">📅 Year/Month</span>`;
+      } else if (rule.subfolderMode === 'sender') {
+        subfolderTag = `<span class="files-badge" style="margin-left:6px;">👤 By Sender</span>`;
+      } else if (rule.folderPerEmail || rule.subfolderMode === 'email') {
+        subfolderTag = `<span class="files-badge" style="margin-left:6px;">📁 Per Email</span>`;
+      }
+
       div.innerHTML = `
         <div class="acc-card-info">
-          <h4>${escapeHtml(rule.name)}</h4>
+          <h4>${escapeHtml(rule.name)}${subfolderTag}</h4>
           <p>${escapeHtml(condDesc)} → 📁 ${escapeHtml(rule.targetFolder)}</p>
         </div>
         <div style="display:flex; gap:8px; align-items:center;">
@@ -989,7 +1022,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       document.getElementById('ruleTargetFolderInput').value = rule.targetFolder || '';
       document.getElementById('ruleSaveEml').checked = rule.saveEml !== false;
       document.getElementById('ruleSaveAttachments').checked = rule.saveAttachments !== false;
-      document.getElementById('ruleFolderPerEmail').checked = !!rule.folderPerEmail;
+      const subMode = rule.subfolderMode || (rule.folderPerEmail ? 'email' : 'none');
+      const subModeEl = document.getElementById('ruleSubfolderMode');
+      if (subModeEl) subModeEl.value = subMode;
+      document.getElementById('ruleFolderPerEmail').checked = (subMode === 'email');
     } else {
       document.getElementById('ruleFormTitle').innerHTML = `<span class="th">+ เพิ่มกฎใหม่</span><span class="en">+ Add New Rule</span>`;
       document.getElementById('editRuleId').value = '-1';
@@ -999,6 +1035,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       document.getElementById('ruleTargetFolderInput').value = '';
       document.getElementById('ruleSaveEml').checked = true;
       document.getElementById('ruleSaveAttachments').checked = true;
+      const subModeEl = document.getElementById('ruleSubfolderMode');
+      if (subModeEl) subModeEl.value = 'none';
       document.getElementById('ruleFolderPerEmail').checked = false;
     }
 
@@ -1038,6 +1076,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   document.getElementById('btnSaveRuleSubmit').addEventListener('click', async () => {
     const index = parseInt(document.getElementById('editRuleId').value);
+    const subModeEl = document.getElementById('ruleSubfolderMode');
+    const subMode = subModeEl ? subModeEl.value : 'none';
+
     const rule = {
       id: index >= 0 && appConfig.rules[index] ? appConfig.rules[index].id : 'rule-' + Date.now(),
       name: document.getElementById('ruleNameInput').value.trim() || 'Auto Archive Rule',
@@ -1047,7 +1088,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       targetFolder: document.getElementById('ruleTargetFolderInput').value.trim(),
       saveEml: document.getElementById('ruleSaveEml').checked,
       saveAttachments: document.getElementById('ruleSaveAttachments').checked,
-      folderPerEmail: document.getElementById('ruleFolderPerEmail').checked
+      subfolderMode: subMode,
+      folderPerEmail: subMode === 'email'
     };
 
     if (!rule.targetFolder) {
@@ -1070,19 +1112,39 @@ document.addEventListener('DOMContentLoaded', async () => {
     showToast(t.savedRule(rule.name));
   });
 
-  // 13. History Table
-  function renderHistoryTable(filterText = '') {
+  // 13. History Table & Audit Log
+  function updateHistoryRuleFilterOptions() {
+    const filterSelect = document.getElementById('historyRuleFilter');
+    if (!filterSelect) return;
+    const curVal = filterSelect.value;
+    const t = i18n[currentLang] || i18n.en;
+    const ruleNames = new Set();
+    (appConfig.rules || []).forEach(r => r.name && ruleNames.add(r.name));
+    historyLogs.forEach(h => h.ruleName && ruleNames.add(h.ruleName));
+
+    filterSelect.innerHTML = `<option value="">${t.allRules || 'ทุกกฎ (All Rules)'}</option>` +
+      Array.from(ruleNames).sort().map(r => `<option value="${escapeHtml(r)}">${escapeHtml(r)}</option>`).join('');
+    if (curVal && ruleNames.has(curVal)) {
+      filterSelect.value = curVal;
+    }
+  }
+
+  function renderHistoryTable() {
     const tbody = document.getElementById('historyTableBody');
+    if (!tbody) return;
     tbody.innerHTML = '';
     const t = i18n[currentLang] || i18n.en;
 
-    const filter = filterText.toLowerCase();
+    const filterText = (document.getElementById('historySearchInput')?.value || '').toLowerCase().trim();
+    const filterRule = document.getElementById('historyRuleFilter')?.value || '';
+
     const filtered = historyLogs.filter(h => {
-      if (!filter) return true;
-      return (h.subject || '').toLowerCase().includes(filter) ||
-             (h.from || '').toLowerCase().includes(filter) ||
-             (h.targetFolder || '').toLowerCase().includes(filter) ||
-             (h.ruleName || '').toLowerCase().includes(filter);
+      if (filterRule && h.ruleName !== filterRule) return false;
+      if (!filterText) return true;
+      return (h.subject || '').toLowerCase().includes(filterText) ||
+             (h.from || '').toLowerCase().includes(filterText) ||
+             (h.targetFolder || '').toLowerCase().includes(filterText) ||
+             (h.ruleName || '').toLowerCase().includes(filterText);
     });
 
     if (filtered.length === 0) {
@@ -1116,14 +1178,63 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  document.getElementById('historySearchInput').addEventListener('input', (e) => {
-    renderHistoryTable(e.target.value);
-  });
+  const historySearchEl = document.getElementById('historySearchInput');
+  if (historySearchEl) {
+    historySearchEl.addEventListener('input', () => renderHistoryTable());
+  }
 
-  document.getElementById('btnClearHistorySearch').addEventListener('click', () => {
-    document.getElementById('historySearchInput').value = '';
-    renderHistoryTable();
-  });
+  const historyRuleFilterEl = document.getElementById('historyRuleFilter');
+  if (historyRuleFilterEl) {
+    historyRuleFilterEl.addEventListener('change', () => renderHistoryTable());
+  }
+
+  const btnClearHistorySearchEl = document.getElementById('btnClearHistorySearch');
+  if (btnClearHistorySearchEl) {
+    btnClearHistorySearchEl.addEventListener('click', () => {
+      if (historySearchEl) historySearchEl.value = '';
+      if (historyRuleFilterEl) historyRuleFilterEl.value = '';
+      renderHistoryTable();
+    });
+  }
+
+  const btnExportHistoryCsv = document.getElementById('btnExportHistoryCsv');
+  if (btnExportHistoryCsv) {
+    btnExportHistoryCsv.addEventListener('click', async () => {
+      const t = i18n[currentLang] || i18n.en;
+      try {
+        const res = await api.exportHistoryCsv();
+        if (res && res.canceled) return;
+        if (res && res.success) {
+          const msg = typeof t.historyExported === 'function' ? t.historyExported(res.count) : `ส่งออกประวัติ ${res.count} รายการสำเร็จ`;
+          showToast(msg);
+        } else {
+          showToast((res && res.message) || (res && res.error) || 'เกิดข้อผิดพลาดในการส่งออกไฟล์', true);
+        }
+      } catch (err) {
+        showToast('เกิดข้อผิดพลาดในการส่งออกไฟล์ CSV', true);
+      }
+    });
+  }
+
+  const btnClearHistoryLogs = document.getElementById('btnClearHistoryLogs');
+  if (btnClearHistoryLogs) {
+    btnClearHistoryLogs.addEventListener('click', async () => {
+      const t = i18n[currentLang] || i18n.en;
+      if (!confirm(t.confirmClearHistory || 'คุณแน่ใจหรือไม่ว่าต้องการล้างประวัติการบันทึกทั้งหมด?')) return;
+      try {
+        const res = await api.clearHistory();
+        if (res && res.success) {
+          historyLogs = [];
+          renderFeed();
+          renderHistoryTable();
+          updateHistoryRuleFilterOptions();
+          showToast(t.historyCleared || 'ล้างประวัติการบันทึกเรียบร้อยแล้ว');
+        }
+      } catch (err) {
+        showToast('เกิดข้อผิดพลาดในการล้างประวัติ', true);
+      }
+    });
+  }
 
   // 14. Settings
   function loadSettingsInputs() {

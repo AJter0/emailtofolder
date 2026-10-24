@@ -14,6 +14,9 @@ function matchRule(email, rule) {
 
   const subject = (email.subject || '').toLowerCase();
   const from = (email.from && email.from.text ? email.from.text : email.fromAddress || '').toLowerCase();
+  const to = (email.to && email.to.text ? email.to.text : email.toAddress || '').toLowerCase();
+  const cc = (email.cc && email.cc.text ? email.cc.text : '').toLowerCase();
+  const body = (email.text || email.intro || email.html || '').toLowerCase();
   const condVal = (rule.conditionValue || '').toLowerCase().trim();
 
   switch (rule.conditionType) {
@@ -23,6 +26,10 @@ function matchRule(email, rule) {
       return !condVal || subject.includes(condVal);
     case 'from_contains':
       return !condVal || from.includes(condVal);
+    case 'to_contains':
+      return !condVal || to.includes(condVal) || cc.includes(condVal);
+    case 'body_contains':
+      return !condVal || body.includes(condVal);
     case 'has_attachment':
       return Boolean(email.attachments && email.attachments.length > 0);
     case 'attachment_name_contains':
@@ -50,18 +57,26 @@ async function saveEmailToFolder(rawBuffer, parsed, rule, onEmailProcessed, orig
     fs.mkdirSync(targetFolder, { recursive: true });
   }
 
-  const dateStr = (parsed.date ? new Date(parsed.date) : new Date())
-    .toISOString()
-    .slice(0, 10);
+  const dateObj = parsed.date ? new Date(parsed.date) : new Date();
+  const dateStr = dateObj.toISOString().slice(0, 10);
   const cleanSubject = sanitizeFilename(parsed.subject || 'No Subject');
 
-  // If user requested a subfolder per email:
+  // Subfolder organization (Per-Email, Year/Month, Sender, or Direct)
   let destDir = targetFolder;
-  if (rule.folderPerEmail) {
+  if (rule.subfolderMode === 'year_month') {
+    const yyyy = String(dateObj.getFullYear());
+    const mm = String(dateObj.getMonth() + 1).padStart(2, '0');
+    destDir = path.join(targetFolder, yyyy, mm);
+  } else if (rule.subfolderMode === 'sender') {
+    const rawSender = parsed.from && parsed.from.text ? parsed.from.text : (parsed.fromAddress || 'Unknown Sender');
+    const senderName = sanitizeFilename(rawSender.replace(/<.*?>/, '').trim() || 'Unknown Sender');
+    destDir = path.join(targetFolder, senderName);
+  } else if (rule.folderPerEmail || rule.subfolderMode === 'email') {
     destDir = path.join(targetFolder, `${dateStr}_${cleanSubject}`);
-    if (!fs.existsSync(destDir)) {
-      fs.mkdirSync(destDir, { recursive: true });
-    }
+  }
+
+  if (!fs.existsSync(destDir)) {
+    fs.mkdirSync(destDir, { recursive: true });
   }
 
   const savedFiles = [];

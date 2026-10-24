@@ -994,10 +994,25 @@ html[lang="en"] .th {
 .history-controls {
   display: flex;
   gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.history-controls select {
+  background: #0f0f13;
+  border: 1px solid var(--line);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font: inherit;
+  font-size: 13px;
+  outline: none;
+  cursor: pointer;
 }
 
 .history-controls input {
   flex: 1;
+  min-width: 220px;
   background: #0f0f13;
   border: 1px solid var(--line);
   color: #fff;
@@ -1369,6 +1384,7 @@ body.light-mode .acc-card.outlook-featured {
 body.light-mode .form-row input,
 body.light-mode .form-row select,
 body.light-mode .history-controls input,
+body.light-mode .history-controls select,
 body.light-mode .setting-item select {
   background: #ffffff;
   border: 1px solid var(--line-strong);

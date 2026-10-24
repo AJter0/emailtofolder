@@ -1,4 +1,4 @@
-# Email to Folder — Enterprise Desktop Application (`v1.1.0 · Run #2`)
+# Email to Folder — Enterprise Desktop Application (`v1.3.0 · Run #4`)
 
 ซอฟต์แวร์จัดเก็บและคัดแยกอีเมลลงโฟลเดอร์อัตโนมัติ สำหรับ **Microsoft Outlook**, **Gmail**, **Office 365** และเซิร์ฟเวอร์ **IMAP** โดยจำลองการทำงานเหมือนการลากเมาส์ (Drag & Drop) อีเมลจากโปรแกรมลงมาที่โฟลเดอร์บนเครื่องคอมพิวเตอร์หรือ Network Drive ทันทีที่มีอีเมลใหม่เข้ามา
 
@@ -10,7 +10,9 @@
 
 | Run Number | Version | Build ID | วันที่อัปเดต | รายละเอียดการเปลี่ยนแปลง (Version Description) |
 | :--- | :--- | :--- | :--- | :--- |
-| **Run #2** *(Latest)* | **`v1.1.0`** | `20261018.2` | `2026-10-18` | **Enhanced Outlook Classic MAPI Engine & Instant Sync:**<br>• แก้ไขปัญหาติดต่อ Outlook Classic ไม่ได้เมื่อเปิดโปรแกรมอยู่ โดยเปลี่ยนไปใช้ PowerShell `-EncodedCommand` (STA COM) และตัวช่วยปลุก ROT (`WM_ACTIVATEAPP`)<br>• ดึงรายการอีเมลจาก Inbox ผ่าน **MAPI Table** ความเร็วสูง ไม่ติดหน้าต่างเตือนความปลอดภัย (Object Model Security Guard)<br>• รองรับการดึงทั้งอีเมลที่อ่านแล้ว (Read) และยังไม่ได้อ่าน (Unread) บันทึกเป็นไฟล์ `.msg` แท้พร้อมแยกไฟล์แนบ<br>• เพิ่มปุ่ม **🔄 ซิงก์ตอนนี้ (Sync Now)** บนแถบด้านบน และเงื่อนไขกฎ **อีเมลขาเข้าทั้งหมด (All Incoming Emails)**<br>• เพิ่มการตรวจจับบัญชี Outlook Classic และสร้างกฎเริ่มต้นให้อัตโนมัติทันทีที่เปิดแอป |
+| **Run #4** *(Latest)* | **`v1.3.0`** | `20261025.1` | `2026-10-25` | **Smart Content Rules, Subfolder Hierarchy, CSV Audit Export & Persistent Tracker:**<br>• เพิ่มเงื่อนไขกฎใหม่: **เนื้อหาอีเมลมีคำว่า (Body contains)** และ **ส่งถึง/สำเนาถึง (To/CC contains)** สำหรับทั้ง Outlook Classic MAPI และ IMAP<br>• เพิ่มการจัดโครงสร้างโฟลเดอร์ย่อย: แยกตาม **ปี/เดือน (Year/Month เช่น 2026/10)** และแยกตาม **ชื่อผู้ส่ง (By Sender)** นอกเหนือจาก Date + Subject<br>• เพิ่มระบบ **ส่งออกประวัติเป็นไฟล์ CSV (Export CSV)** ในหน้าต่าง Audit Log รองรับภาษาไทย UTF-8 BOM สำหรับเปิดใน Excel ทันที<br>• เพิ่มตัวกรองประวัติตามชื่อกฎ (Filter by Rule) และปุ่มล้างประวัติการจัดเก็บ (Clear Log)<br>• เพิ่ม Persistent Message ID Tracker ใน IMAP Worker ป้องกันการบันทึกเมลซ้ำซ้อนเมื่อเปิด-ปิดโปรแกรมใหม่ |
+| **Run #3** | **`v1.2.0`** | `20261018.3` | `2026-10-18` | **Day/Night Theme & Seamless Silent Auto-Update:**<br>• เพิ่มโหมดกลางวัน (Day Light ☀️) สลับกับโหมดกลางคืน (Night Luxury 🌙) ได้ทันทีบน Titlebar และหน้า Settings<br>• ปรับปรุงระบบ Patch Updater ให้ดาวน์โหลดและติดตั้งแบบเงียบ (`/S`) พร้อมรีสตาร์ทโปรแกรมใหม่อัตโนมัติ<br>• ตรวจสอบอัปเดตแบบเรียลไทม์ผ่าน GitHub Raw |
+| **Run #2** | **`v1.1.0`** | `20261018.2` | `2026-10-18` | **Enhanced Outlook Classic MAPI Engine & Instant Sync:**<br>• แก้ไขปัญหาติดต่อ Outlook Classic ไม่ได้เมื่อเปิดโปรแกรมอยู่ โดยเปลี่ยนไปใช้ PowerShell `-EncodedCommand` (STA COM) และตัวช่วยปลุก ROT (`WM_ACTIVATEAPP`)<br>• ดึงรายการอีเมลจาก Inbox ผ่าน **MAPI Table** ความเร็วสูง ไม่ติดหน้าต่างเตือนความปลอดภัย (Object Model Security Guard)<br>• รองรับการดึงทั้งอีเมลที่อ่านแล้ว (Read) และยังไม่ได้อ่าน (Unread) บันทึกเป็นไฟล์ `.msg` แท้พร้อมแยกไฟล์แนบ<br>• เพิ่มปุ่ม **🔄 ซิงก์ตอนนี้ (Sync Now)** บนแถบด้านบน และเงื่อนไขกฎ **อีเมลขาเข้าทั้งหมด (All Incoming Emails)**<br>• เพิ่มการตรวจจับบัญชี Outlook Classic และสร้างกฎเริ่มต้นให้อัตโนมัติทันทีที่เปิดแอป |
 | **Run #1** | **`v1.0.0`** | `20261018.1` | `2026-10-18` | **Initial Release — Multi-Provider Auto Email Archiver:**<br>• เปิดตัวไฟล์ติดตั้ง `EmailToFolder-Setup.exe` รองรับ Outlook, Gmail, Office 365 และ IMAP<br>• ระบบทดลองใช้ฟรี 100 ฉบับ/เดือน พร้อมรีเซ็ตโควตาอัตโนมัติทุกวันที่ 1 ของเดือน<br>• หน้าจอควบคุม 3 คอลัมน์, โซนทดสอบ Drag & Drop และไอคอนทำงานเบื้องหลังบน System Tray |
 
 ---
@@ -54,16 +56,24 @@
   1. บันทึกไฟล์อีเมลฉบับเต็ม (`.msg` หรือ `.eml`) ที่สามารถดับเบิ้ลคลิกเปิดดูใน Microsoft Outlook หรือโปรแกรมอีเมลอื่นๆ ได้ทันที
   2. สกัดไฟล์แนบทั้งหมด (เช่น `Invoice.pdf`, `Report.xlsx`, `Contract.docx`, รูปภาพ) ออกมาบันทึกไว้ในโฟลเดอร์ปลายทาง
   3. ตั้งชื่อไฟล์ตามวันที่และหัวข้ออย่างเป็นระเบียบ เช่น `2026-10-17_Invoice #INV-2026-0418.msg`
-  4. เลือกได้ว่าจะให้สร้างโฟลเดอร์ย่อยตามวันที่และหัวข้อของอีเมลแต่ละฉบับหรือไม่
+  4. เลือกโครงสร้างโฟลเดอร์ย่อยได้: **จัดเก็บลงโฟลเดอร์โดยตรง**, **แยกตามวันที่และหัวข้อ**, **จัดกลุ่มตามปี/เดือน (`YYYY/MM`)**, หรือ **จัดกลุ่มตามชื่อผู้ส่ง**
 
 ### 3. ระบบกฎอัตโนมัติ (Rule Engine)
 - กำหนดเงื่อนไขการคัดแยกได้หลากหลาย:
   - **อีเมลขาเข้าทั้งหมด (All Incoming Emails):** บันทึกทุกอีเมลที่เข้ามาใน Inbox ลงโฟลเดอร์ที่กำหนดโดยอัตโนมัติ
   - **หัวข้ออีเมลมีคำว่า (Subject contains):** เช่น `"Invoice"`, `"Contract"`, `"Report"`
   - **ส่งมาจากอีเมลหรือโดเมน (From / Domain):** เช่น `"@projecta.co.th"`, `"accounting@vendor.com"`
+  - **ส่งถึงหรือสำเนาถึง (To / CC contains):** เช่น `"sales@"`, `"billing@"`
+  - **เนื้อหาอีเมลมีคำว่า (Body contains):** เช่น `"PO-"`, `"ใบสั่งซื้อ"`, `"ด่วนที่สุด"`
   - **มีไฟล์แนบใดๆ (Has any attachment)**
   - **ชื่อไฟล์แนบมีคำว่า (Attachment name contains):** เช่น `".pdf"`, `"PO_"`
 - กำหนดโฟลเดอร์ปลายทางได้ทั้ง **Local Drive (C:, D:)**, **Network Drive**, **NAS**, และ **File Server** (`\\server\share\...`)
+
+### 4. ประวัติการจัดเก็บและส่งออกรายงาน (Audit Log & CSV Export)
+- บันทึกประวัติการจัดเก็บอีเมลทุกฉบับ (วันเวลา, หัวข้อ, ผู้ส่ง, กฎที่ตรง, โฟลเดอร์, รายชื่อไฟล์แนบ)
+- ตัวกรองประวัติตามชื่อกฎ (Filter by Rule) และค้นหาแบบ Real-time
+- ปุ่ม **"📊 ส่งออกเป็น CSV (Export CSV)"** รองรับภาษาไทย UTF-8 BOM เปิดดูใน Microsoft Excel ได้ทันทีโดยสระไม่เพี้ยน
+- ปุ่มล้างประวัติ (Clear History) เมื่อต้องการรีเซ็ตบันทึก audit
 
 ### 4. หน้าตาโปรแกรมตามธีมเว็บไซต์ (UI Replica)
 - Custom Windows Titlebar พร้อมปุ่มปิด ย่อ ขยายสไตล์ macOS (🔴🟡🟢)

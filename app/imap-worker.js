@@ -1,13 +1,42 @@
+const path = require('path');
+const fs = require('fs');
 const { ImapFlow } = require('imapflow');
 const { processRawEmail } = require('./file-processor');
 
 class ImapWorker {
-  constructor(config, onEmailProcessed) {
+  constructor(config, onEmailProcessed, dataDir) {
     this.config = config;
     this.onEmailProcessed = onEmailProcessed;
     this.clients = new Map();
     this.isMonitoring = false;
     this.pollTimer = null;
+    this.dataDir = dataDir || path.join(process.env.APPDATA || __dirname, 'EmailToFolderData');
+    this.processedFile = path.join(this.dataDir, 'imap_processed_ids.json');
+    this.processedMessageIds = this.loadProcessedIds();
+  }
+
+  loadProcessedIds() {
+    try {
+      if (fs.existsSync(this.processedFile)) {
+        const arr = JSON.parse(fs.readFileSync(this.processedFile, 'utf8'));
+        if (Array.isArray(arr)) return new Set(arr);
+      }
+    } catch (e) {
+      console.error('Failed to load processed IMAP IDs:', e.message);
+    }
+    return new Set();
+  }
+
+  saveProcessedIds() {
+    try {
+      if (!fs.existsSync(this.dataDir)) {
+        fs.mkdirSync(this.dataDir, { recursive: true });
+      }
+      const arr = Array.from(this.processedMessageIds).slice(-2000);
+      fs.writeFileSync(this.processedFile, JSON.stringify(arr), 'utf8');
+    } catch (e) {
+      console.error('Failed to save processed IMAP IDs:', e.message);
+    }
   }
 
   start() {
@@ -101,7 +130,7 @@ class ImapWorker {
       // Listen for incoming email events
       client.on('exists', async (data) => {
         console.log(`New email event on ${acc.user}, count: ${data.count}`);
-        await this.fetchLatestMessage(client);
+        await this.fetchLatestMessage(client, acc);
       });
 
       // Keep IDLE connection alive
@@ -119,12 +148,21 @@ class ImapWorker {
     }
   }
 
-  async fetchLatestMessage(client) {
+  async fetchLatestMessage(client, acc = {}) {
     try {
       // Fetch latest message in INBOX
       const message = await client.fetchOne('*', { source: true, flags: true, envelope: true });
       if (message && message.source) {
-        await processRawEmail(message.source, this.config, this.onEmailProcessed);
+        const msgId = (message.envelope && message.envelope.messageId) || (message.uid ? `uid_${message.uid}` : null);
+        const uniqueKey = `${acc.user || 'imap'}_${msgId || ('seq_' + (message.seq || Date.now()))}`;
+        if (this.processedMessageIds.has(uniqueKey)) {
+          return;
+        }
+        const res = await processRawEmail(message.source, this.config, this.onEmailProcessed);
+        if (res && res.success) {
+          this.processedMessageIds.add(uniqueKey);
+          this.saveProcessedIds();
+        }
       }
     } catch (err) {
       console.error('Failed to fetch latest message:', err);
@@ -138,9 +176,18 @@ class ImapWorker {
       if (searchResult && searchResult.length > 0) {
         console.log(`Found ${searchResult.length} unseen messages on ${acc.user}`);
         for (const seq of searchResult.slice(-10)) { // limit to last 10 to avoid flooding
-          const message = await client.fetchOne(seq, { source: true });
+          const message = await client.fetchOne(seq, { source: true, envelope: true });
           if (message && message.source) {
-            await processRawEmail(message.source, this.config, this.onEmailProcessed);
+            const msgId = (message.envelope && message.envelope.messageId) || (message.uid ? `uid_${message.uid}` : null);
+            const uniqueKey = `${acc.user || 'imap'}_${msgId || ('seq_' + seq)}`;
+            if (this.processedMessageIds.has(uniqueKey)) {
+              continue;
+            }
+            const res = await processRawEmail(message.source, this.config, this.onEmailProcessed);
+            if (res && res.success) {
+              this.processedMessageIds.add(uniqueKey);
+              this.saveProcessedIds();
+            }
           }
         }
       }

@@ -116,6 +116,39 @@ async function runTest() {
   }
   console.log('SUCCESS: Quota auto-reset successfully to 0 for new month!');
 
+  // 3. Test New Conditions in Run #4: body_contains, to_contains, and year_month subfolders
+  console.log('Testing Run #4 features: body_contains, to_contains, and year_month hierarchy...');
+  const yearMonthFolder = path.join(testDir, 'YearMonthArchive');
+  const run4Config = {
+    rules: [
+      {
+        id: 'rule-body-test',
+        name: 'Urgent License Match',
+        enabled: true,
+        conditionType: 'body_contains',
+        conditionValue: 'official invoice',
+        targetFolder: yearMonthFolder,
+        saveEml: true,
+        saveAttachments: true,
+        subfolderMode: 'year_month'
+      }
+    ]
+  };
+
+  const bodyMatchResult = await processRawEmail(Buffer.from(mockEml), run4Config);
+  if (!bodyMatchResult.success) {
+    throw new Error('Expected body_contains rule to match email containing "official invoice"');
+  }
+
+  // Check Year/Month folder structure (e.g. testDir/YearMonthArchive/2026/10)
+  const yyyy = '2026';
+  const mm = '10';
+  const expectedSubdir = path.join(yearMonthFolder, yyyy, mm);
+  if (!fs.existsSync(expectedSubdir)) {
+    throw new Error(`Expected year/month subfolder ${expectedSubdir} to exist`);
+  }
+  console.log('SUCCESS: body_contains and year_month folder structure verified successfully!');
+
   // Cleanup test folder
   fs.rmSync(testDir, { recursive: true, force: true });
   console.log('All tests completed successfully and test artifacts cleaned up.');
