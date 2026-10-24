@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>คลังความรู้และบทความการจัดการอีเมลองค์กร | Email to Folder</title>
+<meta name="description" content="รวมบทความ คู่มือ และเทคนิคการจัดการอีเมลองค์กร ความปลอดภัย (Email Security), PDPA Compliance, วิธีจัดระเบียบ Zero Inbox และทริคประหยัดเวลาสำหรับฝ่ายบัญชี การเงิน และจัดซื้อ">
+<meta name="keywords" content="บทความอีเมล, Email Security, จัดระเบียบ Outlook, Zero Inbox, PDPA อีเมล, แบ็กอัปอีเมลองค์กร, สกัดไฟล์แนบ, ทริคบัญชีการเงิน">
+<meta name="author" content="Email to Folder Team">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://emailtofolder.com/articles/">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://emailtofolder.com/articles/">
+<meta property="og:title" content="คลังความรู้และบทความการจัดการอีเมลองค์กร | Email to Folder">
+<meta property="og:description" content="รวมบทความ คู่มือ และเทคนิคการจัดการอีเมลองค์กร ความปลอดภัย (Email Security), PDPA Compliance, วิธีจัดระเบียบ Zero Inbox และทริคประหยัดเวลา">
+<meta property="og:image" content="https://emailtofolder.com/favicon.png">
+<meta property="og:site_name" content="Email to Folder">
+<meta property="og:locale" content="th_TH">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="คลังความรู้และบทความการจัดการอีเมลองค์กร | Email to Folder">
+<meta name="twitter:description" content="รวมบทความ คู่มือ และเทคนิคการจัดการอีเมลองค์กร ความปลอดภัย (Email Security), PDPA Compliance, วิธีจัดระเบียบ Zero Inbox">
+<meta name="twitter:image" content="https://emailtofolder.com/favicon.png">
+
+<link rel="icon" type="image/png" href="../favicon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap">
+
+<!-- Structured Data (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "คลังความรู้และบทความการจัดการอีเมลองค์กร",
+  "description": "รวมบทความ คู่มือ และเทคนิคการจัดการอีเมลองค์กร ความปลอดภัย (Email Security), PDPA Compliance, วิธีจัดระเบียบ Zero Inbox",
+  "url": "https://emailtofolder.com/articles/",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Email to Folder",
+    "url": "https://emailtofolder.com"
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "หน้าแรก (Home)",
+        "item": "https://emailtofolder.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "บทความ (Articles)",
+        "item": "https://emailtofolder.com/articles/"
+      }
+    ]
+  }
+}
+</script>
+
+<style>
+:root{--bg:#ffffff;--bg2:#f5f5f7;--ink:#1d1d1f;--mute:#6e6e73;--line:rgba(0,0,0,.1);--card:rgba(255,255,255,.7);--brand:#0a84ff;--teal:#30d5c8;--vio:#8a5cff}
+html{scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,Prompt,system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+html[lang=th] body{font-family:Prompt,Inter,system-ui,sans-serif}
+html[lang=th] .en,html[lang=en] .th{display:none}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+.grad{background:linear-gradient(100deg,var(--brand),var(--teal) 50%,var(--vio));background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* nav */
+.nav{position:fixed;top:12px;left:50%;transform:translateX(-50%);width:min(960px,calc(100% - 24px));z-index:50;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px 8px 18px;border-radius:999px;background:var(--card);border:1px solid var(--line);backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px)}
+.logo{font-weight:700;font-size:15px;display:flex;gap:8px;align-items:center;white-space:nowrap}
+.logo i{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--vio));display:grid;place-items:center;color:#fff;font-style:normal;font-size:13px}
+.links{display:flex;gap:24px;font-size:13px;color:var(--mute)}.links a:hover{color:var(--ink)}
+.links a.active{color:var(--brand);font-weight:600}
+.r{display:flex;gap:8px;align-items:center}
+.lang{display:flex;background:var(--bg2);border-radius:999px;padding:2px}
+.lang button{border:0;background:none;color:var(--mute);font:600 12px inherit;font-family:inherit;padding:5px 11px;border-radius:999px;cursor:pointer;transition:.3s}
+html[lang=th] [data-l=th],html[lang=en] [data-l=en]{background:var(--ink);color:var(--bg)}
+.btn{display:inline-block;background:var(--brand);color:#fff;padding:12px 24px;border-radius:999px;font-weight:600;font-size:15px;transition:transform .3s,box-shadow .3s}
+.btn:hover{transform:scale(1.03);box-shadow:0 8px 30px rgba(10,132,255,.4)}
+.btn.sm{padding:8px 16px;font-size:13px}
+.btn.ghost{background:none;color:var(--brand);border:1px solid var(--line)}
+
+/* header */
+.header-hero{padding:140px 0 60px;text-align:center;background:radial-gradient(circle at 50% 20%,rgba(10,132,255,.08),transparent 70%)}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:999px;background:rgba(48,213,200,.12);color:#0d9488;font-size:12px;font-weight:600;border:1px solid rgba(48,213,200,.25);margin-bottom:16px}
+h1{font-size:clamp(32px,5vw,56px);font-weight:700;line-height:1.2;margin:0 auto 16px;letter-spacing:-.02em}
+.lead{font-size:clamp(16px,2vw,19px);color:var(--mute);max-width:720px;margin:0 auto}
+
+/* articles grid */
+.articles-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:24px;margin:50px 0 100px}
+.art-card{display:flex;flex-direction:column;background:var(--bg2);border:1px solid var(--line);border-radius:24px;overflow:hidden;transition:transform .3s,box-shadow .3s,border-color .3s}
+.art-card:hover{transform:translateY(-6px);border-color:rgba(10,132,255,.4);box-shadow:0 20px 40px rgba(0,0,0,.06)}
+.art-thumb{height:200px;background:#15151b;position:relative;display:flex;align-items:center;justify-content:center;color:#fff;font-size:54px;overflow:hidden}
+.art-thumb::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at center,rgba(10,132,255,.25),transparent 70%)}
+.art-body{padding:26px;flex:1;display:flex;flex-direction:column}
+.art-meta{display:flex;gap:10px;align-items:center;font-size:12px;color:var(--mute);margin-bottom:12px}
+.tag{padding:3px 10px;border-radius:999px;font-weight:600;font-size:11px}
+.tag.sec{background:rgba(239,68,68,.12);color:#dc2626}
+.tag.how{background:rgba(10,132,255,.12);color:var(--brand)}
+.tag.tip{background:rgba(138,92,255,.12);color:var(--vio)}
+.art-title{font-size:20px;font-weight:700;line-height:1.35;margin:0 0 12px;color:var(--ink)}
+.art-desc{font-size:14px;color:var(--mute);line-height:1.6;margin:0 0 20px;flex:1}
+.read-more{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:14px;color:var(--brand)}
+
+/* cta bar */
+.cta-banner{background:linear-gradient(135deg,#0d0d12,#181824);color:#fff;border-radius:28px;padding:50px 40px;text-align:center;margin-bottom:80px;border:1px solid rgba(255,255,255,.1)}
+.cta-banner h2{font-size:32px;margin:0 0 12px;color:#fff}
+.cta-banner p{color:#a1a1a6;font-size:16px;max-width:600px;margin:0 auto 24px}
+
+footer{padding:40px 0;border-top:1px solid var(--line);font-size:13px;color:var(--mute);text-align:center}
+</style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="nav">
+    <a href="../" class="logo">
+      <i>✉</i>
+      <span>Email to Folder</span>
+    </a>
+    <div class="links">
+      <a href="../#features"><span class="th">ฟีเจอร์</span><span class="en">Features</span></a>
+      <a href="../#how"><span class="th">การทำงาน</span><span class="en">How it Works</span></a>
+      <a href="../infographic.html"><span class="th">อินโฟกราฟิก</span><span class="en">Infographic</span></a>
+      <a href="./" class="active"><span class="th">บทความ & คลังความรู้</span><span class="en">Articles</span></a>
+      <a href="../#download"><span class="th">ดาวน์โหลด</span><span class="en">Download</span></a>
+    </div>
+    <div class="r">
+      <div class="lang">
+        <button data-l="th">TH</button>
+        <button data-l="en">EN</button>
+      </div>
+      <a class="btn sm" href="../downloads/EmailToFolder-Setup.exe" download>
+        <span class="th">ทดลองใช้ฟรี</span>
+        <span class="en">Free Trial</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Header -->
+  <header class="header-hero">
+    <div class="wrap">
+      <div class="badge">
+        <span>📚</span>
+        <span class="th">Email Knowledge Hub & Security Best Practices</span>
+        <span class="en">Email Knowledge Hub & Security Best Practices</span>
+      </div>
+      <h1>
+        <span class="th">คลังความรู้และการจัดการ<br><span class="grad">อีเมลสำหรับองค์กรยุคใหม่</span></span>
+        <span class="en">Enterprise Email Knowledge &<br><span class="grad">Modern Management Guides</span></span>
+      </h1>
+      <p class="lead">
+        <span class="th">รวบรวมแนวทางด้านความปลอดภัย (Security), การปฏิบัติตามกฎหมาย PDPA, เทคนิค Zero-Inbox และทริคประหยัดเวลาที่จะช่วยเปลี่ยนกล่องจดหมายของคุณให้เป็นคลังเอกสารอัตโนมัติ</span>
+        <span class="en">Guides on enterprise email security, PDPA compliance, Zero-Inbox workflows, and time-saving automation tricks for finance and IT teams.</span>
+      </p>
+    </div>
+  </header>
+
+  <!-- Articles List -->
+  <main class="wrap">
+    <div class="articles-grid">
+
+      <!-- Article 1: Security & Compliance -->
+      <article class="art-card">
+        <div class="art-thumb">
+          <span>🛡️</span>
+        </div>
+        <div class="art-body">
+          <div class="art-meta">
+            <span class="tag sec">Security & PDPA</span>
+            <span>⏱ 6 นาทีอ่าน</span>
+            <span>📅 25 ต.ค. 2026</span>
+          </div>
+          <h2 class="art-title">
+            <a href="email-security-compliance-guide.html">
+              <span class="th">ความปลอดภัยของอีเมลองค์กร: ทำไมจัดเก็บลง Local / Server จึงปลอดภัยกว่าคลาวด์ 100%</span>
+              <span class="en">Enterprise Email Security: Why Local/Server Archival Beats Pure Cloud</span>
+            </a>
+          </h2>
+          <p class="art-desc">
+            <span class="th">เจาะลึกความเสี่ยง Phishing, Ransomware และ Business Email Compromise (BEC) พร้อมแนวทางจัดเก็บไฟล์แนบแยกในระบบปิดเพื่อสอดคล้องกับ พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล (PDPA)</span>
+            <span class="en">Mitigate Phishing, Ransomware, and BEC risks by archiving attachments and clean .msg records into secured on-premise storage for PDPA compliance.</span>
+          </p>
+          <a class="read-more" href="email-security-compliance-guide.html">
+            <span class="th">อ่านบทความฉบับเต็ม →</span>
+            <span class="en">Read Article →</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Article 2: How-To Zero Inbox -->
+      <article class="art-card">
+        <div class="art-thumb">
+          <span>📥</span>
+        </div>
+        <div class="art-body">
+          <div class="art-meta">
+            <span class="tag how">How-To Guide</span>
+            <span>⏱ 5 นาทีอ่าน</span>
+            <span>📅 25 ต.ค. 2026</span>
+          </div>
+          <h2 class="art-title">
+            <a href="how-to-organize-outlook-zero-inbox.html">
+              <span class="th">วิธีจัดระเบียบ Microsoft Outlook และ Gmail สู่ Zero-Inbox พร้อมสกัดไฟล์แนบอัตโนมัติ</span>
+              <span class="en">How to Achieve Zero-Inbox in Outlook & Gmail with Auto-Extraction</span>
+            </a>
+          </h2>
+          <p class="art-desc">
+            <span class="th">บอกลาปัญหาไฟล์ .PST / .OST บวมจน Outlook ช้า ด้วยกลยุทธ์การจัดโครงสร้างโฟลเดอร์ตามปี/เดือน (`YYYY/MM`) และการสกัดไฟล์แนบลงโฟลเดอร์ทันทีที่มีอีเมลใหม่</span>
+            <span class="en">Solve slow Outlook and bloated OST/PST files with a structured Year/Month hierarchy and hands-free automatic email sorting.</span>
+          </p>
+          <a class="read-more" href="how-to-organize-outlook-zero-inbox.html">
+            <span class="th">อ่านบทความฉบับเต็ม →</span>
+            <span class="en">Read Article →</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Article 3: Tricks for Accounting & Finance -->
+      <article class="art-card">
+        <div class="art-thumb">
+          <span>💼</span>
+        </div>
+        <div class="art-body">
+          <div class="art-meta">
+            <span class="tag tip">Productivity Tricks</span>
+            <span>⏱ 7 นาทีอ่าน</span>
+            <span>📅 25 ต.ค. 2026</span>
+          </div>
+          <h2 class="art-title">
+            <a href="5-email-tricks-for-accounting-finance.html">
+              <span class="th">5 ทริคเด็ดจัดการอีเมลสำหรับฝ่ายบัญชี การเงิน และจัดซื้อ: ประหยัดเวลา 10+ ชม./สัปดาห์</span>
+              <span class="en">5 Email Productivity Tricks for Accounting & Finance Teams</span>
+            </a>
+          </h2>
+          <p class="art-desc">
+            <span class="th">เทคนิคตั้งชื่อไฟล์เอกสารอัตโนมัติ, การดึง Invoice PDF ไปรอจ่ายโดยไม่ต้องเปิดเมล, การเก็บไฟล์ .msg เป็นหลักฐานสรรพากร และการทำ Audit Trail สรุปเป็น CSV เข้า Excel</span>
+            <span class="en">Automatic invoice routing, legal .msg preservation for tax audits, Excel-ready CSV audit logging, and team-shared network NAS folders.</span>
+          </p>
+          <a class="read-more" href="5-email-tricks-for-accounting-finance.html">
+            <span class="th">อ่านบทความฉบับเต็ม →</span>
+            <span class="en">Read Article →</span>
+          </a>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- CTA Section -->
+    <div class="cta-banner">
+      <h2><span class="th">พร้อมเริ่มจัดระเบียบอีเมลของคุณแล้วหรือยัง?</span><span class="en">Ready to automate your email sorting?</span></h2>
+      <p>
+        <span class="th">ดาวน์โหลด Email to Folder ทดลองใช้ฟรี 100 ฉบับต่อเดือน ติดตั้งง่าย ใช้งานได้กับทั้ง Outlook Classic, Gmail และ Office 365</span>
+        <span class="en">Download Email to Folder for free (100 emails/month). Works seamlessly with Outlook Classic, Gmail, and Office 365.</span>
+      </p>
+      <a class="btn" href="../downloads/EmailToFolder-Setup.exe" download>
+        <span class="th">📥 ดาวน์โหลด Setup.exe ฟรี (~82 MB)</span>
+        <span class="en">📥 Download Setup.exe Free (~82 MB)</span>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>© 2026 Email to Folder Dev Team · <a href="../">emailtofolder.com</a> · Bangkok, Thailand</p>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      var h=document.documentElement,l="th";
+      try{var s=localStorage.getItem("lang");if(s==="th"||s==="en")l=s}catch(e){}
+      function set(x){h.lang=x;try{localStorage.setItem("lang",x)}catch(e){}}
+      set(l);
+      document.querySelectorAll(".lang button").forEach(function(b){b.onclick=function(){set(b.dataset.l)}});
+    })();
+  </script>
+</body>
+</html>

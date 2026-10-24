@@ -3,8 +3,100 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Email to Folder | emailtofolder.com</title>
+<title>Email to Folder — ซอฟต์แวร์จัดเก็บและคัดแยกอีเมลลงโฟลเดอร์อัตโนมัติ สำหรับ Outlook & Gmail</title>
+<meta name="description" content="ซอฟต์แวร์จัดเก็บและคัดแยกอีเมลลงโฟลเดอร์อัตโนมัติสำหรับ Microsoft Outlook, Gmail และ Office 365 สกัดไฟล์แนบ PDF, Excel และบันทึกไฟล์ .msg แท้ลง Local Drive หรือ Network Server ทันทีที่มีอีเมลใหม่">
+<meta name="keywords" content="จัดเก็บอีเมลอัตโนมัติ, อีเมลลงโฟลเดอร์, Email to Folder, แยกไฟล์แนบอีเมล, Outlook Auto Save, MAPI Table, สกัดไฟล์ PDF จากอีเมล, Backup อีเมลลง NAS, Zero Inbox, PDPA อีเมล">
+<meta name="author" content="Email to Folder Team">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://emailtofolder.com/">
 <link rel="icon" type="image/png" href="favicon.png">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://emailtofolder.com/">
+<meta property="og:title" content="Email to Folder — ซอฟต์แวร์จัดเก็บและคัดแยกอีเมลลงโฟลเดอร์อัตโนมัติ">
+<meta property="og:description" content="จัดเก็บและคัดแยกอีเมลลงโฟลเดอร์อัตโนมัติ สำหรับ Microsoft Outlook, Gmail, Office 365 สกัดไฟล์แนบ PDF, Excel และบันทึกไฟล์ .msg แท้">
+<meta property="og:image" content="https://emailtofolder.com/favicon.png">
+<meta property="og:site_name" content="Email to Folder">
+<meta property="og:locale" content="th_TH">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Email to Folder — ซอฟต์แวร์จัดเก็บและคัดแยกอีเมลลงโฟลเดอร์อัตโนมัติ">
+<meta name="twitter:description" content="จัดเก็บและคัดแยกอีเมลลงโฟลเดอร์อัตโนมัติ สำหรับ Microsoft Outlook, Gmail, Office 365 สกัดไฟล์แนบ PDF, Excel และบันทึกไฟล์ .msg แท้">
+<meta name="twitter:image" content="https://emailtofolder.com/favicon.png">
+
+<!-- Structured Data (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Email to Folder",
+      "operatingSystem": "Windows 10, Windows 11",
+      "applicationCategory": "BusinessApplication",
+      "softwareVersion": "1.3.0",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "THB",
+        "description": "ทดลองใช้ฟรี 100 ฉบับต่อเดือน (Free Trial 100 emails/month)"
+      },
+      "downloadUrl": "https://raw.githubusercontent.com/AJter0/emailtofolder/main/downloads/EmailToFolder-Setup.exe",
+      "featureList": [
+        "ตรวจจับ Microsoft Outlook Classic ในเครื่องอัตโนมัติผ่าน MAPI Table",
+        "เชื่อมต่อ Gmail และ Office 365 ผ่าน IMAP IDLE Push 24/7",
+        "สกัดไฟล์แนบ (PDF, Excel, Docs) และบันทึกไฟล์ .msg / .eml",
+        "จัดระเบียบโฟลเดอร์ตามปี/เดือน (YYYY/MM) หรือตามชื่อผู้ส่ง",
+        "ส่งออก Audit Trail ประวัติการจัดเก็บเป็นไฟล์ CSV เข้า Excel"
+      ]
+    },
+    {
+      "@type": "Organization",
+      "name": "Email to Folder",
+      "url": "https://emailtofolder.com",
+      "logo": "https://emailtofolder.com/favicon.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+66-94-562-0859",
+        "contactType": "Customer Service",
+        "email": "teraphanmail@gmail.com"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "โปรแกรม Email to Folder ทำงานร่วมกับ Microsoft Outlook อย่างไร?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "โปรแกรมจะตรวจจับโปรไฟล์ Outlook Classic ในเครื่อง Windows อัตโนมัติ และอ่าน Inbox ผ่าน MAPI Table ความเร็วสูง โดยไม่ต้องกรอกรหัสผ่าน และไม่ติดหน้าต่างเตือนความปลอดภัยของ Outlook"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "โควตาทดลองใช้ฟรี 100 ฉบับต่อเดือน ทำงานอย่างไร?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ผู้ใช้สามารถดาวน์โหลดและใช้งานได้ฟรี 100 ฉบับต่อเดือน โดยระบบจะตรวจจับเดือนใหม่และรีเซ็ตโควตากลับเป็น 0/100 ให้โดยอัตโนมัติในวันที่ 1 ของทุกเดือน"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "สามารถจัดเก็บลง Network Drive, NAS หรือ File Server องค์กรได้หรือไม่?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "สามารถระบุโฟลเดอร์ปลายทางได้ทั้งไดรฟ์ในเครื่อง (C:, D:), Network Share (\\\\server\\share), NAS และ File Server พร้อมเลือกโครงสร้างโฟลเดอร์ย่อยตามปี/เดือน หรือตามชื่อผู้ส่งได้"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap">
 <style>
 :root{--bg:#ffffff;--bg2:#f5f5f7;--ink:#1d1d1f;--mute:#6e6e73;--line:rgba(0,0,0,.1);--card:rgba(255,255,255,.7);--brand:#0a84ff;--teal:#30d5c8;--vio:#8a5cff;
@@ -127,7 +219,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 <div id="bar"></div><div class="cg" id="cg"></div>
 <div class="nav">
 <a href="#top" class="logo"><i>✉</i><span>emailtofolder.com</span></a>
-<div class="links"><a href="#features"><span class="th">จุดเด่น</span><span class="en">Features</span></a><a href="#how"><span class="th">วิธีทำงาน</span><span class="en">How it works</span></a><a href="#download"><span class="th">ดาวน์โหลด</span><span class="en">Download</span></a><a href="#custom">Custom</a><a href="#contact"><span class="th">ติดต่อ</span><span class="en">Contact</span></a></div>
+<div class="links"><a href="#features"><span class="th">จุดเด่น</span><span class="en">Features</span></a><a href="#how"><span class="th">วิธีทำงาน</span><span class="en">How it works</span></a><a href="infographic.html"><span class="th">อินโฟกราฟิก</span><span class="en">Infographic</span></a><a href="articles/"><span class="th">บทความ</span><span class="en">Articles</span></a><a href="#download"><span class="th">ดาวน์โหลด</span><span class="en">Download</span></a><a href="#custom">Custom</a><a href="#contact"><span class="th">ติดต่อ</span><span class="en">Contact</span></a></div>
 <div class="r"><div class="lang"><button data-l="th">TH</button><button data-l="en">EN</button></div><a class="btn sm" href="#download" style="background:linear-gradient(135deg,var(--brand),var(--vio))"><span class="th">ดาวน์โหลดฟรี</span><span class="en">Free Download</span></a></div>
 </div>
 
@@ -278,6 +370,89 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
         <h3 style="font-size:18px; margin:0 0 6px;"><span class="th">Office 365 & Mail Server</span><span class="en">Office 365 & Custom IMAP</span></h3>
         <p style="font-size:13px;"><span class="th">รองรับเซิร์ฟเวอร์อีเมลบริษัททุกรูปแบบ จัดเก็บลงได้ทั้ง Local Folder, Network Share และ NAS</span><span class="en">Works with any corporate IMAP server and saves directly to Local Drives, Network Shares, or NAS.</span></p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- Articles & Knowledge Section -->
+<section id="articles" style="background:var(--bg); border-top:1px solid var(--line);">
+  <div class="wrap">
+    <div style="text-align:center; max-width:720px; margin:0 auto 40px;">
+      <div class="eb rv"><span class="th">บทความ & คลังความรู้</span><span class="en">Knowledge Hub & Articles</span></div>
+      <h2 class="rv d1"><span class="th">เทคนิคและการจัดการ<br><span class="grad">อีเมลสำหรับองค์กร</span></span><span class="en">Email Management &<br><span class="grad">Security Guides</span></span></h2>
+      <p class="sub rv d2"><span class="th">รวมบทความเชิงลึกด้านความปลอดภัย (Security), PDPA Compliance, วิธีจัดระเบียบ Zero-Inbox และทริคประหยัดเวลาสำหรับฝ่ายบัญชีและการเงิน</span><span class="en">In-depth guides on email security, PDPA compliance, Zero-Inbox workflows, and productivity hacks for enterprise teams.</span></p>
+    </div>
+
+    <div class="bento" style="margin-top:0;">
+      <!-- Article Card 1 -->
+      <div class="bc w rv" style="text-align:left; background:var(--bg2);">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <span class="chip" style="margin:0; background:rgba(239,68,68,.12); color:#dc2626;">Security & PDPA</span>
+          <span style="font-size:12px; color:var(--mute);">⏱ 6 min read</span>
+        </div>
+        <h3 style="font-size:20px; line-height:1.35; margin:0 0 10px;">
+          <a href="articles/email-security-compliance-guide.html">
+            <span class="th">ความปลอดภัยของอีเมลองค์กร: ทำไมจัดเก็บลง Local / Server จึงปลอดภัยกว่าคลาวด์ 100%</span>
+            <span class="en">Enterprise Email Security: Why Local/Server Archival Beats Pure Cloud</span>
+          </a>
+        </h3>
+        <p style="font-size:14px; color:var(--mute); margin-bottom:16px;">
+          <span class="th">เจาะลึกความเสี่ยง Phishing, Ransomware และ BEC พร้อมแนวทางจัดเก็บไฟล์แนบแยกในระบบปิดเพื่อสอดคล้องกับ PDPA</span>
+          <span class="en">Mitigate Phishing, Ransomware, and BEC risks by archiving attachments and clean records into secured on-premise storage.</span>
+        </p>
+        <a href="articles/email-security-compliance-guide.html" style="font-size:13px; font-weight:600; color:var(--brand);">
+          <span class="th">อ่านบทความฉบับเต็ม →</span><span class="en">Read Article →</span>
+        </a>
+      </div>
+
+      <!-- Article Card 2 -->
+      <div class="bc w rv d1" style="text-align:left; background:var(--bg2);">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <span class="chip" style="margin:0; background:rgba(10,132,255,.12); color:var(--brand);">Zero-Inbox Guide</span>
+          <span style="font-size:12px; color:var(--mute);">⏱ 5 min read</span>
+        </div>
+        <h3 style="font-size:20px; line-height:1.35; margin:0 0 10px;">
+          <a href="articles/how-to-organize-outlook-zero-inbox.html">
+            <span class="th">วิธีจัดระเบียบ Microsoft Outlook และ Gmail สู่ Zero-Inbox พร้อมสกัดไฟล์แนบอัตโนมัติ</span>
+            <span class="en">How to Achieve Zero-Inbox in Outlook & Gmail with Auto-File Extraction</span>
+          </a>
+        </h3>
+        <p style="font-size:14px; color:var(--mute); margin-bottom:16px;">
+          <span class="th">บอกลาปัญหาไฟล์ .OST/.PST บวมจนเครื่องช้า ด้วยกลยุทธ์การจัดโครงสร้างโฟลเดอร์ตามปี/เดือน (YYYY/MM)</span>
+          <span class="en">Solve slow Outlook and bloated database files with structured Year/Month hierarchy and automatic rules.</span>
+        </p>
+        <a href="articles/how-to-organize-outlook-zero-inbox.html" style="font-size:13px; font-weight:600; color:var(--brand);">
+          <span class="th">อ่านบทความฉบับเต็ม →</span><span class="en">Read Article →</span>
+        </a>
+      </div>
+
+      <!-- Article Card 3 -->
+      <div class="bc x rv d2" style="text-align:left; background:var(--bg2);">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <span class="chip" style="margin:0; background:rgba(138,92,255,.12); color:var(--vio);">Productivity Tricks</span>
+          <span style="font-size:12px; color:var(--mute);">⏱ 7 min read</span>
+        </div>
+        <h3 style="font-size:20px; line-height:1.35; margin:0 0 10px;">
+          <a href="articles/5-email-tricks-for-accounting-finance.html">
+            <span class="th">5 ทริคเด็ดจัดการอีเมลสำหรับฝ่ายบัญชี การเงิน และจัดซื้อ: ประหยัดเวลาค้นหาเอกสาร 10+ ชม./สัปดาห์</span>
+            <span class="en">5 Email Productivity Tricks for Accounting & Finance Teams: Save 10+ Hours/Week</span>
+          </a>
+        </h3>
+        <p style="font-size:14px; color:var(--mute); margin-bottom:16px;">
+          <span class="th">เทคนิคตั้งชื่อไฟล์เอกสารอัตโนมัติ, การดึง Invoice PDF ไปรอจ่ายโดยไม่ต้องเปิดเมล, การเก็บไฟล์ .msg เป็นหลักฐานสรรพากร และการทำ Audit Trail สรุปเป็น CSV เข้า Excel</span>
+          <span class="en">Automatic invoice routing, legal .msg preservation for tax audits, Excel-ready CSV audit logging, and team-shared network folders.</span>
+        </p>
+        <a href="articles/5-email-tricks-for-accounting-finance.html" style="font-size:13px; font-weight:600; color:var(--brand);">
+          <span class="th">อ่านบทความฉบับเต็ม →</span><span class="en">Read Article →</span>
+        </a>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:36px;" class="rv d3">
+      <a class="btn ghost" href="articles/" style="font-size:14px; padding:10px 22px;">
+        <span class="th">ดูบทความและคลังความรู้ทั้งหมด (View All Articles) →</span>
+        <span class="en">View All Knowledge Articles →</span>
+      </a>
     </div>
   </div>
 </section>

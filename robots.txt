@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://emailtofolder.com/sitemap.xml
