@@ -34,17 +34,19 @@ html[lang=th] .en,html[lang=en] .th{display:none}
 a{color:inherit;text-decoration:none}
 .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
 .pixel{font-family:'Press Start 2P', monospace, monospace;letter-spacing:1px}
+.grad{background:linear-gradient(100deg,var(--brand),var(--teal) 50%,var(--vio));background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sh 6s linear infinite}
+@keyframes sh{to{background-position:200% center}}
 
 #bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--brand),var(--teal),var(--vio));z-index:60}
 
 /* nav */
-.nav{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;transform:translateX(-50%);width:min(960px,calc(100% - 24px));z-index:50;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px 8px 18px;border-radius:999px;background:var(--card);border:1px solid var(--line);backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px);color:#fff}
+.nav{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;transform:translateX(-50%);width:min(1080px,calc(100% - 24px));z-index:50;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px 8px 18px;border-radius:999px;background:var(--card);border:1px solid var(--line);backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px);color:#fff}
 .logo{font-weight:700;font-size:15px;display:flex;gap:10px;align-items:center;white-space:nowrap;letter-spacing:-.02em}
 .logo-mark{width:28px;height:28px;border-radius:8px;flex-shrink:0;transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;display:block}
 .logo:hover .logo-mark{transform:scale(1.08) rotate(-2deg);box-shadow:0 4px 20px rgba(10,132,255,.35)}
 .logo-txt{font-weight:700;color:#fff;letter-spacing:-.03em}
 .logo-tld{background:linear-gradient(135deg,var(--brand),var(--vio));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;font-weight:800}
-.links{display:flex;gap:24px;font-size:13px;color:var(--mute)}.links a:hover{color:#fff}
+.links{display:flex;gap:16px;font-size:13px;color:var(--mute);align-items:center}.links a:hover{color:#fff}
 .links a.active{color:var(--brand);font-weight:600}
 .r{display:flex;gap:8px;align-items:center}
 .lang{display:flex;background:rgba(255,255,255,.08);border-radius:999px;padding:2px}
@@ -91,7 +93,7 @@ canvas#gameCanvas{display:block;width:100%;height:100%;image-rendering:pixelated
 footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mute);font-size:13px}
 footer .wrap{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 
-@media(max-width:720px){
+@media(max-width:1040px){.links{gap:10px;font-size:12px}}@media(max-width:860px){
   .links{display:none}
   .logo-txt{font-size:14px}
   .btn.sm{display:none}
@@ -113,8 +115,10 @@ footer .wrap{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;justify-
       <a href="./#how"><span class="th">วิธีทำงาน</span><span class="en">How it works</span></a>
       <a href="infographic.html"><span class="th">อินโฟกราฟิก</span><span class="en">Infographic</span></a>
       <a href="articles/"><span class="th">บทความ</span><span class="en">Articles</span></a>
-      <a href="game.html" class="active"><span class="th">🎮 มินิเกม</span><span class="en">🎮 Mini Game</span></a>
+      <a href="game.html" class="active"><span class="th">มินิเกม 🎮</span><span class="en">Mini Game 🎮</span></a>
       <a href="./#download"><span class="th">ดาวน์โหลด</span><span class="en">Download</span></a>
+      <a href="./#custom">Custom</a>
+      <a href="./#contact"><span class="th">ติดต่อ</span><span class="en">Contact</span></a>
     </div>
     <div class="r">
       <div class="lang">
@@ -130,6 +134,21 @@ footer .wrap{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;justify-
 
   <!-- Game Section -->
   <main class="game-section">
+    <!-- Mascot Hero Intro -->
+    <div style="text-align:center; max-width:760px; margin:0 auto 28px; padding:0 16px;">
+      <div style="background:rgba(48,213,200,.14); color:var(--teal); border:1px solid rgba(48,213,200,.3); padding:5px 14px; font-size:11px; font-weight:700; border-radius:999px; display:inline-flex; align-items:center; gap:6px; margin-bottom:12px;">
+        <span>✦</span> <span class="th">OFFICIAL MASCOT & CYBER GUARDIAN</span><span class="en">OFFICIAL MASCOT & CYBER GUARDIAN</span>
+      </div>
+      <h1 style="font-size:clamp(26px,4.5vw,42px); font-weight:800; line-height:1.2; margin:0 0 10px; color:#fff;">
+        <span class="th">ภารกิจส่งเอกสารไซเบอร์ของ <span class="grad">EmailMan</span></span>
+        <span class="en">The Cyber Mission of <span class="grad">EmailMan</span></span>
+      </h1>
+      <p style="margin:0 auto; font-size:14px; color:#a1a1aa; max-width:620px; line-height:1.6;">
+        <span class="th">สวมบทบาทเป็นมาสคอตของเรา บินฝ่าด่าน Mail Server ข้ามไฟร์วอลล์ สกัดไฟล์ Invoice PDF และส่งตรงถึงโฟลเดอร์เครื่อง Client อย่างปลอดภัย!</span>
+        <span class="en">Take control of our official mascot EmailMan, dodge Spam and Trojan Viruses, deliver clean PDF invoices, and achieve Zero-Inbox status!</span>
+      </p>
+    </div>
+
     <div class="game-cabinet">
       <!-- Cabinet Top Bar -->
       <div class="cabinet-header">
