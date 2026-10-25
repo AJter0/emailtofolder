@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Email to Folder</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <img src="../icons/icon48.png" alt="Logo" class="logo" />
+      <div>
+        <div class="brand-name">emailtofolder<span class="tld">.com</span></div>
+        <div class="brand-sub" id="versionText">Chrome Auto Archiver</div>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button class="lang-btn" id="langBtn" title="Switch TH / EN">TH</button>
+      <button class="icon-btn" id="openOptionsBtn" title="ตั้งค่าและจัดการกฎ (Options)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <section class="quota-card">
+    <div class="quota-head">
+      <span class="quota-label">
+        <span class="th">โควตาประจำเดือน</span>
+        <span class="en">Monthly Quota</span>
+      </span>
+      <span class="quota-val" id="quotaText">0 / 100</span>
+    </div>
+    <div class="quota-track">
+      <div class="quota-bar" id="quotaBar" style="width:0%"></div>
+    </div>
+    <div class="quota-foot">
+      <span id="activeRulesText">0 กฎที่เปิดใช้งาน</span>
+      <span id="rootFolderText">Downloads/EmailToFolder</span>
+    </div>
+  </section>
+
+  <section class="accounts">
+    <div class="acc-row" id="gmailRow">
+      <div class="acc-left">
+        <span class="acc-dot" id="gmailDot"></span>
+        <div>
+          <div class="acc-name">Gmail API</div>
+          <div class="acc-email" id="gmailStatus">ยังไม่ได้เชื่อมต่อ</div>
+        </div>
+      </div>
+      <button class="mini-btn" id="gmailActionBtn">ตั้งค่า</button>
+    </div>
+
+    <div class="acc-row" id="outlookRow">
+      <div class="acc-left">
+        <span class="acc-dot" id="outlookDot"></span>
+        <div>
+          <div class="acc-name">Outlook / Office 365</div>
+          <div class="acc-email" id="outlookStatus">ยังไม่ได้เชื่อมต่อ</div>
+        </div>
+      </div>
+      <button class="mini-btn" id="outlookActionBtn">ตั้งค่า</button>
+    </div>
+  </section>
+
+  <div class="sync-wrap">
+    <button class="sync-btn" id="syncNowBtn">
+      <span id="syncBtnLabel">
+        <span class="th">🔄 ซิงก์อีเมลตอนนี้ (Sync Now)</span>
+        <span class="en">🔄 Sync Emails Now</span>
+      </span>
+    </button>
+    <div class="sync-status" id="syncStatus"></div>
+  </div>
+
+  <section class="dropzone" id="dropzone">
+    <input type="file" id="fileInput" accept=".eml,message/rfc822" multiple hidden />
+    <div class="dz-title">
+      📥 <span class="th">ลากไฟล์ .eml มาวางที่นี่เพื่อจัดเก็บตามกฎ</span>
+      <span class="en">Drop .eml files here to archive by rules</span>
+    </div>
+    <div class="dz-sub">
+      <span class="th">หรือคลิกเพื่อเลือกไฟล์ .eml จากเครื่อง</span>
+      <span class="en">or click to browse .eml files</span>
+    </div>
+  </section>
+
+  <section class="logs">
+    <div class="logs-head">
+      <span>
+        <span class="th">ประวัติการจัดเก็บล่าสุด</span>
+        <span class="en">Recent Activity</span>
+      </span>
+      <button class="link-btn" id="viewAllLogsBtn">
+        <span class="th">ดูทั้งหมด / จัดการกฎ →</span>
+        <span class="en">All Logs & Rules →</span>
+      </button>
+    </div>
+    <div class="log-list" id="logList"></div>
+  </section>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

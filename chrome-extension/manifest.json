@@ -1,0 +1,73 @@
+{
+  "manifest_version": 3,
+  "name": "Email to Folder — Gmail & Outlook Auto Archiver",
+  "short_name": "Email to Folder",
+  "version": "1.0.0",
+  "description": "จัดเก็บอีเมล Gmail และ Outlook / Office 365 ลงโฟลเดอร์อัตโนมัติตามกฎ พร้อมแยกไฟล์แนบ — ประมวลผลในเบราว์เซอร์ 100%",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvkyiUdtVVsZw3a+M5nPRi4AL/ERCYSMhVaay5fQxqYvzQc7S1w0iC9e9EOPRn+deipmBtGT+jRLA92qEpDHsnA/l0Uqv82cocLMqgWtBEAgy8LlebAmCwX+YzonOhv7axix+dR2QI0refKQLZZyMMdgYSvL3gB79gY9TOBizkgCosapE/FcMOOq5/ROKlPZzuPqGpX4SDy1bzRMxJnGmZuijYCnKFh5G3uzk0gCx11Nm6IDnj97Q2wROuKVdKXFFi13VyX2L7Lqh4gi0mMMffxK+7q6SM9Iz/OjiQZZW408jCogYVQNgcuhwOOTxhYrthkhPuuPaBB2WIfb6xF3EiwIDAQAB",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "Email to Folder",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "options_page": "options/options.html",
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "alarms",
+    "identity",
+    "downloads",
+    "downloads.ui",
+    "notifications",
+    "offscreen"
+  ],
+  "host_permissions": [
+    "https://gmail.googleapis.com/*",
+    "https://login.microsoftonline.com/*",
+    "https://graph.microsoft.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://mail.google.com/*"],
+      "js": ["content/gmail.js"],
+      "css": ["content/fab.css"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://outlook.office.com/*",
+        "https://outlook.office365.com/*",
+        "https://outlook.live.com/*"
+      ],
+      "js": ["content/outlook.js"],
+      "css": ["content/fab.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["icons/icon48.png"],
+      "matches": [
+        "https://mail.google.com/*",
+        "https://outlook.office.com/*",
+        "https://outlook.office365.com/*",
+        "https://outlook.live.com/*"
+      ]
+    }
+  ],
+  "minimum_chrome_version": "116"
+}

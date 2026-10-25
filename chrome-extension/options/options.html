@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Email to Folder — ตั้งค่าและจัดการกฎ (Extension Dashboard)</title>
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <div class="brand">
+        <img src="../icons/icon48.png" alt="Logo" class="brand-logo" />
+        <div>
+          <div class="brand-title">emailtofolder<span class="tld">.com</span> <span class="badge">Chrome Extension</span></div>
+          <div class="brand-sub" id="extVersionSub">Auto Email Archiver for Gmail & Outlook</div>
+        </div>
+      </div>
+      <nav class="tabs" id="tabNav">
+        <button class="tab active" data-tab="rules">⚡ กฎคัดแยก (Smart Rules)</button>
+        <button class="tab" data-tab="accounts">🔗 บัญชีอีเมล (Accounts)</button>
+        <button class="tab" data-tab="logs">📋 ประวัติ (Audit Log)</button>
+        <button class="tab" data-tab="settings">⚙️ ตั้งค่าระบบ (Settings)</button>
+      </nav>
+      <div class="top-right">
+        <span class="quota-pill" id="topQuotaPill">โควตา: 0 / 100</span>
+        <button class="btn primary sm" id="topSyncBtn">🔄 Sync Now</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap main-area">
+    <div id="bannerMsg" class="banner" hidden></div>
+
+    <!-- TAB 1: SMART RULES -->
+    <section class="panel active" id="tab-rules">
+      <div class="panel-head">
+        <div>
+          <h1>กฎการจัดเก็บและคัดแยกอีเมล (Smart Rules)</h1>
+          <p class="mute">ระบบจะตรวจสอบกฎเรียงจากบนลงล่าง กฎข้อแรกที่ตรงเงื่อนไขจะถูกนำมาใช้จัดเก็บไฟล์ลงโฟลเดอร์ย่อยใน Downloads</p>
+        </div>
+        <button class="btn primary" id="newRuleBtn">+ เพิ่มกฎใหม่ (Add Rule)</button>
+      </div>
+
+      <!-- Rule Editor Card -->
+      <form class="card rule-form" id="ruleForm" hidden>
+        <h3 id="ruleFormTitle">เพิ่มกฎการจัดเก็บใหม่</h3>
+        <input type="hidden" id="ruleId" />
+        <div class="grid-2">
+          <label class="field">
+            <span>ชื่อกฎ (Rule Name)</span>
+            <input type="text" id="ruleName" placeholder="เช่น ใบแจ้งหนี้ / Invoices" required />
+          </label>
+          <label class="field">
+            <span>แหล่งอีเมล (Account Source)</span>
+            <select id="ruleSource">
+              <option value="any">ทุกบัญชี (Gmail + Outlook)</option>
+              <option value="gmail">เฉพาะ Gmail</option>
+              <option value="outlook">เฉพาะ Outlook / Office 365</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="grid-2">
+          <label class="field">
+            <span>เงื่อนไขการคัดกรอง (Condition Type)</span>
+            <select id="ruleCondType">
+              <option value="subject_contains">หัวข้ออีเมลมีคำว่า (Subject contains)</option>
+              <option value="from_contains">ผู้ส่งมีคำว่า / อีเมล (From contains)</option>
+              <option value="to_contains">ผู้รับ To/CC มีคำว่า (To/CC contains)</option>
+              <option value="body_contains">เนื้อหาอีเมลมีคำว่า (Body contains)</option>
+              <option value="has_attachment">มีไฟล์แนบ (Has attachment)</option>
+              <option value="attachment_name_contains">ชื่อไฟล์แนบมีคำว่า (Attachment name contains)</option>
+              <option value="all_emails">อีเมลขาเข้าทั้งหมด (All incoming emails)</option>
+            </select>
+          </label>
+          <label class="field" id="ruleCondValWrap">
+            <span>คำค้นหา (Keyword — ไม่สนตัวพิมพ์เล็ก/ใหญ่)</span>
+            <input type="text" id="ruleCondVal" placeholder="เช่น invoice, ใบเสร็จ, @supplier.com, .pdf" />
+          </label>
+        </div>
+
+        <div class="grid-2">
+          <label class="field">
+            <span>โฟลเดอร์ปลายทาง (ภายใต้ Downloads/<span id="rootPreviewLbl">EmailToFolder</span>/)</span>
+            <input type="text" id="ruleTarget" placeholder="เช่น Finance/Invoices หรือ Clients/ACME" required />
+          </label>
+          <label class="field">
+            <span>การจัดโครงสร้างโฟลเดอร์ย่อย (Subfolder Mode)</span>
+            <select id="ruleSubfolder">
+              <option value="year_month">แยกตาม ปี/เดือน — เช่น 2026/10</option>
+              <option value="sender">แยกตาม ชื่อผู้ส่ง — เช่น Sender Name</option>
+              <option value="email">สร้างโฟลเดอร์แยกต่อ 1 อีเมล — YYYY-MM-DD_Subject</option>
+              <option value="none">บันทึกตรงในโฟลเดอร์ปลายทาง (ไม่แยกย่อย)</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="checks-row">
+          <label class="check"><input type="checkbox" id="ruleSaveEml" checked /> บันทึกไฟล์อีเมลต้นฉบับ (.eml)</label>
+          <label class="check"><input type="checkbox" id="ruleSaveAtt" checked /> แยกและบันทึกไฟล์แนบทั้งหมด (PDF, Excel, รูป ฯลฯ)</label>
+          <label class="check"><input type="checkbox" id="rulePrefixAtt" /> เติมวันที่ YYYY-MM-DD_ หน้าชื่อไฟล์แนบ</label>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn primary">💾 บันทึกกฎ (Save Rule)</button>
+          <button type="button" class="btn ghost" id="cancelRuleBtn">ยกเลิก</button>
+        </div>
+      </form>
+
+      <div class="rule-list" id="ruleList"></div>
+    </section>
+
+    <!-- TAB 2: ACCOUNTS -->
+    <section class="panel" id="tab-accounts">
+      <div class="panel-head">
+        <div>
+          <h1>เชื่อมต่อบัญชี Gmail และ Outlook / Office 365</h1>
+          <p class="mute">เชื่อมต่อผ่าน OAuth 2.0 อย่างเป็นทางการ (สิทธิ์อ่านอย่างเดียว Read-Only) ข้อมูลและโทเค็นเก็บในเครื่องของคุณเท่านั้น</p>
+        </div>
+        <a class="btn ghost" href="https://emailtofolder.com/extension.html#install" target="_blank" rel="noopener">📖 คู่มือตั้งค่า OAuth</a>
+      </div>
+
+      <div class="card oauth-info">
+        <div class="oauth-row">
+          <div>
+            <div class="oauth-label">Extension ID (คงที่)</div>
+            <code id="extIdCode">cidokheholdhfghadmjihmmdfoibipoh</code>
+          </div>
+          <button class="btn ghost sm" id="copyExtIdBtn">คัดลอก ID</button>
+        </div>
+        <div class="oauth-row">
+          <div>
+            <div class="oauth-label">OAuth Redirect URI (นำไปวางใน Google Cloud Console และ Azure App Registration)</div>
+            <code id="redirectUriCode">https://cidokheholdhfghadmjihmmdfoibipoh.chromiumapp.org/</code>
+          </div>
+          <button class="btn ghost sm" id="copyRedirectBtn">คัดลอก Redirect URI</button>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <!-- Gmail Card -->
+        <div class="card">
+          <div class="acc-card-head">
+            <div>
+              <h2>Gmail (Google Workspace / @gmail.com)</h2>
+              <p class="mute">ใช้ Gmail API (`gmail.readonly`)</p>
+            </div>
+            <span class="status-pill" id="gmailBadge">ยังไม่เชื่อมต่อ</span>
+          </div>
+          <label class="field">
+            <span>Google OAuth Client ID (ประเภท Web application)</span>
+            <input type="text" id="gmailClientId" placeholder="xxxx-xxxx.apps.googleusercontent.com" />
+          </label>
+          <div class="acc-meta" id="gmailMeta"></div>
+          <div class="form-actions">
+            <button class="btn ghost" id="saveGmailClientBtn">บันทึก Client ID</button>
+            <button class="btn primary" id="connectGmailBtn">🔗 เชื่อมต่อ Gmail</button>
+            <button class="btn danger" id="disconnectGmailBtn" hidden>ตัดการเชื่อมต่อ</button>
+          </div>
+          <div class="backfill-bar" id="gmailBackfillBar" hidden>
+            <span>ดึงอีเมลย้อนหลัง:</span>
+            <button class="btn ghost sm" data-backfill="gmail:7">ย้อนหลัง 7 วัน</button>
+            <button class="btn ghost sm" data-backfill="gmail:30">ย้อนหลัง 30 วัน</button>
+          </div>
+        </div>
+
+        <!-- Outlook Card -->
+        <div class="card">
+          <div class="acc-card-head">
+            <div>
+              <h2>Microsoft Outlook / Office 365</h2>
+              <p class="mute">ใช้ Microsoft Graph API (`Mail.Read`, PKCE)</p>
+            </div>
+            <span class="status-pill" id="outlookBadge">ยังไม่เชื่อมต่อ</span>
+          </div>
+          <label class="field">
+            <span>Application (Client) ID (ประเภท Single-page application)</span>
+            <input type="text" id="outlookClientId" placeholder="00000000-0000-0000-0000-000000000000" />
+          </label>
+          <label class="field">
+            <span>Directory (Tenant) ID (ค่าเริ่มต้น `common` รองรับทั้งองค์กรและส่วนตัว)</span>
+            <input type="text" id="outlookTenant" placeholder="common" />
+          </label>
+          <div class="acc-meta" id="outlookMeta"></div>
+          <div class="form-actions">
+            <button class="btn ghost" id="saveOutlookClientBtn">บันทึก Client ID</button>
+            <button class="btn primary" id="connectOutlookBtn">🔗 เชื่อมต่อ Outlook</button>
+            <button class="btn danger" id="disconnectOutlookBtn" hidden>ตัดการเชื่อมต่อ</button>
+          </div>
+          <div class="backfill-bar" id="outlookBackfillBar" hidden>
+            <span>ดึงอีเมลย้อนหลัง:</span>
+            <button class="btn ghost sm" data-backfill="outlook:7">ย้อนหลัง 7 วัน</button>
+            <button class="btn ghost sm" data-backfill="outlook:30">ย้อนหลัง 30 วัน</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: AUDIT LOG -->
+    <section class="panel" id="tab-logs">
+      <div class="panel-head">
+        <div>
+          <h1>ประวัติการจัดเก็บอีเมล (Audit Trail)</h1>
+          <p class="mute">ตรวจสอบรายการอีเมลและไฟล์แนบที่ถูกคัดแยก พร้อมส่งออกเป็นไฟล์ CSV (รองรับภาษาไทยใน Excel)</p>
+        </div>
+        <div class="form-actions">
+          <button class="btn primary" id="exportCsvBtn">📥 ส่งออก CSV (Export Excel)</button>
+          <button class="btn danger" id="clearLogsBtn">ล้างประวัติ</button>
+        </div>
+      </div>
+
+      <div class="card filter-bar">
+        <input type="search" id="logSearch" placeholder="ค้นหาหัวข้ออีเมล, ผู้ส่ง, หรือโฟลเดอร์..." />
+        <select id="logRuleFilter">
+          <option value="">ทุกกฎ (All Rules)</option>
+        </select>
+        <select id="logStatusFilter">
+          <option value="">ทุกสถานะ (All Status)</option>
+          <option value="saved">บันทึกสำเร็จ (Saved)</option>
+          <option value="skipped">ไม่ตรงกฎ (Skipped)</option>
+          <option value="error">ผิดพลาด (Error)</option>
+        </select>
+      </div>
+
+      <div class="card table-wrap">
+        <table class="log-table">
+          <thead>
+            <tr>
+              <th>เวลาที่บันทึก</th>
+              <th>แหล่งที่มา</th>
+              <th>หัวข้ออีเมล / ผู้ส่ง</th>
+              <th>กฎที่ใช้</th>
+              <th>โฟลเดอร์ปลายทาง</th>
+              <th>ไฟล์ที่บันทึก</th>
+              <th>สถานะ</th>
+            </tr>
+          </thead>
+          <tbody id="logTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TAB 4: SETTINGS -->
+    <section class="panel" id="tab-settings">
+      <div class="panel-head">
+        <div>
+          <h1>ตั้งค่าระบบและโฟลเดอร์หลัก (System Settings)</h1>
+          <p class="mute">กำหนดโฟลเดอร์หลักภายใต้โฟลเดอร์ Downloads ของ Chrome และความถี่ในการซิงก์อัตโนมัติ</p>
+        </div>
+      </div>
+
+      <form class="card settings-form" id="settingsForm">
+        <div class="grid-2">
+          <label class="field">
+            <span>โฟลเดอร์หลักใน Chrome Downloads (Root Folder)</span>
+            <input type="text" id="setRootFolder" placeholder="EmailToFolder" required />
+          </label>
+          <label class="field">
+            <span>โฟลเดอร์สำหรับการกดบันทึกด้วยตนเอง (Manual Save Folder)</span>
+            <input type="text" id="setManualFolder" placeholder="Manual" required />
+          </label>
+        </div>
+
+        <div class="grid-3">
+          <label class="field">
+            <span>ความถี่ในการซิงก์อัตโนมัติ (นาที)</span>
+            <input type="number" id="setSyncInterval" min="1" max="120" value="5" />
+          </label>
+          <label class="field">
+            <span>จำนวนอีเมลสูงสุดต่อการซิงก์ 1 รอบ</span>
+            <input type="number" id="setMaxPerSync" min="1" max="100" value="25" />
+          </label>
+          <label class="field">
+            <span>ดึงย้อนหลังเมื่อเชื่อมต่อครั้งแรก (วัน)</span>
+            <input type="number" id="setBackfillDays" min="0" max="90" value="0" />
+          </label>
+        </div>
+
+        <div class="checks-col">
+          <label class="check"><input type="checkbox" id="setAutoSync" checked /> เปิดใช้งานการซิงก์อัตโนมัติเบื้องหลัง (Background Auto-Sync)</label>
+          <label class="check"><input type="checkbox" id="setSkipInline" checked /> ข้ามรูปภาพลายเซ็นขนาดเล็กในเนื้อหาอีเมล (Skip inline signature images)</label>
+          <label class="check"><input type="checkbox" id="setSilentDl" checked /> ซ่อนแถบแจ้งเตือนดาวน์โหลดของ Chrome ขณะจัดเก็บไฟล์อัตโนมัติ</label>
+          <label class="check"><input type="checkbox" id="setNotify" checked /> แสดงการแจ้งเตือนเมื่อจัดเก็บอีเมลใหม่สำเร็จ</label>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn primary">💾 บันทึกการตั้งค่า (Save Settings)</button>
+          <button type="button" class="btn ghost" id="resetTrackerBtn">รีเซ็ตตัวจำอีเมลที่เคยซิงก์แล้ว (Reset Synced IDs)</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script type="module" src="options.js"></script>
+</body>
+</html>
