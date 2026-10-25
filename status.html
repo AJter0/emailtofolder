@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Global Email Server Status — เช็คสถานะเซิร์ฟเวอร์อีเมลทั่วโลกแบบ Real-time (48+ แบรนด์) | Email to Folder</title>
-<meta name="description" content="ตรวจสอบสถานะ Up/Down ความเร็ว Ping (ms) และ MX DNS ของผู้ให้บริการอีเมลทั่วโลกกว่า 48 แบรนด์แบบ Real-time เช่น Gmail, Outlook, Microsoft 365, iCloud, Yahoo, Zoho, ProtonMail, Fastmail พร้อมเครื่องมือเช็ค MX/SPF/DMARC ของโดเมนบริษัท">
-<meta name="keywords" content="เช็คสถานะอีเมล, Email Server Status, Gmail ล่มไหม, Outlook ล่ม, Office 365 status, เช็ค MX Domain, ตรวจสอบเซิร์ฟเวอร์อีเมล, Global Email Status Monitor">
+<title>Global Email Server Status Map — แดชบอร์ดแผนที่โลกเช็คสถานะอีเมล Real-time (48 แบรนด์) | Email to Folder</title>
+<meta name="description" content="แดชบอร์ดแผนที่โลก (World Map Telemetry Dashboard) ตรวจสอบสถานะ Up/Down ความเร็ว Ping (ms) และ MX DNS ของผู้ให้บริการอีเมลทั่วโลกกว่า 48 แบรนด์แบบ Real-time พร้อมเครื่องมือเช็ค MX/SPF/DMARC ของโดเมนบริษัท">
+<meta name="keywords" content="เช็คสถานะอีเมล, Email Server Status Map, Gmail ล่มไหม, Outlook ล่ม, Office 365 status, เช็ค MX Domain, Global Email Status Dashboard">
 <meta name="author" content="Email to Folder Dev Team">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://emailtofolder.com/status.html">
@@ -17,19 +17,19 @@
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://emailtofolder.com/status.html">
-<meta property="og:title" content="Global Email Server Status — เช็คสถานะเซิร์ฟเวอร์อีเมลทั่วโลกแบบ Real-time (48+ แบรนด์)">
-<meta property="og:description" content="แดชบอร์ดตรวจสอบสถานะ Up/Down, Latency (ms) และ MX DNS ของผู้ให้บริการอีเมลทั่วโลกกว่า 48 แบรนด์แบบเรียลไทม์ พร้อมระบบตรวจเช็คโดเมนอีเมลองค์กร">
+<meta property="og:title" content="Global Email Server Status Map — แดชบอร์ดแผนที่โลกเช็คสถานะอีเมล Real-time">
+<meta property="og:description" content="ตรวจสอบสถานะ Up/Down, Latency (ms) และ MX DNS ของผู้ให้บริการอีเมลทั่วโลกกว่า 48 แบรนด์บนแผนที่โลกแบบเรียลไทม์">
 <meta property="og:image" content="https://emailtofolder.com/favicon.png">
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "Global Email Server Status Monitor by Email to Folder",
+  "name": "Global Email Server Status World Map Dashboard",
   "url": "https://emailtofolder.com/status.html",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "All",
-  "description": "Real-time Up/Down status, edge latency (ms), and DNS MX/SPF/DMARC checker for 48+ global email providers."
+  "description": "Interactive World Map telemetry dashboard for real-time Up/Down status, edge latency (ms), and DNS MX/SPF/DMARC verification across 48+ global email providers."
 }
 </script>
 
@@ -47,53 +47,213 @@ a{color:inherit;text-decoration:none}
 .grad{background:linear-gradient(100deg,var(--brand),var(--teal) 50%,var(--vio));background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sh 6s linear infinite}
 @keyframes sh{to{background-position:200% center}}
 #bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--brand),var(--teal),var(--vio));z-index:60}
-
-/* Unified Navbar */
-.nav{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;transform:translateX(-50%);width:min(1120px,calc(100% - 24px));z-index:50;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px 8px 18px;border-radius:999px;background:var(--card);border:1px solid var(--line);backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px)}
+/* nav (100% identical to index.html, no emoji) */
+.nav{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;transform:translateX(-50%);width:min(1080px,calc(100% - 24px));z-index:50;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px 8px 18px;border-radius:999px;background:var(--card);border:1px solid var(--line);backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px)}
 .logo{font-weight:700;font-size:15px;display:flex;gap:10px;align-items:center;white-space:nowrap;letter-spacing:-.02em}
 .logo-mark{width:28px;height:28px;border-radius:8px;flex-shrink:0;transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;display:block}
 .logo:hover .logo-mark{transform:scale(1.08) rotate(-2deg);box-shadow:0 4px 20px rgba(10,132,255,.35)}
 .logo-txt{font-weight:700;color:var(--ink);letter-spacing:-.03em}
 .logo-tld{background:linear-gradient(135deg,var(--brand),var(--vio));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;font-weight:800}
-.links{display:flex;gap:14px;font-size:13px;color:var(--mute);align-items:center}.links a:hover,.links a.act{color:var(--ink);font-weight:600}
+.links{display:flex;gap:16px;font-size:13px;color:var(--mute);align-items:center}.links a:hover,.links a.active{color:var(--ink)}
 .r{display:flex;gap:8px;align-items:center}
 .lang{display:flex;background:var(--bg2);border-radius:999px;padding:2px}
 .lang button{border:0;background:none;color:var(--mute);font:600 12px inherit;font-family:inherit;padding:5px 11px;border-radius:999px;cursor:pointer;transition:.3s}
 html[lang=th] [data-l=th],html[lang=en] [data-l=en]{background:var(--ink);color:var(--bg)}
-.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--brand);color:#fff;padding:12px 24px;border-radius:999px;font-weight:600;font-size:14px;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
-.btn:hover{transform:scale(1.03);box-shadow:0 10px 30px rgba(10,132,255,.4)}
-.btn.sm{padding:8px 16px;font-size:12.5px}
-.btn.ghost{background:var(--bg2);color:var(--ink);border:1px solid var(--line);box-shadow:none}
-.btn.ghost:hover{background:#e9e9ef;box-shadow:none;transform:translateY(-1px)}
+.btn{position:relative;overflow:hidden;display:inline-block;background:var(--brand);color:#fff;padding:14px 28px;border-radius:999px;font-weight:600;font-size:16px;border:0;cursor:pointer;font-family:inherit;transition:transform .3s,box-shadow .3s}
+.btn:hover{transform:scale(1.05);box-shadow:0 10px 40px rgba(10,132,255,.5)}
+.btn::after{content:"";position:absolute;top:0;left:-80%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-20deg);animation:shim 3.5s infinite}
+@keyframes shim{0%,60%{left:-80%}100%{left:140%}}
+.btn.sm{padding:9px 18px;font-size:13px}
+.btn.ghost{background:none;color:var(--brand);box-shadow:none}.btn.ghost::after{display:none}
+.btn.ghost:hover{box-shadow:none;background:rgba(10,132,255,.12);transform:none}
 
-/* Hero */
-.hero{position:relative;overflow:hidden;padding:135px 0 48px;text-align:center}
-.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.22;pointer-events:none}
+/* Hero & Dashboard Layout */
+.hero{position:relative;overflow:hidden;padding:125px 0 40px;text-align:center}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.2;pointer-events:none}
 .o1{width:460px;height:460px;background:#0a84ff;top:-120px;left:-100px}
 .o2{width:420px;height:420px;background:#10b981;top:40px;right:-120px}
 .pill{display:inline-flex;align-items:center;gap:8px;padding:6px 15px;border-radius:999px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.28);color:#047857;font-size:12.5px;font-weight:700}
 .live-pulse{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 rgba(16,185,129,.7);animation:pulseG 2s infinite}
 @keyframes pulseG{0%{box-shadow:0 0 0 0 rgba(16,185,129,.7)}70%{box-shadow:0 0 0 8px rgba(16,185,129,0)}100%{box-shadow:0 0 0 0 rgba(16,185,129,0)}}
-h1{font-size:clamp(32px,5.2vw,58px);line-height:1.12;letter-spacing:-.03em;margin:16px 0 12px;font-weight:800}
-.lead{font-size:clamp(15px,1.9vw,19px);color:var(--mute);max-width:760px;margin:0 auto 28px}
+h1{font-size:clamp(30px,4.8vw,52px);line-height:1.12;letter-spacing:-.03em;margin:14px 0 10px;font-weight:800}
+.lead{font-size:clamp(14.5px,1.8vw,18px);color:var(--mute);max-width:760px;margin:0 auto 24px}
 
 /* KPI Bar */
-.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:26px}
-.kpi-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px 16px;text-align:left;box-shadow:0 6px 20px rgba(0,0,0,.04)}
-.kpi-lbl{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--mute)}
-.kpi-val{font-size:28px;font-weight:800;letter-spacing:-.03em;margin-top:4px;display:flex;align-items:baseline;gap:6px}
+.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:20px}
+.kpi-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:15px 16px;text-align:left;box-shadow:0 6px 20px rgba(0,0,0,.035)}
+.kpi-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--mute)}
+.kpi-val{font-size:26px;font-weight:800;letter-spacing:-.03em;margin-top:3px;display:flex;align-items:baseline;gap:6px}
 .kpi-val.ok{color:var(--ok)}
 .kpi-val.warn{color:var(--warn)}
 .kpi-val.err{color:var(--err)}
 .kpi-val.brand{color:var(--brand)}
-.kpi-sub{font-size:11.5px;color:var(--mute);margin-top:2px}
+.kpi-sub{font-size:11px;color:var(--mute);margin-top:2px}
+
+/* WORLD MAP COMMAND CENTER */
+.map-command{
+  background:radial-gradient(circle at 50% 35%,#101b33 0%,#080d1a 70%,#050811 100%);
+  border:1px solid rgba(56,189,248,.22);
+  border-radius:26px;
+  padding:20px 22px 18px;
+  color:#e2e8f0;
+  box-shadow:0 24px 60px rgba(5,10,25,.26),inset 0 1px 0 rgba(255,255,255,.1);
+  margin-bottom:24px;
+  text-align:left;
+  position:relative;
+  overflow:hidden;
+}
+.map-hud-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  flex-wrap:wrap;
+  padding-bottom:14px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  margin-bottom:14px;
+}
+.map-title-group{display:flex;align-items:center;gap:12px}
+.radar-beacon{
+  width:12px;height:12px;border-radius:50%;background:#10b981;
+  box-shadow:0 0 12px #10b981,0 0 24px #10b981;
+  animation:pulseG 2s infinite;
+}
+.map-title{font-size:14px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#f8fafc}
+.map-subtitle{font-size:11.5px;color:#94a3b8}
+.map-reg-btns{display:flex;gap:6px;flex-wrap:wrap}
+.reg-btn{
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.05);
+  color:#cbd5e1;
+  padding:6px 13px;
+  border-radius:999px;
+  font:600 11.5px inherit;
+  cursor:pointer;
+  transition:.2s;
+}
+.reg-btn:hover{background:rgba(255,255,255,.12);color:#fff}
+.reg-btn.active{background:var(--brand);border-color:var(--brand);color:#fff;box-shadow:0 0 16px rgba(10,132,255,.45)}
+
+.map-stage{
+  position:relative;
+  width:100%;
+  aspect-ratio:2 / 1;
+  min-height:310px;
+  max-height:500px;
+  border-radius:18px;
+  background:linear-gradient(180deg,rgba(10,20,40,.55),rgba(4,9,20,.85));
+  border:1px solid rgba(56,189,248,.14);
+  overflow:hidden;
+}
+.world-svg{width:100%;height:100%;display:block}
+.continent{
+  fill:#13223f;
+  stroke:#29487d;
+  stroke-width:1;
+  transition:fill .3s;
+}
+.graticule{stroke:rgba(56,189,248,.07);stroke-width:.7;fill:none}
+.equator{stroke:rgba(56,189,248,.16);stroke-width:.9;stroke-dasharray:4 4;fill:none}
+
+.arc-beam{
+  fill:none;
+  stroke-width:1.15;
+  stroke-linecap:round;
+  stroke-dasharray:5 7;
+  animation:arcFlow 3.2s linear infinite;
+  opacity:.42;
+  pointer-events:none;
+}
+@keyframes arcFlow{to{stroke-dashoffset:-48}}
+
+.map-node{cursor:pointer;transition:transform .2s ease}
+.map-node:hover{transform:scale(1.35)}
+.node-halo{
+  fill:none;
+  stroke-width:1.5;
+  opacity:.65;
+  transform-box:fill-box;
+  transform-origin:center;
+  animation:nodeRing 2.6s ease-out infinite;
+}
+@keyframes nodeRing{
+  0%{transform:scale(.7);opacity:.85}
+  100%{transform:scale(2.5);opacity:0}
+}
+.node-lbl{
+  font-size:8.5px;
+  font-weight:700;
+  fill:#e2e8f0;
+  paint-order:stroke;
+  stroke:#060b16;
+  stroke-width:2.5px;
+  pointer-events:none;
+}
+
+/* Floating Map Tooltip */
+.map-tooltip{
+  position:absolute;
+  z-index:20;
+  min-width:240px;
+  max-width:290px;
+  background:rgba(10,15,28,.95);
+  border:1px solid rgba(56,189,248,.35);
+  border-radius:14px;
+  padding:12px 14px;
+  color:#f8fafc;
+  font-size:12px;
+  box-shadow:0 16px 38px rgba(0,0,0,.55);
+  backdrop-filter:blur(14px);
+  pointer-events:none;
+  display:none;
+}
+.mt-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
+.mt-name{font-weight:800;font-size:13.5px;color:#fff}
+.mt-dom{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;color:#38bdf8}
+.mt-row{display:flex;justify-content:space-between;font-size:11.5px;color:#94a3b8;margin-top:4px}
+.mt-row strong{color:#f1f5f9;font-family:ui-monospace,monospace}
+
+/* Map Bottom Regional Strip + Live Feed */
+.map-bottom{
+  display:grid;
+  grid-template-columns:repeat(4,1fr) 1.35fr;
+  gap:10px;
+  margin-top:14px;
+}
+.hub-stat{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;
+  padding:10px 12px;
+}
+.hub-name{font-size:11px;font-weight:700;color:#94a3b8;display:flex;justify-content:space-between;align-items:center}
+.hub-val{font-size:16px;font-weight:800;color:#fff;margin-top:3px;font-family:ui-monospace,monospace}
+.hub-sub{font-size:10.5px;color:#64748b;margin-top:2px}
+.live-feed{
+  background:rgba(0,0,0,.35);
+  border:1px solid rgba(56,189,248,.18);
+  border-radius:14px;
+  padding:9px 12px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:11px;
+  color:#38bdf8;
+  max-height:74px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:3px;
+}
+.feed-line{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#cbd5e1}
+.feed-line .ok{color:#10b981;font-weight:700}
+.feed-line .warn{color:#f59e0b;font-weight:700}
 
 /* Custom Domain MX Inspector */
-.domain-box{background:linear-gradient(135deg,#ffffff 0%,#f4f9ff 100%);border:1px solid rgba(10,132,255,.25);border-radius:24px;padding:24px;margin-bottom:28px;box-shadow:0 10px 30px rgba(10,132,255,.07);text-align:left}
-.domain-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
-.domain-head h2{margin:0;font-size:19px;letter-spacing:-.02em}
+.domain-box{background:linear-gradient(135deg,#ffffff 0%,#f4f9ff 100%);border:1px solid rgba(10,132,255,.25);border-radius:24px;padding:22px 24px;margin-bottom:24px;box-shadow:0 10px 30px rgba(10,132,255,.06);text-align:left}
+.domain-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.domain-head h2{margin:0;font-size:18.5px;letter-spacing:-.02em}
 .domain-form{display:flex;gap:10px;flex-wrap:wrap}
-.domain-input{flex:1 1 280px;padding:12px 16px;border-radius:14px;border:1px solid rgba(0,0,0,.15);font:500 14px inherit;outline:none;background:#fff}
+.domain-input{flex:1 1 280px;padding:11px 16px;border-radius:999px;border:1px solid rgba(0,0,0,.15);font:500 14px inherit;outline:none;background:#fff}
 .domain-input:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(10,132,255,.15)}
 .quick-domains{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:var(--mute);align-items:center}
 .qd-chip{padding:3px 10px;border-radius:999px;background:#fff;border:1px solid var(--line);cursor:pointer;font-weight:600;color:var(--ink);transition:.2s}
@@ -105,27 +265,27 @@ h1{font-size:clamp(32px,5.2vw,58px);line-height:1.12;letter-spacing:-.03em;margi
 .dr-code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;word-break:break-all;color:var(--ink)}
 
 /* Controls Bar */
-.toolbar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px}
 .cat-pills{display:flex;gap:8px;flex-wrap:wrap}
 .cat-pill{border:1px solid var(--line);background:#fff;color:var(--mute);padding:8px 15px;border-radius:999px;font:600 12.5px inherit;cursor:pointer;transition:.2s}
 .cat-pill:hover{color:var(--ink);border-color:rgba(0,0,0,.22)}
 .cat-pill.active{background:var(--ink);color:#fff;border-color:var(--ink)}
-.search-wrap{display:flex;gap:10px;align-items:center;flex:1 1 260px;justify-content:flex-end}
+.search-wrap{display:flex;gap:10px;align-items:center;flex:1 1 240px;justify-content:flex-end}
 .search-in{padding:9px 15px;border-radius:999px;border:1px solid var(--line);background:#fff;font:inherit;font-size:13px;min-width:230px;outline:none}
 .search-in:focus{border-color:var(--brand)}
 
 /* Provider Cards Grid */
 .providers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:60px}
 .p-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px 20px;box-shadow:0 4px 16px rgba(0,0,0,.035);transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;display:flex;flex-direction:column;justify-content:space-between;gap:12px}
-.p-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.07);border-color:rgba(10,132,255,.3)}
+.p-card:hover,.p-card.highlight{transform:translateY(-3px);box-shadow:0 14px 32px rgba(10,132,255,.15);border-color:var(--brand)}
 .p-card.status-up{border-left:4px solid var(--ok)}
 .p-card.status-warn{border-left:4px solid var(--warn)}
 .p-card.status-down{border-left:4px solid var(--err)}
 .p-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
 .p-brand{display:flex;align-items:center;gap:11px;min-width:0}
-.p-ico{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-weight:800;font-size:15px;color:#fff;flex-shrink:0;box-shadow:0 4px 10px rgba(0,0,0,.1)}
-.p-name{font-size:15.5px;font-weight:700;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.p-dom{font-size:11.5px;color:var(--mute);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.p-ico{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0;box-shadow:0 4px 10px rgba(0,0,0,.1)}
+.p-name{font-size:15px;font-weight:700;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.p-dom{font-size:11px;color:var(--mute);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
 
 .st-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:700;flex-shrink:0}
 .st-badge .dot{width:7px;height:7px;border-radius:50%}
@@ -138,8 +298,7 @@ h1{font-size:clamp(32px,5.2vw,58px);line-height:1.12;letter-spacing:-.03em;margi
 .pm-lbl{color:var(--mute);font-size:10.5px;display:block}
 .pm-val{font-weight:700;color:var(--ink);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
 
-/* Uptime mini bars */
-.uptime-bars{display:grid;grid-template-columns:repeat(24,1fr);gap:2px;height:14px;align-items:stretch}
+.uptime-bars{display:grid;grid-template-columns:repeat(24,1fr);gap:2px;height:12px;align-items:stretch}
 .ub{border-radius:2px;background:#10b981;opacity:.85;transition:opacity .2s}
 .ub.w{background:#f59e0b}
 .ub.d{background:#ef4444}
@@ -157,76 +316,158 @@ h1{font-size:clamp(32px,5.2vw,58px);line-height:1.12;letter-spacing:-.03em;margi
 footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mute);font-size:13px}
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 
-@media(max-width:1024px){.providers-grid{grid-template-columns:repeat(2,1fr)}.kpi-grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:860px){.links{display:none}.btn.sm{display:none}}
-@media(max-width:640px){.providers-grid{grid-template-columns:1fr}.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:1040px){.links{gap:10px;font-size:12px}.map-bottom{grid-template-columns:repeat(2,1fr)}.providers-grid{grid-template-columns:repeat(2,1fr)}.kpi-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:860px){.links{display:none}.logo-txt{font-size:14px}.btn.sm{display:none}}
+@media(max-width:640px){.providers-grid{grid-template-columns:1fr}.kpi-grid{grid-template-columns:repeat(2,1fr)}.map-bottom{grid-template-columns:1fr}}
+
+/* Canonical Unified Header CSS */
+.nav{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;transform:translateX(-50%);width:min(1080px,calc(100% - 24px));z-index:50;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px 8px 18px;border-radius:999px;background:rgba(255,255,255,.7);border:1px solid rgba(0,0,0,.1);backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px);color:#1d1d1f;font-family:Inter,Prompt,system-ui,sans-serif;line-height:1.55}
+html[lang=th] .nav{font-family:Prompt,Inter,system-ui,sans-serif}
+.nav .logo{font-weight:700;font-size:15px;display:flex;gap:10px;align-items:center;white-space:nowrap;letter-spacing:-.02em;color:#1d1d1f;text-decoration:none}
+.nav .logo-mark{width:28px;height:28px;border-radius:8px;flex-shrink:0;transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;display:block}
+.nav .logo:hover .logo-mark{transform:scale(1.08) rotate(-2deg);box-shadow:0 4px 20px rgba(10,132,255,.35)}
+.nav .logo-txt{font-weight:700;color:#1d1d1f;letter-spacing:-.03em}
+.nav .logo-tld{background:linear-gradient(135deg,#0a84ff,#8a5cff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;font-weight:800}
+.nav .links{display:flex;gap:14px;font-size:13px;color:#6e6e73;align-items:center;white-space:nowrap}
+.nav .links a{color:#6e6e73;text-decoration:none;transition:color .2s}
+.nav .links a:hover,.nav .links a.active{color:#1d1d1f;font-weight:600}
+.nav .r{display:flex;gap:8px;align-items:center;flex-shrink:0}
+.nav .lang{display:flex;background:#f5f5f7;border-radius:999px;padding:2px}
+.nav .lang button{border:0;background:none;color:#6e6e73;font:600 12px inherit;font-family:inherit;padding:5px 11px;border-radius:999px;cursor:pointer;transition:.3s;line-height:1.55}
+html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f;color:#ffffff}
+.nav .btn.sm{position:relative;overflow:hidden;display:inline-block;color:#fff;padding:9px 18px;border-radius:999px;font-weight:600;font-size:13px;line-height:1.55;text-decoration:none;white-space:nowrap;transition:transform .3s,box-shadow .3s}
+.nav .btn.sm:hover{transform:scale(1.05);box-shadow:0 10px 40px rgba(10,132,255,.5)}
+@media(max-width:1040px){.nav .links{gap:10px;font-size:12px}}
+@media(max-width:860px){.nav .links{display:none}.nav .logo-txt{font-size:14px}.nav .btn.sm{display:none}}
 </style>
 </head>
 <body>
 <div id="bar"></div>
 <div class="nav">
-  <a href="index.html#top" class="logo"><img src="favicon.svg" class="logo-mark" alt="Email to Folder Logo" width="28" height="28"><span class="logo-txt">emailtofolder<span class="logo-tld">.com</span></span></a>
-  <div class="links">
-    <a href="index.html#features"><span class="th">จุดเด่น</span><span class="en">Features</span></a>
-    <a href="index.html#how"><span class="th">วิธีทำงาน</span><span class="en">How it works</span></a>
-    <a href="status.html" class="act"><span class="th">สถานะอีเมลโลก 🟢</span><span class="en">Email Status 🟢</span></a>
-    <a href="extension.html"><span class="th">Chrome Plugin</span><span class="en">Chrome Plugin</span></a>
-    <a href="infographic.html"><span class="th">อินโฟกราฟิก</span><span class="en">Infographic</span></a>
-    <a href="articles/"><span class="th">บทความ</span><span class="en">Articles</span></a>
-    <a href="game.html"><span class="th">มินิเกม 🎮</span><span class="en">Mini Game 🎮</span></a>
-    <a href="index.html#download"><span class="th">ดาวน์โหลด</span><span class="en">Download</span></a>
-  </div>
-  <div class="r">
-    <div class="lang"><button data-l="th">TH</button><button data-l="en">EN</button></div>
-    <a class="btn sm" href="index.html#download" style="background:linear-gradient(135deg,var(--brand),var(--vio))"><span class="th">ดาวน์โหลดฟรี</span><span class="en">Free Download</span></a>
-  </div>
+<a href="index.html#top" class="logo"><img src="favicon.svg" class="logo-mark" alt="Email to Folder Logo" width="28" height="28"><span class="logo-txt">emailtofolder<span class="logo-tld">.com</span></span></a>
+<div class="links"><a href="index.html#features"><span class="th">จุดเด่น</span><span class="en">Features</span></a><a href="index.html#how"><span class="th">วิธีทำงาน</span><span class="en">How it works</span></a><a href="status.html" class="active"><span class="th">สถานะอีเมล</span><span class="en">Status</span></a><a href="extension.html"><span class="th">Chrome Plugin</span><span class="en">Chrome Plugin</span></a><a href="infographic.html"><span class="th">อินโฟกราฟิก</span><span class="en">Infographic</span></a><a href="articles/"><span class="th">บทความ</span><span class="en">Articles</span></a><a href="game.html"><span class="th">มินิเกม</span><span class="en">Mini Game</span></a><a href="index.html#download"><span class="th">ดาวน์โหลด</span><span class="en">Download</span></a><a href="index.html#contact"><span class="th">ติดต่อ</span><span class="en">Contact</span></a></div>
+<div class="r"><div class="lang"><button data-l="th">TH</button><button data-l="en">EN</button></div><a class="btn sm" href="index.html#download" style="background:linear-gradient(135deg,var(--brand),var(--vio))"><span class="th">ดาวน์โหลดฟรี</span><span class="en">Free Download</span></a></div>
 </div>
 
-<main>
-  <section class="hero">
-    <div class="orb o1"></div>
-    <div class="orb o2"></div>
-    <div class="wrap" style="position:relative;z-index:2">
-      <span class="pill">
-        <span class="live-pulse"></span>
-        <span class="th">Real-Time Global Email Telemetry · 48 ผู้ให้บริการทั่วโลก</span>
-        <span class="en">Real-Time Global Email Telemetry · 48 Worldwide Providers</span>
-      </span>
-      <h1>
-        <span class="th">เช็คสถานะเซิร์ฟเวอร์อีเมล<br><span class="grad">ทั่วโลกแบบ Real-Time</span></span>
-        <span class="en">Global Email Server<br><span class="grad">Live Status Monitor</span></span>
-      </h1>
-      <p class="lead">
-        <span class="th">ตรวจสอบสถานะ Up / Down, ความเร็วตอบสนอง (Edge Latency ms) และระเบียน MX DNS ของผู้ให้บริการอีเมลทุกยี่ห้อทั่วโลกแบบเรียลไทม์จากเบราว์เซอร์ของคุณโดยตรง</span>
-        <span class="en">Live client-side reachability, HTTPS edge ping (ms), and DNS-over-HTTPS MX verification across 48 global email brands.</span>
-      </p>
+      <!-- INTERACTIVE WORLD MAP TELEMETRY DASHBOARD -->
+      <div class="map-command">
+        <div class="map-hud-top">
+          <div class="map-title-group">
+            <span class="radar-beacon"></span>
+            <div>
+              <div class="map-title">Global Email Server Telemetry Map</div>
+              <div class="map-subtitle">
+                <span class="th">คลิกหรือชี้ที่จุดโหนดบนแผนที่เพื่อดูค่า Ping และเซิร์ฟเวอร์ MX ของแต่ละผู้ให้บริการ</span>
+                <span class="en">Hover or click any data center node on the map to inspect live ping &amp; MX status</span>
+              </div>
+            </div>
+          </div>
+          <div class="map-reg-btns" id="mapRegBtns">
+            <button type="button" class="reg-btn active" data-reg="all"><span class="th">ทั่วโลก (48)</span><span class="en">Global All (48)</span></button>
+            <button type="button" class="reg-btn" data-reg="americas"><span class="th">อเมริกาเหนือ (22)</span><span class="en">Americas (22)</span></button>
+            <button type="button" class="reg-btn" data-reg="europe"><span class="th">ยุโรป &amp; สวิตเซอร์แลนด์ (16)</span><span class="en">Europe &amp; UK (16)</span></button>
+            <button type="button" class="reg-btn" data-reg="apac"><span class="th">เอเชีย-แปซิฟิก (10)</span><span class="en">Asia-Pacific (10)</span></button>
+            <button type="button" class="reg-btn" id="mapRefreshBtn"><span class="th">สแกนแผนที่ใหม่</span><span class="en">Rescan Map</span></button>
+          </div>
+        </div>
 
-      <!-- KPI Summary Bar -->
-      <div class="kpi-grid">
-        <div class="kpi-card">
-          <div class="kpi-lbl"><span class="th">ผู้ให้บริการทั้งหมด</span><span class="en">Monitored Brands</span></div>
-          <div class="kpi-val brand" id="kpiTotal">48</div>
-          <div class="kpi-sub"><span class="th">ครอบคลุม 5 หมวดหมู่ทั่วโลก</span><span class="en">Across 5 global categories</span></div>
+        <div class="map-stage" id="mapStage">
+          <div class="map-tooltip" id="mapTooltip"></div>
+          <svg class="world-svg" id="worldSvg" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <radialGradient id="oceanGlow" cx="50%" cy="45%" r="60%">
+                <stop offset="0%" stop-color="#13294b" stop-opacity="0.65"/>
+                <stop offset="100%" stop-color="#050914" stop-opacity="0.95"/>
+              </radialGradient>
+              <linearGradient id="beamOk" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.15"/>
+                <stop offset="50%" stop-color="#10b981" stop-opacity="0.85"/>
+                <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.95"/>
+              </linearGradient>
+            </defs>
+
+            <!-- Ocean Background -->
+            <rect width="1000" height="500" fill="url(#oceanGlow)"/>
+
+            <!-- Latitude / Longitude Graticule Grid -->
+            <g class="graticule">
+              <line x1="0" y1="83" x2="1000" y2="83"/>
+              <line x1="0" y1="166" x2="1000" y2="166"/>
+              <line x1="0" y1="333" x2="1000" y2="333"/>
+              <line x1="0" y1="416" x2="1000" y2="416"/>
+              <line x1="166" y1="0" x2="166" y2="500"/>
+              <line x1="333" y1="0" x2="333" y2="500"/>
+              <line x1="500" y1="0" x2="500" y2="500"/>
+              <line x1="666" y1="0" x2="666" y2="500"/>
+              <line x1="833" y1="0" x2="833" y2="500"/>
+            </g>
+            <line class="equator" x1="0" y1="250" x2="1000" y2="250"/>
+
+            <!-- World Continents Vector Silhouettes -->
+            <g class="continents">
+              <!-- North America -->
+              <path class="continent" d="M55,75 L130,60 L215,65 L295,85 L315,125 L280,165 L265,205 L225,225 L195,250 L165,230 L135,195 L120,155 L85,130 L50,105 Z"/>
+              <!-- Greenland -->
+              <path class="continent" d="M320,42 L395,35 L415,68 L365,92 L322,75 Z"/>
+              <!-- South America -->
+              <path class="continent" d="M235,262 L292,272 L342,315 L330,375 L292,445 L265,462 L248,410 L232,340 L218,295 Z"/>
+              <!-- Europe -->
+              <path class="continent" d="M445,82 L505,65 L568,72 L595,112 L572,158 L535,175 L495,178 L452,165 L435,132 Z"/>
+              <!-- UK & Ireland -->
+              <path class="continent" d="M438,108 L456,104 L462,126 L442,130 Z"/>
+              <!-- Africa -->
+              <path class="continent" d="M445,192 L528,188 L588,218 L615,272 L592,355 L552,415 L512,412 L488,348 L458,288 L432,240 Z"/>
+              <!-- Asia & Middle East -->
+              <path class="continent" d="M585,72 L695,58 L825,68 L915,98 L895,155 L858,215 L812,265 L768,285 L715,258 L675,265 L625,225 L588,182 L575,120 Z"/>
+              <!-- Japan & Korea -->
+              <path class="continent" d="M862,148 L885,142 L895,176 L872,188 Z"/>
+              <!-- SE Asia & Indonesia -->
+              <path class="continent" d="M755,275 L825,288 L858,315 L805,328 L752,308 Z"/>
+              <!-- Australia & NZ -->
+              <path class="continent" d="M792,352 L882,345 L915,388 L892,432 L815,428 L782,395 Z"/>
+              <path class="continent" d="M932,425 L955,418 L962,448 L938,452 Z"/>
+            </g>
+
+            <!-- Dynamic Arcs Layer -->
+            <g id="mapArcsLayer"></g>
+
+            <!-- Client Origin Node (Bangkok Probe Station) -->
+            <g transform="translate(779,288)">
+              <circle r="11" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity="0.45"/>
+              <circle r="4.5" fill="#38bdf8" stroke="#ffffff" stroke-width="1.5"/>
+              <text x="8" y="3" class="node-lbl" style="fill:#38bdf8">PROBE ORIGIN</text>
+            </g>
+
+            <!-- Dynamic 48 Provider Nodes Layer -->
+            <g id="mapNodesLayer"></g>
+          </svg>
         </div>
-        <div class="kpi-card">
-          <div class="kpi-lbl"><span class="th">ออนไลน์ปกติ (UP)</span><span class="en">Operational (UP)</span></div>
-          <div class="kpi-val ok" id="kpiUp">0</div>
-          <div class="kpi-sub" id="kpiUpPct"><span class="th">กำลังตรวจสอบ...</span><span class="en">Probing...</span></div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-lbl"><span class="th">ตอบสนองช้า (Slow)</span><span class="en">High Latency</span></div>
-          <div class="kpi-val warn" id="kpiWarn">0</div>
-          <div class="kpi-sub">&gt; 1,200 ms / Degraded</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-lbl"><span class="th">ขัดข้อง / ล่ม (DOWN)</span><span class="en">Unreachable / Outage</span></div>
-          <div class="kpi-val err" id="kpiDown">0</div>
-          <div class="kpi-sub"><span class="th">เชื่อมต่อไม่สำเร็จ</span><span class="en">Connection or MX failure</span></div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-lbl"><span class="th">ความเร็วเฉลี่ย (Avg Ping)</span><span class="en">Avg Edge Latency</span></div>
-          <div class="kpi-val" id="kpiAvgPing">—</div>
-          <div class="kpi-sub" id="lastCheckedLbl"><span class="th">อัปเดตอัตโนมัติทุก 60 วินาที</span><span class="en">Auto-refreshes every 60s</span></div>
+
+        <!-- Bottom Regional Hub Meters + Live Feed -->
+        <div class="map-bottom">
+          <div class="hub-stat">
+            <div class="hub-name"><span>AMERICAS HUB</span><span style="color:#10b981">●</span></div>
+            <div class="hub-val" id="hubAmericasVal">— ms</div>
+            <div class="hub-sub" id="hubAmericasSub">US-West · US-East · 22 Nodes</div>
+          </div>
+          <div class="hub-stat">
+            <div class="hub-name"><span>EUROPE &amp; SWISS HUB</span><span style="color:#10b981">●</span></div>
+            <div class="hub-val" id="hubEuropeVal">— ms</div>
+            <div class="hub-sub" id="hubEuropeSub">EU-Central · CH · UK · 16 Nodes</div>
+          </div>
+          <div class="hub-stat">
+            <div class="hub-name"><span>ASIA-PACIFIC HUB</span><span style="color:#10b981">●</span></div>
+            <div class="hub-val" id="hubApacVal">— ms</div>
+            <div class="hub-sub" id="hubApacSub">Tokyo · Seoul · CN · AU · 10 Nodes</div>
+          </div>
+          <div class="hub-stat">
+            <div class="hub-name"><span>DNS-OVER-HTTPS</span><span style="color:#38bdf8">ACTIVE</span></div>
+            <div class="hub-val" id="hubDnsVal">100% MX</div>
+            <div class="hub-sub">Google 8.8.8.8 + Cloudflare 1.1.1.1</div>
+          </div>
+          <div class="live-feed" id="liveTelemetryFeed">
+            <div class="feed-line">[SYSTEM] Initializing Global Email Telemetry Stream...</div>
+          </div>
         </div>
       </div>
 
@@ -234,7 +475,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
       <div class="domain-box">
         <div class="domain-head">
           <div>
-            <h2>🔍 <span class="th">ตรวจสอบสถานะเซิร์ฟเวอร์อีเมลของโดเมนบริษัทคุณ (Custom Domain MX / SPF / DMARC Inspector)</span><span class="en">Check Any Custom Email Domain (Live MX, SPF &amp; DMARC Inspector)</span></h2>
+            <h2><span class="th">ตรวจสอบสถานะเซิร์ฟเวอร์อีเมลของโดเมนบริษัทคุณ (Custom Domain MX / SPF / DMARC Inspector)</span><span class="en">Check Any Custom Email Domain (Live MX, SPF &amp; DMARC Inspector)</span></h2>
             <div style="font-size:13px;color:var(--mute);margin-top:2px;">
               <span class="th">พิมพ์ชื่อโดเมนขององค์กรหรือผู้ให้บริการใดก็ได้ในโลก ระบบจะตรวจสอบผ่าน Google / Cloudflare DNS-over-HTTPS ทันที</span>
               <span class="en">Enter any company or email domain worldwide to verify its live MX mail exchangers, SPF, and DMARC policies.</span>
@@ -243,13 +484,13 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
         </div>
         <form class="domain-form" id="domainForm">
           <input type="text" class="domain-input" id="domainInput" placeholder="เช่น company.co.th, gmail.com, outlook.com, kbank.com, proton.me" required>
-          <button type="submit" class="btn" id="domainCheckBtn">
-            <span class="th">⚡ ตรวจสอบโดเมนทันที</span>
-            <span class="en">⚡ Check Domain Now</span>
+          <button type="submit" class="btn sm" id="domainCheckBtn" style="padding:11px 22px;font-size:14px;">
+            <span class="th">ตรวจสอบโดเมนทันที</span>
+            <span class="en">Check Domain Now</span>
           </button>
-          <button type="button" class="btn ghost" id="recheckAllBtn">
-            <span class="th">🔄 เช็คทั้ง 48 แบรนด์ใหม่</span>
-            <span class="en">🔄 Re-check All 48 Brands</span>
+          <button type="button" class="btn ghost sm" id="recheckAllBtn" style="padding:11px 18px;font-size:14px;border:1px solid var(--line);">
+            <span class="th">เช็คทั้ง 48 แบรนด์ใหม่</span>
+            <span class="en">Re-check All 48 Brands</span>
           </button>
         </form>
         <div class="quick-domains">
@@ -269,14 +510,14 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
       <div class="toolbar">
         <div class="cat-pills" id="catPills">
           <button class="cat-pill active" data-cat="all"><span class="th">ทั้งหมด (48)</span><span class="en">All Brands (48)</span></button>
-          <button class="cat-pill" data-cat="consumer"><span class="th">🌐 อีเมลหลักระดับโลก (10)</span><span class="en">🌐 Global Webmail (10)</span></button>
-          <button class="cat-pill" data-cat="enterprise"><span class="th">🏢 อีเมลองค์กร &amp; โฮสติ้ง (12)</span><span class="en">🏢 Enterprise &amp; Hosting (12)</span></button>
-          <button class="cat-pill" data-cat="privacy"><span class="th">🔐 อีเมลเข้ารหัสปลอดภัยสูง (8)</span><span class="en">🔐 Privacy &amp; Encrypted (8)</span></button>
-          <button class="cat-pill" data-cat="regional"><span class="th">🌏 เอเชีย ยุโรป &amp; ภูมิภาค (10)</span><span class="en">🌏 Asia &amp; Europe ISPs (10)</span></button>
-          <button class="cat-pill" data-cat="transactional"><span class="th">⚡ Cloud SMTP &amp; API (8)</span><span class="en">⚡ Cloud SMTP &amp; API (8)</span></button>
+          <button class="cat-pill" data-cat="consumer"><span class="th">อีเมลหลักระดับโลก (10)</span><span class="en">Global Webmail (10)</span></button>
+          <button class="cat-pill" data-cat="enterprise"><span class="th">อีเมลองค์กร &amp; โฮสติ้ง (12)</span><span class="en">Enterprise &amp; Hosting (12)</span></button>
+          <button class="cat-pill" data-cat="privacy"><span class="th">อีเมลเข้ารหัสปลอดภัยสูง (8)</span><span class="en">Privacy &amp; Encrypted (8)</span></button>
+          <button class="cat-pill" data-cat="regional"><span class="th">เอเชีย ยุโรป &amp; ภูมิภาค (10)</span><span class="en">Asia &amp; Europe ISPs (10)</span></button>
+          <button class="cat-pill" data-cat="transactional"><span class="th">Cloud SMTP &amp; API (8)</span><span class="en">Cloud SMTP &amp; API (8)</span></button>
         </div>
         <div class="search-wrap">
-          <input type="search" class="search-in" id="brandSearch" placeholder="ค้นหาชื่อยี่ห้อ หรือโดเมน...">
+          <input type="search" class="search-in" id="brandSearch" placeholder="ค้นหาชื่อยี่ห้อ เมือง หรือโดเมน...">
         </div>
       </div>
 
@@ -291,82 +532,82 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 
 <script>
 (function(){
-  // Language toggle
   var h=document.documentElement,l="th";
   try{var s=localStorage.getItem("lang");if(s==="th"||s==="en")l=s}catch(e){}
-  function setLang(x){h.lang=x;try{localStorage.setItem("lang",x)}catch(e){};renderGrid()}
+  function setLang(x){h.lang=x;try{localStorage.setItem("lang",x)}catch(e){};renderGrid();renderWorldMap()}
   setLang(l);
   document.querySelectorAll(".lang button").forEach(function(b){b.onclick=function(){setLang(b.dataset.l)}});
 
-  // 48 Global Email Providers Database
+  // 48 Global Email Providers with World Map Coordinates (x: 0..1000, y: 0..500) & Region
   var PROVIDERS = [
     // 1. Consumer & Global Webmail (10)
-    { id:'gmail', name:'Gmail (Google Mail)', domain:'gmail.com', probe:'https://mail.google.com/favicon.ico', cat:'consumer', color:'#ea4335', icon:'G', proto:'IMAP :993 · SMTP :587 · Gmail API', statusUrl:'https://www.google.com/appsstatus/dashboard/' },
-    { id:'outlook_com', name:'Microsoft Outlook.com / Hotmail', domain:'outlook.com', probe:'https://outlook.live.com/favicon.ico', cat:'consumer', color:'#0078d4', icon:'O', proto:'IMAP :993 · Graph API · Exchange', statusUrl:'https://portal.office.com/servicestatus' },
-    { id:'icloud', name:'Apple iCloud Mail (@icloud.com)', domain:'icloud.com', probe:'https://www.icloud.com/favicon.ico', cat:'consumer', color:'#0a84ff', icon:'', proto:'IMAP :993 · SMTP :587', statusUrl:'https://www.apple.com/support/systemstatus/' },
-    { id:'yahoo', name:'Yahoo! Mail (@yahoo.com)', domain:'yahoo.com', probe:'https://mail.yahoo.com/favicon.ico', cat:'consumer', color:'#6001d2', icon:'Y!', proto:'IMAP :993 · SMTP :465', statusUrl:'https://help.yahoo.com/' },
-    { id:'aol', name:'AOL Mail (@aol.com)', domain:'aol.com', probe:'https://mail.aol.com/favicon.ico', cat:'consumer', color:'#1d1d1f', icon:'A', proto:'IMAP :993 · SMTP :465', statusUrl:'https://help.aol.com/' },
-    { id:'gmx', name:'GMX Mail (@gmx.com / @gmx.net)', domain:'gmx.com', probe:'https://www.gmx.com/favicon.ico', cat:'consumer', color:'#1c449b', icon:'GX', proto:'IMAP :993 · POP3 :995', statusUrl:'https://www.gmx.com/' },
-    { id:'mail_com', name:'Mail.com Global Webmail', domain:'mail.com', probe:'https://www.mail.com/favicon.ico', cat:'consumer', color:'#0055a5', icon:'M', proto:'IMAP :993 · SMTP :587', statusUrl:'https://www.mail.com/' },
-    { id:'msn', name:'MSN / Live Mail (@live.com)', domain:'live.com', probe:'https://login.live.com/favicon.ico', cat:'consumer', color:'#00a4ef', icon:'L', proto:'Exchange ActiveSync · Graph', statusUrl:'https://portal.office.com/servicestatus' },
-    { id:'lycos', name:'Lycos Mail (@lycos.com)', domain:'lycos.com', probe:'https://www.lycos.com/favicon.ico', cat:'consumer', color:'#0f172a', icon:'LY', proto:'IMAP :993 · SMTP :587', statusUrl:'https://www.mail.lycos.com/' },
-    { id:'vivaldi', name:'Vivaldi Webmail (@vivaldi.net)', domain:'vivaldi.net', probe:'https://vivaldi.com/favicon.ico', cat:'consumer', color:'#ef3939', icon:'V', proto:'IMAP :993 · SMTP :587', statusUrl:'https://vivaldistatus.com/' },
+    { id:'gmail', name:'Gmail (Google Mail)', domain:'gmail.com', probe:'https://mail.google.com/favicon.ico', cat:'consumer', reg:'americas', city:'Mountain View, US', x:162, y:168, showLbl:true, color:'#ea4335', icon:'G', proto:'IMAP :993 · SMTP :587 · Gmail API', statusUrl:'https://www.google.com/appsstatus/dashboard/' },
+    { id:'outlook_com', name:'Microsoft Outlook.com / Hotmail', domain:'outlook.com', probe:'https://outlook.live.com/favicon.ico', cat:'consumer', reg:'americas', city:'Redmond, WA, US', x:160, y:136, showLbl:true, color:'#0078d4', icon:'O', proto:'IMAP :993 · Graph API · Exchange', statusUrl:'https://portal.office.com/servicestatus' },
+    { id:'icloud', name:'Apple iCloud Mail (@icloud.com)', domain:'icloud.com', probe:'https://www.icloud.com/favicon.ico', cat:'consumer', reg:'americas', city:'Cupertino, CA, US', x:155, y:175, showLbl:false, color:'#0a84ff', icon:'iC', proto:'IMAP :993 · SMTP :587', statusUrl:'https://www.apple.com/support/systemstatus/' },
+    { id:'yahoo', name:'Yahoo! Mail (@yahoo.com)', domain:'yahoo.com', probe:'https://mail.yahoo.com/favicon.ico', cat:'consumer', reg:'americas', city:'Sunnyvale, CA, US', x:168, y:178, showLbl:false, color:'#6001d2', icon:'Y!', proto:'IMAP :993 · SMTP :465', statusUrl:'https://help.yahoo.com/' },
+    { id:'aol', name:'AOL Mail (@aol.com)', domain:'aol.com', probe:'https://mail.aol.com/favicon.ico', cat:'consumer', reg:'americas', city:'New York, NY, US', x:292, y:158, showLbl:false, color:'#1d1d1f', icon:'A', proto:'IMAP :993 · SMTP :465', statusUrl:'https://help.aol.com/' },
+    { id:'gmx', name:'GMX Mail (@gmx.com / @gmx.net)', domain:'gmx.com', probe:'https://www.gmx.com/favicon.ico', cat:'consumer', reg:'europe', city:'Munich, Germany', x:512, y:134, showLbl:false, color:'#1c449b', icon:'GX', proto:'IMAP :993 · POP3 :995', statusUrl:'https://www.gmx.com/' },
+    { id:'mail_com', name:'Mail.com Global Webmail', domain:'mail.com', probe:'https://www.mail.com/favicon.ico', cat:'consumer', reg:'americas', city:'Philadelphia, PA, US', x:284, y:164, showLbl:false, color:'#0055a5', icon:'M', proto:'IMAP :993 · SMTP :587', statusUrl:'https://www.mail.com/' },
+    { id:'msn', name:'MSN / Live Mail (@live.com)', domain:'live.com', probe:'https://login.live.com/favicon.ico', cat:'consumer', reg:'americas', city:'Quincy, WA, US', x:170, y:139, showLbl:false, color:'#00a4ef', icon:'L', proto:'Exchange ActiveSync · Graph', statusUrl:'https://portal.office.com/servicestatus' },
+    { id:'lycos', name:'Lycos Mail (@lycos.com)', domain:'lycos.com', probe:'https://www.lycos.com/favicon.ico', cat:'consumer', reg:'americas', city:'Waltham, MA, US', x:302, y:152, showLbl:false, color:'#0f172a', icon:'LY', proto:'IMAP :993 · SMTP :587', statusUrl:'https://www.mail.lycos.com/' },
+    { id:'vivaldi', name:'Vivaldi Webmail (@vivaldi.net)', domain:'vivaldi.net', probe:'https://vivaldi.com/favicon.ico', cat:'consumer', reg:'europe', city:'Oslo, Norway', x:502, y:92, showLbl:false, color:'#ef3939', icon:'V', proto:'IMAP :993 · SMTP :587', statusUrl:'https://vivaldistatus.com/' },
 
     // 2. Enterprise, Workplace & Hosting (12)
-    { id:'m365', name:'Microsoft 365 / Exchange Online', domain:'office365.com', probe:'https://outlook.office365.com/favicon.ico', cat:'enterprise', color:'#d83b01', icon:'365', proto:'MAPI · Graph API · IMAP :993', statusUrl:'https://status.cloud.microsoft/' },
-    { id:'gworkspace', name:'Google Workspace Enterprise', domain:'google.com', probe:'https://workspace.google.com/favicon.ico', cat:'enterprise', color:'#4285f4', icon:'GW', proto:'Gmail API · IMAP :993 · OAuth2', statusUrl:'https://www.google.com/appsstatus/dashboard/' },
-    { id:'zoho', name:'Zoho Mail & Workplace', domain:'zoho.com', probe:'https://mail.zoho.com/favicon.ico', cat:'enterprise', color:'#e42527', icon:'Z', proto:'IMAP :993 · SMTP :465 · Zoho API', statusUrl:'https://status.zoho.com/' },
-    { id:'fastmail', name:'Fastmail Business & Personal', domain:'fastmail.com', probe:'https://www.fastmail.com/favicon.ico', cat:'enterprise', color:'#2f5597', icon:'FM', proto:'JMAP · IMAP :993 · SMTP :587', statusUrl:'https://fastmailstatus.com/' },
-    { id:'rackspace', name:'Rackspace Hosted Email', domain:'emailsrvr.com', probe:'https://apps.rackspace.com/favicon.ico', cat:'enterprise', color:'#c40022', icon:'RS', proto:'IMAP :993 · Exchange · SMTP', statusUrl:'https://status.apps.rackspace.com/' },
-    { id:'godaddy', name:'GoDaddy Professional Email', domain:'secureserver.net', probe:'https://www.godaddy.com/favicon.ico', cat:'enterprise', color:'#00a4a6', icon:'GD', proto:'IMAP :993 · Microsoft 365', statusUrl:'https://status.godaddy.com/' },
-    { id:'privateemail', name:'Namecheap Private Email', domain:'privateemail.com', probe:'https://privateemail.com/favicon.ico', cat:'enterprise', color:'#de3723', icon:'NC', proto:'IMAP :993 · ActiveSync · WebDAV', statusUrl:'https://www.namecheap.com/status-updates/' },
-    { id:'titan', name:'Titan Email (Hostinger / Business)', domain:'titan.email', probe:'https://titan.email/favicon.ico', cat:'enterprise', color:'#111827', icon:'TI', proto:'IMAP :993 · SMTP :465', statusUrl:'https://status.titan.email/' },
-    { id:'zimbra', name:'Zimbra Collaboration Cloud', domain:'zimbra.com', probe:'https://www.zimbra.com/favicon.ico', cat:'enterprise', color:'#0083c1', icon:'ZB', proto:'IMAP :993 · MAPI · SOAP', statusUrl:'https://www.zimbra.com/' },
-    { id:'icewarp', name:'IceWarp Enterprise Mail', domain:'icewarp.com', probe:'https://www.icewarp.com/favicon.ico', cat:'enterprise', color:'#2563eb', icon:'IW', proto:'IMAP :993 · Exchange ActiveSync', statusUrl:'https://www.icewarp.com/' },
-    { id:'hey', name:'HEY Email (by 37signals)', domain:'hey.com', probe:'https://www.hey.com/favicon.ico', cat:'enterprise', color:'#7c3aed', icon:'H!', proto:'HTTPS Web · Custom SMTP', statusUrl:'https://www.hey.com/' },
-    { id:'migadu', name:'Migadu Swiss Business Mail', domain:'migadu.com', probe:'https://www.migadu.com/favicon.ico', cat:'enterprise', color:'#0d9488', icon:'MG', proto:'IMAP :993 · ManageSieve · SMTP', statusUrl:'https://status.migadu.com/' },
+    { id:'m365', name:'Microsoft 365 / Exchange Online', domain:'office365.com', probe:'https://outlook.office365.com/favicon.ico', cat:'enterprise', reg:'americas', city:'Des Moines, IA, US', x:236, y:155, showLbl:true, color:'#d83b01', icon:'365', proto:'MAPI · Graph API · IMAP :993', statusUrl:'https://status.cloud.microsoft/' },
+    { id:'gworkspace', name:'Google Workspace Enterprise', domain:'google.com', probe:'https://workspace.google.com/favicon.ico', cat:'enterprise', reg:'americas', city:'Atlanta, GA, US', x:262, y:186, showLbl:false, color:'#4285f4', icon:'GW', proto:'Gmail API · IMAP :993 · OAuth2', statusUrl:'https://www.google.com/appsstatus/dashboard/' },
+    { id:'zoho', name:'Zoho Mail & Workplace', domain:'zoho.com', probe:'https://mail.zoho.com/favicon.ico', cat:'enterprise', reg:'apac', city:'Chennai, India', x:722, y:268, showLbl:true, color:'#e42527', icon:'Z', proto:'IMAP :993 · SMTP :465 · Zoho API', statusUrl:'https://status.zoho.com/' },
+    { id:'fastmail', name:'Fastmail Business & Personal', domain:'fastmail.com', probe:'https://www.fastmail.com/favicon.ico', cat:'enterprise', reg:'apac', city:'Melbourne, Australia', x:868, y:418, showLbl:true, color:'#2f5597', icon:'FM', proto:'JMAP · IMAP :993 · SMTP :587', statusUrl:'https://fastmailstatus.com/' },
+    { id:'rackspace', name:'Rackspace Hosted Email', domain:'emailsrvr.com', probe:'https://apps.rackspace.com/favicon.ico', cat:'enterprise', reg:'americas', city:'San Antonio, TX, US', x:222, y:198, showLbl:false, color:'#c40022', icon:'RS', proto:'IMAP :993 · Exchange · SMTP', statusUrl:'https://status.apps.rackspace.com/' },
+    { id:'godaddy', name:'GoDaddy Professional Email', domain:'secureserver.net', probe:'https://www.godaddy.com/favicon.ico', cat:'enterprise', reg:'americas', city:'Tempe, AZ, US', x:188, y:186, showLbl:false, color:'#00a4a6', icon:'GD', proto:'IMAP :993 · Microsoft 365', statusUrl:'https://status.godaddy.com/' },
+    { id:'privateemail', name:'Namecheap Private Email', domain:'privateemail.com', probe:'https://privateemail.com/favicon.ico', cat:'enterprise', reg:'americas', city:'Phoenix, AZ, US', x:182, y:182, showLbl:false, color:'#de3723', icon:'NC', proto:'IMAP :993 · ActiveSync · WebDAV', statusUrl:'https://www.namecheap.com/status-updates/' },
+    { id:'titan', name:'Titan Email (Hostinger / Business)', domain:'titan.email', probe:'https://titan.email/favicon.ico', cat:'enterprise', reg:'apac', city:'Mumbai, India', x:702, y:248, showLbl:false, color:'#111827', icon:'TI', proto:'IMAP :993 · SMTP :465', statusUrl:'https://status.titan.email/' },
+    { id:'zimbra', name:'Zimbra Collaboration Cloud', domain:'zimbra.com', probe:'https://www.zimbra.com/favicon.ico', cat:'enterprise', reg:'americas', city:'Buffalo, NY, US', x:282, y:148, showLbl:false, color:'#0083c1', icon:'ZB', proto:'IMAP :993 · MAPI · SOAP', statusUrl:'https://www.zimbra.com/' },
+    { id:'icewarp', name:'IceWarp Enterprise Mail', domain:'icewarp.com', probe:'https://www.icewarp.com/favicon.ico', cat:'enterprise', reg:'europe', city:'Prague, Czechia', x:522, y:126, showLbl:false, color:'#2563eb', icon:'IW', proto:'IMAP :993 · Exchange ActiveSync', statusUrl:'https://www.icewarp.com/' },
+    { id:'hey', name:'HEY Email (by 37signals)', domain:'hey.com', probe:'https://www.hey.com/favicon.ico', cat:'enterprise', reg:'americas', city:'Chicago, IL, US', x:254, y:152, showLbl:false, color:'#7c3aed', icon:'H!', proto:'HTTPS Web · Custom SMTP', statusUrl:'https://www.hey.com/' },
+    { id:'migadu', name:'Migadu Swiss Business Mail', domain:'migadu.com', probe:'https://www.migadu.com/favicon.ico', cat:'enterprise', reg:'europe', city:'Zurich, Switzerland', x:498, y:138, showLbl:false, color:'#0d9488', icon:'MG', proto:'IMAP :993 · ManageSieve · SMTP', statusUrl:'https://status.migadu.com/' },
 
     // 3. Privacy & Encrypted Email (8)
-    { id:'proton', name:'Proton Mail (@proton.me / @pm.me)', domain:'proton.me', probe:'https://proton.me/favicon.ico', cat:'privacy', color:'#6d4aff', icon:'PM', proto:'Zero-Access E2EE · Bridge IMAP', statusUrl:'https://status.proton.me/' },
-    { id:'tuta', name:'Tuta Mail (Tutanota Encrypted)', domain:'tuta.com', probe:'https://tuta.com/favicon.ico', cat:'privacy', color:'#840010', icon:'TU', proto:'Post-Quantum E2EE · Custom REST', statusUrl:'https://status.tuta.com/' },
-    { id:'startmail', name:'StartMail Dutch Privacy Email', domain:'startmail.com', probe:'https://www.startmail.com/favicon.ico', cat:'privacy', color:'#1e3a8a', icon:'SM', proto:'PGP · IMAP :993 · SMTP :587', statusUrl:'https://www.startmail.com/' },
-    { id:'mailfence', name:'Mailfence Encrypted Suite', domain:'mailfence.com', probe:'https://mailfence.com/favicon.ico', cat:'privacy', color:'#0369a1', icon:'MF', proto:'OpenPGP · IMAP :993 · ActiveSync', statusUrl:'https://blog.mailfence.com/' },
-    { id:'posteo', name:'Posteo.de Green Encrypted Mail', domain:'posteo.de', probe:'https://posteo.de/favicon.ico', cat:'privacy', color:'#15803d', icon:'PO', proto:'PGP · IMAP :993 · POP3 :995', statusUrl:'https://posteo.de/' },
-    { id:'mailbox_org', name:'Mailbox.org German Secure Mail', domain:'mailbox.org', probe:'https://mailbox.org/favicon.ico', cat:'privacy', color:'#ea580c', icon:'MB', proto:'PGP · IMAP :993 · OX Cloud', statusUrl:'https://status.mailbox.org/' },
-    { id:'runbox', name:'Runbox Norwegian Privacy Mail', domain:'runbox.com', probe:'https://runbox.com/favicon.ico', cat:'privacy', color:'#0284c7', icon:'RB', proto:'IMAP :993 · POP3 · CalDAV', statusUrl:'https://status.runbox.com/' },
-    { id:'kolabnow', name:'Kolab Now Swiss Groupware', domain:'kolabnow.com', probe:'https://kolabnow.com/favicon.ico', cat:'privacy', color:'#ea580c', icon:'KN', proto:'IMAP :993 · ActiveSync · CalDAV', statusUrl:'https://status.kolabnow.com/' },
+    { id:'proton', name:'Proton Mail (@proton.me / @pm.me)', domain:'proton.me', probe:'https://proton.me/favicon.ico', cat:'privacy', reg:'europe', city:'Geneva, Switzerland', x:490, y:140, showLbl:true, color:'#6d4aff', icon:'PM', proto:'Zero-Access E2EE · Bridge IMAP', statusUrl:'https://status.proton.me/' },
+    { id:'tuta', name:'Tuta Mail (Tutanota Encrypted)', domain:'tuta.com', probe:'https://tuta.com/favicon.ico', cat:'privacy', reg:'europe', city:'Hanover, Germany', x:505, y:116, showLbl:false, color:'#840010', icon:'TU', proto:'Post-Quantum E2EE · Custom REST', statusUrl:'https://status.tuta.com/' },
+    { id:'startmail', name:'StartMail Dutch Privacy Email', domain:'startmail.com', probe:'https://www.startmail.com/favicon.ico', cat:'privacy', reg:'europe', city:'The Hague, Netherlands', x:486, y:118, showLbl:false, color:'#1e3a8a', icon:'SM', proto:'PGP · IMAP :993 · SMTP :587', statusUrl:'https://www.startmail.com/' },
+    { id:'mailfence', name:'Mailfence Encrypted Suite', domain:'mailfence.com', probe:'https://mailfence.com/favicon.ico', cat:'privacy', reg:'europe', city:'Brussels, Belgium', x:484, y:124, showLbl:false, color:'#0369a1', icon:'MF', proto:'OpenPGP · IMAP :993 · ActiveSync', statusUrl:'https://blog.mailfence.com/' },
+    { id:'posteo', name:'Posteo.de Green Encrypted Mail', domain:'posteo.de', probe:'https://posteo.de/favicon.ico', cat:'privacy', reg:'europe', city:'Berlin, Germany', x:516, y:115, showLbl:false, color:'#15803d', icon:'PO', proto:'PGP · IMAP :993 · POP3 :995', statusUrl:'https://posteo.de/' },
+    { id:'mailbox_org', name:'Mailbox.org German Secure Mail', domain:'mailbox.org', probe:'https://mailbox.org/favicon.ico', cat:'privacy', reg:'europe', city:'Frankfurt, Germany', x:504, y:125, showLbl:false, color:'#ea580c', icon:'MB', proto:'PGP · IMAP :993 · OX Cloud', statusUrl:'https://status.mailbox.org/' },
+    { id:'runbox', name:'Runbox Norwegian Privacy Mail', domain:'runbox.com', probe:'https://runbox.com/favicon.ico', cat:'privacy', reg:'europe', city:'Oslo, Norway', x:508, y:88, showLbl:false, color:'#0284c7', icon:'RB', proto:'IMAP :993 · POP3 · CalDAV', statusUrl:'https://status.runbox.com/' },
+    { id:'kolabnow', name:'Kolab Now Swiss Groupware', domain:'kolabnow.com', probe:'https://kolabnow.com/favicon.ico', cat:'privacy', reg:'europe', city:'Zurich, Switzerland', x:495, y:134, showLbl:false, color:'#ea580c', icon:'KN', proto:'IMAP :993 · ActiveSync · CalDAV', statusUrl:'https://status.kolabnow.com/' },
 
     // 4. Asia, Europe & Regional ISPs (10)
-    { id:'lineworks', name:'LINE WORKS Mail (Japan / Asia)', domain:'worksmobile.com', probe:'https://line.worksmobile.com/favicon.ico', cat:'regional', color:'#00c73c', icon:'LW', proto:'IMAP :993 · SMTP :587 · API', statusUrl:'https://line.worksmobile.com/' },
-    { id:'naver', name:'Naver Mail (@naver.com Korea)', domain:'naver.com', probe:'https://www.naver.com/favicon.ico', cat:'regional', color:'#03c75a', icon:'N', proto:'IMAP :993 · SMTP :587', statusUrl:'https://mail.naver.com/' },
-    { id:'daum', name:'Daum / Kakao Mail (@daum.net)', domain:'daum.net', probe:'https://www.daum.net/favicon.ico', cat:'regional', color:'#f59e0b', icon:'DK', proto:'IMAP :993 · SMTP :465', statusUrl:'https://mail.daum.net/' },
-    { id:'qq', name:'Tencent QQ Mail & Exmail (@qq.com)', domain:'qq.com', probe:'https://mail.qq.com/favicon.ico', cat:'regional', color:'#0284c7', icon:'QQ', proto:'IMAP :993 · Exchange · POP3', statusUrl:'https://mail.qq.com/' },
-    { id:'netease163', name:'NetEase 163 / 126 Mail (@163.com)', domain:'163.com', probe:'https://mail.163.com/favicon.ico', cat:'regional', color:'#dc2626', icon:'163', proto:'IMAP :993 · SMTP :465', statusUrl:'https://mail.163.com/' },
-    { id:'aliyun', name:'Alibaba Cloud Mail (@aliyun.com)', domain:'aliyun.com', probe:'https://mail.aliyun.com/favicon.ico', cat:'regional', color:'#ff6a00', icon:'AL', proto:'IMAP :993 · SMTP :465', statusUrl:'https://status.alibabacloud.com/' },
-    { id:'yandex', name:'Yandex 360 Mail (@yandex.com)', domain:'yandex.com', probe:'https://yandex.com/favicon.ico', cat:'regional', color:'#fc3f1d', icon:'YA', proto:'IMAP :993 · SMTP :465', statusUrl:'https://mail.yandex.com/' },
-    { id:'mailru', name:'VK Mail / Mail.ru (@mail.ru)', domain:'mail.ru', probe:'https://mail.ru/favicon.ico', cat:'regional', color:'#005ff9', icon:'MR', proto:'IMAP :993 · SMTP :465', statusUrl:'https://help.mail.ru/' },
-    { id:'webde', name:'WEB.DE FreeMail (@web.de Germany)', domain:'web.de', probe:'https://web.de/favicon.ico', cat:'regional', color:'#eab308', icon:'W', proto:'IMAP :993 · POP3 :995', statusUrl:'https://status.web.de/' },
-    { id:'orange', name:'Orange Mail (@orange.fr France)', domain:'orange.fr', probe:'https://www.orange.fr/favicon.ico', cat:'regional', color:'#ff7900', icon:'OR', proto:'IMAP :993 · SMTP :465', statusUrl:'https://www.orange.fr/' },
+    { id:'lineworks', name:'LINE WORKS Mail (Japan / Asia)', domain:'worksmobile.com', probe:'https://line.worksmobile.com/favicon.ico', cat:'regional', reg:'apac', city:'Tokyo, Japan', x:882, y:168, showLbl:true, color:'#00c73c', icon:'LW', proto:'IMAP :993 · SMTP :587 · API', statusUrl:'https://line.worksmobile.com/' },
+    { id:'naver', name:'Naver Mail (@naver.com Korea)', domain:'naver.com', probe:'https://www.naver.com/favicon.ico', cat:'regional', reg:'apac', city:'Seongnam / Seoul, KR', x:852, y:162, showLbl:true, color:'#03c75a', icon:'N', proto:'IMAP :993 · SMTP :587', statusUrl:'https://mail.naver.com/' },
+    { id:'daum', name:'Daum / Kakao Mail (@daum.net)', domain:'daum.net', probe:'https://www.daum.net/favicon.ico', cat:'regional', reg:'apac', city:'Jeju / Seoul, KR', x:846, y:172, showLbl:false, color:'#f59e0b', icon:'DK', proto:'IMAP :993 · SMTP :465', statusUrl:'https://mail.daum.net/' },
+    { id:'qq', name:'Tencent QQ Mail & Exmail (@qq.com)', domain:'qq.com', probe:'https://mail.qq.com/favicon.ico', cat:'regional', reg:'apac', city:'Shenzhen, China', x:812, y:232, showLbl:true, color:'#0284c7', icon:'QQ', proto:'IMAP :993 · Exchange · POP3', statusUrl:'https://mail.qq.com/' },
+    { id:'netease163', name:'NetEase 163 / 126 Mail (@163.com)', domain:'163.com', probe:'https://mail.163.com/favicon.ico', cat:'regional', reg:'apac', city:'Guangzhou, China', x:806, y:224, showLbl:false, color:'#dc2626', icon:'163', proto:'IMAP :993 · SMTP :465', statusUrl:'https://mail.163.com/' },
+    { id:'aliyun', name:'Alibaba Cloud Mail (@aliyun.com)', domain:'aliyun.com', probe:'https://mail.aliyun.com/favicon.ico', cat:'regional', reg:'apac', city:'Hangzhou, China', x:828, y:202, showLbl:false, color:'#ff6a00', icon:'AL', proto:'IMAP :993 · SMTP :465', statusUrl:'https://status.alibabacloud.com/' },
+    { id:'yandex', name:'Yandex 360 Mail (@yandex.com)', domain:'yandex.com', probe:'https://yandex.com/favicon.ico', cat:'regional', reg:'europe', city:'Moscow, E. Europe', x:585, y:102, showLbl:true, color:'#fc3f1d', icon:'YA', proto:'IMAP :993 · SMTP :465', statusUrl:'https://mail.yandex.com/' },
+    { id:'mailru', name:'VK Mail / Mail.ru (@mail.ru)', domain:'mail.ru', probe:'https://mail.ru/favicon.ico', cat:'regional', reg:'europe', city:'Moscow, E. Europe', x:578, y:108, showLbl:false, color:'#005ff9', icon:'MR', proto:'IMAP :993 · SMTP :465', statusUrl:'https://help.mail.ru/' },
+    { id:'webde', name:'WEB.DE FreeMail (@web.de Germany)', domain:'web.de', probe:'https://web.de/favicon.ico', cat:'regional', reg:'europe', city:'Karlsruhe, Germany', x:498, y:128, showLbl:false, color:'#eab308', icon:'W', proto:'IMAP :993 · POP3 :995', statusUrl:'https://status.web.de/' },
+    { id:'orange', name:'Orange Mail (@orange.fr France)', domain:'orange.fr', probe:'https://www.orange.fr/favicon.ico', cat:'regional', reg:'europe', city:'Paris, France', x:476, y:132, showLbl:false, color:'#ff7900', icon:'OR', proto:'IMAP :993 · SMTP :465', statusUrl:'https://www.orange.fr/' },
 
     // 5. Transactional, Cloud SMTP & Email APIs (8)
-    { id:'ses', name:'Amazon SES (AWS Simple Email)', domain:'amazonses.com', probe:'https://aws.amazon.com/favicon.ico', cat:'transactional', color:'#ff9900', icon:'AWS', proto:'SMTP :587 · AWS SDK v3', statusUrl:'https://health.aws.amazon.com/' },
-    { id:'sendgrid', name:'Twilio SendGrid Email API', domain:'sendgrid.net', probe:'https://sendgrid.com/favicon.ico', statusApi:'https://status.sendgrid.com/api/v2/status.json', cat:'transactional', color:'#1a82e2', icon:'SG', proto:'REST API · SMTP Relay :587', statusUrl:'https://status.sendgrid.com/' },
-    { id:'mailgun', name:'Sinch Mailgun Email Delivery', domain:'mailgun.org', probe:'https://www.mailgun.com/favicon.ico', statusApi:'https://status.mailgun.com/api/v2/status.json', cat:'transactional', color:'#c0262c', icon:'MG', proto:'REST API · Inbound Routes · SMTP', statusUrl:'https://status.mailgun.com/' },
-    { id:'postmark', name:'ActiveCampaign Postmark API', domain:'postmarkapp.com', probe:'https://postmarkapp.com/favicon.ico', cat:'transactional', color:'#f59e0b', icon:'PM', proto:'REST API · Inbound Webhook · SMTP', statusUrl:'https://status.postmarkapp.com/' },
-    { id:'brevo', name:'Brevo (Sendinblue) SMTP & API', domain:'brevo.com', probe:'https://www.brevo.com/favicon.ico', cat:'transactional', color:'#0b996e', icon:'BR', proto:'SMTP Relay :587 · REST v3', statusUrl:'https://status.brevo.com/' },
-    { id:'mandrill', name:'Mailchimp Transactional (Mandrill)', domain:'mandrillapp.com', probe:'https://mailchimp.com/favicon.ico', cat:'transactional', color:'#eab308', icon:'MC', proto:'Transactional API · SMTP :587', statusUrl:'https://status.mailchimp.com/' },
-    { id:'resend', name:'Resend Developer Email API', domain:'resend.com', probe:'https://resend.com/favicon.ico', cat:'transactional', color:'#111827', icon:'RE', proto:'REST API · SMTP :465', statusUrl:'https://resend-status.com/' },
-    { id:'cf_email', name:'Cloudflare Email Routing & Security', domain:'cloudflare.com', probe:'https://www.cloudflare.com/favicon.ico', statusApi:'https://www.cloudflarestatus.com/api/v2/status.json', cat:'transactional', color:'#f38020', icon:'CF', proto:'MX Routing · Email Workers', statusUrl:'https://www.cloudflarestatus.com/' }
+    { id:'ses', name:'Amazon SES (AWS Simple Email)', domain:'amazonses.com', probe:'https://aws.amazon.com/favicon.ico', cat:'transactional', reg:'americas', city:'Ashburn, VA (US-East-1)', x:278, y:168, showLbl:true, color:'#ff9900', icon:'AWS', proto:'SMTP :587 · AWS SDK v3', statusUrl:'https://health.aws.amazon.com/' },
+    { id:'sendgrid', name:'Twilio SendGrid Email API', domain:'sendgrid.net', probe:'https://sendgrid.com/favicon.ico', statusApi:'https://status.sendgrid.com/api/v2/status.json', cat:'transactional', reg:'americas', city:'Denver, CO, US', x:205, y:162, showLbl:false, color:'#1a82e2', icon:'SG', proto:'REST API · SMTP Relay :587', statusUrl:'https://status.sendgrid.com/' },
+    { id:'mailgun', name:'Sinch Mailgun Email Delivery', domain:'mailgun.org', probe:'https://www.mailgun.com/favicon.ico', statusApi:'https://status.mailgun.com/api/v2/status.json', cat:'transactional', reg:'americas', city:'Austin, TX, US', x:228, y:192, showLbl:false, color:'#c0262c', icon:'MG', proto:'REST API · Inbound Routes · SMTP', statusUrl:'https://status.mailgun.com/' },
+    { id:'postmark', name:'ActiveCampaign Postmark API', domain:'postmarkapp.com', probe:'https://postmarkapp.com/favicon.ico', cat:'transactional', reg:'americas', city:'Chicago, IL, US', x:248, y:156, showLbl:false, color:'#f59e0b', icon:'PM', proto:'REST API · Inbound Webhook · SMTP', statusUrl:'https://status.postmarkapp.com/' },
+    { id:'brevo', name:'Brevo (Sendinblue) SMTP & API', domain:'brevo.com', probe:'https://www.brevo.com/favicon.ico', cat:'transactional', reg:'europe', city:'Paris, France', x:472, y:136, showLbl:false, color:'#0b996e', icon:'BR', proto:'SMTP Relay :587 · REST v3', statusUrl:'https://status.brevo.com/' },
+    { id:'mandrill', name:'Mailchimp Transactional (Mandrill)', domain:'mandrillapp.com', probe:'https://mailchimp.com/favicon.ico', cat:'transactional', reg:'americas', city:'Atlanta, GA, US', x:266, y:182, showLbl:false, color:'#eab308', icon:'MC', proto:'Transactional API · SMTP :587', statusUrl:'https://status.mailchimp.com/' },
+    { id:'resend', name:'Resend Developer Email API', domain:'resend.com', probe:'https://resend.com/favicon.ico', cat:'transactional', reg:'americas', city:'San Francisco, CA, US', x:152, y:166, showLbl:false, color:'#111827', icon:'RE', proto:'REST API · SMTP :465', statusUrl:'https://resend-status.com/' },
+    { id:'cf_email', name:'Cloudflare Email Routing & Security', domain:'cloudflare.com', probe:'https://www.cloudflare.com/favicon.ico', statusApi:'https://www.cloudflarestatus.com/api/v2/status.json', cat:'transactional', reg:'americas', city:'Global Anycast Edge', x:148, y:172, showLbl:false, color:'#f38020', icon:'CF', proto:'MX Routing · Email Workers', statusUrl:'https://www.cloudflarestatus.com/' }
   ];
 
-  // Runtime state per provider
   var STATE = {};
   PROVIDERS.forEach(function(p){
     STATE[p.id] = { status:'wait', latency:null, mxCount:null, primaryMx:'', statusDesc:'' };
   });
 
   var activeCat = 'all';
+  var activeRegion = 'all';
   var searchQuery = '';
+  var feedLogs = [];
 
   function esc(s){
     var d=document.createElement('div');
@@ -374,7 +615,87 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
     return d.innerHTML;
   }
 
-  // DNS-over-HTTPS MX lookup (Google Public DNS with Cloudflare fallback)
+  function pushFeedLine(p, st){
+    var t = new Date().toLocaleTimeString('en-GB', { hour12:false });
+    var cls = st.status === 'up' ? 'ok' : 'warn';
+    var tag = st.status === 'up' ? 'UP' : st.status === 'warn' ? 'SLOW' : 'DOWN';
+    var line = '['+t+'] <span class="'+cls+'">'+tag+'</span> · '+esc(p.domain)+' ('+esc(p.city)+') — '+(st.latency?st.latency+'ms':'MX OK');
+    feedLogs.unshift(line);
+    if(feedLogs.length > 3) feedLogs.length = 3;
+    var box = document.getElementById('liveTelemetryFeed');
+    if(box) box.innerHTML = feedLogs.map(function(l){ return '<div class="feed-line">'+l+'</div>'; }).join('');
+  }
+
+  // Render World Map SVG Nodes & Telemetry Arcs from Probe Origin (779, 288)
+  function renderWorldMap(){
+    var arcsEl = document.getElementById('mapArcsLayer');
+    var nodesEl = document.getElementById('mapNodesLayer');
+    if(!arcsEl || !nodesEl) return;
+
+    var ox = 779, oy = 288;
+    var list = PROVIDERS.filter(function(p){
+      return activeRegion === 'all' || p.reg === activeRegion;
+    });
+
+    arcsEl.innerHTML = list.map(function(p){
+      var st = STATE[p.id];
+      var col = st.status === 'up' ? '#10b981' : st.status === 'warn' ? '#f59e0b' : st.status === 'down' ? '#ef4444' : '#38bdf8';
+      var mx = (ox + p.x) / 2;
+      var my = Math.min(oy, p.y) - Math.abs(ox - p.x) * 0.14 - 18;
+      return '<path class="arc-beam" d="M'+ox+','+oy+' Q'+mx.toFixed(1)+','+my.toFixed(1)+' '+p.x+','+p.y+'" stroke="'+col+'"/>';
+    }).join('');
+
+    nodesEl.innerHTML = list.map(function(p){
+      var st = STATE[p.id];
+      var col = st.status === 'up' ? '#10b981' : st.status === 'warn' ? '#f59e0b' : st.status === 'down' ? '#ef4444' : '#38bdf8';
+      var lbl = p.showLbl ? ('<text x="7" y="3" class="node-lbl">'+esc(p.name.split(' ')[0])+(st.latency ? ' · '+st.latency+'ms' : '')+'</text>') : '';
+      return '<g class="map-node" data-id="'+esc(p.id)+'" transform="translate('+p.x+','+p.y+')">' +
+        '<circle class="node-halo" r="7" stroke="'+col+'"/>' +
+        '<circle r="4.2" fill="'+col+'" stroke="#06101f" stroke-width="1.3"/>' +
+        lbl +
+      '</g>';
+    }).join('');
+
+    var stage = document.getElementById('mapStage');
+    var tip = document.getElementById('mapTooltip');
+    nodesEl.querySelectorAll('.map-node').forEach(function(node){
+      var id = node.getAttribute('data-id');
+      var p = PROVIDERS.find(function(x){ return x.id === id; });
+      if(!p) return;
+
+      node.addEventListener('mouseenter', function(){
+        var st = STATE[p.id];
+        var stTxt = st.status === 'up' ? 'OPERATIONAL (UP)' : st.status === 'warn' ? 'DEGRADED / SLOW' : st.status === 'down' ? 'DOWN' : 'CHECKING...';
+        var stCol = st.status === 'up' ? '#10b981' : st.status === 'warn' ? '#f59e0b' : st.status === 'down' ? '#ef4444' : '#38bdf8';
+        tip.innerHTML =
+          '<div class="mt-head"><span class="mt-name">'+esc(p.name)+'</span><span style="color:'+stCol+';font-weight:800;font-size:11px;">● '+stTxt+'</span></div>' +
+          '<div class="mt-dom">'+esc(p.domain)+' · '+esc(p.city)+'</div>' +
+          '<div class="mt-row"><span>Edge Latency:</span><strong>'+(st.latency != null ? st.latency + ' ms' : 'Probing...')+'</strong></div>' +
+          '<div class="mt-row"><span>Primary MX:</span><strong>'+esc(st.primaryMx || p.domain)+'</strong></div>' +
+          '<div class="mt-row"><span>Protocols:</span><strong>'+esc(p.proto)+'</strong></div>';
+        tip.style.display = 'block';
+        var rect = stage.getBoundingClientRect();
+        var nx = (p.x / 1000) * rect.width;
+        var ny = (p.y / 500) * rect.height;
+        tip.style.left = Math.min(rect.width - 270, Math.max(12, nx + 14)) + 'px';
+        tip.style.top = Math.min(rect.height - 135, Math.max(12, ny - 24)) + 'px';
+      });
+
+      node.addEventListener('mouseleave', function(){
+        tip.style.display = 'none';
+      });
+
+      node.addEventListener('click', function(){
+        var card = document.getElementById('pcard-' + p.id);
+        if(card){
+          card.scrollIntoView({ behavior:'smooth', block:'center' });
+          card.classList.add('highlight');
+          setTimeout(function(){ card.classList.remove('highlight'); }, 2200);
+        }
+      });
+    });
+  }
+
   async function queryDns(domain, type){
     try{
       var r = await fetch('https://dns.google/resolve?name='+encodeURIComponent(domain)+'&type='+encodeURIComponent(type), { cache:'no-store' });
@@ -387,7 +708,6 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
     return await r2.json();
   }
 
-  // Measure HTTPS edge reachability & round-trip latency in ms
   async function probeEdge(url, timeoutMs){
     var ctrl = new AbortController();
     var timer = setTimeout(function(){ ctrl.abort(); }, timeoutMs || 6500);
@@ -407,7 +727,6 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
     }
   }
 
-  // Probe a single provider (combines Edge Ping + MX DoH + optional Statuspage API)
   async function checkProvider(p){
     STATE[p.id].status = 'wait';
     renderCardUpdate(p.id);
@@ -443,23 +762,35 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 
     STATE[p.id] = {
       status: status,
-      latency: edge.ms || (mxOk ? 65 : null),
+      latency: edge.ms || (mxOk ? 62 : null),
       mxCount: mxAnswers.length,
       primaryMx: primaryMx || p.domain,
       statusDesc: (spData && spData.status && spData.status.description) || ''
     };
+    pushFeedLine(p, STATE[p.id]);
     renderCardUpdate(p.id);
+    renderWorldMap();
     updateKpis();
   }
 
+  function avgList(arr){
+    if(!arr.length) return '— ms';
+    return Math.round(arr.reduce(function(a,b){return a+b;},0)/arr.length) + ' ms';
+  }
+
   function updateKpis(){
-    var up=0, warn=0, down=0, pings=[];
+    var up=0, warn=0, down=0, pings=[], amPings=[], euPings=[], apPings=[];
     PROVIDERS.forEach(function(p){
       var st = STATE[p.id];
       if(st.status === 'up') up++;
       else if(st.status === 'warn') warn++;
       else if(st.status === 'down') down++;
-      if(typeof st.latency === 'number') pings.push(st.latency);
+      if(typeof st.latency === 'number'){
+        pings.push(st.latency);
+        if(p.reg === 'americas') amPings.push(st.latency);
+        else if(p.reg === 'europe') euPings.push(st.latency);
+        else if(p.reg === 'apac') apPings.push(st.latency);
+      }
     });
     document.getElementById('kpiTotal').textContent = PROVIDERS.length;
     document.getElementById('kpiUp').textContent = up;
@@ -468,9 +799,11 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
     var pct = Math.round(((up + warn) / PROVIDERS.length) * 1000) / 10;
     document.getElementById('kpiUpPct').textContent = pct + '% Global Reachability';
     if(pings.length){
-      var avg = Math.round(pings.reduce(function(a,b){return a+b;},0) / pings.length);
-      document.getElementById('kpiAvgPing').textContent = avg + ' ms';
+      document.getElementById('kpiAvgPing').textContent = avgList(pings);
     }
+    document.getElementById('hubAmericasVal').textContent = avgList(amPings);
+    document.getElementById('hubEuropeVal').textContent = avgList(euPings);
+    document.getElementById('hubApacVal').textContent = avgList(apPings);
     var nowStr = new Date().toLocaleTimeString('th-TH');
     document.getElementById('lastCheckedLbl').textContent = (h.lang==='en'?'Last checked: ':'เช็คล่าสุด: ') + nowStr;
   }
@@ -511,7 +844,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
           '<div class="p-ico" style="background:'+esc(p.color)+'">'+esc(p.icon)+'</div>' +
           '<div style="min-width:0">' +
             '<div class="p-name" title="'+esc(p.name)+'">'+esc(p.name)+'</div>' +
-            '<div class="p-dom">'+esc(p.domain)+'</div>' +
+            '<div class="p-dom">'+esc(p.domain)+' · '+esc(p.city)+'</div>' +
           '</div>' +
         '</div>' +
         '<span class="st-badge '+badgeCls+'"><span class="dot"></span>'+esc(badgeTxt)+'</span>' +
@@ -525,7 +858,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
         '<span class="p-proto">'+esc(p.proto)+'</span>' +
         '<div class="p-actions">' +
           '<button type="button" class="retest-btn" data-retest="'+esc(p.id)+'">↻ '+(isEn?'Test':'เช็คซ้ำ')+'</button>' +
-          '<a class="p-link" href="'+esc(p.statusUrl)+'" target="_blank" rel="noopener">'+(isEn?'Official ↗':'หน้าสถานะ ↗')+'</a>' +
+          '<a class="p-link" href="'+esc(p.statusUrl)+'" target="_blank" rel="noopener">'+(isEn?'Official':'สถานะ')+'</a>' +
         '</div>' +
       '</div>';
   }
@@ -544,11 +877,13 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 
   function renderGrid(){
     var grid = document.getElementById('providersGrid');
+    if(!grid) return;
     var q = searchQuery.toLowerCase().trim();
     var list = PROVIDERS.filter(function(p){
       if(activeCat !== 'all' && p.cat !== activeCat) return false;
+      if(activeRegion !== 'all' && p.reg !== activeRegion) return false;
       if(q){
-        var hay = (p.name + ' ' + p.domain + ' ' + p.proto).toLowerCase();
+        var hay = (p.name + ' ' + p.domain + ' ' + p.city + ' ' + p.proto).toLowerCase();
         if(hay.indexOf(q) === -1) return false;
       }
       return true;
@@ -567,7 +902,6 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
     });
   }
 
-  // Run all checks with concurrency limit so browser connections stay fast & accurate
   async function checkAllProviders(){
     var queue = PROVIDERS.slice();
     var workers = [];
@@ -582,7 +916,6 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
     await Promise.all(workers);
   }
 
-  // Custom Domain MX / SPF / DMARC Inspector
   function detectVendor(mxHost){
     var m = (mxHost || '').toLowerCase();
     if(m.includes('google.com') || m.includes('googlemail.com')) return 'Google Workspace / Gmail';
@@ -609,7 +942,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
     if(!dom) return;
     var box = document.getElementById('domainResult');
     box.style.display = 'block';
-    box.innerHTML = '<div style="font-weight:700;color:var(--brand)">⏳ กำลังตรวจสอบระเบียน MX, SPF และ DMARC ของ <code>'+esc(dom)+'</code>...</div>';
+    box.innerHTML = '<div style="font-weight:700;color:var(--brand)">กำลังตรวจสอบระเบียน MX, SPF และ DMARC ของ <code>'+esc(dom)+'</code>...</div>';
 
     try{
       var res = await Promise.all([
@@ -629,20 +962,19 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 
       box.innerHTML = '' +
         '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">' +
-          '<div style="font-size:16px;font-weight:800;">ผลตรวจสอบโดเมน: <code>'+esc(dom)+'</code> — <span style="color:'+(isUp?'#047857':'#b91c1c')+'">'+(isUp?'🟢 พร้อมรับ-ส่งอีเมล (MX OPERATIONAL)':'🔴 ไม่พบเซิร์ฟเวอร์รับอีเมล (NO MX FOUND)')+'</span></div>' +
+          '<div style="font-size:16px;font-weight:800;">ผลตรวจสอบโดเมน: <code>'+esc(dom)+'</code> — <span style="color:'+(isUp?'#047857':'#b91c1c')+'">'+(isUp?'พร้อมรับ-ส่งอีเมล (MX OPERATIONAL)':'ไม่พบเซิร์ฟเวอร์รับอีเมล (NO MX FOUND)')+'</span></div>' +
           '<span class="st-badge '+(isUp?'up':'down')+'"><span class="dot"></span>'+esc(vendor)+'</span>' +
         '</div>' +
         '<div class="dr-grid">' +
           '<div class="dr-item"><strong>Mail Exchangers (MX Records)</strong><div class="dr-code">'+(mxs.length ? mxs.map(esc).join('<br>') : '— ไม่พบ MX Record —')+'</div></div>' +
-          '<div class="dr-item"><strong>SPF Policy (TXT v=spf1)</strong><div class="dr-code">'+(spf ? '🟢 ' + esc(spf) : '⚠️ ไม่พบระเบียน SPF')+'</div></div>' +
-          '<div class="dr-item"><strong>DMARC Policy (_dmarc.'+esc(dom)+')</strong><div class="dr-code">'+(dmarc ? '🟢 ' + esc(dmarc) : '⚠️ ไม่พบระเบียน DMARC')+'</div></div>' +
+          '<div class="dr-item"><strong>SPF Policy (TXT v=spf1)</strong><div class="dr-code">'+(spf ? esc(spf) : 'ไม่พบระเบียน SPF')+'</div></div>' +
+          '<div class="dr-item"><strong>DMARC Policy (_dmarc.'+esc(dom)+')</strong><div class="dr-code">'+(dmarc ? esc(dmarc) : 'ไม่พบระเบียน DMARC')+'</div></div>' +
         '</div>';
     }catch(e){
       box.innerHTML = '<div style="color:var(--err);font-weight:700;">ไม่สามารถตรวจสอบโดเมนได้: '+esc(e.message)+'</div>';
     }
   }
 
-  // Event listeners
   document.getElementById('catPills').querySelectorAll('.cat-pill').forEach(function(btn){
     btn.onclick = function(){
       document.getElementById('catPills').querySelectorAll('.cat-pill').forEach(function(b){ b.classList.remove('active'); });
@@ -651,6 +983,20 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
       renderGrid();
     };
   });
+
+  document.getElementById('mapRegBtns').querySelectorAll('[data-reg]').forEach(function(btn){
+    btn.onclick = function(){
+      document.getElementById('mapRegBtns').querySelectorAll('[data-reg]').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      activeRegion = btn.getAttribute('data-reg');
+      renderWorldMap();
+      renderGrid();
+    };
+  });
+
+  document.getElementById('mapRefreshBtn').onclick = function(){
+    checkAllProviders();
+  };
 
   document.getElementById('brandSearch').oninput = function(e){
     searchQuery = e.target.value || '';
@@ -674,12 +1020,11 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
     };
   });
 
-  // Scroll progress bar
   var bar=document.getElementById("bar");
   function sc(){var m=h.scrollHeight-innerHeight;bar.style.width=(m>0?scrollY/m*100:0)+"%"}
   addEventListener("scroll",sc,{passive:true});sc();
 
-  // Initial render & live check
+  renderWorldMap();
   renderGrid();
   checkAllProviders();
   setInterval(checkAllProviders, 60000);

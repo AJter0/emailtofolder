@@ -272,49 +272,35 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 @media(max-width:1040px){.links{gap:10px;font-size:12px}}@media(max-width:860px){.links{display:none}.bc,.bc.w,.bc.x{grid-column:span 6;min-height:0}.gi{grid-template-columns:1fr}.hero{padding-top:120px}.logo-txt{font-size:14px}.btn.sm{display:none}.cg{display:none}}
 @media(max-width:560px){.sl>li{grid-template-columns:1fr;gap:12px;padding:20px}.code{flex-wrap:wrap}.code .k{min-width:0;width:100%}.cta .btn{width:100%;text-align:center}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none;filter:none}}
+
+/* Canonical Unified Header CSS */
+.nav{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;transform:translateX(-50%);width:min(1080px,calc(100% - 24px));z-index:50;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px 8px 18px;border-radius:999px;background:rgba(255,255,255,.7);border:1px solid rgba(0,0,0,.1);backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px);color:#1d1d1f;font-family:Inter,Prompt,system-ui,sans-serif;line-height:1.55}
+html[lang=th] .nav{font-family:Prompt,Inter,system-ui,sans-serif}
+.nav .logo{font-weight:700;font-size:15px;display:flex;gap:10px;align-items:center;white-space:nowrap;letter-spacing:-.02em;color:#1d1d1f;text-decoration:none}
+.nav .logo-mark{width:28px;height:28px;border-radius:8px;flex-shrink:0;transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;display:block}
+.nav .logo:hover .logo-mark{transform:scale(1.08) rotate(-2deg);box-shadow:0 4px 20px rgba(10,132,255,.35)}
+.nav .logo-txt{font-weight:700;color:#1d1d1f;letter-spacing:-.03em}
+.nav .logo-tld{background:linear-gradient(135deg,#0a84ff,#8a5cff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;font-weight:800}
+.nav .links{display:flex;gap:14px;font-size:13px;color:#6e6e73;align-items:center;white-space:nowrap}
+.nav .links a{color:#6e6e73;text-decoration:none;transition:color .2s}
+.nav .links a:hover,.nav .links a.active{color:#1d1d1f;font-weight:600}
+.nav .r{display:flex;gap:8px;align-items:center;flex-shrink:0}
+.nav .lang{display:flex;background:#f5f5f7;border-radius:999px;padding:2px}
+.nav .lang button{border:0;background:none;color:#6e6e73;font:600 12px inherit;font-family:inherit;padding:5px 11px;border-radius:999px;cursor:pointer;transition:.3s;line-height:1.55}
+html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f;color:#ffffff}
+.nav .btn.sm{position:relative;overflow:hidden;display:inline-block;color:#fff;padding:9px 18px;border-radius:999px;font-weight:600;font-size:13px;line-height:1.55;text-decoration:none;white-space:nowrap;transition:transform .3s,box-shadow .3s}
+.nav .btn.sm:hover{transform:scale(1.05);box-shadow:0 10px 40px rgba(10,132,255,.5)}
+@media(max-width:1040px){.nav .links{gap:10px;font-size:12px}}
+@media(max-width:860px){.nav .links{display:none}.nav .logo-txt{font-size:14px}.nav .btn.sm{display:none}}
 </style>
 </head>
 <body>
 <div id="bar"></div><div class="cg" id="cg"></div>
 <div class="nav">
 <a href="index.html#top" class="logo"><img src="favicon.svg" class="logo-mark" alt="Email to Folder Logo" width="28" height="28"><span class="logo-txt">emailtofolder<span class="logo-tld">.com</span></span></a>
-<div class="links"><a href="index.html#features"><span class="th">จุดเด่น</span><span class="en">Features</span></a><a href="index.html#how"><span class="th">วิธีทำงาน</span><span class="en">How it works</span></a><a href="infographic.html"><span class="th">อินโฟกราฟิก</span><span class="en">Infographic</span></a><a href="articles/"><span class="th">บทความ</span><span class="en">Articles</span></a><a href="game.html"><span class="th">มินิเกม 🎮</span><span class="en">Mini Game 🎮</span></a><a href="index.html#download"><span class="th">ดาวน์โหลด</span><span class="en">Download</span></a><a href="index.html#custom">Custom</a><a href="index.html#contact"><span class="th">ติดต่อ</span><span class="en">Contact</span></a></div>
+<div class="links"><a href="index.html#features"><span class="th">จุดเด่น</span><span class="en">Features</span></a><a href="index.html#how"><span class="th">วิธีทำงาน</span><span class="en">How it works</span></a><a href="status.html"><span class="th">สถานะอีเมล</span><span class="en">Status</span></a><a href="extension.html" class="active"><span class="th">Chrome Plugin</span><span class="en">Chrome Plugin</span></a><a href="infographic.html"><span class="th">อินโฟกราฟิก</span><span class="en">Infographic</span></a><a href="articles/"><span class="th">บทความ</span><span class="en">Articles</span></a><a href="game.html"><span class="th">มินิเกม</span><span class="en">Mini Game</span></a><a href="index.html#download"><span class="th">ดาวน์โหลด</span><span class="en">Download</span></a><a href="index.html#contact"><span class="th">ติดต่อ</span><span class="en">Contact</span></a></div>
 <div class="r"><div class="lang"><button data-l="th">TH</button><button data-l="en">EN</button></div><a class="btn sm" href="index.html#download" style="background:linear-gradient(135deg,var(--brand),var(--vio))"><span class="th">ดาวน์โหลดฟรี</span><span class="en">Free Download</span></a></div>
 </div>
-
-<main id="top">
-<!-- ===== Hero ===== -->
-<div class="hero dk">
-<div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
-<div class="wrap">
-<span class="pill rv">🧩 <span class="th">ใหม่! ส่วนขยายสำหรับ Chrome · Edge · Brave</span><span class="en">New! Extension for Chrome · Edge · Brave</span></span>
-<h1 class="rv d1"><span class="th">Email to Folder<br><span class="grad">for Chrome</span></span><span class="en">Email to Folder<br><span class="grad">for Chrome</span></span></h1>
-<p class="lead rv d2"><span class="th">จัดเก็บอีเมล <strong>Gmail</strong> และ <strong>Outlook / Office 365</strong> ลงโฟลเดอร์อัตโนมัติตามกฎ บันทึกเป็นไฟล์ .eml พร้อมสกัดไฟล์แนบ — ทำงานในเบราว์เซอร์ 100% ไม่ต้องติดตั้งโปรแกรม ใช้ได้ทั้ง macOS, Windows, Linux และ ChromeOS</span><span class="en">Automatically save <strong>Gmail</strong> and <strong>Outlook / Office 365</strong> emails into folders by rule — as .eml files with extracted attachments. Runs 100% in your browser, no install needed, on macOS, Windows, Linux and ChromeOS.</span></p>
-<div class="cta rv d3"><a class="btn" href="downloads/EmailToFolder-Chrome-Extension.zip" download><span class="th">🧩 ดาวน์โหลดส่วนขยายฟรี (.zip)</span><span class="en">🧩 Download Free Extension (.zip)</span></a><a class="btn ghost" href="#install"><span class="th">คู่มือติดตั้ง →</span><span class="en">Install guide →</span></a></div>
-<div style="margin-top:16px; font-size:13px; color:var(--mute);" class="rv d3">
-  <span class="th">🎁 <strong>ฟรี 100 ฉบับ/เดือน</strong> (รีเซ็ตทุกวันที่ 1) · 🔒 ประมวลผลในเครื่อง ไม่มีเซิร์ฟเวอร์กลาง · สิทธิ์อ่านอย่างเดียว</span>
-  <span class="en">🎁 <strong>Free 100 emails/month</strong> (resets on the 1st) · 🔒 Processed locally, no server · Read-only access</span>
-</div>
-
-<div class="stage rv d3" aria-hidden="true">
-<div class="fc c1">📎 Invoice.pdf</div><div class="fc c2">📂 Finance/2026/10 ✓</div><div class="fc c3">✉ Quotation_v2.eml</div><div class="fc c4">🔒 Local only</div>
-<div class="float"><div class="pop">
-  <div class="pop-h"><img src="favicon.svg" alt="" width="26" height="26"><b>Email to Folder</b><span class="pop-v">v1.0</span><span class="pop-g">⚙</span></div>
-  <div class="pop-b">
-    <div class="pop-q">
-      <div class="pop-ql"><span><span class="th">โควตาฟรี</span><span class="en">Free quota</span></span><b>12 / 100 <span class="th">ฉบับเดือนนี้</span><span class="en">emails this month</span></b></div>
-      <div class="qbar"><i></i></div>
-    </div>
-    <div class="acc"><div class="acc-i g">G</div><div class="acc-t"><strong>Gmail</strong><small>finance.team@gmail.com</small></div><span class="acc-s">✓ <span class="th">เชื่อมต่อแล้ว</span><span class="en">Connected</span></span></div>
-    <div class="acc"><div class="acc-i o">O</div><div class="acc-t"><strong>Outlook</strong><small>accounting@company.onmicrosoft.com</small></div><span class="acc-s">✓ <span class="th">เชื่อมต่อแล้ว</span><span class="en">Connected</span></span></div>
-    <button class="pop-sync" type="button" tabindex="-1">⟳ Sync Now</button>
-    <div class="pop-l">
-      <h6><span class="th">ล่าสุด</span><span class="en">Recent</span></h6>
-      <div class="lg"><span>📄 Invoice #2026-114 → <em>Finance/2026/10</em></span><time>12:04</time></div>
-      <div class="lg"><span>📜 Contract Draft v3 → <em>Legal/partner.com</em></span><time>11:52</time></div>
-      <div class="lg"><span>📊 Site Report W42 → <em>Projects/2026-A</em></span><time>11:30</time></div>
-    </div>
-  </div>
 </div></div>
 </div>
 </div>
