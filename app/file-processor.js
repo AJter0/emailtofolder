@@ -69,7 +69,7 @@ async function saveEmailToFolder(rawBuffer, parsed, rule, onEmailProcessed, orig
     destDir = path.join(targetFolder, yyyy, mm);
   } else if (rule.subfolderMode === 'sender') {
     const rawSender = parsed.from && parsed.from.text ? parsed.from.text : (parsed.fromAddress || 'Unknown Sender');
-    const senderName = sanitizeFilename(rawSender.replace(/<.*?>/, '').trim() || 'Unknown Sender');
+    const senderName = sanitizeFilename(rawSender.split('<', 1)[0].trim() || 'Unknown Sender');
     destDir = path.join(targetFolder, senderName);
   } else if (rule.folderPerEmail || rule.subfolderMode === 'email') {
     destDir = path.join(targetFolder, `${dateStr}_${cleanSubject}`);

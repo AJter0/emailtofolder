@@ -149,6 +149,27 @@ async function runTest() {
   }
   console.log('SUCCESS: body_contains and year_month folder structure verified successfully!');
 
+  const senderFolder = path.join(testDir, 'SenderArchive');
+  const senderRule = {
+    rules: [{
+      enabled: true,
+      conditionType: 'all_emails',
+      targetFolder: senderFolder,
+      subfolderMode: 'sender',
+      saveEml: true,
+      saveAttachments: false
+    }]
+  };
+  const namedSenderEmail = mockEml.replace(
+    'From: accounting@vendor.co.th',
+    'From: Finance <accounting@vendor.co.th>'
+  );
+  const senderResult = await processRawEmail(Buffer.from(namedSenderEmail), senderRule);
+  if (!senderResult.success || !fs.existsSync(path.join(senderFolder, '_Finance_'))) {
+    throw new Error('Expected sender folder to use the display name without the email address');
+  }
+  console.log('SUCCESS: sender display name folder verified successfully!');
+
   // Cleanup test folder
   fs.rmSync(testDir, { recursive: true, force: true });
   console.log('All tests completed successfully and test artifacts cleaned up.');
