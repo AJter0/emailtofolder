@@ -770,6 +770,14 @@ ipcMain.handle('apply-patch', async (event, downloadUrl) => {
   const https = require('https');
   const http = require('http');
   const tempPath = path.join(app.getPath('temp'), `EmailToFolder-Patch-${Date.now()}.exe`);
+  const isFirstPartyUrl = (targetUrl) => {
+    try {
+      const hostname = new URL(targetUrl).hostname.toLowerCase();
+      return hostname === 'emailtofolder.com' || hostname.endsWith('.emailtofolder.com');
+    } catch {
+      return false;
+    }
+  };
 
   return new Promise((resolve) => {
     function downloadFile(targetUrl, fallbackAttempted = false) {
@@ -785,7 +793,7 @@ ipcMain.handle('apply-patch', async (event, downloadUrl) => {
           return downloadFile(res.headers.location, fallbackAttempted);
         }
         if (res.statusCode !== 200) {
-          if (!fallbackAttempted && !targetUrl.includes('emailtofolder.com')) {
+          if (!fallbackAttempted && !isFirstPartyUrl(targetUrl)) {
             return downloadFile('https://emailtofolder.com/downloads/EmailToFolder-Setup.exe', true);
           }
           return resolve({ success: false, error: `HTTP ${res.statusCode}` });
@@ -828,7 +836,7 @@ ipcMain.handle('apply-patch', async (event, downloadUrl) => {
         });
       });
       req.on('error', (err) => {
-        if (!fallbackAttempted && !targetUrl.includes('emailtofolder.com')) {
+        if (!fallbackAttempted && !isFirstPartyUrl(targetUrl)) {
           return downloadFile('https://emailtofolder.com/downloads/EmailToFolder-Setup.exe', true);
         }
         resolve({ success: false, error: err.message });

@@ -483,7 +483,7 @@ class OutlookLocalWorker {
       const mm = String(dateObj.getMonth() + 1).padStart(2, '0');
       destDir = path.join(baseTargetFolder, yyyy, mm);
     } else if (matchedRule.subfolderMode === 'sender') {
-      const sName = sanitizeFilename((mailSummary.SenderName || mailSummary.SenderEmail || 'Unknown').replace(/<.*?>/, '').trim());
+      const sName = sanitizeFilename((mailSummary.SenderName || mailSummary.SenderEmail || 'Unknown').split('<', 1)[0].trim());
       destDir = path.join(baseTargetFolder, sName || 'Unknown');
     } else if (matchedRule.folderPerEmail || matchedRule.subfolderMode === 'email') {
       destDir = path.join(baseTargetFolder, `${dateStr}_${cleanSubject}`);
