@@ -376,7 +376,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 <div id="bar"></div><div class="cg" id="cg"></div>
 <div class="nav">
 <a href="#top" class="logo"><img src="favicon.svg" class="logo-mark" alt="Email to Folder Logo" width="28" height="28"><span class="logo-txt">emailtofolder<span class="logo-tld">.com</span></span></a>
-<div class="links"><a href="#features"><span class="th">จุดเด่น</span><span class="en">Features</span></a><a href="#how"><span class="th">วิธีทำงาน</span><span class="en">How it works</span></a><a href="infographic.html"><span class="th">อินโฟกราฟิก</span><span class="en">Infographic</span></a><a href="articles/"><span class="th">บทความ</span><span class="en">Articles</span></a><a href="game.html"><span class="th">มินิเกม 🎮</span><span class="en">Mini Game 🎮</span></a><a href="#download"><span class="th">ดาวน์โหลด</span><span class="en">Download</span></a><a href="#custom">Custom</a><a href="#contact"><span class="th">ติดต่อ</span><span class="en">Contact</span></a></div>
+<div class="links"><a href="#features"><span class="th">จุดเด่น</span><span class="en">Features</span></a><a href="#how"><span class="th">วิธีทำงาน</span><span class="en">How it works</span></a><a href="status.html"><span class="th">สถานะอีเมลโลก 🟢</span><span class="en">Email Status 🟢</span></a><a href="extension.html"><span class="th">Chrome Plugin</span><span class="en">Chrome Plugin</span></a><a href="infographic.html"><span class="th">อินโฟกราฟิก</span><span class="en">Infographic</span></a><a href="articles/"><span class="th">บทความ</span><span class="en">Articles</span></a><a href="game.html"><span class="th">มินิเกม 🎮</span><span class="en">Mini Game 🎮</span></a><a href="#download"><span class="th">ดาวน์โหลด</span><span class="en">Download</span></a><a href="#contact"><span class="th">ติดต่อ</span><span class="en">Contact</span></a></div>
 <div class="r"><div class="lang"><button data-l="th">TH</button><button data-l="en">EN</button></div><a class="btn sm" href="#download" style="background:linear-gradient(135deg,var(--brand),var(--vio))"><span class="th">ดาวน์โหลดฟรี</span><span class="en">Free Download</span></a></div>
 </div>
 
@@ -556,6 +556,40 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
         <p style="font-size:13px;"><span class="th">รองรับเซิร์ฟเวอร์อีเมลบริษัททุกรูปแบบ จัดเก็บลงได้ทั้ง Local Folder, Network Share และ NAS</span><span class="en">Works with any corporate IMAP server and saves directly to Local Drives, Network Shares, or NAS.</span></p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- Live Global Email Server Status Section -->
+<section id="email-status" style="background:var(--bg); border-top:1px solid var(--line); padding:85px 0;">
+  <div class="wrap">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:20px; flex-wrap:wrap; margin-bottom:32px;">
+      <div>
+        <div class="eb rv" style="display:inline-flex; align-items:center; gap:8px;">
+          <span style="width:8px;height:8px;border-radius:50%;background:#10b981;box-shadow:0 0 8px #10b981;display:inline-block;"></span>
+          <span class="th">Real-Time Global Email Telemetry</span>
+          <span class="en">Real-Time Global Email Telemetry</span>
+        </div>
+        <h2 class="rv d1" style="margin:8px 0 8px; font-size:clamp(28px,4.5vw,46px);">
+          <span class="th">สถานะเซิร์ฟเวอร์อีเมลทั่วโลก <span class="grad">(Live Up/Down)</span></span>
+          <span class="en">Global Email Server <span class="grad">Live Status</span></span>
+        </h2>
+        <p class="sub rv d2" style="margin:0; max-width:680px;">
+          <span class="th">ตรวจสอบสถานะออนไลน์ ความเร็วตอบสนอง (Ping ms) และระเบียน MX DNS ของผู้ให้บริการอีเมลชั้นนำทั่วโลกแบบเรียลไทม์</span>
+          <span class="en">Real-time reachability, edge latency (ms), and MX DNS health across major global email providers.</span>
+        </p>
+      </div>
+      <div class="rv d2" style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button type="button" id="homeRecheckBtn" class="btn ghost" style="padding:11px 18px; font-size:13.5px; border:1px solid var(--line); cursor:pointer;">
+          🔄 <span class="th">เช็คสถานะใหม่</span><span class="en">Re-check Now</span>
+        </button>
+        <a class="btn" href="status.html" style="padding:11px 22px; font-size:13.5px;">
+          <span class="th">🌐 ดูครบทั้ง 48 แบรนด์ทั่วโลก &amp; เช็คโดเมนบริษัท →</span>
+          <span class="en">🌐 View All 48 Global Brands &amp; MX Checker →</span>
+        </a>
+      </div>
+    </div>
+
+    <div id="homeStatusGrid" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(255px,1fr)); gap:14px;"></div>
   </div>
 </section>
 
@@ -870,6 +904,63 @@ document.querySelectorAll(".bc").forEach(function(c){c.addEventListener("pointer
 }
 var n=1284,cn=document.getElementById("cnt");
 setInterval(function(){n+=1;cn.textContent=n.toLocaleString("en-US")},2000);
+
+/* Homepage Live Global Email Status Widget */
+var HOME_PROVIDERS=[
+  {id:"gmail",name:"Gmail",domain:"gmail.com",probe:"https://mail.google.com/favicon.ico",color:"#ea4335",icon:"G"},
+  {id:"m365",name:"Microsoft 365",domain:"office365.com",probe:"https://outlook.office365.com/favicon.ico",color:"#d83b01",icon:"365"},
+  {id:"outlook",name:"Outlook.com / Hotmail",domain:"outlook.com",probe:"https://outlook.live.com/favicon.ico",color:"#0078d4",icon:"O"},
+  {id:"icloud",name:"Apple iCloud Mail",domain:"icloud.com",probe:"https://www.icloud.com/favicon.ico",color:"#0a84ff",icon:""},
+  {id:"yahoo",name:"Yahoo! Mail",domain:"yahoo.com",probe:"https://mail.yahoo.com/favicon.ico",color:"#6001d2",icon:"Y!"},
+  {id:"zoho",name:"Zoho Mail",domain:"zoho.com",probe:"https://mail.zoho.com/favicon.ico",color:"#e42527",icon:"Z"},
+  {id:"proton",name:"Proton Mail",domain:"proton.me",probe:"https://proton.me/favicon.ico",color:"#6d4aff",icon:"PM"},
+  {id:"fastmail",name:"Fastmail",domain:"fastmail.com",probe:"https://www.fastmail.com/favicon.ico",color:"#2f5597",icon:"FM"},
+  {id:"gworkspace",name:"Google Workspace",domain:"google.com",probe:"https://workspace.google.com/favicon.ico",color:"#4285f4",icon:"GW"},
+  {id:"lineworks",name:"LINE WORKS Mail",domain:"worksmobile.com",probe:"https://line.worksmobile.com/favicon.ico",color:"#00c73c",icon:"LW"},
+  {id:"qq",name:"Tencent QQ Mail",domain:"qq.com",probe:"https://mail.qq.com/favicon.ico",color:"#0284c7",icon:"QQ"},
+  {id:"ses",name:"Amazon SES (AWS)",domain:"amazonses.com",probe:"https://aws.amazon.com/favicon.ico",color:"#ff9900",icon:"AWS"}
+];
+var hGrid=document.getElementById("homeStatusGrid");
+if(hGrid){
+  function renderHomeStatus(stMap){
+    hGrid.innerHTML=HOME_PROVIDERS.map(function(p){
+      var s=stMap[p.id]||{status:"wait",ms:null};
+      var dotCol=s.status==="up"?"#10b981":s.status==="warn"?"#f59e0b":s.status==="down"?"#ef4444":"#0a84ff";
+      var lbl=s.status==="up"?("UP · "+s.ms+" ms"):s.status==="warn"?("SLOW · "+s.ms+" ms"):s.status==="down"?"DOWN":"Checking...";
+      return '<a href="status.html" style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-radius:16px;background:var(--bg2);border:1px solid var(--line);transition:transform .2s,border-color .2s;">'+
+        '<div style="display:flex;align-items:center;gap:11px;min-width:0;">'+
+          '<div style="width:34px;height:34px;border-radius:10px;background:'+p.color+';color:#fff;display:grid;place-items:center;font-weight:800;font-size:13px;flex-shrink:0;">'+p.icon+'</div>'+
+          '<div style="min-width:0;">'+
+            '<div style="font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+p.name+'</div>'+
+            '<div style="font-size:11.5px;color:var(--mute);font-family:ui-monospace,monospace;">'+p.domain+'</div>'+
+          '</div>'+
+        '</div>'+
+        '<span style="display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:11px;font-weight:700;color:var(--ink);flex-shrink:0;">'+
+          '<span style="width:7px;height:7px;border-radius:50%;background:'+dotCol+';box-shadow:0 0 6px '+dotCol+';"></span>'+lbl+
+        '</span>'+
+      '</a>';
+    }).join("");
+  }
+  var homeMap={};
+  function runHomeProbes(){
+    HOME_PROVIDERS.forEach(function(p){homeMap[p.id]={status:"wait",ms:null}});
+    renderHomeStatus(homeMap);
+    HOME_PROVIDERS.forEach(function(p){
+      var t0=performance.now();
+      fetch(p.probe+"?_t="+Date.now(),{mode:"no-cors",cache:"no-store"}).then(function(){
+        var ms=Math.max(9,Math.round(performance.now()-t0));
+        homeMap[p.id]={status:ms>1200?"warn":"up",ms:ms};
+        renderHomeStatus(homeMap);
+      }).catch(function(){
+        homeMap[p.id]={status:"down",ms:null};
+        renderHomeStatus(homeMap);
+      });
+    });
+  }
+  runHomeProbes();
+  var rcBtn=document.getElementById("homeRecheckBtn");
+  if(rcBtn)rcBtn.onclick=runHomeProbes;
+}
 })();
 </script>
 </body>
