@@ -23,7 +23,7 @@
     "mailparser": "^3.7.2"
   },
   "devDependencies": {
-    "electron": "^33.2.0",
+    "electron": "^42.11.16",
     "electron-builder": "^25.1.8"
   },
   "build": {
