@@ -110,7 +110,7 @@ a{color:inherit;text-decoration:none}
 .links a.active{color:var(--brand);font-weight:600}
 .r{display:flex;gap:8px;align-items:center}
 .lang{display:flex;background:var(--bg2);border-radius:999px;padding:2px}
-.lang button{border:0;background:none;color:var(--mute);font:600 12px inherit;font-family:inherit;padding:5px 11px;border-radius:999px;cursor:pointer;transition:.3s}
+.lang button{border:0;background:none;color:var(--mute);font-weight:600;font-size:12px;font-family:inherit;padding:5px 11px;border-radius:999px;cursor:pointer;transition:.3s}
 html[lang=th] [data-l=th],html[lang=en] [data-l=en]{background:var(--ink);color:var(--bg)}
 .btn{position:relative;overflow:hidden;display:inline-block;background:var(--brand);color:#fff;padding:12px 24px;border-radius:999px;font-weight:600;font-size:15px;transition:transform .3s,box-shadow .3s}
 .btn:hover{transform:scale(1.05);box-shadow:0 10px 40px rgba(10,132,255,.5)}
@@ -158,25 +158,27 @@ h1{font-size:clamp(28px,4.5vw,44px);line-height:1.25;font-weight:700;letter-spac
 .cta-box h3{color:#fff;font-size:26px;margin:0 0 12px}
 .cta-box p{color:#a1a1a6;font-size:15px;max-width:540px;margin:0 auto 24px}
 
-/* Canonical Unified Header CSS */
-.nav{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;transform:translateX(-50%);width:min(1080px,calc(100% - 24px));z-index:50;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px 8px 18px;border-radius:999px;background:rgba(255,255,255,.7);border:1px solid rgba(0,0,0,.1);backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px);color:#1d1d1f;font-family:Inter,Prompt,system-ui,sans-serif;line-height:1.55}
-html[lang=th] .nav{font-family:Prompt,Inter,system-ui,sans-serif}
-.nav .logo{font-weight:700;font-size:15px;display:flex;gap:10px;align-items:center;white-space:nowrap;letter-spacing:-.02em;color:#1d1d1f;text-decoration:none}
+/* Canonical Unified Header & Font CSS */
+body,button,input,select,textarea{font-family:'Prompt','Inter',system-ui,-apple-system,sans-serif}
+html[lang=en] body,html[lang=en] button,html[lang=en] input,html[lang=en] select,html[lang=en] textarea{font-family:'Inter','Prompt',system-ui,-apple-system,sans-serif}
+.nav{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;transform:translateX(-50%);width:min(1160px,calc(100% - 24px));z-index:50;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px 8px 18px;border-radius:999px;background:rgba(255,255,255,.78);border:1px solid rgba(0,0,0,.1);backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px);color:#1d1d1f;font-family:'Prompt','Inter',system-ui,-apple-system,sans-serif;line-height:1.55}
+html[lang=en] .nav{font-family:'Inter','Prompt',system-ui,-apple-system,sans-serif}
+.nav .logo{font-weight:700;font-size:15px;display:flex;gap:10px;align-items:center;white-space:nowrap;letter-spacing:-.02em;color:#1d1d1f;text-decoration:none;flex-shrink:0}
 .nav .logo-mark{width:28px;height:28px;border-radius:8px;flex-shrink:0;transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;display:block}
 .nav .logo:hover .logo-mark{transform:scale(1.08) rotate(-2deg);box-shadow:0 4px 20px rgba(10,132,255,.35)}
 .nav .logo-txt{font-weight:700;color:#1d1d1f;letter-spacing:-.03em}
 .nav .logo-tld{background:linear-gradient(135deg,#0a84ff,#8a5cff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;font-weight:800}
 .nav .links{display:flex;gap:14px;font-size:13px;color:#6e6e73;align-items:center;white-space:nowrap}
-.nav .links a{color:#6e6e73;text-decoration:none;transition:color .2s}
+.nav .links a{color:#6e6e73;text-decoration:none;transition:color .2s;font-weight:500}
 .nav .links a:hover,.nav .links a.active{color:#1d1d1f;font-weight:600}
 .nav .r{display:flex;gap:8px;align-items:center;flex-shrink:0}
 .nav .lang{display:flex;background:#f5f5f7;border-radius:999px;padding:2px}
-.nav .lang button{border:0;background:none;color:#6e6e73;font:600 12px inherit;font-family:inherit;padding:5px 11px;border-radius:999px;cursor:pointer;transition:.3s;line-height:1.55}
+.nav .lang button{border:0;background:none;color:#6e6e73;font-weight:600;font-size:12px;font-family:inherit;padding:5px 11px;border-radius:999px;cursor:pointer;transition:.3s;line-height:1.4}
 html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f;color:#ffffff}
-.nav .btn.sm{position:relative;overflow:hidden;display:inline-block;color:#fff;padding:9px 18px;border-radius:999px;font-weight:600;font-size:13px;line-height:1.55;text-decoration:none;white-space:nowrap;transition:transform .3s,box-shadow .3s}
-.nav .btn.sm:hover{transform:scale(1.05);box-shadow:0 10px 40px rgba(10,132,255,.5)}
-@media(max-width:1040px){.nav .links{gap:10px;font-size:12px}}
-@media(max-width:860px){.nav .links{display:none}.nav .logo-txt{font-size:14px}.nav .btn.sm{display:none}}
+.nav .btn.sm{position:relative;overflow:hidden;display:inline-block;color:#fff;padding:9px 18px;border-radius:999px;font-weight:600;font-size:13px;line-height:1.4;text-decoration:none;white-space:nowrap;transition:transform .3s,box-shadow .3s}
+.nav .btn.sm:hover{transform:scale(1.04);box-shadow:0 10px 34px rgba(10,132,255,.45)}
+@media(max-width:1120px){.nav .links{gap:9px;font-size:12px}}
+@media(max-width:940px){.nav .links{display:none}.nav .logo-txt{font-size:14px}.nav .btn.sm{display:none}}
 </style>
 </head>
 <body>
@@ -185,7 +187,7 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
       <div id="bar"></div>
   <div class="nav">
 <a href="../#top" class="logo"><img src="../favicon.svg" class="logo-mark" alt="Email to Folder Logo" width="28" height="28"><span class="logo-txt">emailtofolder<span class="logo-tld">.com</span></span></a>
-<div class="links"><a href="../#features"><span class="th">จุดเด่น</span><span class="en">Features</span></a><a href="../#how"><span class="th">วิธีทำงาน</span><span class="en">How it works</span></a><a href="../status.html"><span class="th">สถานะอีเมล</span><span class="en">Status</span></a><a href="../extension.html"><span class="th">Chrome Plugin</span><span class="en">Chrome Plugin</span></a><a href="../infographic.html"><span class="th">อินโฟกราฟิก</span><span class="en">Infographic</span></a><a href="./" class="active"><span class="th">บทความ</span><span class="en">Articles</span></a><a href="../game.html"><span class="th">มินิเกม</span><span class="en">Mini Game</span></a><a href="../#download"><span class="th">ดาวน์โหลด</span><span class="en">Download</span></a><a href="../#contact"><span class="th">ติดต่อ</span><span class="en">Contact</span></a></div>
+<div class="links"><a href="../#features"><span class="th">จุดเด่น</span><span class="en">Features</span></a><a href="../#how"><span class="th">วิธีทำงาน</span><span class="en">How it works</span></a><a href="../status.html"><span class="th">สถานะอีเมล</span><span class="en">Status</span></a><a href="../extension.html"><span class="th">ส่วนขยาย Chrome</span><span class="en">Chrome Plugin</span></a><a href="../infographic.html"><span class="th">อินโฟกราฟิก</span><span class="en">Infographic</span></a><a href="./" class="active"><span class="th">บทความ</span><span class="en">Articles</span></a><a href="../game.html"><span class="th">มินิเกม</span><span class="en">Mini Game</span></a><a href="../#download"><span class="th">ดาวน์โหลด</span><span class="en">Download</span></a><a href="../#contact"><span class="th">ติดต่อ</span><span class="en">Contact</span></a></div>
 <div class="r"><div class="lang"><button data-l="th">TH</button><button data-l="en">EN</button></div><a class="btn sm" href="../#download" style="background:linear-gradient(135deg,var(--brand),var(--vio))"><span class="th">ดาวน์โหลดฟรี</span><span class="en">Free Download</span></a></div>
 </div>
 

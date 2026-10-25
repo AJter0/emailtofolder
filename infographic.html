@@ -37,7 +37,7 @@
     .links a.active{color:var(--brand);font-weight:600}
     .r{display:flex;gap:8px;align-items:center}
     .lang{display:flex;background:var(--bg2);border-radius:999px;padding:2px}
-    .lang button{border:0;background:none;color:var(--mute);font:600 12px inherit;font-family:inherit;padding:5px 11px;border-radius:999px;cursor:pointer;transition:.3s}
+    .lang button{border:0;background:none;color:var(--mute);font-weight:600;font-size:12px;font-family:inherit;padding:5px 11px;border-radius:999px;cursor:pointer;transition:.3s}
     html[lang=th] [data-l=th],html[lang=en] [data-l=en]{background:var(--ink);color:var(--bg)}
     .btn{position:relative;overflow:hidden;display:inline-block;background:var(--brand);color:#fff;padding:14px 28px;border-radius:999px;font-weight:600;font-size:16px;transition:transform .3s,box-shadow .3s}
     .btn:hover{transform:scale(1.05);box-shadow:0 10px 40px rgba(10,132,255,.5)}
@@ -98,34 +98,100 @@
       transform: translateY(-2px);
     }
   
-/* Canonical Unified Header CSS */
-.nav{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;transform:translateX(-50%);width:min(1080px,calc(100% - 24px));z-index:50;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px 8px 18px;border-radius:999px;background:rgba(255,255,255,.7);border:1px solid rgba(0,0,0,.1);backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px);color:#1d1d1f;font-family:Inter,Prompt,system-ui,sans-serif;line-height:1.55}
-html[lang=th] .nav{font-family:Prompt,Inter,system-ui,sans-serif}
-.nav .logo{font-weight:700;font-size:15px;display:flex;gap:10px;align-items:center;white-space:nowrap;letter-spacing:-.02em;color:#1d1d1f;text-decoration:none}
+/* Canonical Unified Header & Font CSS */
+body,button,input,select,textarea{font-family:'Prompt','Inter',system-ui,-apple-system,sans-serif}
+html[lang=en] body,html[lang=en] button,html[lang=en] input,html[lang=en] select,html[lang=en] textarea{font-family:'Inter','Prompt',system-ui,-apple-system,sans-serif}
+.nav{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;transform:translateX(-50%);width:min(1160px,calc(100% - 24px));z-index:50;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px 8px 18px;border-radius:999px;background:rgba(255,255,255,.78);border:1px solid rgba(0,0,0,.1);backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px);color:#1d1d1f;font-family:'Prompt','Inter',system-ui,-apple-system,sans-serif;line-height:1.55}
+html[lang=en] .nav{font-family:'Inter','Prompt',system-ui,-apple-system,sans-serif}
+.nav .logo{font-weight:700;font-size:15px;display:flex;gap:10px;align-items:center;white-space:nowrap;letter-spacing:-.02em;color:#1d1d1f;text-decoration:none;flex-shrink:0}
 .nav .logo-mark{width:28px;height:28px;border-radius:8px;flex-shrink:0;transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;display:block}
 .nav .logo:hover .logo-mark{transform:scale(1.08) rotate(-2deg);box-shadow:0 4px 20px rgba(10,132,255,.35)}
 .nav .logo-txt{font-weight:700;color:#1d1d1f;letter-spacing:-.03em}
 .nav .logo-tld{background:linear-gradient(135deg,#0a84ff,#8a5cff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;font-weight:800}
 .nav .links{display:flex;gap:14px;font-size:13px;color:#6e6e73;align-items:center;white-space:nowrap}
-.nav .links a{color:#6e6e73;text-decoration:none;transition:color .2s}
+.nav .links a{color:#6e6e73;text-decoration:none;transition:color .2s;font-weight:500}
 .nav .links a:hover,.nav .links a.active{color:#1d1d1f;font-weight:600}
 .nav .r{display:flex;gap:8px;align-items:center;flex-shrink:0}
 .nav .lang{display:flex;background:#f5f5f7;border-radius:999px;padding:2px}
-.nav .lang button{border:0;background:none;color:#6e6e73;font:600 12px inherit;font-family:inherit;padding:5px 11px;border-radius:999px;cursor:pointer;transition:.3s;line-height:1.55}
+.nav .lang button{border:0;background:none;color:#6e6e73;font-weight:600;font-size:12px;font-family:inherit;padding:5px 11px;border-radius:999px;cursor:pointer;transition:.3s;line-height:1.4}
 html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f;color:#ffffff}
-.nav .btn.sm{position:relative;overflow:hidden;display:inline-block;color:#fff;padding:9px 18px;border-radius:999px;font-weight:600;font-size:13px;line-height:1.55;text-decoration:none;white-space:nowrap;transition:transform .3s,box-shadow .3s}
-.nav .btn.sm:hover{transform:scale(1.05);box-shadow:0 10px 40px rgba(10,132,255,.5)}
-@media(max-width:1040px){.nav .links{gap:10px;font-size:12px}}
-@media(max-width:860px){.nav .links{display:none}.nav .logo-txt{font-size:14px}.nav .btn.sm{display:none}}
+.nav .btn.sm{position:relative;overflow:hidden;display:inline-block;color:#fff;padding:9px 18px;border-radius:999px;font-weight:600;font-size:13px;line-height:1.4;text-decoration:none;white-space:nowrap;transition:transform .3s,box-shadow .3s}
+.nav .btn.sm:hover{transform:scale(1.04);box-shadow:0 10px 34px rgba(10,132,255,.45)}
+@media(max-width:1120px){.nav .links{gap:9px;font-size:12px}}
+@media(max-width:940px){.nav .links{display:none}.nav .logo-txt{font-size:14px}.nav .btn.sm{display:none}}
 </style>
 </head>
 <body class="bg-[#0b0b0e] text-[#ededed] min-h-screen p-4 md:p-8 antialiased selection:bg-[#30d5c8]/30">
   <div id="bar"></div>
   <div class="nav">
 <a href="index.html#top" class="logo"><img src="favicon.svg" class="logo-mark" alt="Email to Folder Logo" width="28" height="28"><span class="logo-txt">emailtofolder<span class="logo-tld">.com</span></span></a>
-<div class="links"><a href="index.html#features"><span class="th">จุดเด่น</span><span class="en">Features</span></a><a href="index.html#how"><span class="th">วิธีทำงาน</span><span class="en">How it works</span></a><a href="status.html"><span class="th">สถานะอีเมล</span><span class="en">Status</span></a><a href="extension.html"><span class="th">Chrome Plugin</span><span class="en">Chrome Plugin</span></a><a href="infographic.html" class="active"><span class="th">อินโฟกราฟิก</span><span class="en">Infographic</span></a><a href="articles/"><span class="th">บทความ</span><span class="en">Articles</span></a><a href="game.html"><span class="th">มินิเกม</span><span class="en">Mini Game</span></a><a href="index.html#download"><span class="th">ดาวน์โหลด</span><span class="en">Download</span></a><a href="index.html#contact"><span class="th">ติดต่อ</span><span class="en">Contact</span></a></div>
+<div class="links"><a href="index.html#features"><span class="th">จุดเด่น</span><span class="en">Features</span></a><a href="index.html#how"><span class="th">วิธีทำงาน</span><span class="en">How it works</span></a><a href="status.html"><span class="th">สถานะอีเมล</span><span class="en">Status</span></a><a href="extension.html"><span class="th">ส่วนขยาย Chrome</span><span class="en">Chrome Plugin</span></a><a href="infographic.html" class="active"><span class="th">อินโฟกราฟิก</span><span class="en">Infographic</span></a><a href="articles/"><span class="th">บทความ</span><span class="en">Articles</span></a><a href="game.html"><span class="th">มินิเกม</span><span class="en">Mini Game</span></a><a href="index.html#download"><span class="th">ดาวน์โหลด</span><span class="en">Download</span></a><a href="index.html#contact"><span class="th">ติดต่อ</span><span class="en">Contact</span></a></div>
 <div class="r"><div class="lang"><button data-l="th">TH</button><button data-l="en">EN</button></div><a class="btn sm" href="index.html#download" style="background:linear-gradient(135deg,var(--brand),var(--vio))"><span class="th">ดาวน์โหลดฟรี</span><span class="en">Free Download</span></a></div>
 </div>
+
+  <!-- Header Section -->
+  <header class="max-w-6xl mx-auto mb-8 pt-20 md:pt-24 text-center relative">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#30d5c8]/10 border border-[#30d5c8]/30 text-[#30d5c8] text-xs font-medium mb-3">
+      <span class="w-2 h-2 rounded-full bg-[#30d5c8] animate-ping"></span>
+      Interactive System Architecture · v1.3.0
+    </div>
+    <h1 class="text-3xl md:text-5xl font-bold tracking-tight mb-3">
+      การทำงานของ <span class="bg-gradient-to-r from-[#30d5c8] via-[#a78bfa] to-[#60a5fa] bg-clip-text text-transparent">Email to Folder</span>
+    </h1>
+    <p class="text-[#9ca3af] max-w-2xl mx-auto text-sm md:text-base font-light">
+      กราฟฟิกจำลองการตรวจจับ คัดแยก และจัดเก็บอีเมลลงโฟลเดอร์อัตโนมัติแบบเรียลไทม์ 
+      เลื่อน Scroll เพื่อติดตามแต่ละขั้นตอน หรือกดปุ่มจำลองอีเมลเพื่อดูการทำงาน
+    </p>
+
+    <!-- Top Action Bar & Simulator Controls -->
+    <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+      <span class="text-xs text-[#6b7280]">ทดสอบจำลองอีเมล:</span>
+      <button onclick="selectScenario('invoice')" id="btnScenarioInvoice" class="px-3 py-1.5 rounded-lg text-xs font-medium border border-[#30d5c8] bg-[#30d5c8]/20 text-[#30d5c8] hover:bg-[#30d5c8]/30 transition">
+        📄 ใบแจ้งหนี้ (Invoice PDF)
+      </button>
+      <button onclick="selectScenario('contract')" id="btnScenarioContract" class="px-3 py-1.5 rounded-lg text-xs font-medium border border-[#4b5563] bg-[#18181f] text-[#d1d5db] hover:border-[#a78bfa] hover:text-[#a78bfa] transition">
+        📜 สัญญาฝ่ายกฎหมาย (Contract)
+      </button>
+      <button onclick="selectScenario('report')" id="btnScenarioReport" class="px-3 py-1.5 rounded-lg text-xs font-medium border border-[#4b5563] bg-[#18181f] text-[#d1d5db] hover:border-[#60a5fa] hover:text-[#60a5fa] transition">
+        📊 รายงานโครงการ (Excel Report)
+      </button>
+      <button onclick="triggerSimulation()" class="px-4 py-1.5 rounded-lg text-xs font-semibold bg-gradient-to-r from-[#30d5c8] to-[#0ea5e9] text-black hover:opacity-90 shadow-lg shadow-[#30d5c8]/20 transition flex items-center gap-1.5">
+        <span>🚀</span> รันแอนิเมชันทันที
+      </button>
+    </div>
+
+    <!-- Progress Indicator -->
+    <div class="max-w-md mx-auto mt-6 bg-[#16161d] h-2 rounded-full overflow-hidden border border-[#272732]">
+      <div id="progressBar" class="h-full bg-gradient-to-r from-[#30d5c8] to-[#a78bfa] transition-all duration-300 w-1/5"></div>
+    </div>
+  </header>
+
+  <!-- Main Interactive Layout -->
+  <main class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+    <!-- Left Column: Interactive Story Steps (Scrollable Container) -->
+    <div class="lg:col-span-5 space-y-6" id="stepsContainer">
+
+      <!-- Step 1 -->
+      <div class="step-card active p-6 rounded-2xl bg-[#121217] border border-[#272732] cursor-pointer" onclick="goToStep(1)">
+        <div class="flex items-center justify-between mb-3">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-xs font-semibold bg-[#30d5c8]/10 text-[#30d5c8] border border-[#30d5c8]/20">
+            STEP 01
+          </span>
+          <span class="text-xs text-[#9ca3af]">ตรวจจับอีเมลขาเข้า</span>
+        </div>
+        <h3 class="text-lg font-semibold text-white mb-2 flex items-center gap-2">
+          <span>📨</span> รับอีเมลขาเข้าแบบ Real-Time
+        </h3>
+        <p class="text-xs text-[#9ca3af] leading-relaxed mb-3">
+          เชื่อมต่อกับ <b>Microsoft Outlook Classic</b> ผ่าน MAPI Table ไร้หน้าต่างแจ้งเตือน หรือรับผ่าน <b>IMAP IDLE Push</b> (Gmail, Office 365) โดยไม่ต้องรอยิง polling
+        </p>
+        <div class="text-[11px] bg-[#181822] p-2.5 rounded-xl border border-[#272734] space-y-1">
+          <div class="flex justify-between text-[#d1d5db]"><span>หัวข้อ (Subject):</span> <b id="step1Subject" class="text-[#30d5c8]">Invoice #INV-2026-0418</b></div>
+          <div class="flex justify-between text-[#9ca3af]"><span>ผู้ส่ง (From):</span> <span id="step1From">accounting@vendor.co.th</span></div>
+          <div class="flex justify-between text-[#9ca3af]"><span>มีไฟล์แนบ:</span> <span id="step1Attach" class="text-emerald-400">✓ มี (Invoice.pdf)</span></div>
+        </div>
+      </div>
 
       <!-- Step 2 -->
       <div class="step-card p-6 rounded-2xl bg-[#121217] border border-[#272732] cursor-pointer" onclick="goToStep(2)">

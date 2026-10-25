@@ -106,9 +106,10 @@ box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:en
 
 
 html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px)}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,Prompt,system-ui,sans-serif;line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-html[lang=th] body{font-family:Prompt,Inter,system-ui,sans-serif}
+*,*::before,*::after{box-sizing:border-box}
+body,button,input,select,textarea{margin:0;font-family:'Prompt','Inter',system-ui,-apple-system,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+html[lang=en] body,html[lang=en] button,html[lang=en] input,html[lang=en] select,html[lang=en] textarea{font-family:'Inter','Prompt',system-ui,-apple-system,sans-serif}
+body{background:var(--bg);color:var(--ink);overflow-x:hidden}
 html[lang=th] .en,html[lang=en] .th{display:none}
 a{color:inherit;text-decoration:none}
 .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
@@ -116,16 +117,16 @@ a{color:inherit;text-decoration:none}
 @keyframes sh{to{background-position:200% center}}
 #bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--brand),var(--teal),var(--vio));z-index:60}
 /* nav */
-.nav{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;transform:translateX(-50%);width:min(1080px,calc(100% - 24px));z-index:50;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px 8px 18px;border-radius:999px;background:var(--card);border:1px solid var(--line);backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px)}
-.logo{font-weight:700;font-size:15px;display:flex;gap:10px;align-items:center;white-space:nowrap;letter-spacing:-.02em}
+.nav{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;transform:translateX(-50%);width:min(1160px,calc(100% - 24px));z-index:50;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px 8px 18px;border-radius:999px;background:rgba(255,255,255,.78);border:1px solid var(--line);backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px)}
+.logo{font-weight:700;font-size:15px;display:flex;gap:10px;align-items:center;white-space:nowrap;letter-spacing:-.02em;flex-shrink:0}
 .logo-mark{width:28px;height:28px;border-radius:8px;flex-shrink:0;transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;display:block}
 .logo:hover .logo-mark{transform:scale(1.08) rotate(-2deg);box-shadow:0 4px 20px rgba(10,132,255,.35)}
 .logo-txt{font-weight:700;color:var(--ink);letter-spacing:-.03em}
 .logo-tld{background:linear-gradient(135deg,var(--brand),var(--vio));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;font-weight:800}
-.links{display:flex;gap:16px;font-size:13px;color:var(--mute);align-items:center}.links a:hover{color:var(--ink)}
-.r{display:flex;gap:8px;align-items:center}
+.links{display:flex;gap:14px;font-size:13px;color:var(--mute);align-items:center;white-space:nowrap}.links a{font-weight:500}.links a:hover,.links a.active{color:var(--ink);font-weight:600}
+.r{display:flex;gap:8px;align-items:center;flex-shrink:0}
 .lang{display:flex;background:var(--bg2);border-radius:999px;padding:2px}
-.lang button{border:0;background:none;color:var(--mute);font:600 12px inherit;font-family:inherit;padding:5px 11px;border-radius:999px;cursor:pointer;transition:.3s}
+.lang button{border:0;background:none;color:var(--mute);font-weight:600;font-size:12px;font-family:inherit;padding:5px 11px;border-radius:999px;cursor:pointer;transition:.3s;line-height:1.4}
 html[lang=th] [data-l=th],html[lang=en] [data-l=en]{background:var(--ink);color:var(--bg)}
 .btn{position:relative;overflow:hidden;display:inline-block;background:var(--brand);color:#fff;padding:14px 28px;border-radius:999px;font-weight:600;font-size:16px;transition:transform .3s,box-shadow .3s}
 .btn:hover{transform:scale(1.05);box-shadow:0 10px 40px rgba(10,132,255,.5)}
@@ -368,36 +369,47 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 .d1{transition-delay:.12s}.d2{transition-delay:.24s}.d3{transition-delay:.36s}
 .cg{position:fixed;width:420px;height:420px;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(10,132,255,.14),transparent 65%);transform:translate(-50%,-50%);z-index:1;left:-999px;top:-999px}
 @media(max-width:1024px){.bd{grid-template-columns:170px 1fr}.bd .cl:last-child{display:none}.bc,.bc.w{grid-column:span 3}.bc.x{grid-column:span 6}.fc{display:none}}
-@media(max-width:1040px){.links{gap:10px;font-size:12px}}@media(max-width:860px){.links{display:none}.bd{grid-template-columns:1fr}.bd .cl:first-child{display:none}.bc,.bc.w,.bc.x{grid-column:span 6;min-height:0}.steps{grid-template-columns:1fr;gap:40px}.steps::before{display:none}.gi{grid-template-columns:1fr}.hero{padding-top:120px}.logo-txt{font-size:14px}.btn.sm{display:none}.cg{display:none}}
+@media(max-width:1120px){.links{gap:9px;font-size:12px}}@media(max-width:940px){.links{display:none}.bd{grid-template-columns:1fr}.bd .cl:first-child{display:none}.bc,.bc.w,.bc.x{grid-column:span 6;min-height:0}.steps{grid-template-columns:1fr;gap:40px}.steps::before{display:none}.gi{grid-template-columns:1fr}.hero{padding-top:120px}.logo-txt{font-size:14px}.btn.sm{display:none}.cg{display:none}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none;filter:none}}
-
-/* Canonical Unified Header CSS */
-.nav{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;transform:translateX(-50%);width:min(1080px,calc(100% - 24px));z-index:50;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px 8px 18px;border-radius:999px;background:rgba(255,255,255,.7);border:1px solid rgba(0,0,0,.1);backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px);color:#1d1d1f;font-family:Inter,Prompt,system-ui,sans-serif;line-height:1.55}
-html[lang=th] .nav{font-family:Prompt,Inter,system-ui,sans-serif}
-.nav .logo{font-weight:700;font-size:15px;display:flex;gap:10px;align-items:center;white-space:nowrap;letter-spacing:-.02em;color:#1d1d1f;text-decoration:none}
-.nav .logo-mark{width:28px;height:28px;border-radius:8px;flex-shrink:0;transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;display:block}
-.nav .logo:hover .logo-mark{transform:scale(1.08) rotate(-2deg);box-shadow:0 4px 20px rgba(10,132,255,.35)}
-.nav .logo-txt{font-weight:700;color:#1d1d1f;letter-spacing:-.03em}
-.nav .logo-tld{background:linear-gradient(135deg,#0a84ff,#8a5cff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;font-weight:800}
-.nav .links{display:flex;gap:14px;font-size:13px;color:#6e6e73;align-items:center;white-space:nowrap}
-.nav .links a{color:#6e6e73;text-decoration:none;transition:color .2s}
-.nav .links a:hover,.nav .links a.active{color:#1d1d1f;font-weight:600}
-.nav .r{display:flex;gap:8px;align-items:center;flex-shrink:0}
-.nav .lang{display:flex;background:#f5f5f7;border-radius:999px;padding:2px}
-.nav .lang button{border:0;background:none;color:#6e6e73;font:600 12px inherit;font-family:inherit;padding:5px 11px;border-radius:999px;cursor:pointer;transition:.3s;line-height:1.55}
-html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f;color:#ffffff}
-.nav .btn.sm{position:relative;overflow:hidden;display:inline-block;color:#fff;padding:9px 18px;border-radius:999px;font-weight:600;font-size:13px;line-height:1.55;text-decoration:none;white-space:nowrap;transition:transform .3s,box-shadow .3s}
-.nav .btn.sm:hover{transform:scale(1.05);box-shadow:0 10px 40px rgba(10,132,255,.5)}
-@media(max-width:1040px){.nav .links{gap:10px;font-size:12px}}
-@media(max-width:860px){.nav .links{display:none}.nav .logo-txt{font-size:14px}.nav .btn.sm{display:none}}
 </style>
 </head>
 <body>
 <div id="bar"></div><div class="cg" id="cg"></div>
 <div class="nav">
 <a href="#top" class="logo"><img src="favicon.svg" class="logo-mark" alt="Email to Folder Logo" width="28" height="28"><span class="logo-txt">emailtofolder<span class="logo-tld">.com</span></span></a>
-<div class="links"><a href="#features"><span class="th">จุดเด่น</span><span class="en">Features</span></a><a href="#how"><span class="th">วิธีทำงาน</span><span class="en">How it works</span></a><a href="status.html"><span class="th">สถานะอีเมล</span><span class="en">Status</span></a><a href="extension.html"><span class="th">Chrome Plugin</span><span class="en">Chrome Plugin</span></a><a href="infographic.html"><span class="th">อินโฟกราฟิก</span><span class="en">Infographic</span></a><a href="articles/"><span class="th">บทความ</span><span class="en">Articles</span></a><a href="game.html"><span class="th">มินิเกม</span><span class="en">Mini Game</span></a><a href="#download"><span class="th">ดาวน์โหลด</span><span class="en">Download</span></a><a href="#contact"><span class="th">ติดต่อ</span><span class="en">Contact</span></a></div>
+<div class="links"><a href="#features"><span class="th">จุดเด่น</span><span class="en">Features</span></a><a href="#how"><span class="th">วิธีทำงาน</span><span class="en">How it works</span></a><a href="status.html"><span class="th">สถานะอีเมล</span><span class="en">Status</span></a><a href="extension.html"><span class="th">ส่วนขยาย Chrome</span><span class="en">Chrome Plugin</span></a><a href="infographic.html"><span class="th">อินโฟกราฟิก</span><span class="en">Infographic</span></a><a href="articles/"><span class="th">บทความ</span><span class="en">Articles</span></a><a href="game.html"><span class="th">มินิเกม</span><span class="en">Mini Game</span></a><a href="#download"><span class="th">ดาวน์โหลด</span><span class="en">Download</span></a><a href="#contact"><span class="th">ติดต่อ</span><span class="en">Contact</span></a></div>
 <div class="r"><div class="lang"><button data-l="th">TH</button><button data-l="en">EN</button></div><a class="btn sm" href="#download" style="background:linear-gradient(135deg,var(--brand),var(--vio))"><span class="th">ดาวน์โหลดฟรี</span><span class="en">Free Download</span></a></div>
+</div>
+
+<main id="top">
+<div class="hero dk">
+<div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+<div class="wrap">
+<span class="pill rv"><span class="th">Enterprise Email Archiving Solution</span><span class="en">Enterprise Email Archiving Solution</span></span>
+<h1 class="rv d1"><span class="th">จัดเก็บอีเมลลงโฟลเดอร์<br>ให้เอง <span class="grad">แบบอัตโนมัติ</span></span><span class="en">Every email.<br>Right <span class="grad">Folder</span>. Automatically.</span></h1>
+<p class="lead rv d2"><span class="th">ซอฟต์แวร์สำหรับองค์กร บันทึกอีเมลและไฟล์แนบลงโฟลเดอร์ตามกฎที่คุณกำหนด ค้นหาง่าย ตรวจสอบย้อนหลังได้ พร้อมทีมงานปรับแต่งและดูแลให้เป็นรายกรณี</span><span class="en">Software and solutions that turn scattered emails into an organized, searchable, auditable archive — supported case by case.</span></p>
+<div class="cta rv d3"><a class="btn" href="downloads/EmailToFolder-Setup.exe" download><span class="th">⚡ ดาวน์โหลดทดลองใช้ฟรี (.exe)</span><span class="en">⚡ Download Free Trial (.exe)</span></a><a class="btn ghost" href="#contact"><span class="th">ขอราคา Enterprise</span><span class="en">Enterprise Quote</span></a></div>
+<div style="margin-top:16px; font-size:13px; color:var(--mute);" class="rv d3">
+  <span class="th">🎁 <strong>ทดลองใช้ฟรี 100 ฉบับ/เดือน</strong> (ระบบรีเซ็ตโควตาใหม่ให้อัตโนมัติทุกวันที่ 1 ของเดือน) · รองรับ Windows 10/11</span>
+  <span class="en">🎁 <strong>Free 100 emails/month</strong> (auto-resets on the 1st of every month) · Windows 10/11</span>
+</div>
+
+<div class="stage rv d3">
+<div class="fc c1">📎 Invoice.pdf</div><div class="fc c2">📂 Finance / Invoices ✓</div><div class="fc c3">✉ Contract_v3.eml</div><div class="fc c4">📊 Report.xlsx</div>
+<div class="float"><div class="tilt" id="tilt"><div class="app">
+<div class="tb"><b></b><b></b><b></b><span>Email to Folder — Enterprise</span></div>
+<div class="bd">
+<div class="cl"><h6><span class="th">โฟลเดอร์ปลายทาง</span><span class="en">Target folders</span></h6>
+<div class="fo a3">📁 Projects / 2026-A</div><div class="fo a1">📁 Finance / Invoices</div><div class="fo a2">📁 Legal / Contracts</div><div class="fo a4">📁 HR</div><div class="fo">📁 Clients</div><div class="fo">📁 Archive</div></div>
+<div class="cl"><h6>Inbox</h6>
+<div class="ml a1"><strong>Invoice #INV-2026-0418</strong><p>accounting@vendor.co.th</p><span class="chip">→ Finance / Invoices</span></div>
+<div class="ml a2"><strong>Contract Draft v3</strong><p>legal@partner.com</p><span class="chip">→ Legal / Contracts</span></div>
+<div class="ml a3"><strong>Site report – Week 41</strong><p>pm@projecta.co.th</p><span class="chip">→ Projects / 2026-A</span></div>
+<div class="ml a4"><strong>Meeting minutes</strong><p>hr@company.com</p><span class="chip">→ HR</span></div></div>
+<div class="cl"><h6><span class="th">กฎอัตโนมัติ</span><span class="en">Auto rules</span></h6>
+<div class="ru"><b>Subject contains "Invoice"</b>→ Finance/Invoices</div>
+<div class="ru"><b>From @projecta.co.th</b>→ 2026-A</div>
+<div class="ok">✓ <span id="cnt">1,284</span> <span class="th">ฉบับที่บันทึกแล้ว</span><span class="en">emails saved</span></div></div>
 </div></div></div></div>
 </div>
 </div></div>
@@ -551,45 +563,45 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
 <!-- Live Global Email Server Status Section -->
 <section id="email-status" style="background:var(--bg); border-top:1px solid var(--line); padding:85px 0;">
   <div class="wrap">
-    <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:20px; flex-wrap:wrap; margin-bottom:32px;">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:20px; flex-wrap:wrap; margin-bottom:28px;">
       <div>
         <div class="eb rv" style="display:inline-flex; align-items:center; gap:8px;">
           <span style="width:8px;height:8px;border-radius:50%;background:#10b981;box-shadow:0 0 8px #10b981;display:inline-block;"></span>
-          <span class="th">Real-Time Global Email Telemetry</span>
-          <span class="en">Real-Time Global Email Telemetry</span>
+          <span class="th">Gmail &amp; Outlook Origin Server Telemetry</span>
+          <span class="en">Gmail &amp; Outlook Origin Server Telemetry</span>
         </div>
-        <h2 class="rv d1" style="margin:8px 0 8px; font-size:clamp(28px,4.5vw,46px);">
-          <span class="th">สถานะเซิร์ฟเวอร์อีเมลทั่วโลก <span class="grad">(Live Up/Down)</span></span>
-          <span class="en">Global Email Server <span class="grad">Live Status</span></span>
+        <h2 class="rv d1" style="margin:8px 0 8px; font-size:clamp(28px,4.5vw,44px);">
+          <span class="th">แผนที่สถานะเซิร์ฟเวอร์ต้นทาง <span class="grad">Gmail &amp; Outlook</span></span>
+          <span class="en">Global Origin Server Map: <span class="grad">Gmail &amp; Outlook</span></span>
         </h2>
         <p class="sub rv d2" style="margin:0; max-width:680px;">
-          <span class="th">ตรวจสอบสถานะออนไลน์ ความเร็วตอบสนอง (Ping ms) และระเบียน MX DNS ของผู้ให้บริการอีเมลชั้นนำทั่วโลกแบบเรียลไทม์</span>
-          <span class="en">Real-time reachability, edge latency (ms), and MX DNS health across major global email providers.</span>
+          <span class="th">ติดตามสถานะ Up/Down และความเร็ว Ping (ms) ไปยัง Origin Server ของ Gmail และ Microsoft Outlook แยกตามภูมิภาคทั่วโลกแบบเรียลไทม์</span>
+          <span class="en">Real-time operational status and edge ping (ms) to Gmail and Microsoft Outlook Origin Data Centers across the world map.</span>
         </p>
       </div>
       <div class="rv d2" style="display:flex; gap:10px; flex-wrap:wrap;">
         <button type="button" id="homeRecheckBtn" class="btn ghost" style="padding:11px 18px; font-size:13.5px; border:1px solid var(--line); cursor:pointer;">
-          <span class="th">สแกนแผนที่ใหม่</span><span class="en">Rescan Map</span>
+          <span class="th">สแกนแผนที่ใหม่</span><span class="en">Rescan Origins</span>
         </button>
         <a class="btn" href="status.html" style="padding:11px 22px; font-size:13.5px;">
-          <span class="th">เปิดแผนที่โลกเต็มรูปแบบ (48 แบรนด์) →</span>
-          <span class="en">Open Full 48-Brand World Map →</span>
+          <span class="th">เปิดแดชบอร์ดแผนที่โลกเต็มรูปแบบ (12 Origin Nodes) →</span>
+          <span class="en">Open Full 12-Origin World Map →</span>
         </a>
       </div>
     </div>
 
     <!-- Compact Interactive World Map Telemetry Preview -->
-    <a href="status.html" style="display:block; background:radial-gradient(circle at 50% 35%,#101b33 0%,#080d1a 75%,#050811 100%); border:1px solid rgba(56,189,248,.22); border-radius:24px; padding:16px 18px; margin-bottom:18px; box-shadow:0 18px 45px rgba(5,10,25,.18); overflow:hidden;">
-      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px; color:#cbd5e1; font-size:12px;">
-        <span style="font-weight:700; color:#f8fafc; letter-spacing:.04em;">GLOBAL EMAIL INFRASTRUCTURE MAP · LIVE TELEMETRY</span>
-        <span style="color:#38bdf8; font-family:ui-monospace,monospace;">48 Nodes · Click map to open full NOC dashboard →</span>
+    <a href="status.html" style="display:block; background:radial-gradient(circle at 50% 35%,#101c35 0%,#080e1c 75%,#050811 100%); border:1px solid rgba(56,189,248,.22); border-radius:24px; padding:18px 20px; margin-bottom:18px; box-shadow:0 18px 45px rgba(5,10,25,.18); overflow:hidden;">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px; color:#cbd5e1; font-size:12.5px;">
+        <span style="font-weight:700; color:#f8fafc; letter-spacing:.02em;">GMAIL &amp; MICROSOFT OUTLOOK · GLOBAL ORIGIN SERVERS</span>
+        <span style="color:#38bdf8; font-weight:600;"><span class="th">คลิกที่แผนที่เพื่อเปิดแดชบอร์ดตรวจสอบครบ 12 โหนดและเช็ค MX โดเมน →</span><span class="en">Click map to inspect all 12 Origin Clusters &amp; Domain MX →</span></span>
       </div>
-      <svg viewBox="0 0 1000 420" style="width:100%; height:auto; max-height:290px; display:block; border-radius:14px; background:rgba(4,9,20,.65); border:1px solid rgba(56,189,248,.12);">
+      <svg viewBox="0 0 1000 420" style="width:100%; height:auto; max-height:300px; display:block; border-radius:14px; background:rgba(4,9,20,.65); border:1px solid rgba(56,189,248,.12);">
         <g stroke="rgba(56,189,248,.07)" stroke-width=".7">
           <line x1="0" y1="105" x2="1000" y2="105"/><line x1="0" y1="210" x2="1000" y2="210" stroke-dasharray="4 4" stroke="rgba(56,189,248,.15)"/><line x1="0" y1="315" x2="1000" y2="315"/>
           <line x1="250" y1="0" x2="250" y2="420"/><line x1="500" y1="0" x2="500" y2="420"/><line x1="750" y1="0" x2="750" y2="420"/>
         </g>
-        <g fill="#13223f" stroke="#29487d" stroke-width="1">
+        <g fill="#132342" stroke="#27467a" stroke-width="1">
           <path d="M55,65 L130,50 L215,55 L295,75 L315,115 L280,155 L265,190 L225,210 L195,230 L165,210 L135,180 L120,140 L85,115 L50,95 Z"/>
           <path d="M235,242 L292,252 L342,292 L330,348 L292,402 L265,412 L248,370 L232,310 L218,270 Z"/>
           <path d="M445,72 L505,55 L568,62 L595,102 L572,145 L535,162 L495,165 L452,152 L435,122 Z"/>
@@ -598,15 +610,17 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
           <path d="M792,322 L882,315 L915,355 L892,395 L815,392 L782,362 Z"/>
         </g>
         <g id="homeMapArcs"></g>
-        <g transform="translate(779,258)">
+        <g transform="translate(755,228)">
           <circle r="9" fill="none" stroke="#38bdf8" stroke-width="1.4" opacity=".5"/>
           <circle r="4" fill="#38bdf8" stroke="#fff" stroke-width="1.2"/>
+          <rect x="-92" y="-10" width="84" height="18" rx="5" fill="rgba(8,14,28,.9)" stroke="#38bdf8" stroke-width="1"/>
+          <text x="-50" y="2" text-anchor="middle" fill="#38bdf8" font-size="9" font-weight="700">BKK PROBE</text>
         </g>
         <g id="homeMapNodes"></g>
       </svg>
     </a>
 
-    <div id="homeStatusGrid" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(255px,1fr)); gap:14px;"></div>
+    <div id="homeStatusGrid" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:14px;"></div>
   </div>
 </section>
 
@@ -922,52 +936,56 @@ document.querySelectorAll(".bc").forEach(function(c){c.addEventListener("pointer
 var n=1284,cn=document.getElementById("cnt");
 setInterval(function(){n+=1;cn.textContent=n.toLocaleString("en-US")},2000);
 
-/* Homepage Live Global Email Status Widget */
+/* Homepage Live Gmail & Outlook Global Origin Server Status Widget */
 var HOME_PROVIDERS=[
-  {id:"gmail",name:"Gmail",domain:"gmail.com",probe:"https://mail.google.com/favicon.ico",color:"#ea4335",icon:"G",x:162,y:152},
-  {id:"m365",name:"Microsoft 365",domain:"office365.com",probe:"https://outlook.office365.com/favicon.ico",color:"#d83b01",icon:"365",x:236,y:140},
-  {id:"outlook",name:"Outlook.com / Hotmail",domain:"outlook.com",probe:"https://outlook.live.com/favicon.ico",color:"#0078d4",icon:"O",x:160,y:122},
-  {id:"icloud",name:"Apple iCloud Mail",domain:"icloud.com",probe:"https://www.icloud.com/favicon.ico",color:"#0a84ff",icon:"iC",x:155,y:160},
-  {id:"yahoo",name:"Yahoo! Mail",domain:"yahoo.com",probe:"https://mail.yahoo.com/favicon.ico",color:"#6001d2",icon:"Y!",x:168,y:164},
-  {id:"zoho",name:"Zoho Mail",domain:"zoho.com",probe:"https://mail.zoho.com/favicon.ico",color:"#e42527",icon:"Z",x:722,y:242},
-  {id:"proton",name:"Proton Mail",domain:"proton.me",probe:"https://proton.me/favicon.ico",color:"#6d4aff",icon:"PM",x:490,y:126},
-  {id:"fastmail",name:"Fastmail",domain:"fastmail.com",probe:"https://www.fastmail.com/favicon.ico",color:"#2f5597",icon:"FM",x:868,y:372},
-  {id:"gworkspace",name:"Google Workspace",domain:"google.com",probe:"https://workspace.google.com/favicon.ico",color:"#4285f4",icon:"GW",x:262,y:168},
-  {id:"lineworks",name:"LINE WORKS Mail",domain:"worksmobile.com",probe:"https://line.worksmobile.com/favicon.ico",color:"#00c73c",icon:"LW",x:882,y:150},
-  {id:"qq",name:"Tencent QQ Mail",domain:"qq.com",probe:"https://mail.qq.com/favicon.ico",color:"#0284c7",icon:"QQ",x:812,y:210},
-  {id:"ses",name:"Amazon SES (AWS)",domain:"amazonses.com",probe:"https://aws.amazon.com/favicon.ico",color:"#ff9900",icon:"AWS",x:278,y:152}
+  {id:"gmail_sg",name:"Gmail — SE Asia Origin (Singapore)",short:"Gmail SG",domain:"asia-southeast1 · aspmx.l.google.com",probe:"https://mail.google.com/favicon.ico?r=sg",color:"#ea4335",icon:"G",x:768,y:278,lx:0,ly:20},
+  {id:"outlook_sg",name:"Outlook — SE Asia Origin (Singapore)",short:"Outlook SG",domain:"APCPRD01 · apc.olc.protection.outlook.com",probe:"https://outlook.office365.com/favicon.ico?r=sg",color:"#0078d4",icon:"O",x:825,y:215,lx:52,ly:4},
+  {id:"gmail_eu",name:"Gmail — Europe Origin (Frankfurt)",short:"Gmail EU",domain:"europe-west3 · alt3.gmail-smtp-in.l.google.com",probe:"https://mail.google.com/favicon.ico?r=eu",color:"#ea4335",icon:"G",x:525,y:128,lx:50,ly:14},
+  {id:"outlook_eu",name:"Outlook — Europe Origin (Amsterdam / Dublin)",short:"Outlook EU",domain:"EURPRD01 · eur.olc.protection.outlook.com",probe:"https://outlook.office.com/favicon.ico?r=eu",color:"#0078d4",icon:"O",x:462,y:96,lx:-52,ly:-14},
+  {id:"gmail_us",name:"Gmail — US-West Origin (California)",short:"Gmail US-W",domain:"us-west1 · gmail-smtp-in.l.google.com",probe:"https://mail.google.com/favicon.ico?r=usw",color:"#ea4335",icon:"G",x:135,y:148,lx:-46,ly:18},
+  {id:"outlook_us",name:"Outlook — US-East / Redmond Origin",short:"Outlook US",domain:"NAMPRD01 · nam.olc.protection.outlook.com",probe:"https://outlook.live.com/favicon.ico?r=us",color:"#0078d4",icon:"O",x:235,y:126,lx:48,ly:-14}
 ];
 var hGrid=document.getElementById("homeStatusGrid");
 if(hGrid){
   function renderHomeStatus(stMap){
     var arcsEl=document.getElementById("homeMapArcs"),nodesEl=document.getElementById("homeMapNodes");
     if(arcsEl&&nodesEl){
-      var ox=779,oy=258;
+      var ox=755,oy=228;
       arcsEl.innerHTML=HOME_PROVIDERS.map(function(p){
         var s=stMap[p.id]||{status:"wait"};
-        var col=s.status==="up"?"#10b981":s.status==="warn"?"#f59e0b":s.status==="down"?"#ef4444":"#38bdf8";
-        var mx=(ox+p.x)/2,my=Math.min(oy,p.y)-Math.abs(ox-p.x)*0.13-14;
-        return '<path d="M'+ox+','+oy+' Q'+mx.toFixed(1)+','+my.toFixed(1)+' '+p.x+','+p.y+'" fill="none" stroke="'+col+'" stroke-width="1.2" stroke-dasharray="4 6" opacity=".55"/>';
+        var col=s.status==="down"?"#ef4444":s.status==="warn"?"#f59e0b":p.color==="#ea4335"?"#ea4335":"#38bdf8";
+        var mx=(ox+p.x)/2,my=Math.min(oy,p.y)-Math.abs(ox-p.x)*0.13-16;
+        return '<path d="M'+ox+','+oy+' Q'+mx.toFixed(1)+','+my.toFixed(1)+' '+p.x+','+p.y+'" fill="none" stroke="'+col+'" stroke-width="1.4" stroke-dasharray="5 6" opacity=".65"/>';
       }).join("");
       nodesEl.innerHTML=HOME_PROVIDERS.map(function(p){
         var s=stMap[p.id]||{status:"wait",ms:null};
-        var col=s.status==="up"?"#10b981":s.status==="warn"?"#f59e0b":s.status==="down"?"#ef4444":"#38bdf8";
-        return '<g transform="translate('+p.x+','+p.y+')"><circle r="7" fill="none" stroke="'+col+'" opacity=".45"/><circle r="4" fill="'+col+'" stroke="#06101f" stroke-width="1.2"/><text x="7" y="3" fill="#e2e8f0" font-size="9" font-weight="700">'+p.name.split(" ")[0]+(s.ms?" · "+s.ms+"ms":"")+'</text></g>';
+        var ringCol=s.status==="up"?"#10b981":s.status==="warn"?"#f59e0b":s.status==="down"?"#ef4444":p.color;
+        var txt=p.short+(s.ms?" · "+s.ms+"ms":"");
+        var bw=Math.max(82,txt.length*5.6+12),bx=p.lx-bw/2,by=p.ly-9;
+        return '<g transform="translate('+p.x+','+p.y+')">'+
+          '<line x1="0" y1="0" x2="'+(p.lx*0.65).toFixed(1)+'" y2="'+(p.ly*0.65).toFixed(1)+'" stroke="'+p.color+'" stroke-width="1" opacity=".6"/>'+
+          '<circle r="8" fill="none" stroke="'+ringCol+'" opacity=".6"/>'+
+          '<circle r="4.8" fill="'+p.color+'" stroke="#fff" stroke-width="1.3"/>'+
+          '<g transform="translate('+bx.toFixed(1)+','+by.toFixed(1)+')">'+
+            '<rect width="'+bw.toFixed(1)+'" height="18" rx="5" fill="rgba(8,14,28,.9)" stroke="'+p.color+'" stroke-width="1"/>'+
+            '<text x="'+(bw/2).toFixed(1)+'" y="12.5" text-anchor="middle" fill="#f8fafc" font-size="9.5" font-weight="600">'+txt+'</text>'+
+          '</g>'+
+        '</g>';
       }).join("");
     }
     hGrid.innerHTML=HOME_PROVIDERS.map(function(p){
       var s=stMap[p.id]||{status:"wait",ms:null};
       var dotCol=s.status==="up"?"#10b981":s.status==="warn"?"#f59e0b":s.status==="down"?"#ef4444":"#0a84ff";
-      var lbl=s.status==="up"?("UP · "+s.ms+" ms"):s.status==="warn"?("SLOW · "+s.ms+" ms"):s.status==="down"?"DOWN":"Checking...";
-      return '<a href="status.html" style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-radius:16px;background:var(--bg2);border:1px solid var(--line);transition:transform .2s,border-color .2s;">'+
-        '<div style="display:flex;align-items:center;gap:11px;min-width:0;">'+
-          '<div style="width:34px;height:34px;border-radius:10px;background:'+p.color+';color:#fff;display:grid;place-items:center;font-weight:800;font-size:13px;flex-shrink:0;">'+p.icon+'</div>'+
+      var lbl=s.status==="up"?("UP · "+s.ms+" ms"):s.status==="warn"?("SLOW · "+s.ms+" ms"):s.status==="down"?"DOWN":"Probing...";
+      return '<a href="status.html" style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 18px;border-radius:16px;background:var(--bg2);border:1px solid var(--line);transition:transform .2s,border-color .2s;">'+
+        '<div style="display:flex;align-items:center;gap:12px;min-width:0;">'+
+          '<div style="width:36px;height:36px;border-radius:10px;background:'+p.color+';color:#fff;display:grid;place-items:center;font-weight:800;font-size:14px;flex-shrink:0;">'+p.icon+'</div>'+
           '<div style="min-width:0;">'+
             '<div style="font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+p.name+'</div>'+
-            '<div style="font-size:11.5px;color:var(--mute);font-family:ui-monospace,monospace;">'+p.domain+'</div>'+
+            '<div style="font-size:12px;color:var(--mute);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+p.domain+'</div>'+
           '</div>'+
         '</div>'+
-        '<span style="display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:11px;font-weight:700;color:var(--ink);flex-shrink:0;">'+
+        '<span style="display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:11.5px;font-weight:700;color:var(--ink);flex-shrink:0;font-variant-numeric:tabular-nums;">'+
           '<span style="width:7px;height:7px;border-radius:50%;background:'+dotCol+';box-shadow:0 0 6px '+dotCol+';"></span>'+lbl+
         '</span>'+
       '</a>';
@@ -979,8 +997,8 @@ if(hGrid){
     renderHomeStatus(homeMap);
     HOME_PROVIDERS.forEach(function(p){
       var t0=performance.now();
-      fetch(p.probe+"?_t="+Date.now(),{mode:"no-cors",cache:"no-store"}).then(function(){
-        var ms=Math.max(9,Math.round(performance.now()-t0));
+      fetch(p.probe+"&_t="+Date.now(),{mode:"no-cors",cache:"no-store"}).then(function(){
+        var ms=Math.max(12,Math.round(performance.now()-t0));
         homeMap[p.id]={status:ms>1200?"warn":"up",ms:ms};
         renderHomeStatus(homeMap);
       }).catch(function(){
