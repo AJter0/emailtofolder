@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" href="favicon.png">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Email to Folder — Interactive Workflow Infographic</title>
@@ -25,8 +27,12 @@
     #bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--brand),var(--teal),var(--vio));z-index:60}
     /* nav */
     .nav{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;transform:translateX(-50%);width:min(960px,calc(100% - 24px));z-index:50;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px 8px 18px;border-radius:999px;background:var(--card);border:1px solid var(--line);backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px);color:var(--ink)}
-    .logo{font-weight:700;font-size:15px;display:flex;gap:8px;align-items:center;white-space:nowrap}
-    .logo i{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--vio));display:grid;place-items:center;color:#fff;font-style:normal;font-size:13px}
+    .logo{font-weight:700;font-size:15px;display:flex;gap:10px;align-items:center;white-space:nowrap;letter-spacing:-.02em}
+    .logo-mark{width:28px;height:28px;border-radius:8px;flex-shrink:0;transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;display:block}
+    .logo:hover .logo-mark{transform:scale(1.08) rotate(-2deg);box-shadow:0 4px 20px rgba(10,132,255,.35)}
+    .logo-txt{font-weight:700;color:var(--ink);letter-spacing:-.03em}
+    .logo-tld{background:linear-gradient(135deg,var(--brand),var(--vio));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;font-weight:800}
+    
     .links{display:flex;gap:24px;font-size:13px;color:var(--mute)}.links a:hover{color:var(--ink)}
     .links a.active{color:var(--brand);font-weight:600}
     .r{display:flex;gap:8px;align-items:center}
@@ -96,7 +102,7 @@
 <body class="bg-[#0b0b0e] text-[#ededed] min-h-screen p-4 md:p-8 antialiased selection:bg-[#30d5c8]/30">
   <div id="bar"></div>
   <div class="nav">
-    <a href="./#top" class="logo"><i>✉</i><span>emailtofolder.com</span></a>
+    <a href="./#top" class="logo"><img src="favicon.svg" class="logo-mark" alt="Email to Folder Logo" width="28" height="28"><span class="logo-txt">emailtofolder<span class="logo-tld">.com</span></span></a>
     <div class="links">
       <a href="./#features"><span class="th">จุดเด่น</span><span class="en">Features</span></a>
       <a href="./#how"><span class="th">วิธีทำงาน</span><span class="en">How it works</span></a>

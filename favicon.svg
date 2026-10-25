@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="efBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#181926"/>
+      <stop offset="50%" stop-color="#0e0f17"/>
+      <stop offset="100%" stop-color="#06070a"/>
+    </linearGradient>
+    <!-- Rim Light Gradient -->
+    <linearGradient id="efRim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.45)"/>
+      <stop offset="25%" stop-color="rgba(48,213,200,0.4)"/>
+      <stop offset="65%" stop-color="rgba(10,132,255,0.35)"/>
+      <stop offset="100%" stop-color="rgba(138,92,255,0.25)"/>
+    </linearGradient>
+    <!-- Email Flap Gradient -->
+    <linearGradient id="efEmail" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f2fe"/>
+      <stop offset="50%" stop-color="#0a84ff"/>
+      <stop offset="100%" stop-color="#7000ff"/>
+    </linearGradient>
+    <!-- Folder Pocket Gradient -->
+    <linearGradient id="efFolder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8a5cff"/>
+      <stop offset="100%" stop-color="#4d27e8"/>
+    </linearGradient>
+    <!-- Specular Highlight -->
+    <linearGradient id="efSheen" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <!-- Ambient Blur -->
+    <filter id="efGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Obsidian Glass Squircle Base -->
+  <rect x="1.5" y="1.5" width="45" height="45" rx="13" fill="url(#efBg)" stroke="url(#efRim)" stroke-width="1.2"/>
+
+  <!-- Internal Soft Glow Halo -->
+  <circle cx="24" cy="22" r="15" fill="#0a84ff" opacity="0.2" filter="url(#efGlow)"/>
+
+  <!-- Upper Envelope Flap (Electric Cyan to Blue to Violet) -->
+  <path d="M13 14.5C13 13.67 13.67 13 14.5 13H33.5C34.33 13 35 13.67 35 14.5V19.8C35 20.3 34.75 20.76 34.34 21.04L24.64 27.64C24.25 27.9 23.75 27.9 23.36 27.64L13.66 21.04C13.25 20.76 13 20.3 13 19.8V14.5Z" 
+        fill="url(#efEmail)"/>
+
+  <!-- Specular Flap Line -->
+  <path d="M13.8 14.2L23.4 21.9C23.76 22.18 24.24 22.18 24.6 21.9L34.2 14.2" 
+        stroke="url(#efSheen)" stroke-width="1.4" stroke-linecap="round"/>
+
+  <!-- Lower Folder Pocket (Royal Violet) -->
+  <path d="M12 25L16.8 25L19.2 27.4H28.8L31.2 25L36 25V30.5C36 32.43 34.43 34 32.5 34H15.5C13.57 34 12 32.43 12 30.5V25Z" 
+        fill="url(#efFolder)" stroke="rgba(255,255,255,0.25)" stroke-width="0.8" stroke-linejoin="round"/>
+
+  <!-- Micro Automation Directional Arrow (Crisp White/Cyan Core) -->
+  <path d="M24 23.5L24 28M21.8 26.3L24 28.5L26.2 26.3" 
+        stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
+</svg>
