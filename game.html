@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>EmailMan: The Cyber Packet Courier — 2D Pixel Minigame | Email to Folder</title>
+<meta name="description" content="เล่นเกม 2D Pixel Endless Runner 'EmailMan' บินส่งอีเมลและไฟล์แนบจาก Mail Server ฝ่าด่านไวรัส โทรจัน สแปม และไฟร์วอลล์ สู่โฟลเดอร์ปลายทางของ Client!">
+<meta name="keywords" content="EmailMan game, pixel runner game, cyber email game, minigame, retro 2d arcade, Email to Folder">
+<meta name="author" content="Email to Folder Tech Team">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://emailtofolder.com/game.html">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://emailtofolder.com/game.html">
+<meta property="og:title" content="EmailMan: The Cyber Packet Courier — 2D Pixel Minigame">
+<meta property="og:description" content="เกม 2D Pixel ผจญภัยส่งอีเมลข้ามเซิร์ฟเวอร์ หลบไวรัสและสแปม เก็บคะแนนและทำลายสถิติ High Score!">
+<meta property="og:image" content="https://emailtofolder.com/favicon.png">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&family=Press+Start+2P&display=swap">
+
+<style>
+:root{--bg:#07080d;--bg2:#0f1018;--ink:#ffffff;--mute:#8e8e98;--line:rgba(255,255,255,.1);--card:rgba(18,20,30,.75);--brand:#0a84ff;--teal:#30d5c8;--vio:#8a5cff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,Prompt,system-ui,sans-serif;line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+html[lang=th] body{font-family:Prompt,Inter,system-ui,sans-serif}
+html[lang=th] .en,html[lang=en] .th{display:none}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+.pixel{font-family:'Press Start 2P', monospace, monospace;letter-spacing:1px}
+
+#bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--brand),var(--teal),var(--vio));z-index:60}
+
+/* nav */
+.nav{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;transform:translateX(-50%);width:min(960px,calc(100% - 24px));z-index:50;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px 8px 18px;border-radius:999px;background:var(--card);border:1px solid var(--line);backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px);color:#fff}
+.logo{font-weight:700;font-size:15px;display:flex;gap:10px;align-items:center;white-space:nowrap;letter-spacing:-.02em}
+.logo-mark{width:28px;height:28px;border-radius:8px;flex-shrink:0;transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;display:block}
+.logo:hover .logo-mark{transform:scale(1.08) rotate(-2deg);box-shadow:0 4px 20px rgba(10,132,255,.35)}
+.logo-txt{font-weight:700;color:#fff;letter-spacing:-.03em}
+.logo-tld{background:linear-gradient(135deg,var(--brand),var(--vio));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;font-weight:800}
+.links{display:flex;gap:24px;font-size:13px;color:var(--mute)}.links a:hover{color:#fff}
+.links a.active{color:var(--brand);font-weight:600}
+.r{display:flex;gap:8px;align-items:center}
+.lang{display:flex;background:rgba(255,255,255,.08);border-radius:999px;padding:2px}
+.lang button{border:0;background:none;color:var(--mute);font:600 12px inherit;font-family:inherit;padding:5px 11px;border-radius:999px;cursor:pointer;transition:.3s}
+html[lang=th] [data-l=th],html[lang=en] [data-l=en]{background:#fff;color:#0b0c13}
+.btn{position:relative;overflow:hidden;display:inline-block;background:var(--brand);color:#fff;padding:12px 24px;border-radius:999px;font-weight:600;font-size:14px;transition:transform .3s,box-shadow .3s}
+.btn:hover{transform:scale(1.04);box-shadow:0 8px 30px rgba(10,132,255,.45)}
+.btn.sm{padding:8px 16px;font-size:12.5px}
+
+/* Game Area */
+.game-section{padding:120px 0 60px;min-height:calc(100vh - 120px);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
+.game-cabinet{position:relative;width:min(900px,calc(100% - 20px));background:#0a0b12;border:2px solid rgba(48,213,200,.3);border-radius:20px;box-shadow:0 0 50px rgba(10,132,255,.2),0 0 0 1px rgba(255,255,255,.06) inset;overflow:hidden}
+
+.cabinet-header{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:#121422;border-bottom:1px solid rgba(255,255,255,.08);font-size:12px}
+.cabinet-title{display:flex;align-items:center;gap:10px;color:var(--teal);font-weight:700}
+.cabinet-controls{display:flex;gap:10px}
+.c-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:#ccc;padding:4px 10px;border-radius:6px;font-size:11px;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;gap:4px}
+.c-btn:hover{background:rgba(255,255,255,.16);color:#fff}
+.c-btn.active{background:rgba(48,213,200,.2);border-color:var(--teal);color:var(--teal)}
+
+.screen-wrapper{position:relative;width:100%;aspect-ratio:16/9;max-height:520px;background:#030407;overflow:hidden}
+canvas#gameCanvas{display:block;width:100%;height:100%;image-rendering:pixelated;image-rendering:crisp-edges}
+
+/* CRT Scanlines Overlay */
+.crt-overlay{position:absolute;inset:0;pointer-events:none;background:linear-gradient(rgba(18,16,16,0) 50%,rgba(0,0,0,.35) 50%),linear-gradient(90deg,rgba(255,0,0,.04),rgba(0,255,0,.02),rgba(0,0,255,.04));background-size:100% 3px,4px 100%;z-index:10;opacity:.7;transition:opacity .3s}
+.crt-overlay.off{opacity:0}
+
+/* Mobile Onscreen Controls */
+.mobile-controls{display:none;width:100%;padding:14px 20px;background:#10111d;border-top:1px solid rgba(255,255,255,.08);touch-action:manipulation}
+.m-row{display:flex;justify-content:space-between;align-items:center}
+.m-btn{background:linear-gradient(135deg,rgba(10,132,255,.2),rgba(138,92,255,.2));border:1px solid rgba(10,132,255,.4);color:#fff;border-radius:12px;padding:12px 24px;font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px;user-select:none;-webkit-user-select:none}
+.m-btn:active{background:var(--brand);transform:scale(.97)}
+
+/* Instructions card */
+.guide-card{margin-top:24px;width:min(900px,calc(100% - 20px));background:#0e101a;border:1px solid var(--line);border-radius:16px;padding:24px 28px}
+.guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-top:16px}
+.guide-item{display:flex;gap:12px;align-items:flex-start}
+.g-icon{font-size:24px;flex-shrink:0}
+.g-text h4{margin:0 0 4px;font-size:14px;color:#fff}
+.g-text p{margin:0;font-size:12px;color:var(--mute);line-height:1.5}
+
+/* footer & gh */
+.gh{background:#0d1117;color:#fff;text-align:center;padding:14px 22px;font-size:14px;font-weight:500;margin-top:60px;border-top:1px solid var(--line)}.gh a{display:inline-flex;align-items:center;gap:10px;transition:opacity .3s}.gh a:hover{opacity:.75}.gh svg{width:20px;height:20px;fill:#fff;flex:none}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mute);font-size:13px}
+footer .wrap{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+@media(max-width:720px){
+  .links{display:none}
+  .logo-txt{font-size:14px}
+  .btn.sm{display:none}
+  .mobile-controls{display:block}
+}
+</style>
+</head>
+<body>
+  <div id="bar"></div>
+  
+  <!-- Navigation Bar -->
+  <nav class="nav">
+    <a href="./#top" class="logo">
+      <img src="favicon.svg" class="logo-mark" alt="Email to Folder Logo" width="28" height="28">
+      <span class="logo-txt">emailtofolder<span class="logo-tld">.com</span></span>
+    </a>
+    <div class="links">
+      <a href="./#features"><span class="th">จุดเด่น</span><span class="en">Features</span></a>
+      <a href="./#how"><span class="th">วิธีทำงาน</span><span class="en">How it works</span></a>
+      <a href="infographic.html"><span class="th">อินโฟกราฟิก</span><span class="en">Infographic</span></a>
+      <a href="articles/"><span class="th">บทความ</span><span class="en">Articles</span></a>
+      <a href="game.html" class="active"><span class="th">🎮 มินิเกม</span><span class="en">🎮 Mini Game</span></a>
+      <a href="./#download"><span class="th">ดาวน์โหลด</span><span class="en">Download</span></a>
+    </div>
+    <div class="r">
+      <div class="lang">
+        <button data-l="th">TH</button>
+        <button data-l="en">EN</button>
+      </div>
+      <a class="btn sm" href="./#download" style="background:linear-gradient(135deg,var(--brand),var(--vio))">
+        <span class="th">ดาวน์โหลดฟรี</span>
+        <span class="en">Free Download</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Game Section -->
+  <main class="game-section">
+    <div class="game-cabinet">
+      <!-- Cabinet Top Bar -->
+      <div class="cabinet-header">
+        <div class="cabinet-title pixel">
+          <span>⚡ EMAILMAN: PACKET COURIER</span>
+          <span style="font-size:10px;color:var(--brand);">v1.0</span>
+        </div>
+        <div class="cabinet-controls">
+          <button class="c-btn active" id="btnSound" onclick="toggleAudio()" title="เปิด/ปิดเสียง">🔊 <span class="th">เสียง</span><span class="en">Sound</span></button>
+          <button class="c-btn active" id="btnCrt" onclick="toggleCrt()" title="เปิด/ปิดเส้นสแกน CRT">📺 CRT</button>
+          <button class="c-btn" onclick="toggleFullscreen()" title="ขยายเต็มจอ">⛶ <span class="th">เต็มจอ</span><span class="en">Full</span></button>
+        </div>
+      </div>
+
+      <!-- Canvas Screen -->
+      <div class="screen-wrapper" id="screenWrapper">
+        <canvas id="gameCanvas" width="800" height="450"></canvas>
+        <div class="crt-overlay" id="crtOverlay"></div>
+      </div>
+
+      <!-- Mobile Touch Bar -->
+      <div class="mobile-controls">
+        <div class="m-row">
+          <div style="font-size:12px;color:var(--mute)">
+            <span class="th">แตะจอหรือกดปุ่มเพื่อบิน</span>
+            <span class="en">Tap anywhere to thrust!</span>
+          </div>
+          <button class="m-btn" id="mJumpBtn">
+            🚀 <span>BOOST UP</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Instructions Guide -->
+    <div class="guide-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <h3 style="margin:0;font-size:16px;">
+          <span class="th">🕹️ วิธีเล่นและภารกิจของ EmailMan</span>
+          <span class="en">🕹️ How to Play & Mission Briefing</span>
+        </h3>
+        <span style="font-size:12px;color:var(--teal)">Desktop: [Space] / [W] / [↑] / Click | Mobile: Tap</span>
+      </div>
+      
+      <div class="guide-grid">
+        <div class="guide-item">
+          <div class="g-icon">✉️</div>
+          <div class="g-text">
+            <h4><span class="th">คุณคือ EmailMan</span><span class="en">You are EmailMan</span></h4>
+            <p><span class="th">ซองจดหมายติดปีกไอพ่น บินขนส่งเอกสารจาก Mail Server ไปยังโฟลเดอร์เครื่อง Client</span><span class="en">Fly your packet courier through network nodes to reach client storage safely.</span></p>
+          </div>
+        </div>
+        <div class="guide-item">
+          <div class="g-icon">👾</div>
+          <div class="g-text">
+            <h4><span class="th">หลบหลีกอุปสรรค</span><span class="en">Dodge Hazards</span></h4>
+            <p><span class="th">หลบ Spam Bot (แดง), Trojan Virus (เขียวหนาม), Phishing Hook และ Firewall Laser</span><span class="en">Evade Spam Bots, Trojan Viruses, Phishing Hooks, and Firewall Laser Grids.</span></p>
+          </div>
+        </div>
+        <div class="guide-item">
+          <div class="g-icon">📎</div>
+          <div class="g-text">
+            <h4><span class="th">เก็บเอกสาร & คอมโบ</span><span class="en">Collect Invoices</span></h4>
+            <p><span class="th">เก็บไฟล์ PDF/Excel เพิ่มคะแนน และสะสม Combo จากการบินเฉียด (Near Miss)</span><span class="en">Collect PDF/Excel invoices for score streaks and execute near-miss maneuvers!</span></p>
+          </div>
+        </div>
+        <div class="guide-item">
+          <div class="g-icon">🛡️</div>
+          <div class="g-text">
+            <h4><span class="th">เกราะ TLS & เทอร์โบ</span><span class="en">Power-ups</span></h4>
+            <p><span class="th">เก็บเกราะ TLS Shield ป้องกันชน หรือ IMAP Boost บินพุ่งทะลวงทุกสิ่ง!</span><span class="en">Acquire TLS Shields for temporary invincibility and IMAP Turbo Boost.</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="gh"><a href="https://github.com" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span class="th">เว็บไซต์นี้โฮสต์ด้วย GitHub</span><span class="en">This website is hosted on GitHub</span></a></div>
+  <footer class="dk"><div class="wrap"><div>© 2026 Email to Folder Dev Team · emailtofolder.com</div><div>📍 Bangkok, Thailand · 📞 094-562-0859</div></div></footer>
+
+  <!-- Web Audio Synthesizer & Game Engine Script -->
+  <script>
+    /* =========================================================
+       1. RETRO WEB AUDIO 8-BIT SYNTHESIZER
+       ========================================================= */
+    const AudioEngine = {
+      ctx: null,
+      enabled: true,
+      init() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) this.ctx = new AudioContext();
+        }
+      },
+      play(type) {
+        if (!this.enabled || !this.ctx) return;
+        if (this.ctx.state === 'suspended') this.ctx.resume();
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        switch (type) {
+          case 'thrust':
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(140, now);
+            osc.frequency.exponentialRampToValueAtTime(320, now + 0.08);
+            gain.gain.setValueAtTime(0.06, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
+            osc.start(now);
+            osc.stop(now + 0.09);
+            break;
+          case 'pickup':
+            osc.type = 'square';
+            osc.frequency.setValueAtTime(587.33, now); // D5
+            osc.frequency.setValueAtTime(880, now + 0.06); // A5
+            gain.gain.setValueAtTime(0.08, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.16);
+            osc.start(now);
+            osc.stop(now + 0.16);
+            break;
+          case 'powerup':
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(440, now);
+            osc.frequency.exponentialRampToValueAtTime(1174, now + 0.25);
+            gain.gain.setValueAtTime(0.12, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
+            osc.start(now);
+            osc.stop(now + 0.28);
+            break;
+          case 'hit':
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(220, now);
+            osc.frequency.exponentialRampToValueAtTime(40, now + 0.22);
+            gain.gain.setValueAtTime(0.2, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+            osc.start(now);
+            osc.stop(now + 0.25);
+            break;
+          case 'gameover':
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(350, now);
+            osc.frequency.setValueAtTime(280, now + 0.15);
+            osc.frequency.setValueAtTime(220, now + 0.3);
+            osc.frequency.setValueAtTime(160, now + 0.45);
+            gain.gain.setValueAtTime(0.15, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.65);
+            osc.start(now);
+            osc.stop(now + 0.65);
+            break;
+        }
+      }
+    };
+
+    function toggleAudio() {
+      AudioEngine.init();
+      AudioEngine.enabled = !AudioEngine.enabled;
+      document.getElementById('btnSound').classList.toggle('active', AudioEngine.enabled);
+    }
+
+    function toggleCrt() {
+      const crt = document.getElementById('crtOverlay');
+      const btn = document.getElementById('btnCrt');
+      crt.classList.toggle('off');
+      btn.classList.toggle('active', !crt.classList.contains('off'));
+    }
+
+    function toggleFullscreen() {
+      const el = document.getElementById('screenWrapper');
+      if (!document.fullscreenElement) {
+        if (el.requestFullscreen) el.requestFullscreen();
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    }
+
+    /* =========================================================
+       2. GAME ENGINE: EMAILMAN PACKET COURIER
+       ========================================================= */
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const WIDTH = 800;
+    const HEIGHT = 450;
+
+    let state = 'START'; // 'START' | 'PLAYING' | 'GAMEOVER'
+    let score = 0;
+    let highScore = parseInt(localStorage.getItem('emailman_hi') || '0', 10);
+    let distance = 0;
+    let combo = 1;
+    let comboTimer = 0;
+    let screenShake = 0;
+    let frameCount = 0;
+
+    // Player Object
+    const player = {
+      x: 120,
+      y: 200,
+      w: 38,
+      h: 26,
+      vy: 0,
+      gravity: 0.36,
+      jumpForce: -6.5,
+      shieldTime: 0,
+      boostTime: 0,
+      trail: [],
+      reset() {
+        this.x = 120;
+        this.y = 200;
+        this.vy = 0;
+        this.shieldTime = 0;
+        this.boostTime = 0;
+        this.trail = [];
+      },
+      update() {
+        this.vy += this.gravity;
+        if (this.boostTime > 0) {
+          this.vy *= 0.5; // smoother vertical gliding during boost
+          this.boostTime--;
+        }
+        if (this.shieldTime > 0) this.shieldTime--;
+
+        this.y += this.vy;
+
+        // Clamping to screen
+        if (this.y < 12) {
+          this.y = 12;
+          this.vy = 0;
+        }
+        if (this.y + this.h > HEIGHT - 18) {
+          this.y = HEIGHT - 18 - this.h;
+          this.vy = 0;
+        }
+
+        // Particle Exhaust Trail
+        if (frameCount % 2 === 0) {
+          this.trail.push({
+            x: this.x - 4,
+            y: this.y + this.h / 2 + (Math.random() * 6 - 3),
+            vx: -(2.5 + Math.random() * 2),
+            vy: (Math.random() - 0.5) * 1.5,
+            size: Math.random() * 4 + 3,
+            color: this.boostTime > 0 ? '#30d5c8' : '#0a84ff',
+            life: 1
+          });
+        }
+        for (let i = this.trail.length - 1; i >= 0; i--) {
+          const t = this.trail[i];
+          t.x += t.vx;
+          t.y += t.vy;
+          t.life -= 0.05;
+          if (t.life <= 0) this.trail.splice(i, 1);
+        }
+      },
+      thrust() {
+        AudioEngine.init();
+        AudioEngine.play('thrust');
+        this.vy = this.jumpForce;
+        // create little burst particles
+        for (let i = 0; i < 5; i++) {
+          particles.push({
+            x: this.x,
+            y: this.y + this.h,
+            vx: -3 - Math.random() * 3,
+            vy: 2 + Math.random() * 2,
+            size: 3,
+            color: '#30d5c8',
+            life: 0.8
+          });
+        }
+      },
+      draw() {
+        // Draw Exhaust Trail
+        for (const t of this.trail) {
+          ctx.fillStyle = t.color;
+          ctx.globalAlpha = t.life * 0.8;
+          ctx.fillRect(t.x, t.y, t.size, t.size);
+        }
+        ctx.globalAlpha = 1;
+
+        ctx.save();
+        ctx.translate(this.x + this.w / 2, this.y + this.h / 2);
+        const angle = Math.max(-0.4, Math.min(0.4, this.vy * 0.06));
+        ctx.rotate(angle);
+
+        // Active Shield Glow Bubble
+        if (this.shieldTime > 0) {
+          ctx.strokeStyle = `rgba(48, 213, 200, ${0.5 + Math.sin(frameCount * 0.2) * 0.4})`;
+          ctx.lineWidth = 3;
+          ctx.fillStyle = 'rgba(48, 213, 200, 0.15)';
+          ctx.beginPath();
+          ctx.arc(0, 0, 26, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+        }
+
+        // Boost aura
+        if (this.boostTime > 0) {
+          ctx.fillStyle = 'rgba(10, 132, 255, 0.25)';
+          ctx.beginPath();
+          ctx.arc(0, 0, 30, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Draw Pixel Email Envelope Body (26x18 normalized)
+        const hw = this.w / 2;
+        const hh = this.h / 2;
+
+        // Envelope Base White/Silver
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(-hw, -hh, this.w, this.h);
+
+        // Envelope Border Dark Blue
+        ctx.strokeStyle = '#0e172a';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(-hw, -hh, this.w, this.h);
+
+        // Envelope Flap Lines (V-shape crease)
+        ctx.beginPath();
+        ctx.moveTo(-hw, -hh);
+        ctx.lineTo(0, hh * 0.3);
+        ctx.lineTo(hw, -hh);
+        ctx.strokeStyle = '#0a84ff';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Bottom diagonal creases
+        ctx.beginPath();
+        ctx.moveTo(-hw, hh);
+        ctx.lineTo(-hw * 0.2, 0);
+        ctx.moveTo(hw, hh);
+        ctx.lineTo(hw * 0.2, 0);
+        ctx.strokeStyle = '#cbd5e1';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Cyber Wing Thruster (animated flapping top/bottom)
+        const wingOffset = Math.sin(frameCount * 0.35) * 4;
+        ctx.fillStyle = '#30d5c8';
+        // Top Wing
+        ctx.fillRect(-hw + 4, -hh - 6 + wingOffset, 14, 5);
+        ctx.fillStyle = '#0a84ff';
+        ctx.fillRect(-hw + 8, -hh - 9 + wingOffset, 8, 3);
+
+        // Core Badge Glow (Center LED)
+        ctx.fillStyle = this.boostTime > 0 ? '#30d5c8' : (this.shieldTime > 0 ? '#8a5cff' : '#0a84ff');
+        ctx.fillRect(-3, -2, 6, 6);
+
+        ctx.restore();
+      }
+    };
+
+    // Obstacles, Items & Floating Text
+    const obstacles = [];
+    const items = [];
+    const floatingTexts = [];
+    const particles = [];
+
+    // Background Layers
+    const bgStars = [];
+    for (let i = 0; i < 40; i++) {
+      bgStars.push({
+        x: Math.random() * WIDTH,
+        y: Math.random() * HEIGHT,
+        s: Math.random() * 2 + 1,
+        speed: Math.random() * 1.5 + 0.5
+      });
+    }
+
+    // Network Hops
+    const hops = [
+      { name: 'HOP 1: SMTP GATEWAY', dist: 0, color: '#0a84ff' },
+      { name: 'HOP 2: CLOUD RELAY', dist: 500, color: '#30d5c8' },
+      { name: 'HOP 3: DEEP FIREWALL', dist: 1200, color: '#f59e0b' },
+      { name: 'HOP 4: OPTICAL FIBER TRUNK', dist: 2200, color: '#8a5cff' },
+      { name: 'HOP 5: CLIENT STORAGE VAULT', dist: 3500, color: '#10b981' }
+    ];
+
+    function getCurrentHop(d) {
+      for (let i = hops.length - 1; i >= 0; i--) {
+        if (d >= hops[i].dist) return hops[i];
+      }
+      return hops[0];
+    }
+
+    function spawnObstacle() {
+      const baseSpeed = 3.5 + Math.min(3.5, distance * 0.0015);
+      const rand = Math.random();
+
+      if (rand < 0.45) {
+        // SPAM Bot (Floating red junk packet)
+        obstacles.push({
+          type: 'spam',
+          x: WIDTH + 30,
+          y: Math.random() * (HEIGHT - 120) + 40,
+          w: 32,
+          h: 24,
+          vx: -(baseSpeed + Math.random()),
+          vy: Math.sin(Math.random() * Math.PI) * 1.5,
+          color: '#ef4444'
+        });
+      } else if (rand < 0.75) {
+        // TROJAN Virus (Spiked bug with pulsing spikes)
+        obstacles.push({
+          type: 'trojan',
+          x: WIDTH + 30,
+          y: Math.random() * (HEIGHT - 100) + 30,
+          w: 28,
+          h: 28,
+          vx: -(baseSpeed + 1.2),
+          vy: (Math.random() - 0.5) * 2,
+          color: '#10b981'
+        });
+      } else {
+        // Firewall Laser Gate (Column top or bottom)
+        const isTop = Math.random() > 0.5;
+        const gateHeight = Math.random() * 120 + 80;
+        obstacles.push({
+          type: 'firewall',
+          x: WIDTH + 30,
+          y: isTop ? 0 : HEIGHT - gateHeight,
+          w: 26,
+          h: gateHeight,
+          vx: -baseSpeed,
+          vy: 0,
+          color: '#f97316'
+        });
+      }
+    }
+
+    function spawnItem() {
+      const rand = Math.random();
+      let itemType = 'pdf';
+      if (rand < 0.6) itemType = 'pdf'; // Invoice
+      else if (rand < 0.8) itemType = 'xlsx'; // Report
+      else if (rand < 0.92) itemType = 'shield'; // TLS Shield
+      else itemType = 'boost'; // IMAP Speed Boost
+
+      items.push({
+        type: itemType,
+        x: WIDTH + 20,
+        y: Math.random() * (HEIGHT - 100) + 40,
+        w: 22,
+        h: 24,
+        vx: -3,
+        hoverAngle: Math.random() * Math.PI
+      });
+    }
+
+    function addFloatText(txt, x, y, color = '#30d5c8') {
+      floatingTexts.push({ txt, x, y, vy: -1.2, life: 1, color });
+    }
+
+    function explode(x, y, color = '#ef4444', count = 16) {
+      for (let i = 0; i < count; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = Math.random() * 4 + 1.5;
+        particles.push({
+          x,
+          y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          size: Math.random() * 4 + 2,
+          color,
+          life: 1
+        });
+      }
+    }
+
+    /* =========================================================
+       3. GAME LOOP: UPDATE & RENDER
+       ========================================================= */
+    let spawnTimer = 0;
+    let itemSpawnTimer = 0;
+
+    function resetGame() {
+      score = 0;
+      distance = 0;
+      combo = 1;
+      comboTimer = 0;
+      obstacles.length = 0;
+      items.length = 0;
+      floatingTexts.length = 0;
+      particles.length = 0;
+      player.reset();
+      state = 'PLAYING';
+    }
+
+    function gameOver() {
+      AudioEngine.play('gameover');
+      state = 'GAMEOVER';
+      screenShake = 16;
+      explode(player.x + player.w / 2, player.y + player.h / 2, '#ef4444', 30);
+      if (score > highScore) {
+        highScore = score;
+        localStorage.setItem('emailman_hi', highScore.toString());
+      }
+    }
+
+    function checkCollision(r1, r2) {
+      return (
+        r1.x < r2.x + r2.w &&
+        r1.x + r1.w > r2.x &&
+        r1.y < r2.y + r2.h &&
+        r1.y + r1.h > r2.y
+      );
+    }
+
+    function update() {
+      frameCount++;
+
+      // Decay screen shake
+      if (screenShake > 0) screenShake--;
+
+      // Background stars scrolling
+      const currentSpeed = player.boostTime > 0 ? 7 : 3;
+      for (const star of bgStars) {
+        star.x -= star.speed * (currentSpeed / 3);
+        if (star.x < 0) {
+          star.x = WIDTH;
+          star.y = Math.random() * HEIGHT;
+        }
+      }
+
+      if (state !== 'PLAYING') return;
+
+      distance += Math.floor(currentSpeed * 0.5);
+      score += (player.boostTime > 0 ? 3 : 1) * combo;
+
+      if (comboTimer > 0) {
+        comboTimer--;
+        if (comboTimer <= 0) combo = 1;
+      }
+
+      player.update();
+
+      // Spawning
+      spawnTimer++;
+      const spawnInterval = Math.max(35, 75 - Math.floor(distance * 0.015));
+      if (spawnTimer >= spawnInterval) {
+        spawnTimer = 0;
+        spawnObstacle();
+      }
+
+      itemSpawnTimer++;
+      if (itemSpawnTimer >= 110) {
+        itemSpawnTimer = 0;
+        spawnItem();
+      }
+
+      // Update Obstacles
+      for (let i = obstacles.length - 1; i >= 0; i--) {
+        const obs = obstacles[i];
+        obs.x += obs.vx * (player.boostTime > 0 ? 1.5 : 1);
+        obs.y += obs.vy;
+
+        // Bounce up/down for spam
+        if (obs.type === 'spam') {
+          if (obs.y < 30 || obs.y > HEIGHT - 50) obs.vy *= -1;
+        }
+
+        // Near-miss check (flew closely without hitting)
+        if (!obs.nearMissed && obs.x < player.x && obs.x > player.x - 20) {
+          obs.nearMissed = true;
+          const distY = Math.abs((player.y + player.h / 2) - (obs.y + obs.h / 2));
+          if (distY < 48) {
+            combo = Math.min(5, combo + 1);
+            comboTimer = 180;
+            score += 150 * combo;
+            addFloatText(`NEAR MISS! x${combo}`, player.x, player.y - 10, '#30d5c8');
+            AudioEngine.play('pickup');
+          }
+        }
+
+        // Collision Check
+        if (checkCollision(player, obs)) {
+          if (player.shieldTime > 0 || player.boostTime > 0) {
+            // Smash obstacle!
+            explode(obs.x + obs.w / 2, obs.y + obs.h / 2, obs.color, 18);
+            obstacles.splice(i, 1);
+            score += 200;
+            screenShake = 6;
+            AudioEngine.play('hit');
+            addFloatText('+200 BREACH!', player.x, player.y - 12, '#30d5c8');
+            continue;
+          } else {
+            gameOver();
+            return;
+          }
+        }
+
+        if (obs.x + obs.w < -40) {
+          obstacles.splice(i, 1);
+        }
+      }
+
+      // Update Items
+      for (let i = items.length - 1; i >= 0; i--) {
+        const it = items[i];
+        it.hoverAngle += 0.08;
+        it.y += Math.sin(it.hoverAngle) * 0.8;
+        it.x += it.vx * (player.boostTime > 0 ? 1.4 : 1);
+
+        // Magnetic Attraction when Boost Active
+        if (player.boostTime > 0) {
+          const dx = (player.x + player.w / 2) - it.x;
+          const dy = (player.y + player.h / 2) - it.y;
+          it.x += dx * 0.12;
+          it.y += dy * 0.12;
+        }
+
+        if (checkCollision(player, it)) {
+          AudioEngine.play('pickup');
+          if (it.type === 'pdf') {
+            score += 250 * combo;
+            addFloatText(`+250 INVOICE.PDF`, it.x, it.y, '#38bdf8');
+          } else if (it.type === 'xlsx') {
+            score += 350 * combo;
+            addFloatText(`+350 REPORT.XLSX`, it.x, it.y, '#34d399');
+          } else if (it.type === 'shield') {
+            player.shieldTime = 360; // 6s
+            AudioEngine.play('powerup');
+            addFloatText('TLS SHIELD ON!', it.x, it.y, '#30d5c8');
+          } else if (it.type === 'boost') {
+            player.boostTime = 240; // 4s
+            AudioEngine.play('powerup');
+            addFloatText('IMAP TURBO SPEED!', it.x, it.y, '#a78bfa');
+          }
+          explode(it.x + it.w / 2, it.y + it.h / 2, '#30d5c8', 12);
+          items.splice(i, 1);
+          continue;
+        }
+
+        if (it.x + it.w < -30) items.splice(i, 1);
+      }
+
+      // Update Floating Texts
+      for (let i = floatingTexts.length - 1; i >= 0; i--) {
+        const ft = floatingTexts[i];
+        ft.y += ft.vy;
+        ft.life -= 0.025;
+        if (ft.life <= 0) floatingTexts.splice(i, 1);
+      }
+
+      // Update Particles
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life -= 0.035;
+        if (p.life <= 0) particles.splice(i, 1);
+      }
+    }
+
+    function render() {
+      ctx.save();
+      // Apply screen shake
+      if (screenShake > 0) {
+        const dx = (Math.random() - 0.5) * screenShake;
+        const dy = (Math.random() - 0.5) * screenShake;
+        ctx.translate(dx, dy);
+      }
+
+      // 1. Dark Cyber Background
+      ctx.fillStyle = '#06070c';
+      ctx.fillRect(0, 0, WIDTH, HEIGHT);
+
+      // Cyber Grid Lines (Perspective floor & ceiling)
+      ctx.strokeStyle = 'rgba(10, 132, 255, 0.08)';
+      ctx.lineWidth = 1;
+      const gridOffset = (frameCount * 2) % 40;
+      for (let x = -gridOffset; x < WIDTH; x += 40) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, 30);
+        ctx.moveTo(x, HEIGHT - 30);
+        ctx.lineTo(x, HEIGHT);
+        ctx.stroke();
+      }
+
+      // Network Hop Floor Color Indicator
+      const currentHop = getCurrentHop(distance);
+      ctx.fillStyle = currentHop.color;
+      ctx.fillRect(0, 0, WIDTH, 3);
+      ctx.fillRect(0, HEIGHT - 4, WIDTH, 4);
+
+      // Starfield / Data packets in background
+      for (const star of bgStars) {
+        ctx.fillStyle = star.speed > 1.2 ? '#0a84ff' : 'rgba(255,255,255,0.4)';
+        ctx.fillRect(star.x, star.y, star.s, star.s);
+      }
+
+      // 2. Draw Items (Attachments & Shields)
+      for (const it of items) {
+        ctx.save();
+        ctx.translate(it.x, it.y);
+        if (it.type === 'pdf') {
+          // Red/Cyan PDF Doc
+          ctx.fillStyle = '#ef4444';
+          ctx.fillRect(0, 0, it.w, it.h);
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(3, 3, it.w - 6, it.h - 6);
+          ctx.fillStyle = '#ef4444';
+          ctx.font = '7px sans-serif';
+          ctx.fillText('PDF', 4, 15);
+        } else if (it.type === 'xlsx') {
+          // Green XLSX Doc
+          ctx.fillStyle = '#10b981';
+          ctx.fillRect(0, 0, it.w, it.h);
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(3, 3, it.w - 6, it.h - 6);
+          ctx.fillStyle = '#10b981';
+          ctx.font = '7px sans-serif';
+          ctx.fillText('XLS', 4, 15);
+        } else if (it.type === 'shield') {
+          // Cyan Shield Gem
+          ctx.fillStyle = '#30d5c8';
+          ctx.beginPath();
+          ctx.arc(it.w / 2, it.h / 2, 10, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = '#ffffff';
+          ctx.font = '10px monospace';
+          ctx.fillText('🛡️', 2, 16);
+        } else if (it.type === 'boost') {
+          // Violet Turbo Lightning
+          ctx.fillStyle = '#8a5cff';
+          ctx.beginPath();
+          ctx.arc(it.w / 2, it.h / 2, 10, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = '#ffffff';
+          ctx.font = '10px monospace';
+          ctx.fillText('⚡', 3, 16);
+        }
+        ctx.restore();
+      }
+
+      // 3. Draw Obstacles
+      for (const obs of obstacles) {
+        ctx.save();
+        ctx.translate(obs.x, obs.y);
+
+        if (obs.type === 'spam') {
+          // Red junk envelope with skull / cross
+          ctx.fillStyle = '#ef4444';
+          ctx.fillRect(0, 0, obs.w, obs.h);
+          ctx.strokeStyle = '#7f1d1d';
+          ctx.lineWidth = 1.5;
+          ctx.strokeRect(0, 0, obs.w, obs.h);
+          ctx.strokeStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.moveTo(0, 0); ctx.lineTo(obs.w / 2, obs.h / 2); ctx.lineTo(obs.w, 0);
+          ctx.stroke();
+          ctx.fillStyle = '#ffffff';
+          ctx.font = '8px monospace';
+          ctx.fillText('SPAM', 4, 18);
+        } else if (obs.type === 'trojan') {
+          // Neon Green Spiked Trojan Bug
+          ctx.fillStyle = '#10b981';
+          ctx.fillRect(4, 4, obs.w - 8, obs.h - 8);
+          // Spikes
+          ctx.fillStyle = '#34d399';
+          ctx.fillRect(0, obs.h / 2 - 2, 4, 4);
+          ctx.fillRect(obs.w - 4, obs.h / 2 - 2, 4, 4);
+          ctx.fillRect(obs.w / 2 - 2, 0, 4, 4);
+          ctx.fillRect(obs.w / 2 - 2, obs.h - 4, 4, 4);
+          // Glitch Eye
+          ctx.fillStyle = '#000000';
+          ctx.fillRect(8, 8, 4, 4);
+          ctx.fillRect(obs.w - 12, 8, 4, 4);
+        } else if (obs.type === 'firewall') {
+          // Firewall Laser Pillar
+          ctx.fillStyle = 'rgba(249, 115, 22, 0.3)';
+          ctx.fillRect(0, 0, obs.w, obs.h);
+          ctx.strokeStyle = '#f97316';
+          ctx.lineWidth = 2;
+          ctx.strokeRect(0, 0, obs.w, obs.h);
+          // Laser Beam core
+          ctx.fillStyle = '#ffedd5';
+          ctx.fillRect(obs.w / 2 - 2, 0, 4, obs.h);
+          // Pulsing warning
+          if (frameCount % 10 < 5) {
+            ctx.fillStyle = '#ea580c';
+            ctx.fillRect(2, obs.h / 2 - 6, obs.w - 4, 12);
+          }
+        }
+
+        ctx.restore();
+      }
+
+      // 4. Draw Player (EmailMan)
+      if (state === 'PLAYING') {
+        player.draw();
+      }
+
+      // 5. Draw Particle Explosions
+      for (const p of particles) {
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = Math.max(0, p.life);
+        ctx.fillRect(p.x, p.y, p.size, p.size);
+      }
+      ctx.globalAlpha = 1;
+
+      // 6. Draw Floating Score Texts
+      for (const ft of floatingTexts) {
+        ctx.fillStyle = ft.color;
+        ctx.globalAlpha = Math.max(0, ft.life);
+        ctx.font = '10px "Press Start 2P", monospace';
+        ctx.fillText(ft.txt, ft.x, ft.y);
+      }
+      ctx.globalAlpha = 1;
+
+      // 7. HUD (Score, Hop, High Score)
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '10px "Press Start 2P", monospace';
+      ctx.fillText(`SCORE: ${score.toLocaleString()}`, 20, 26);
+      ctx.fillText(`HI: ${highScore.toLocaleString()}`, 240, 26);
+
+      // Current Hop & Distance
+      ctx.fillStyle = currentHop.color;
+      ctx.fillText(`${currentHop.name} [${distance}m]`, 440, 26);
+
+      // Combo Multiplier
+      if (combo > 1) {
+        ctx.fillStyle = '#30d5c8';
+        ctx.font = '11px "Press Start 2P", monospace';
+        ctx.fillText(`COMBO x${combo}!`, 20, 48);
+      }
+
+      // Power-up Time Status
+      if (player.shieldTime > 0) {
+        ctx.fillStyle = '#30d5c8';
+        ctx.font = '8px "Press Start 2P", monospace';
+        ctx.fillText(`TLS SHIELD: ${Math.ceil(player.shieldTime / 60)}s`, 20, HEIGHT - 14);
+      }
+      if (player.boostTime > 0) {
+        ctx.fillStyle = '#a78bfa';
+        ctx.font = '8px "Press Start 2P", monospace';
+        ctx.fillText(`TURBO BOOST: ${Math.ceil(player.boostTime / 60)}s`, 180, HEIGHT - 14);
+      }
+
+      // 8. Start / Game Over Overlay Screens
+      if (state === 'START') {
+        ctx.fillStyle = 'rgba(7, 8, 13, 0.85)';
+        ctx.fillRect(0, 0, WIDTH, HEIGHT);
+
+        ctx.fillStyle = '#30d5c8';
+        ctx.font = '18px "Press Start 2P", monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText('EMAILMAN: PACKET COURIER', WIDTH / 2, 160);
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '11px "Press Start 2P", monospace';
+        ctx.fillText('DELIVER PACKETS TO CLIENT FOLDER', WIDTH / 2, 200);
+
+        // Blinking Press Space
+        if (Math.floor(frameCount / 25) % 2 === 0) {
+          ctx.fillStyle = '#0a84ff';
+          ctx.font = '12px "Press Start 2P", monospace';
+          ctx.fillText('>> PRESS SPACE OR TAP TO START <<', WIDTH / 2, 260);
+        }
+
+        ctx.fillStyle = '#8e8e98';
+        ctx.font = '9px "Press Start 2P", monospace';
+        ctx.fillText('DODGE VIRUSES & FIREWALLS · COLLECT INVOICES', WIDTH / 2, 310);
+        ctx.textAlign = 'left';
+      } else if (state === 'GAMEOVER') {
+        ctx.fillStyle = 'rgba(15, 7, 7, 0.88)';
+        ctx.fillRect(0, 0, WIDTH, HEIGHT);
+
+        ctx.fillStyle = '#ef4444';
+        ctx.font = '22px "Press Start 2P", monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText('PACKET DROPPED!', WIDTH / 2, 150);
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '12px "Press Start 2P", monospace';
+        ctx.fillText(`FINAL SCORE: ${score.toLocaleString()}`, WIDTH / 2, 200);
+        ctx.fillText(`DISTANCE REACHED: ${distance} METERS`, WIDTH / 2, 225);
+
+        if (score >= highScore && score > 0) {
+          ctx.fillStyle = '#30d5c8';
+          ctx.font = '11px "Press Start 2P", monospace';
+          ctx.fillText('★ NEW HIGH SCORE! ★', WIDTH / 2, 260);
+        }
+
+        if (Math.floor(frameCount / 25) % 2 === 0) {
+          ctx.fillStyle = '#38bdf8';
+          ctx.font = '12px "Press Start 2P", monospace';
+          ctx.fillText('>> PRESS SPACE OR TAP TO RETRY <<', WIDTH / 2, 310);
+        }
+
+        ctx.textAlign = 'left';
+      }
+
+      ctx.restore();
+    }
+
+    function loop() {
+      update();
+      render();
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+
+    /* =========================================================
+       4. INPUT EVENT LISTENERS (KEYBOARD & TOUCH)
+       ========================================================= */
+    function handleUserAction() {
+      AudioEngine.init();
+      if (state === 'START') {
+        resetGame();
+      } else if (state === 'PLAYING') {
+        player.thrust();
+      } else if (state === 'GAMEOVER') {
+        resetGame();
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space' || e.code === 'ArrowUp' || e.code === 'KeyW') {
+        e.preventDefault();
+        handleUserAction();
+      } else if (e.code === 'KeyM') {
+        toggleAudio();
+      } else if (e.code === 'KeyC') {
+        toggleCrt();
+      }
+    });
+
+    canvas.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      handleUserAction();
+    });
+
+    const mBtn = document.getElementById('mJumpBtn');
+    if (mBtn) {
+      mBtn.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        handleUserAction();
+      });
+    }
+
+    /* =========================================================
+       5. BILINGUAL CONTROLS & SCROLL PROGRESS
+       ========================================================= */
+    (function(){
+      var h=document.documentElement,l="th";
+      try{var s=localStorage.getItem("lang");if(s==="th"||s==="en")l=s}catch(e){}
+      function set(x){h.lang=x;try{localStorage.setItem("lang",x)}catch(e){}}
+      set(l);
+      document.querySelectorAll(".lang button").forEach(function(b){b.onclick=function(){set(b.dataset.l)}});
+      var bar=document.getElementById("bar");
+      if(bar){
+        function sc(){var m=h.scrollHeight-innerHeight;bar.style.width=(m>0?scrollY/m*100:0)+"%"}
+        addEventListener("scroll",sc,{passive:true});sc();
+      }
+    })();
+  </script>
+</body>
+</html>

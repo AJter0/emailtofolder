@@ -13,6 +13,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://emailtofolder.com/game.html</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://emailtofolder.com/articles/</loc>
     <lastmod>2026-10-25</lastmod>
     <changefreq>daily</changefreq>
