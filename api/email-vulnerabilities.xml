@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Email to Folder — Email Vulnerability &amp; Security Advisory Feed (CVE / KEV)</title>
+  <link>https://emailtofolder.com/status.html#vuln-feed</link>
+  <description>Real-time feed of critical email vulnerabilities (Microsoft Outlook, Gmail, Exchange, Roundcube, Exim, SMTP Smuggling, BEC/Phishing) curated for enterprise email users and IT admins.</description>
+  <language>th-TH</language>
+  <lastBuildDate>Sun, 25 Oct 2026 20:55:00 +0700</lastBuildDate>
+  <atom:link href="https://emailtofolder.com/api/email-vulnerabilities.xml" rel="self" type="application/rss+xml" />
+
+  <item>
+    <title>[CRITICAL · CVSS 9.8] CVE-2024-21413 (MonikerLink) — ช่องโหว่ Microsoft Outlook สั่งรันโค้ดระยะไกล (RCE) และขโมยรหัสผ่าน NTLM</title>
+    <link>https://nvd.nist.gov/vuln/detail/CVE-2024-21413</link>
+    <guid isPermaLink="false">CVE-2024-21413</guid>
+    <pubDate>Tue, 13 Feb 2024 08:00:00 +0000</pubDate>
+    <category>Microsoft Outlook</category>
+    <description>ผู้โจมตีสามารถส่งอีเมลที่มีลิงก์ file:// พิเศษพร้อมเครื่องหมายอัศเจรีย์ (!) เพื่อข้ามระบบป้องกัน Protected View ของ Outlook ทำให้ขโมยข้อมูลรับรอง NTLM และรันโค้ดอันตรายได้ทันทีเมื่อผู้ใช้เปิดอ่านอีเมล</description>
+  </item>
+
+  <item>
+    <title>[CRITICAL · CVSS 9.8] CVE-2023-23397 — ช่องโหว่ Zero-Click ใน Microsoft Outlook ขโมย Net-NTLMv2 Hash อัตโนมัติโดยไม่ต้องเปิดอ่านอีเมล</title>
+    <link>https://nvd.nist.gov/vuln/detail/CVE-2023-23397</link>
+    <guid isPermaLink="false">CVE-2023-23397</guid>
+    <pubDate>Tue, 14 Mar 2023 08:00:00 +0000</pubDate>
+    <category>Microsoft Outlook</category>
+    <description>ทำงานทันทีที่อีเมลหรือการแจ้งเตือนนัดหมาย (Reminder) เข้าสู่ Inbox โดยผู้โจมตีระบุพาธ UNC ไปยังเซิร์ฟเวอร์ภายนอกในคุณสมบัติเสียงแจ้งเตือน โดยที่ผู้ใช้ไม่ต้องกดเปิดอีเมล</description>
+  </item>
+
+  <item>
+    <title>[HIGH · CVSS 8.8] CVE-2024-38021 — ช่องโหว่ Remote Code Execution ใน Microsoft Outlook &amp; Office 365</title>
+    <link>https://nvd.nist.gov/vuln/detail/CVE-2024-38021</link>
+    <guid isPermaLink="false">CVE-2024-38021</guid>
+    <pubDate>Tue, 09 Jul 2024 08:00:00 +0000</pubDate>
+    <category>Microsoft Outlook</category>
+    <description>ช่องโหว่ความรุนแรงสูงที่ช่วยให้ผู้โจมตีที่ไม่ผ่านการยืนยันตัวตนส่งอีเมลเจาะจงเพื่อยกระดับสิทธิ์และรันคำสั่งในบริบทของผู้ใช้งานปัจจุบัน</description>
+  </item>
+
+  <item>
+    <title>[HIGH · CVSS 8.8] CVE-2024-30103 — ช่องโหว่การส่งอีเมลฝังโค้ดอันตรายใน Microsoft Outlook ข้ามระบบตรวจสอบความปลอดภัย</title>
+    <link>https://nvd.nist.gov/vuln/detail/CVE-2024-30103</link>
+    <guid isPermaLink="false">CVE-2024-30103</guid>
+    <pubDate>Tue, 11 Jun 2024 08:00:00 +0000</pubDate>
+    <category>Microsoft Outlook</category>
+    <description>ผู้โจมตีสามารถส่งอีเมลที่มีโครงสร้างพิเศษเพื่อเรียกใช้งานโค้ดจากระยะไกลเมื่อผู้รับเปิดอ่านอีเมลในโปรแกรม Outlook บนเครื่องคอมพิวเตอร์</description>
+  </item>
+
+  <item>
+    <title>[HIGH · CVSS 7.5] CVE-2024-49040 — ช่องโหว่ปลอมแปลงชื่อผู้ส่ง (P2 FROM Header Spoofing) ใน Microsoft Exchange Server</title>
+    <link>https://nvd.nist.gov/vuln/detail/CVE-2024-49040</link>
+    <guid isPermaLink="false">CVE-2024-49040</guid>
+    <pubDate>Tue, 12 Nov 2024 08:00:00 +0000</pubDate>
+    <category>Microsoft Exchange</category>
+    <description>เกิดจากการตรวจสอบส่วนหัว P2 FROM ที่ไม่ตรงตามมาตรฐาน RFC 5322 ทำให้ผู้โจมตีสามารถส่งอีเมลปลอมแปลงชื่อผู้บริหารหรือฝ่ายการเงิน (BEC / CEO Fraud)</description>
+  </item>
+
+  <item>
+    <title>[HIGH · CVSS 7.5] CVE-2024-0408 — ช่องโหว่ SMTP Smuggling ลักลอบส่งอีเมลปลอมแปลงโดเมน (Spoofing) ข้ามการตรวจ DMARC</title>
+    <link>https://nvd.nist.gov/vuln/detail/CVE-2024-0408</link>
+    <guid isPermaLink="false">CVE-2024-0408</guid>
+    <pubDate>Mon, 15 Jan 2024 08:00:00 +0000</pubDate>
+    <category>SMTP Mail Servers</category>
+    <description>อาศัยความแตกต่างในการตีความอักขระจบข้อมูล (&lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;) ทำให้ผู้โจมตีแทรกอีเมลปลอมเข้าไปในเซสชันเดียวกันและผ่านการตรวจสอบ SPF/DMARC ได้</description>
+  </item>
+
+  <item>
+    <title>[MEDIUM · CVSS 6.1] CVE-2024-37383 — ช่องโหว่ Stored XSS ในระบบ Webmail Roundcube ขโมยอีเมลเมื่อเปิดอ่านข้อความ</title>
+    <link>https://nvd.nist.gov/vuln/detail/CVE-2024-37383</link>
+    <guid isPermaLink="false">CVE-2024-37383</guid>
+    <pubDate>Sun, 09 Jun 2024 08:00:00 +0000</pubDate>
+    <category>Roundcube Webmail</category>
+    <description>ผู้โจมตีส่งอีเมลที่มีภาพ SVG ฝังโค้ด JavaScript ในแอตทริบิวต์ animate เมื่อเหยื่อเปิดอ่านอีเมลผ่านหน้าเว็บเมล โค้ดจะทำงานและแอบดูดข้อมูลอีเมลในกล่องจดหมายออกไป</description>
+  </item>
+
+  <item>
+    <title>[HIGH · CVSS 8.6] ADVISORY-2026-BEC — แจ้งเตือนภัยคุกคาม Quishing (QR Code Phishing) และการปลอมแปลงใบแจ้งหนี้ PDF ใน Gmail &amp; M365</title>
+    <link>https://www.cisa.gov/known-exploited-vulnerabilities-catalog</link>
+    <guid isPermaLink="false">GW-2026-BEC-01</guid>
+    <pubDate>Sun, 25 Oct 2026 08:00:00 +0000</pubDate>
+    <category>Gmail &amp; Microsoft 365</category>
+    <description>แคมเปญโจมตีองค์กรปี 2026 ที่แนบไฟล์ PDF ใบแจ้งหนี้ที่มี QR Code ลวงให้สแกนผ่านมือถือเพื่อขโมย Session Token ของบัญชี Gmail และ Microsoft 365</description>
+  </item>
+</channel>
+</rss>

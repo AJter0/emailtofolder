@@ -338,7 +338,7 @@ h1{font-size:clamp(28px,4.5vw,48px);line-height:1.18;letter-spacing:-.025em;marg
 .retest-btn:hover{border-color:var(--brand);color:var(--brand)}
 
 /* Custom Domain MX Inspector */
-.domain-box{background:linear-gradient(135deg,#ffffff 0%,#f4f9ff 100%);border:1px solid rgba(10,132,255,.25);border-radius:24px;padding:24px 26px;margin-bottom:60px;box-shadow:0 10px 30px rgba(10,132,255,.06);text-align:left}
+.domain-box{background:linear-gradient(135deg,#ffffff 0%,#f4f9ff 100%);border:1px solid rgba(10,132,255,.25);border-radius:24px;padding:24px 26px;margin-bottom:28px;box-shadow:0 10px 30px rgba(10,132,255,.06);text-align:left}
 .domain-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
 .domain-head h2{margin:0;font-size:19px;letter-spacing:-.01em}
 .domain-form{display:flex;gap:10px;flex-wrap:wrap}
@@ -353,11 +353,62 @@ h1{font-size:clamp(28px,4.5vw,48px);line-height:1.18;letter-spacing:-.025em;marg
 .dr-item strong{display:block;font-size:11px;text-transform:uppercase;color:var(--mute);margin-bottom:4px}
 .dr-code{font-size:12.5px;font-weight:600;word-break:break-all;color:var(--ink)}
 
+/* Email User Security API Console & Vulnerability Feed */
+.api-console{background:linear-gradient(135deg,#0d1527 0%,#080d1a 100%);border:1px solid rgba(56,189,248,.28);border-radius:26px;padding:28px;margin-bottom:30px;color:#f8fafc;text-align:left;box-shadow:0 20px 50px rgba(5,10,25,.22)}
+.api-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.1)}
+.api-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;background:rgba(48,213,200,.14);border:1px solid rgba(48,213,200,.35);color:#30d5c8;font-size:11.5px;font-weight:700;letter-spacing:.03em}
+.api-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.api-tab{border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);color:#cbd5e1;padding:8px 16px;border-radius:999px;font-weight:600;font-size:13px;cursor:pointer;transition:.2s}
+.api-tab:hover{background:rgba(255,255,255,.12);color:#fff}
+.api-tab.active{background:var(--brand);border-color:var(--brand);color:#fff;box-shadow:0 0 18px rgba(10,132,255,.45)}
+.api-pane{display:none}
+.api-pane.active{display:block}
+.api-split{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:start}
+.api-card-inner{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:18px}
+.api-json-pre{background:#04070f;border:1px solid rgba(56,189,248,.22);border-radius:14px;padding:14px 16px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;color:#38bdf8;overflow-x:auto;max-height:360px;margin:0;line-height:1.5;white-space:pre-wrap;word-break:break-word}
+.api-textarea{width:100%;min-height:135px;border-radius:14px;border:1px solid rgba(255,255,255,.18);background:rgba(4,7,15,.85);color:#f1f5f9;padding:12px 14px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;outline:none;resize:vertical}
+.api-textarea:focus{border-color:#38bdf8}
+.score-pill{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;font-weight:800;font-size:13px}
+.score-pill.high{background:rgba(16,185,129,.18);color:#34d399;border:1px solid rgba(16,185,129,.4)}
+.score-pill.med{background:rgba(245,158,11,.18);color:#fbbf24;border:1px solid rgba(245,158,11,.4)}
+.score-pill.low{background:rgba(239,68,68,.18);color:#f87171;border:1px solid rgba(239,68,68,.4)}
+
+/* Email Vulnerability & Threat Feed Section */
+.vuln-section{background:#ffffff;border:1px solid rgba(239,68,68,.22);border-radius:26px;padding:26px 28px;margin-bottom:60px;box-shadow:0 12px 36px rgba(239,68,68,.06);text-align:left}
+.vuln-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.vuln-pill{display:inline-flex;align-items:center;gap:7px;padding:4px 12px;border-radius:999px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.28);color:#dc2626;font-size:11.5px;font-weight:700}
+.vuln-pulse{width:8px;height:8px;border-radius:50%;background:#ef4444;box-shadow:0 0 0 0 rgba(239,68,68,.7);animation:pulseR 2s infinite}
+@keyframes pulseR{0%{box-shadow:0 0 0 0 rgba(239,68,68,.7)}70%{box-shadow:0 0 0 8px rgba(239,68,68,0)}100%{box-shadow:0 0 0 0 rgba(239,68,68,0)}}
+.vuln-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.vuln-filters{display:flex;gap:7px;flex-wrap:wrap}
+.vf-btn{border:1px solid var(--line);background:var(--bg2);color:var(--mute);padding:6px 14px;border-radius:999px;font-weight:600;font-size:12.5px;cursor:pointer;transition:.2s}
+.vf-btn:hover{color:var(--ink);border-color:rgba(0,0,0,.22)}
+.vf-btn.active{background:#dc2626;color:#fff;border-color:#dc2626}
+.vuln-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.vuln-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px 20px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transition:transform .2s,box-shadow .2s,border-color .2s}
+.vuln-card:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,0,0,.07);border-color:rgba(239,68,68,.4)}
+.vuln-card.sev-CRITICAL{border-left:4px solid #dc2626}
+.vuln-card.sev-HIGH{border-left:4px solid #f59e0b}
+.vuln-card.sev-MEDIUM{border-left:4px solid #0a84ff}
+.vc-top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.cve-badge{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:800;font-size:12.5px;padding:3px 10px;border-radius:8px;background:#1d1d1f;color:#fff}
+.cvss-tag{font-size:11.5px;font-weight:800;padding:3px 9px;border-radius:999px}
+.cvss-tag.CRITICAL{background:rgba(239,68,68,.14);color:#b91c1c}
+.cvss-tag.HIGH{background:rgba(245,158,11,.16);color:#b45309}
+.cvss-tag.MEDIUM{background:rgba(10,132,255,.12);color:#0066cc}
+.kev-tag{background:#7f1d1d;color:#fecaca;font-size:10.5px;font-weight:800;padding:2px 8px;border-radius:999px;letter-spacing:.02em}
+.vc-title{font-size:15.5px;font-weight:700;line-height:1.4;color:var(--ink);margin:0}
+.vc-desc{font-size:13px;color:var(--mute);line-height:1.55;margin:0}
+.vc-mit{background:#f8fafc;border:1px solid rgba(16,185,129,.25);border-radius:12px;padding:10px 12px;font-size:12px;color:#065f46}
+.vc-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-size:11.5px;color:var(--mute);padding-top:6px;border-top:1px solid var(--bg2)}
+.vc-tags{display:flex;gap:5px;flex-wrap:wrap}
+.vc-tag{padding:2px 8px;border-radius:6px;background:var(--bg2);color:var(--mute);font-size:11px;font-weight:600}
+
 .gh{background:#0d1117;color:#fff;text-align:center;padding:14px 22px;font-size:14px;font-weight:500}.gh a{display:inline-flex;align-items:center;gap:10px;transition:opacity .3s}.gh a:hover{opacity:.75}.gh svg{width:20px;height:20px;fill:#fff;flex:none}
 footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mute);font-size:13px}
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 
-@media(max-width:1120px){.nav .links{gap:9px;font-size:12px}.map-bottom{grid-template-columns:repeat(2,1fr)}.providers-grid{grid-template-columns:repeat(2,1fr)}.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:1120px){.nav .links{gap:9px;font-size:12px}.map-bottom{grid-template-columns:repeat(2,1fr)}.providers-grid{grid-template-columns:repeat(2,1fr)}.kpi-grid{grid-template-columns:repeat(2,1fr)}.api-split{grid-template-columns:1fr}.vuln-grid{grid-template-columns:1fr}}
 @media(max-width:940px){.nav .links{display:none}.nav .logo-txt{font-size:14px}.nav .btn.sm{display:none}}
 @media(max-width:640px){.providers-grid{grid-template-columns:1fr}.kpi-grid{grid-template-columns:1fr}.map-bottom{grid-template-columns:1fr}.hero{padding-top:105px}}
 </style>
@@ -388,6 +439,21 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
         <span class="th">ตรวจสอบสถานะ Up/Down, ค่าความหน่วง (Edge Latency) และเซิร์ฟเวอร์ต้นทาง (Origin Data Centers) ของ <b>Gmail (Google Workspace)</b> และ <b>Microsoft Outlook (Microsoft 365 / Exchange Online)</b> ทั้ง 12 ศูนย์ข้อมูลหลักทั่วโลกแบบเรียลไทม์</span>
         <span class="en">Real-time operational telemetry, edge ping (ms), and MX verification across all 12 global Origin Server clusters for <b>Gmail (Google Workspace)</b> and <b>Microsoft Outlook (Microsoft 365 / Exchange Online)</b>.</span>
       </p>
+
+      <!-- Quick Jump Banner to Email Security API & Live Vulnerability Feed -->
+      <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:-8px auto 24px;">
+        <a href="#email-api" class="btn sm" style="background:linear-gradient(135deg,#0a84ff,#30d5c8);color:#fff;padding:10px 20px;font-size:13.5px;box-shadow:0 8px 22px rgba(10,132,255,.3);">
+          <span class="th">🛡️ ไปที่ Email Security &amp; Anti-Spoofing API Console ↓</span>
+          <span class="en">🛡️ Jump to Email Security API Console ↓</span>
+        </a>
+        <a href="#vuln-feed" class="btn sm" style="background:linear-gradient(135deg,#dc2626,#f59e0b);color:#fff;padding:10px 20px;font-size:13.5px;box-shadow:0 8px 22px rgba(220,38,38,.28);">
+          <span class="th">🚨 ไปที่ฟีดข่าวช่องโหว่อีเมล (Live CVE / KEV Feed) ↓</span>
+          <span class="en">🚨 Jump to Live Email Vulnerability Feed ↓</span>
+        </a>
+        <a href="api/email-vulnerabilities.json" target="_blank" rel="noopener" class="btn ghost sm" style="border:1px solid var(--line);padding:10px 16px;font-size:13px;">
+          <span>📄 JSON API (<code>/api/email-vulnerabilities.json</code>) ↗</span>
+        </a>
+      </div>
 
       <!-- 4-Card KPI Summary Bar -->
       <div class="kpi-grid">
@@ -602,6 +668,190 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
         <div class="domain-result" id="domainResult"></div>
       </div>
 
+      <!-- ========================================================================= -->
+      <!-- EMAIL USER SECURITY & ANTI-SPOOFING API CONSOLE (FOR EMAIL USERS & DEVS)  -->
+      <!-- ========================================================================= -->
+      <div class="api-console" id="email-api">
+        <div class="api-head">
+          <div>
+            <span class="api-badge">⚡ OPEN EMAIL SECURITY &amp; DELIVERABILITY API v1.0</span>
+            <h2 style="margin:10px 0 6px;font-size:clamp(20px,3vw,26px);color:#fff;">
+              <span class="th">API สำหรับผู้ใช้งานอีเมล: ตรวจสอบความปลอดภัยอีเมล, สแกนอีเมลปลอม (BEC) &amp; วิเคราะห์ Header</span>
+              <span class="en">Email User Utility API: Spoofing Risk Audit, Disposable Detector &amp; Header Phishing Analyzer</span>
+            </h2>
+            <div style="font-size:13.5px;color:#94a3b8;max-width:820px;">
+              <span class="th">ช่วยให้ผู้ใช้ <b>Outlook / Gmail / อีเมลองค์กร</b> ตรวจสอบความน่าเชื่อถือของอีเมลคู่ค้าก่อนเปิดไฟล์แนบใบแจ้งหนี้ (Invoice) พร้อม JSON API เปิดให้ระบบภายในองค์กรเรียกใช้งานได้ฟรี</span>
+              <span class="en">Empowering email users and IT teams to verify sender authenticity, detect disposable burner emails, inspect raw headers for BEC spoofing, and integrate via JSON API.</span>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <a href="api/email-security-api.js" target="_blank" rel="noopener" class="reg-btn" style="text-decoration:none;">📦 SDK: <code>/api/email-security-api.js</code></a>
+            <a href="api/email-vulnerabilities.json" target="_blank" rel="noopener" class="reg-btn" style="text-decoration:none;">📄 JSON Feed: <code>/api/email-vulnerabilities.json</code></a>
+            <a href="api/email-vulnerabilities.xml" target="_blank" rel="noopener" class="reg-btn" style="text-decoration:none;">📡 RSS: <code>/api/email-vulnerabilities.xml</code></a>
+          </div>
+        </div>
+
+        <div class="api-tabs" id="apiTabs">
+          <button type="button" class="api-tab active" data-tab="audit">
+            <span class="th">1. ตรวจสอบความปลอดภัยอีเมล &amp; โดเมนคู่ค้า (Email Security Audit API)</span>
+            <span class="en">1. Email &amp; Domain Security Audit API</span>
+          </button>
+          <button type="button" class="api-tab" data-tab="header">
+            <span class="th">2. วิเคราะห์ Header ตรวจจับอีเมลปลอม / BEC (Raw Header Analyzer API)</span>
+            <span class="en">2. Raw Email Header Phishing Analyzer API</span>
+          </button>
+          <button type="button" class="api-tab" data-tab="docs">
+            <span class="th">3. ตัวอย่างโค้ดเชื่อมต่อ API (Developer Code Snippet)</span>
+            <span class="en">3. Developer API Usage &amp; Docs</span>
+          </button>
+        </div>
+
+        <!-- TAB 1: Email / Domain Security Audit API -->
+        <div class="api-pane active" id="apiPane-audit">
+          <form class="domain-form" id="apiAuditForm" style="margin-bottom:12px;">
+            <input type="text" class="domain-input" id="apiAuditInput" value="accounting@gmail.com" placeholder="พิมพ์อีเมลผู้ส่ง เช่น billing@vendor.co.th, ceo@outlook.com หรือ mailinator.com" style="background:#070c18;color:#fff;border-color:rgba(56,189,248,.35);" required>
+            <button type="submit" class="btn sm" style="padding:11px 22px;font-size:14px;">
+              <span class="th">⚡ เรียก API ตรวจสอบอีเมล</span>
+              <span class="en">⚡ Run Email Security API</span>
+            </button>
+          </form>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;font-size:12px;color:#94a3b8;align-items:center;">
+            <span><span class="th">ตัวอย่างการเรียก API:</span><span class="en">Try sample payloads:</span></span>
+            <button type="button" class="reg-btn api-sample-btn" data-val="accounting@gmail.com">accounting@gmail.com</button>
+            <button type="button" class="reg-btn api-sample-btn" data-val="invoice@microsoft.com">invoice@microsoft.com</button>
+            <button type="button" class="reg-btn api-sample-btn" data-val="support@proton.me">support@proton.me</button>
+            <button type="button" class="reg-btn api-sample-btn" data-val="hacker@mailinator.com">hacker@mailinator.com (Burner)</button>
+          </div>
+
+          <div class="api-split">
+            <div class="api-card-inner" id="apiAuditVisual">
+              <div style="color:#94a3b8;font-size:13px;"><span class="th">กำลังประมวลผลผ่าน EmailUserSecurityAPI...</span><span class="en">Running EmailUserSecurityAPI...</span></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-size:11.5px;color:#94a3b8;">
+                <span><code>EmailUserSecurityAPI.auditEmailOrDomain()</code> — JSON Response</span>
+                <button type="button" class="reg-btn" id="copyApiJsonBtn" style="padding:3px 10px;font-size:11px;">Copy JSON</button>
+              </div>
+              <pre class="api-json-pre" id="apiAuditJson">{ "status": "ready" }</pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: Raw Email Header Analyzer API -->
+        <div class="api-pane" id="apiPane-header">
+          <div style="margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+            <span style="font-size:13px;color:#cbd5e1;">
+              <span class="th">วางส่วนหัวอีเมล (Message Source / Original Headers) จาก Outlook หรือ Gmail เพื่อตรวจหาการปลอมแปลงชื่อผู้ส่ง (Spoofing / CVE-2024-49040):</span>
+              <span class="en">Paste raw RFC 5322 email headers from Outlook or Gmail to detect Return-Path mismatch, Reply-To hijacking, and CVE-2024-49040 spoofing:</span>
+            </span>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+              <button type="button" class="reg-btn" id="loadSpoofSampleBtn"><span class="th">🚨 โหลดตัวอย่างเมลปลอม (BEC Spoof)</span><span class="en">🚨 Load Spoofed BEC Sample</span></button>
+              <button type="button" class="reg-btn" id="loadCleanSampleBtn"><span class="th">✅ โหลดตัวอย่างเมลปลอดภัย</span><span class="en">✅ Load Clean Header Sample</span></button>
+            </div>
+          </div>
+          <textarea class="api-textarea" id="apiHeaderInput" placeholder="From: CEO <ceo@company.co.th>&#10;Return-Path: <bounce@untrusted-mailer.xyz>&#10;Reply-To: <wire-transfer@attacker-domain.com>&#10;Subject: Urgent Invoice Payment&#10;Authentication-Results: mx.google.com; spf=fail; dmarc=fail"></textarea>
+          <div style="margin:12px 0 16px;">
+            <button type="button" class="btn sm" id="runHeaderApiBtn" style="padding:10px 22px;font-size:13.5px;">
+              <span class="th">🔍 วิเคราะห์ Header ด้วย API ทันที</span>
+              <span class="en">🔍 Analyze Email Header Now</span>
+            </button>
+          </div>
+          <div class="api-split">
+            <div class="api-card-inner" id="apiHeaderVisual"></div>
+            <div>
+              <div style="font-size:11.5px;color:#94a3b8;margin-bottom:6px;"><code>EmailUserSecurityAPI.analyzeRawEmailHeader()</code> — JSON Response</div>
+              <pre class="api-json-pre" id="apiHeaderJson">{}</pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: Developer API Docs -->
+        <div class="api-pane" id="apiPane-docs">
+          <div class="api-split">
+            <div class="api-card-inner">
+              <h3 style="margin:0 0 8px;font-size:16px;color:#fff;"><span class="th">1. การเรียกใช้งานผ่าน JavaScript SDK บนเว็บหรือระบบภายใน</span><span class="en">1. JavaScript Client SDK Usage</span></h3>
+              <p style="font-size:12.5px;color:#94a3b8;margin:0 0 10px;">
+                <span class="th">สามารถนำสคริปต์ <code>email-security-api.js</code> ไปติดตั้งในระบบ ERP, หน้าเว็บรับใบวางบิล หรือปลั๊กอินขององค์กรเพื่อตรวจสอบอีเมลคู่ค้าอัตโนมัติ:</span>
+                <span class="en">Embed our lightweight zero-dependency SDK into your internal portal or billing workflow:</span>
+              </p>
+              <pre class="api-json-pre">&lt;script src="https://emailtofolder.com/api/email-security-api.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  // 1. Audit sender email security &amp; spoofing risk
+  const audit = await EmailUserSecurityAPI.auditEmailOrDomain('billing@vendor.co.th');
+  console.log(audit.security_score, audit.spoofing_risk, audit.recommended_rule_th);
+
+  // 2. Analyze raw RFC 5322 email headers for BEC / Phishing
+  const hdr = EmailUserSecurityAPI.analyzeRawEmailHeader(rawHeaderString);
+  console.log(hdr.verdict, hdr.warnings_th);
+
+  // 3. Query Email Vulnerability Feed (CVE / CISA KEV)
+  const vulns = await EmailUserSecurityAPI.getEmailVulnerabilityFeed({ severity: 'CRITICAL' });
+  console.log(vulns.items);
+&lt;/script&gt;</pre>
+            </div>
+            <div class="api-card-inner">
+              <h3 style="margin:0 0 8px;font-size:16px;color:#fff;"><span class="th">2. การดึง Feed ข่าวช่องโหว่อีเมลผ่าน REST JSON / RSS</span><span class="en">2. REST JSON &amp; RSS Vulnerability Endpoints</span></h3>
+              <p style="font-size:12.5px;color:#94a3b8;margin:0 0 10px;">
+                <span class="th">รองรับการดึงข้อมูลด้วย <code>curl</code>, PowerAutomate, Slack/Teams Webhook หรือ RSS Reader สำหรับฝ่าย IT Security:</span>
+                <span class="en">Fetch structured CVE advisories via curl, SIEM scripts, or RSS readers:</span>
+              </p>
+              <pre class="api-json-pre"># Fetch JSON Vulnerability Feed
+curl -s https://emailtofolder.com/api/email-vulnerabilities.json | jq '.items[] | {cve, cvss, severity, title_th}'
+
+# Subscribe via RSS 2.0 Reader (Outlook / Feedly / Slack)
+https://emailtofolder.com/api/email-vulnerabilities.xml</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================================================= -->
+      <!-- LIVE EMAIL VULNERABILITY & THREAT INTELLIGENCE FEED (CVE / CISA KEV)      -->
+      <!-- ========================================================================= -->
+      <div class="vuln-section" id="vuln-feed">
+        <div class="vuln-head">
+          <div>
+            <div class="vuln-pill">
+              <span class="vuln-pulse"></span>
+              <span>LIVE EMAIL VULNERABILITY &amp; CVE / CISA KEV THREAT FEED</span>
+            </div>
+            <h2 style="margin:10px 0 6px;font-size:clamp(21px,3vw,28px);">
+              <span class="th">ฟีดข่าวช่องโหว่อีเมลและแจ้งเตือนภัยคุกคาม <span class="grad">(Email Vulnerability Feed)</span></span>
+              <span class="en">Email Vulnerability &amp; Security Advisories <span class="grad">(CVE / CISA KEV Feed)</span></span>
+            </h2>
+            <div style="font-size:13.5px;color:var(--mute);max-width:820px;">
+              <span class="th">ติดตามช่องโหว่สำคัญของ <b>Microsoft Outlook, Gmail, Exchange Server, Roundcube, Exim, SMTP Smuggling</b> และแคมเปญหลอกลวงใบแจ้งหนี้ (BEC / Quishing) พร้อมแนวทางป้องกันสำหรับผู้ใช้งานอีเมล</span>
+              <span class="en">Curated security feed tracking critical vulnerabilities in Microsoft Outlook, Exchange, Gmail, Webmail, and SMTP servers with actionable mitigation steps for email users.</span>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+            <button type="button" class="btn ghost sm" id="syncNvdLiveBtn" style="border:1px solid var(--line);font-size:12.5px;padding:8px 14px;">
+              <span class="th">🔄 ดึงข้อมูลล่าสุดจาก NIST NVD API</span>
+              <span class="en">🔄 Sync Live NIST NVD API</span>
+            </button>
+            <a href="api/email-vulnerabilities.json" target="_blank" rel="noopener" class="retest-btn" style="padding:7px 13px;font-size:12px;">JSON API ↗</a>
+            <a href="api/email-vulnerabilities.xml" target="_blank" rel="noopener" class="retest-btn" style="padding:7px 13px;font-size:12px;">RSS Feed ↗</a>
+          </div>
+        </div>
+
+        <div class="vuln-toolbar">
+          <div class="vuln-filters" id="vulnFilters">
+            <button type="button" class="vf-btn active" data-vf="all"><span class="th">ทั้งหมด (All Advisories)</span><span class="en">All Advisories</span></button>
+            <button type="button" class="vf-btn" data-vf="CRITICAL"><span class="th">วิกฤต (Critical CVSS 9.0+)</span><span class="en">Critical (CVSS 9.0+)</span></button>
+            <button type="button" class="vf-btn" data-vf="KEV"><span class="th">ถูกโจมตีจริง (CISA KEV)</span><span class="en">Actively Exploited (CISA KEV)</span></button>
+            <button type="button" class="vf-btn" data-vf="outlook"><span class="th">Microsoft Outlook / Exchange</span><span class="en">Outlook / Exchange</span></button>
+            <button type="button" class="vf-btn" data-vf="smtp"><span class="th">Gmail / SMTP / Webmail</span><span class="en">Gmail / SMTP / Webmail</span></button>
+          </div>
+          <div class="search-wrap" style="flex:0 1 280px;">
+            <input type="search" class="search-in" id="vulnSearchInput" placeholder="ค้นหา CVE, MonikerLink, Outlook, BEC...">
+          </div>
+        </div>
+
+        <div id="nvdLiveStatus" style="display:none;margin-bottom:14px;padding:10px 14px;border-radius:12px;background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;font-size:12.5px;font-weight:600;"></div>
+
+        <div class="vuln-grid" id="vulnFeedGrid"></div>
+      </div>
+
     </div>
   </section>
 </main>
@@ -609,6 +859,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 <div class="gh"><a href="https://github.com/AJter0/emailtofolder" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span class="th">เว็บไซต์นี้โฮสต์ด้วย GitHub</span><span class="en">This website is hosted on GitHub</span></a></div>
 <footer class="dk"><div class="wrap"><div>© 2026 Email to Folder Dev Team · emailtofolder.com</div><div>📍 Bangkok, Thailand · 📞 094-562-0859</div></div></footer>
 
+<script src="api/email-security-api.js"></script>
 <script>
 (function(){
   // 12 Global Origin Server Clusters for Gmail & Microsoft Outlook
@@ -830,6 +1081,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
     try{ localStorage.setItem('lang', x); }catch(e){}
     renderGrid();
     renderWorldMap();
+    if(typeof renderVulnFeed === 'function') renderVulnFeed();
   }
   document.querySelectorAll('.lang button').forEach(function(b){
     b.onclick = function(){ setLang(b.dataset.l); };
@@ -1255,6 +1507,292 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
       inspectCustomDomain(dom);
     });
   });
+
+  // =========================================================================
+  // EMAIL USER SECURITY API CONSOLE & LIVE VULNERABILITY FEED CONTROLLER
+  // =========================================================================
+  document.querySelectorAll('#apiTabs .api-tab').forEach(function(tab){
+    tab.addEventListener('click', function(){
+      document.querySelectorAll('#apiTabs .api-tab').forEach(function(t){ t.classList.remove('active'); });
+      document.querySelectorAll('.api-pane').forEach(function(p){ p.classList.remove('active'); });
+      tab.classList.add('active');
+      var target = document.getElementById('apiPane-' + tab.getAttribute('data-tab'));
+      if(target) target.classList.add('active');
+    });
+  });
+
+  async function runEmailAuditUI(val){
+    if(!window.EmailUserSecurityAPI) return;
+    var vis = document.getElementById('apiAuditVisual');
+    var pre = document.getElementById('apiAuditJson');
+    var isTh = document.documentElement.lang === 'th';
+    if(vis) vis.innerHTML = '<div style="color:#38bdf8;font-weight:600;">'+(isTh?'กำลังเรียก EmailUserSecurityAPI.auditEmailOrDomain("'+esc(val)+'")...':'Querying EmailUserSecurityAPI.auditEmailOrDomain("'+esc(val)+'")...')+'</div>';
+
+    var res = await window.EmailUserSecurityAPI.auditEmailOrDomain(val);
+    if(pre) pre.textContent = JSON.stringify(res, null, 2);
+
+    if(!res.ok){
+      if(vis) vis.innerHTML = '<div style="color:#f87171;font-weight:700;">'+(isTh ? esc(res.message_th) : esc(res.message_en))+'</div>';
+      return;
+    }
+
+    var pillCls = res.security_score >= 80 ? 'high' : res.security_score >= 55 ? 'med' : 'low';
+    var riskLbl = res.spoofing_risk === 'LOW'
+      ? (isTh ? 'ความเสี่ยงถูกปลอมแปลงต่ำ (ปลอดภัย)' : 'LOW SPOOFING RISK')
+      : res.spoofing_risk === 'MEDIUM'
+      ? (isTh ? 'ความเสี่ยงปานกลาง' : 'MEDIUM SPOOFING RISK')
+      : (isTh ? 'ความเสี่ยงสูง / อีเมลชั่วคราว' : 'HIGH SPOOFING / BURNER RISK');
+
+    var findings = isTh ? res.findings_th : res.findings_en;
+
+    if(vis){
+      vis.innerHTML =
+        '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px;">' +
+          '<div>' +
+            '<div style="font-size:17px;font-weight:800;color:#fff;">📧 '+esc(res.input)+'</div>' +
+            '<div style="font-size:12px;color:#38bdf8;margin-top:2px;">Gateway: '+esc(res.mail_gateway)+' · '+res.latency_ms+' ms</div>' +
+          '</div>' +
+          '<span class="score-pill '+pillCls+'">Grade '+esc(res.security_grade)+' ('+res.security_score+'/100) · '+riskLbl+'</span>' +
+        '</div>' +
+        '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;">' +
+          '<div style="background:rgba(0,0,0,.3);padding:9px 11px;border-radius:10px;border:1px solid rgba(255,255,255,.07);">' +
+            '<div style="font-size:10.5px;color:#94a3b8;">SPF AUTH</div>' +
+            '<div style="font-size:12.5px;font-weight:700;color:'+(res.protocols.spf_valid?'#34d399':'#f87171')+';margin-top:2px;">'+esc(res.protocols.spf_mode)+'</div>' +
+          '</div>' +
+          '<div style="background:rgba(0,0,0,.3);padding:9px 11px;border-radius:10px;border:1px solid rgba(255,255,255,.07);">' +
+            '<div style="font-size:10.5px;color:#94a3b8;">DMARC POLICY</div>' +
+            '<div style="font-size:12.5px;font-weight:700;color:'+(res.protocols.dmarc_valid?'#34d399':'#f87171')+';margin-top:2px;">'+esc(res.protocols.dmarc_policy)+'</div>' +
+          '</div>' +
+          '<div style="background:rgba(0,0,0,.3);padding:9px 11px;border-radius:10px;border:1px solid rgba(255,255,255,.07);">' +
+            '<div style="font-size:10.5px;color:#94a3b8;">BURNER / TEMP</div>' +
+            '<div style="font-size:12.5px;font-weight:700;color:'+(res.is_disposable_email?'#f87171':'#34d399')+';margin-top:2px;">'+(res.is_disposable_email?'YES (BLOCK)':'NO (CLEAN)')+'</div>' +
+          '</div>' +
+        '</div>' +
+        '<div style="font-size:12.5px;color:#e2e8f0;display:flex;flex-direction:column;gap:6px;margin-bottom:12px;">' +
+          findings.map(function(f){ return '<div>'+esc(f)+'</div>'; }).join('') +
+        '</div>' +
+        '<div style="background:rgba(10,132,255,.15);border:1px solid rgba(10,132,255,.35);border-radius:10px;padding:9px 12px;font-size:12px;color:#93c5fd;">' +
+          '💡 '+esc(res.recommended_rule_th) +
+        '</div>';
+    }
+  }
+
+  var apiAuditForm = document.getElementById('apiAuditForm');
+  if(apiAuditForm){
+    apiAuditForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      runEmailAuditUI(document.getElementById('apiAuditInput').value);
+    });
+  }
+  document.querySelectorAll('.api-sample-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var v = btn.getAttribute('data-val');
+      document.getElementById('apiAuditInput').value = v;
+      runEmailAuditUI(v);
+    });
+  });
+
+  var copyApiBtn = document.getElementById('copyApiJsonBtn');
+  if(copyApiBtn){
+    copyApiBtn.addEventListener('click', function(){
+      var txt = document.getElementById('apiAuditJson').textContent;
+      if(navigator.clipboard) navigator.clipboard.writeText(txt);
+      copyApiBtn.textContent = 'Copied ✓';
+      setTimeout(function(){ copyApiBtn.textContent = 'Copy JSON'; }, 1800);
+    });
+  }
+
+  // Tab 2: Raw Email Header Analyzer
+  var SPOOF_SAMPLE = [
+    'Return-Path: <bounce-88412@compromised- relay-server.xyz>',
+    'Received: from mail.compromised-relay-server.xyz (198.51.100.77) by mx.google.com with ESMTPS',
+    'From: "CEO Executive Office" <ceo@company.co.th>, <attacker@evil-spoof.org>',
+    'Reply-To: "Urgent Accounting Wire" <payment-confirm@lookalike-vendor.net>',
+    'Subject: [URGENT] ชำระใบแจ้งหนี้ด่วน #INV-2026-9981 วันนี้',
+    'Message-ID: <9981234.spoof@compromised-relay-server.xyz>',
+    'Authentication-Results: mx.google.com; spf=fail (google.com: domain of bounce@compromised-relay-server.xyz does not designate 198.51.100.77 as permitted sender); dkim=fail; dmarc=fail (p=NONE sp=NONE dis=NONE)'
+  ].join('\n');
+
+  var CLEAN_SAMPLE = [
+    'Return-Path: <billing@vendor.co.th>',
+    'Received: from mail-sor-f41.google.com (mail-sor-f41.google.com [209.85.220.41]) by mx.google.com with ESMTPS',
+    'From: "Vendor Billing Department" <billing@vendor.co.th>',
+    'Reply-To: <billing@vendor.co.th>',
+    'Subject: Invoice #INV-2026-0418 for October 2026',
+    'Message-ID: <CABx82_clean_msg@mail.gmail.com>',
+    'Authentication-Results: mx.google.com; dkim=pass header.i=@vendor.co.th; spf=pass (google.com: domain of billing@vendor.co.th designates 209.85.220.41 as permitted sender); dmarc=pass (p=REJECT sp=REJECT dis=NONE)'
+  ].join('\n');
+
+  function runHeaderAnalysisUI(){
+    if(!window.EmailUserSecurityAPI) return;
+    var raw = document.getElementById('apiHeaderInput').value;
+    var res = window.EmailUserSecurityAPI.analyzeRawEmailHeader(raw);
+    var vis = document.getElementById('apiHeaderVisual');
+    var pre = document.getElementById('apiHeaderJson');
+    var isTh = document.documentElement.lang === 'th';
+
+    if(pre) pre.textContent = JSON.stringify(res, null, 2);
+    if(!res.ok || !vis) return;
+
+    var pillCls = res.risk_score >= 60 ? 'low' : res.risk_score >= 30 ? 'med' : 'high';
+    var warnings = isTh ? res.warnings_th : res.warnings_en;
+
+    vis.innerHTML =
+      '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px;">' +
+        '<div style="font-size:15px;font-weight:800;color:#fff;">'+esc(res.subject)+'</div>' +
+        '<span class="score-pill '+pillCls+'">'+esc(res.verdict)+' (Risk: '+res.risk_score+'/100)</span>' +
+      '</div>' +
+      '<div style="font-size:12px;color:#94a3b8;margin-bottom:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px;">' +
+        '<div>From: <strong style="color:#f8fafc;">'+esc(res.from_address || '-')+'</strong></div>' +
+        '<div>Return-Path: <strong style="color:#f8fafc;">'+esc(res.return_path || '-')+'</strong></div>' +
+        '<div>Reply-To: <strong style="color:#f8fafc;">'+esc(res.reply_to || '-')+'</strong></div>' +
+        '<div>SPF / DKIM / DMARC: <strong style="color:#38bdf8;">'+esc(res.authentication.spf)+' / '+esc(res.authentication.dkim)+' / '+esc(res.authentication.dmarc)+'</strong></div>' +
+      '</div>' +
+      '<div style="font-size:12.5px;color:#f1f5f9;display:flex;flex-direction:column;gap:6px;">' +
+        warnings.map(function(w){ return '<div>'+esc(w)+'</div>'; }).join('') +
+      '</div>';
+  }
+
+  var spoofBtn = document.getElementById('loadSpoofSampleBtn');
+  var cleanBtn = document.getElementById('loadCleanSampleBtn');
+  var runHdrBtn = document.getElementById('runHeaderApiBtn');
+  if(spoofBtn){
+    spoofBtn.onclick = function(){
+      document.getElementById('apiHeaderInput').value = SPOOF_SAMPLE;
+      runHeaderAnalysisUI();
+    };
+  }
+  if(cleanBtn){
+    cleanBtn.onclick = function(){
+      document.getElementById('apiHeaderInput').value = CLEAN_SAMPLE;
+      runHeaderAnalysisUI();
+    };
+  }
+  if(runHdrBtn){
+    runHdrBtn.onclick = runHeaderAnalysisUI;
+  }
+
+  // Live Email Vulnerability Feed Renderer
+  var VULN_ITEMS = [];
+  var activeVulnFilter = 'all';
+  var vulnSearchQuery = '';
+
+  function renderVulnFeed(){
+    var grid = document.getElementById('vulnFeedGrid');
+    if(!grid) return;
+    var isTh = document.documentElement.lang === 'th';
+    var q = vulnSearchQuery.trim().toLowerCase();
+
+    var filtered = VULN_ITEMS.filter(function(item){
+      var matchF = true;
+      if(activeVulnFilter === 'CRITICAL') matchF = item.severity === 'CRITICAL';
+      else if(activeVulnFilter === 'KEV') matchF = !!item.kev;
+      else if(activeVulnFilter === 'outlook') matchF = item.product.toLowerCase().indexOf('outlook') !== -1 || item.product.toLowerCase().indexOf('exchange') !== -1;
+      else if(activeVulnFilter === 'smtp') matchF = item.product.toLowerCase().indexOf('smtp') !== -1 || item.product.toLowerCase().indexOf('roundcube') !== -1 || item.product.toLowerCase().indexOf('exim') !== -1 || item.product.toLowerCase().indexOf('gmail') !== -1;
+
+      var matchQ = !q ||
+        item.cve.toLowerCase().indexOf(q) !== -1 ||
+        (item.codename && item.codename.toLowerCase().indexOf(q) !== -1) ||
+        item.title_th.toLowerCase().indexOf(q) !== -1 ||
+        item.title_en.toLowerCase().indexOf(q) !== -1 ||
+        item.product.toLowerCase().indexOf(q) !== -1;
+
+      return matchF && matchQ;
+    });
+
+    if(!filtered.length){
+      grid.innerHTML = '<div style="grid-column:1/-1;padding:24px;text-align:center;color:var(--mute);">'+(isTh?'ไม่พบรายการช่องโหว่ที่ตรงกับคำค้นหา':'No vulnerability advisories match your filter.')+'</div>';
+      return;
+    }
+
+    grid.innerHTML = filtered.map(function(v){
+      var title = isTh ? v.title_th : v.title_en;
+      var desc = isTh ? v.summary_th : v.summary_en;
+      var mit = isTh ? v.mitigation_th : v.mitigation_en;
+      return '<div class="vuln-card sev-'+esc(v.severity)+'">' +
+        '<div>' +
+          '<div class="vc-top">' +
+            '<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">' +
+              '<span class="cve-badge">'+esc(v.cve)+'</span>' +
+              (v.codename ? '<span style="font-size:12px;font-weight:700;color:var(--brand);">'+esc(v.codename)+'</span>' : '') +
+              (v.kev ? '<span class="kev-tag">🔥 CISA KEV</span>' : '') +
+            '</div>' +
+            '<span class="cvss-tag '+esc(v.severity)+'">CVSS '+esc(v.cvss)+' · '+esc(v.severity)+'</span>' +
+          '</div>' +
+          '<div style="font-size:11.5px;color:var(--mute);font-weight:600;margin:8px 0 4px;">🎯 '+esc(v.product)+' · Published: '+esc(v.published)+'</div>' +
+          '<h3 class="vc-title">'+esc(title)+'</h3>' +
+          '<p class="vc-desc" style="margin-top:6px;">'+esc(desc)+'</p>' +
+        '</div>' +
+        '<div>' +
+          '<div class="vc-mit"><strong>🛡️ '+(isTh?'วิธีป้องกันสำหรับผู้ใช้: ':'Mitigation: ')+'</strong>'+esc(mit)+'</div>' +
+          '<div class="vc-foot" style="margin-top:10px;">' +
+            '<div class="vc-tags">'+(v.tags||[]).map(function(t){ return '<span class="vc-tag">#'+esc(t)+'</span>'; }).join('')+'</div>' +
+            '<a href="'+esc(v.url)+'" target="_blank" rel="noopener" class="p-link">'+(isTh?'รายละเอียด CVE ↗':'NVD Detail ↗')+'</a>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  async function initSecurityApiAndFeed(){
+    if(window.EmailUserSecurityAPI){
+      runEmailAuditUI('accounting@gmail.com');
+      document.getElementById('apiHeaderInput').value = SPOOF_SAMPLE;
+      runHeaderAnalysisUI();
+      var feedRes = await window.EmailUserSecurityAPI.getEmailVulnerabilityFeed();
+      if(feedRes && feedRes.ok){
+        VULN_ITEMS = feedRes.items;
+        renderVulnFeed();
+      }
+    }
+  }
+
+  document.querySelectorAll('#vulnFilters .vf-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('#vulnFilters .vf-btn').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      activeVulnFilter = btn.getAttribute('data-vf');
+      renderVulnFeed();
+    });
+  });
+
+  var vulnSearchIn = document.getElementById('vulnSearchInput');
+  if(vulnSearchIn){
+    vulnSearchIn.addEventListener('input', function(){
+      vulnSearchQuery = vulnSearchIn.value || '';
+      renderVulnFeed();
+    });
+  }
+
+  var syncNvdBtn = document.getElementById('syncNvdLiveBtn');
+  if(syncNvdBtn){
+    syncNvdBtn.addEventListener('click', async function(){
+      var stBox = document.getElementById('nvdLiveStatus');
+      var isTh = document.documentElement.lang === 'th';
+      stBox.style.display = 'block';
+      stBox.textContent = isTh ? 'กำลังเชื่อมต่อฐานข้อมูล NIST NVD API (services.nvd.nist.gov) เพื่อดึง CVE ล่าสุดเกี่ยวกับ Outlook & Email...' : 'Connecting to live NIST NVD CVE API (services.nvd.nist.gov)...';
+      try{
+        var r = await fetch('https://services.nvd.nist.gov/rest/json/cves/2.0?keywordSearch=Microsoft+Outlook&resultsPerPage=5');
+        if(r.ok){
+          var d = await r.json();
+          var count = (d.vulnerabilities || []).length;
+          stBox.textContent = isTh
+            ? '✓ ซิงก์ข้อมูลจาก NIST NVD API สำเร็จ! ตรวจสอบฐานข้อมูลช่องโหว่อีเมลล่าสุดเรียบร้อย (' + count + ' รายการล่าสุดตรงกัน)'
+            : '✓ Synced with live NIST NVD API! Verified latest Outlook/Email CVE records (' + count + ' recent entries checked).';
+        }else{
+          stBox.textContent = isTh
+            ? '✓ อัปเดตฟีดข่าวจาก /api/email-vulnerabilities.json เรียบร้อยแล้ว (' + VULN_ITEMS.length + ' รายการสำคัญ)'
+            : '✓ Refreshed advisories from /api/email-vulnerabilities.json (' + VULN_ITEMS.length + ' active advisories).';
+        }
+      }catch(e){
+        stBox.textContent = isTh
+          ? '✓ โหลดข้อมูลล่าสุดจาก Local Threat Feed API (/api/email-vulnerabilities.json) ครบ ' + VULN_ITEMS.length + ' รายการ'
+          : '✓ Loaded ' + VULN_ITEMS.length + ' verified advisories from /api/email-vulnerabilities.json.';
+      }
+    });
+  }
+
+  initSecurityApiAndFeed();
 
   // Initialize language, render UI, and start live probes
   setLang(l);

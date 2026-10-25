@@ -393,6 +393,18 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
   <span class="th">🎁 <strong>ทดลองใช้ฟรี 100 ฉบับ/เดือน</strong> (ระบบรีเซ็ตโควตาใหม่ให้อัตโนมัติทุกวันที่ 1 ของเดือน) · รองรับ Windows 10/11</span>
   <span class="en">🎁 <strong>Free 100 emails/month</strong> (auto-resets on the 1st of every month) · Windows 10/11</span>
 </div>
+<div style="margin-top:14px; display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
+  <a href="status.html#email-api" style="display:inline-flex; align-items:center; gap:7px; padding:7px 15px; border-radius:999px; background:rgba(10,132,255,.15); border:1px solid rgba(10,132,255,.4); color:#60a5fa; font-size:12.5px; font-weight:700; transition:.2s;">
+    <span>🛡️</span>
+    <span class="th">ใหม่! Email Security API (สแกนเมลปลอม SPF/DMARC/Header) →</span>
+    <span class="en">NEW: Free Email Security Audit API →</span>
+  </a>
+  <a href="status.html#vuln-feed" style="display:inline-flex; align-items:center; gap:7px; padding:7px 15px; border-radius:999px; background:rgba(239,68,68,.15); border:1px solid rgba(239,68,68,.4); color:#fca5a5; font-size:12.5px; font-weight:700; transition:.2s;">
+    <span>🚨</span>
+    <span class="th">ฟีดข่าวช่องโหว่อีเมล (CVE / Outlook Vulnerability Feed) →</span>
+    <span class="en">Live Email Vulnerability Feed (CVE / KEV) →</span>
+  </a>
+</div>
 
 <div class="stage rv d3">
 <div class="fc c1">📎 Invoice.pdf</div><div class="fc c2">📂 Finance / Invoices ✓</div><div class="fc c3">✉ Contract_v3.eml</div><div class="fc c4">📊 Report.xlsx</div>
@@ -563,6 +575,34 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 <!-- Live Global Email Server Status Section -->
 <section id="email-status" style="background:var(--bg); border-top:1px solid var(--line); padding:85px 0;">
   <div class="wrap">
+    <!-- Top Prominent Banner: Email Security API & Live Vulnerability Feed -->
+    <div style="margin-bottom:28px; background:linear-gradient(135deg,#0d1527 0%,#16102c 100%); border:2px solid rgba(56,189,248,.45); border-radius:24px; padding:24px 28px; color:#f8fafc; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:18px; box-shadow:0 18px 45px rgba(10,132,255,.16);">
+      <div style="flex:1 1 520px; text-align:left;">
+        <div style="display:inline-flex; align-items:center; gap:8px; padding:4px 12px; border-radius:999px; background:rgba(239,68,68,.2); border:1px solid rgba(239,68,68,.5); color:#fecaca; font-size:11.5px; font-weight:800; margin-bottom:10px; letter-spacing:.03em;">
+          <span style="width:8px;height:8px;border-radius:50%;background:#ef4444;box-shadow:0 0 8px #ef4444;display:inline-block;"></span>
+          <span>NEW · EMAIL SECURITY API &amp; LIVE CVE VULNERABILITY FEED</span>
+        </div>
+        <h3 style="margin:0 0 8px; font-size:clamp(19px,2.5vw,23px); color:#fff; line-height:1.3;">
+          <span class="th">🛡️ Email Security API (สแกนอีเมลปลอม SPF/DMARC/Header) &amp; ฟีดข่าวช่องโหว่อีเมล (CVE / CISA KEV)</span>
+          <span class="en">🛡️ Free Email Security Audit API &amp; Live Email Vulnerability Feed (CVE / CISA KEV)</span>
+        </h3>
+        <p style="margin:0; font-size:13.5px; color:#cbd5e1; line-height:1.55;">
+          <span class="th">ตรวจสอบความน่าเชื่อถือของอีเมลคู่ค้าก่อนเปิดไฟล์แนบ วิเคราะห์ Raw Header ป้องกันอีเมลหลอกโอนเงิน (BEC) และติดตามข่าวช่องโหว่ <b>CVE-2024-21413 (MonikerLink)</b>, <b>CVE-2023-23397</b>, <b>SMTP Smuggling</b> แบบเรียลไทม์</span>
+          <span class="en">Audit sender domains against BEC spoofing, inspect raw RFC 5322 headers, and subscribe to real-time Outlook, Gmail, Exchange &amp; SMTP vulnerability advisories via JSON &amp; RSS.</span>
+        </p>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+        <a href="status.html#email-api" class="btn" style="background:linear-gradient(135deg,#0a84ff,#30d5c8); color:#fff; padding:12px 22px; font-size:14px; font-weight:700; box-shadow:0 8px 24px rgba(10,132,255,.4);">
+          <span class="th">⚡ เปิด Email Security API →</span>
+          <span class="en">⚡ Open Email Security API →</span>
+        </a>
+        <a href="status.html#vuln-feed" class="btn" style="background:linear-gradient(135deg,#dc2626,#f59e0b); color:#fff; padding:12px 22px; font-size:14px; font-weight:700; box-shadow:0 8px 24px rgba(220,38,38,.35);">
+          <span class="th">🚨 ดูฟีดข่าวช่องโหว่อีเมล (CVE Feed) →</span>
+          <span class="en">🚨 View Vulnerability Feed →</span>
+        </a>
+      </div>
+    </div>
+
     <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:20px; flex-wrap:wrap; margin-bottom:28px;">
       <div>
         <div class="eb rv" style="display:inline-flex; align-items:center; gap:8px;">
@@ -641,6 +681,34 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
     </a>
 
     <div id="homeStatusGrid" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:14px;"></div>
+
+    <!-- Email User Security API & Live Vulnerability Feed Banner -->
+    <div style="margin-top:24px; background:linear-gradient(135deg,#0d1527 0%,#130f26 100%); border:1px solid rgba(239,68,68,.35); border-radius:22px; padding:22px 26px; color:#f8fafc; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:18px; box-shadow:0 16px 40px rgba(0,0,0,.18);">
+      <div style="flex:1 1 520px;">
+        <div style="display:inline-flex; align-items:center; gap:8px; padding:4px 12px; border-radius:999px; background:rgba(239,68,68,.16); border:1px solid rgba(239,68,68,.4); color:#fca5a5; font-size:11.5px; font-weight:700; margin-bottom:8px;">
+          <span style="width:7px;height:7px;border-radius:50%;background:#ef4444;box-shadow:0 0 8px #ef4444;"></span>
+          <span>NEW · EMAIL SECURITY API &amp; LIVE CVE VULNERABILITY FEED</span>
+        </div>
+        <h3 style="margin:0 0 6px; font-size:20px; color:#fff;">
+          <span class="th">🛡️ ฟรี API ตรวจสอบความปลอดภัยอีเมล (SPF/DMARC/Header Spoofing) &amp; ฟีดข่าวช่องโหว่อีเมล (CVE / KEV)</span>
+          <span class="en">🛡️ Free Email Security Audit API &amp; Live Email Vulnerability Feed (CVE / CISA KEV)</span>
+        </h3>
+        <p style="margin:0; font-size:13.5px; color:#cbd5e1;">
+          <span class="th">ตรวจสอบอีเมลคู่ค้าก่อนเปิดไฟล์แนบ วิเคราะห์ Header ป้องกันอีเมลปลอม (BEC) และติดตามข่าวช่องโหว่ <b>CVE-2024-21413 (MonikerLink)</b>, <b>CVE-2023-23397</b>, <b>SMTP Smuggling</b> แบบเรียลไทม์ผ่าน JSON / RSS</span>
+          <span class="en">Audit sender domains against BEC spoofing, inspect raw RFC 5322 headers, and subscribe to real-time Outlook, Gmail, Exchange &amp; SMTP vulnerability advisories via JSON &amp; RSS.</span>
+        </p>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a href="status.html#email-api" class="btn sm" style="background:linear-gradient(135deg,#0a84ff,#30d5c8); color:#fff; padding:11px 20px; font-size:13.5px;">
+          <span class="th">⚡ ทดลองใช้ Email Security API →</span>
+          <span class="en">⚡ Try Email Security API →</span>
+        </a>
+        <a href="status.html#vuln-feed" class="btn ghost sm" style="border:1px solid rgba(255,255,255,.25); color:#fff; padding:11px 18px; font-size:13.5px;">
+          <span class="th">🚨 ดูฟีดข่าวช่องโหว่อีเมล (CVE Feed)</span>
+          <span class="en">🚨 View Vulnerability Feed</span>
+        </a>
+      </div>
+    </div>
   </div>
 </section>
 
