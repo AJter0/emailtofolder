@@ -76,6 +76,13 @@
     });
   }
 
+  function mxUsesDomain(mxRecords, domain) {
+    return mxRecords.some(function (record) {
+      var hostname = String(record || '').trim().split(/\s+/).pop().toLowerCase().replace(/\.$/, '');
+      return hostname === domain || hostname.endsWith('.' + domain);
+    });
+  }
+
   /**
    * 1. Audit an Email Address or Domain for Deliverability, Spoofing Risk, SPF, DMARC & MX
    * @param {string} rawInput - e.g. "accounting@company.co.th" or "gmail.com"
@@ -127,21 +134,20 @@
     var bimiRecord = bimiRecords.find(function (t) { return t.toLowerCase().indexOf('v=bimi1') === 0; }) || null;
 
     // Detect Email Infrastructure Provider
-    var mxJoined = mxRecords.join(' ').toLowerCase();
     var mailGateway = 'Custom / Self-Hosted Mail Server';
-    if (mxJoined.indexOf('google.com') !== -1 || mxJoined.indexOf('googlemail.com') !== -1) {
+    if (mxUsesDomain(mxRecords, 'google.com') || mxUsesDomain(mxRecords, 'googlemail.com')) {
       mailGateway = 'Google Workspace / Gmail Origin';
-    } else if (mxJoined.indexOf('outlook.com') !== -1 || mxJoined.indexOf('protection.outlook.com') !== -1) {
+    } else if (mxUsesDomain(mxRecords, 'outlook.com') || mxUsesDomain(mxRecords, 'protection.outlook.com')) {
       mailGateway = 'Microsoft 365 / Exchange Online Protection (EOP)';
-    } else if (mxJoined.indexOf('pphosted.com') !== -1) {
+    } else if (mxUsesDomain(mxRecords, 'pphosted.com')) {
       mailGateway = 'Proofpoint Secure Email Gateway';
-    } else if (mxJoined.indexOf('mimecast.com') !== -1) {
+    } else if (mxUsesDomain(mxRecords, 'mimecast.com')) {
       mailGateway = 'Mimecast Secure Email Gateway';
-    } else if (mxJoined.indexOf('barracudanetworks.com') !== -1) {
+    } else if (mxUsesDomain(mxRecords, 'barracudanetworks.com')) {
       mailGateway = 'Barracuda Email Security Gateway';
-    } else if (mxJoined.indexOf('zoho.com') !== -1) {
+    } else if (mxUsesDomain(mxRecords, 'zoho.com')) {
       mailGateway = 'Zoho Mail Enterprise';
-    } else if (mxJoined.indexOf('protonmail.ch') !== -1) {
+    } else if (mxUsesDomain(mxRecords, 'protonmail.ch')) {
       mailGateway = 'Proton Mail Encrypted Gateway';
     }
 
