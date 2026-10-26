@@ -1443,6 +1443,13 @@ https://emailtofolder.com/api/email-vulnerabilities.xml</pre>
   document.getElementById('recheckAllBtn').addEventListener('click', runAllChecks);
   document.getElementById('mapRefreshBtn').addEventListener('click', runAllChecks);
 
+  function mxUsesDomain(mxRecords, domain){
+    return mxRecords.some(function(record){
+      var hostname = String(record || '').trim().split(/\s+/).pop().toLowerCase().replace(/\.$/,'');
+      return hostname === domain || hostname.endsWith('.'+domain);
+    });
+  }
+
   // Custom Domain Live MX / SPF / DMARC Inspector
   async function inspectCustomDomain(rawDomain){
     var dom = rawDomain.trim().toLowerCase().replace(/^https?:\/\//,'').replace(/^.*@/,'').replace(/\/.*$/,'');
@@ -1470,11 +1477,10 @@ https://emailtofolder.com/api/email-vulnerabilities.xml</pre>
     var dmarcList = (dmarcData && Array.isArray(dmarcData.Answer)) ? dmarcData.Answer.map(function(a){ return a.data.replace(/^"|"$/g,''); }) : [];
     var dmarcTxt = dmarcList.find(function(t){ return t.toLowerCase().indexOf('v=dmarc1') !== -1; }) || '';
 
-    var mxJoined = mxList.join(' ').toLowerCase();
     var detectedPlatform = isTh ? 'เซิร์ฟเวอร์อีเมลองค์กร (Custom Mail Server)' : 'Custom / Third-Party Mail Server';
-    if(mxJoined.indexOf('google.com') !== -1 || mxJoined.indexOf('googlemail.com') !== -1){
+    if(mxUsesDomain(mxList, 'google.com') || mxUsesDomain(mxList, 'googlemail.com')){
       detectedPlatform = 'Gmail / Google Workspace Origin Server';
-    }else if(mxJoined.indexOf('outlook.com') !== -1){
+    }else if(mxUsesDomain(mxList, 'outlook.com')){
       detectedPlatform = 'Microsoft Outlook / Microsoft 365 Exchange Online';
     }
 
