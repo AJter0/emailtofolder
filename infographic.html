@@ -147,16 +147,16 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
     <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
       <span class="text-xs text-[#6b7280]">ทดสอบจำลองอีเมล:</span>
       <button onclick="selectScenario('invoice')" id="btnScenarioInvoice" class="px-3 py-1.5 rounded-lg text-xs font-medium border border-[#30d5c8] bg-[#30d5c8]/20 text-[#30d5c8] hover:bg-[#30d5c8]/30 transition">
-        📄 ใบแจ้งหนี้ (Invoice PDF)
+        ใบแจ้งหนี้ (Invoice PDF)
       </button>
       <button onclick="selectScenario('contract')" id="btnScenarioContract" class="px-3 py-1.5 rounded-lg text-xs font-medium border border-[#4b5563] bg-[#18181f] text-[#d1d5db] hover:border-[#a78bfa] hover:text-[#a78bfa] transition">
-        📜 สัญญาฝ่ายกฎหมาย (Contract)
+        สัญญาฝ่ายกฎหมาย (Contract)
       </button>
       <button onclick="selectScenario('report')" id="btnScenarioReport" class="px-3 py-1.5 rounded-lg text-xs font-medium border border-[#4b5563] bg-[#18181f] text-[#d1d5db] hover:border-[#60a5fa] hover:text-[#60a5fa] transition">
-        📊 รายงานโครงการ (Excel Report)
+        รายงานโครงการ (Excel Report)
       </button>
       <button onclick="triggerSimulation()" class="px-4 py-1.5 rounded-lg text-xs font-semibold bg-gradient-to-r from-[#30d5c8] to-[#0ea5e9] text-black hover:opacity-90 shadow-lg shadow-[#30d5c8]/20 transition flex items-center gap-1.5">
-        <span>🚀</span> รันแอนิเมชันทันที
+        รันแอนิเมชันทันที
       </button>
     </div>
 
@@ -181,7 +181,7 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
           <span class="text-xs text-[#9ca3af]">ตรวจจับอีเมลขาเข้า</span>
         </div>
         <h3 class="text-lg font-semibold text-white mb-2 flex items-center gap-2">
-          <span>📨</span> รับอีเมลขาเข้าแบบ Real-Time
+          รับอีเมลขาเข้าแบบ Real-Time
         </h3>
         <p class="text-xs text-[#9ca3af] leading-relaxed mb-3">
           เชื่อมต่อกับ <b>Microsoft Outlook Classic</b> ผ่าน MAPI Table ไร้หน้าต่างแจ้งเตือน หรือรับผ่าน <b>IMAP IDLE Push</b> (Gmail, Office 365) โดยไม่ต้องรอยิง polling
@@ -189,7 +189,7 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
         <div class="text-[11px] bg-[#181822] p-2.5 rounded-xl border border-[#272734] space-y-1">
           <div class="flex justify-between text-[#d1d5db]"><span>หัวข้อ (Subject):</span> <b id="step1Subject" class="text-[#30d5c8]">Invoice #INV-2026-0418</b></div>
           <div class="flex justify-between text-[#9ca3af]"><span>ผู้ส่ง (From):</span> <span id="step1From">accounting@vendor.co.th</span></div>
-          <div class="flex justify-between text-[#9ca3af]"><span>มีไฟล์แนบ:</span> <span id="step1Attach" class="text-emerald-400">✓ มี (Invoice.pdf)</span></div>
+          <div class="flex justify-between text-[#9ca3af]"><span>มีไฟล์แนบ:</span> <span id="step1Attach" class="text-emerald-400">มี (Invoice.pdf)</span></div>
         </div>
       </div>
 
@@ -202,7 +202,7 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
           <span class="text-xs text-[#9ca3af]">คัดแยกตามกฎ</span>
         </div>
         <h3 class="text-lg font-semibold text-white mb-2 flex items-center gap-2">
-          <span>⚡</span> วิเคราะห์ด้วย Rule Engine
+          วิเคราะห์ด้วย Rule Engine
         </h3>
         <p class="text-xs text-[#9ca3af] leading-relaxed mb-3">
           ระบบสแกนข้อมูลเทียบกับกฎที่ตั้งไว้: หัวข้อ (Subject), ผู้ส่ง (From), ผู้รับ (To/CC), หรือ <b>เนื้อหาข้อความ (Body)</b> พร้อมโควตาตรวจสอบรายเดือน
@@ -227,15 +227,15 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
           <span class="text-xs text-[#9ca3af]">สกัดและประมวลผลไฟล์</span>
         </div>
         <h3 class="text-lg font-semibold text-white mb-2 flex items-center gap-2">
-          <span>📦</span> สกัดไฟล์แนบ & บันทึก .MSG แท้
+          สกัดไฟล์แนบ & บันทึก .MSG แท้
         </h3>
         <p class="text-xs text-[#9ca3af] leading-relaxed mb-3">
           จำลองการลากวาง (Drag & Drop): บันทึกไฟล์อีเมลฉบับเต็ม (`.msg` / `.eml`) พร้อมสกัดไฟล์แนบ (PDF, Excel, Docs) และดาวน์โหลดรูปภาพลิงก์ภายนอกแปลงเป็น Inline CID อัตโนมัติ
         </p>
         <div class="text-[11px] bg-[#181822] p-2.5 rounded-xl border border-[#272734] space-y-1 text-[#9ca3af]">
-          <div>✓ สกัด: <span class="text-white font-mono" id="step3ExtractedMsg">2026-10-25_Invoice.msg</span></div>
-          <div>✓ ไฟล์แนบ: <span class="text-emerald-400 font-mono" id="step3ExtractedAtt">Invoice.pdf</span></div>
-          <div>✓ จัดการชื่อไฟล์ซ้ำ: เติมหมายเลขลำดับ _(1) อัตโนมัติ</div>
+          <div>สกัด: <span class="text-white font-mono" id="step3ExtractedMsg">2026-10-25_Invoice.msg</span></div>
+          <div>ไฟล์แนบ: <span class="text-emerald-400 font-mono" id="step3ExtractedAtt">Invoice.pdf</span></div>
+          <div>จัดการชื่อไฟล์ซ้ำ: เติมหมายเลขลำดับ _(1) อัตโนมัติ</div>
         </div>
       </div>
 
@@ -248,7 +248,7 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
           <span class="text-xs text-[#9ca3af]">จัดระเบียบลงโฟลเดอร์</span>
         </div>
         <h3 class="text-lg font-semibold text-white mb-2 flex items-center gap-2">
-          <span>📁</span> บันทึกลงโฟลเดอร์โครงสร้างที่ต้องการ
+          บันทึกลงโฟลเดอร์โครงสร้างที่ต้องการ
         </h3>
         <p class="text-xs text-[#9ca3af] leading-relaxed mb-3">
           ย้ายไฟล์เข้าโฟลเดอร์ Local Drive (C:, D:), Network Share (`\\server\share`) หรือ NAS โดยเลือกโครงสร้าง: แยกตามปี/เดือน (`YYYY/MM`), ตามชื่อผู้ส่ง, หรือแยกรายอีเมล
@@ -267,13 +267,13 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
           <span class="text-xs text-[#9ca3af]">บันทึกประวัติ & แจ้งเตือน</span>
         </div>
         <h3 class="text-lg font-semibold text-white mb-2 flex items-center gap-2">
-          <span>📜</span> บันทึก Audit Log & ส่งออก CSV
+          บันทึก Audit Log & ส่งออก CSV
         </h3>
         <p class="text-xs text-[#9ca3af] leading-relaxed mb-3">
           อัปเดตสถิติ Real-time, แจ้งเตือน Native Windows Notification และบันทึก Audit History พร้อมกดส่งออกเป็นไฟล์ CSV รองรับภาษาไทยใน Microsoft Excel ได้ทันที
         </p>
         <div class="text-[11px] bg-[#181822] p-2.5 rounded-xl border border-[#272734] flex justify-between items-center text-xs">
-          <span class="text-emerald-400">✓ บันทึกสำเร็จ</span>
+          <span class="text-emerald-400">บันทึกสำเร็จ</span>
           <span class="text-[#9ca3af]">โควตาเดือนนี้: 15/100</span>
         </div>
       </div>
@@ -307,14 +307,14 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
           <div id="visualStage1" class="w-full flex flex-col items-center gap-6 transition-all duration-500">
             <div class="grid grid-cols-2 gap-4 w-full max-w-sm">
               <div class="p-3.5 rounded-xl bg-[#181822] border border-[#2d2d3e] flex items-center gap-3">
-                <span class="text-2xl">📧</span>
+                <span class="w-8 h-8 rounded-lg bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center text-xs font-bold">MAPI</span>
                 <div>
                   <div class="text-xs font-semibold text-white">Outlook Classic</div>
                   <div class="text-[10px] text-cyan-400">MAPI Table Engine</div>
                 </div>
               </div>
               <div class="p-3.5 rounded-xl bg-[#181822] border border-[#2d2d3e] flex items-center gap-3">
-                <span class="text-2xl">☁️</span>
+                <span class="w-8 h-8 rounded-lg bg-purple-500/15 border border-purple-500/30 text-purple-400 flex items-center justify-center text-xs font-bold">IMAP</span>
                 <div>
                   <div class="text-xs font-semibold text-white">Gmail / O365</div>
                   <div class="text-[10px] text-purple-400">IMAP IDLE Push</div>
@@ -328,7 +328,7 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
                 <path d="M 120 0 L 120 70" stroke="#30d5c8" stroke-width="2" class="flow-path" />
               </svg>
               <div id="flyingEmailCard" class="absolute top-1/2 -translate-y-1/2 p-3 bg-gradient-to-r from-[#1c1c27] to-[#252536] border border-[#30d5c8] rounded-xl shadow-lg shadow-[#30d5c8]/20 flex items-center gap-2.5 animate-bounce">
-                <span class="text-lg">✉️</span>
+                <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-[#30d5c8]/20 text-[#30d5c8]">MAIL</span>
                 <div class="text-left">
                   <div class="text-xs font-bold text-white truncate max-w-[150px]" id="simCardSubject">Invoice #INV-2026</div>
                   <div class="text-[10px] text-[#9ca3af]" id="simCardSender">accounting@vendor.co.th</div>
@@ -338,8 +338,8 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
 
             <!-- Email to Folder Daemon Node -->
             <div class="w-full max-w-xs p-4 rounded-2xl bg-gradient-to-b from-[#181824] to-[#12121c] border border-[#30d5c8]/50 shadow-lg text-center">
-              <div class="w-10 h-10 mx-auto mb-2 rounded-xl bg-[#30d5c8]/10 border border-[#30d5c8]/30 flex items-center justify-center text-[#30d5c8] text-lg">
-                ⚙️
+              <div class="w-10 h-10 mx-auto mb-2 rounded-xl bg-[#30d5c8]/10 border border-[#30d5c8]/30 flex items-center justify-center text-[#30d5c8] text-xs font-bold">
+                CORE
               </div>
               <div class="text-xs font-bold text-white">Email to Folder Engine</div>
               <div class="text-[10px] text-[#30d5c8]">Listening on Windows Service / Tray</div>
@@ -351,27 +351,27 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
             <div class="w-full max-w-md bg-[#161622] p-4 rounded-2xl border border-[#2d2d3e]">
               <div class="text-xs font-semibold text-[#a78bfa] mb-3 flex items-center justify-between">
                 <span>Rule Matching Evaluation</span>
-                <span class="text-[10px] bg-[#272738] px-2 py-0.5 rounded text-gray-300">Fast Match < 2ms</span>
+                <span class="text-[10px] bg-[#272738] px-2 py-0.5 rounded text-gray-300">Fast Match &lt; 2ms</span>
               </div>
               
               <div class="space-y-2">
                 <div class="p-2.5 rounded-lg bg-[#1f1f2e] border border-emerald-500/50 flex items-center justify-between text-xs">
                   <div class="flex items-center gap-2">
-                    <span class="text-emerald-400">✓</span>
+                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
                     <span class="text-white" id="evalRuleActive">Rule: Invoice to Finance</span>
                   </div>
                   <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono">MATCHED</span>
                 </div>
                 <div class="p-2.5 rounded-lg bg-[#1a1a24] border border-[#2d2d3c] opacity-40 flex items-center justify-between text-xs">
                   <div class="flex items-center gap-2">
-                    <span class="text-gray-500">✗</span>
+                    <span class="w-2 h-2 rounded-full bg-gray-600"></span>
                     <span class="text-gray-400">Rule: Contracts & Legal</span>
                   </div>
                   <span class="text-[10px] text-gray-500">SKIPPED</span>
                 </div>
                 <div class="p-2.5 rounded-lg bg-[#1a1a24] border border-[#2d2d3c] opacity-40 flex items-center justify-between text-xs">
                   <div class="flex items-center gap-2">
-                    <span class="text-gray-500">✗</span>
+                    <span class="w-2 h-2 rounded-full bg-gray-600"></span>
                     <span class="text-gray-400">Rule: Human Resources</span>
                   </div>
                   <span class="text-[10px] text-gray-500">SKIPPED</span>
@@ -398,28 +398,28 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
             <div class="flex items-center gap-4">
               <!-- Raw MIME Source -->
               <div class="p-4 rounded-xl bg-[#161622] border border-[#3b3b4f] text-center w-36">
-                <span class="text-3xl mb-1 block">✉️</span>
+                <span class="text-xs font-mono font-bold text-cyan-400 mb-1 block">MIME / MAPI</span>
                 <span class="text-xs font-bold text-white block">Raw Email Stream</span>
                 <span class="text-[10px] text-gray-400">COM / MIME Buffer</span>
               </div>
 
               <!-- Unbundling Arrow -->
               <div class="flex flex-col items-center">
-                <span class="text-cyan-400 font-bold text-xl">➔</span>
+                <span class="text-cyan-400 font-bold text-xl">-&gt;</span>
                 <span class="text-[10px] text-cyan-300 font-mono">Dissect</span>
               </div>
 
               <!-- Extracted Artifacts -->
               <div class="space-y-2">
                 <div class="p-2.5 px-3.5 rounded-lg bg-[#1a1a26] border border-cyan-500/40 flex items-center gap-2.5 text-xs">
-                  <span class="text-cyan-400 text-base">📑</span>
+                  <span class="text-cyan-400 text-[10px] font-mono font-bold">MSG</span>
                   <div>
                     <div class="font-bold text-white" id="visMsgFile">2026-10-25_Invoice.msg</div>
                     <div class="text-[9px] text-gray-400">Complete MSG (Outlook native)</div>
                   </div>
                 </div>
                 <div class="p-2.5 px-3.5 rounded-lg bg-[#1a1a26] border border-emerald-500/40 flex items-center gap-2.5 text-xs">
-                  <span class="text-emerald-400 text-base">📎</span>
+                  <span class="text-emerald-400 text-[10px] font-mono font-bold">ATT</span>
                   <div>
                     <div class="font-bold text-emerald-300" id="visAttFile">Invoice.pdf</div>
                     <div class="text-[9px] text-gray-400">Extracted Clean Attachment</div>
@@ -430,7 +430,6 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
 
             <!-- CID Inliner Badge -->
             <div class="p-2.5 rounded-xl bg-[#181822] border border-purple-500/30 text-[11px] text-purple-300 flex items-center gap-2 max-w-sm">
-              <span>🖼️</span>
               <span><b>Inline Image Fix:</b> ดึงภาพภายนอกแปลงเป็น CID แนบใน .msg ให้เปิดออฟไลน์รูปไม่หาย</span>
             </div>
           </div>
@@ -439,25 +438,25 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
           <div id="visualStage4" class="w-full flex-col items-center gap-5 hidden transition-all duration-500">
             <div class="w-full max-w-md bg-[#161622] rounded-2xl border border-[#2c2c3e] p-4 text-xs">
               <div class="flex items-center justify-between mb-3 text-amber-400 font-semibold">
-                <span>📁 Destination Directory Tree</span>
+                <span>Destination Directory Tree</span>
                 <span class="text-[10px] bg-amber-400/10 px-2 py-0.5 rounded text-amber-300">Hierarchy Mode</span>
               </div>
 
               <!-- Folder Tree Visualization -->
               <div class="space-y-1 font-mono text-[11px]">
-                <div class="text-gray-400">📂 \\FileServer\Finance\Invoices</div>
-                <div class="pl-4 text-gray-400">└── 📂 2026 <span class="text-gray-500">(Year)</span></div>
-                <div class="pl-8 text-amber-300 font-bold">└── 📂 10 <span class="text-gray-500">(Month)</span></div>
-                <div class="pl-12 text-cyan-300">├── 📄 2026-10-25_Invoice #INV-2026-0418.msg</div>
-                <div class="pl-12 text-emerald-400">└── 📎 Invoice.pdf</div>
+                <div class="text-gray-400">\\FileServer\Finance\Invoices</div>
+                <div class="pl-4 text-gray-400">└── 2026 <span class="text-gray-500">(Year)</span></div>
+                <div class="pl-8 text-amber-300 font-bold">└── 10 <span class="text-gray-500">(Month)</span></div>
+                <div class="pl-12 text-cyan-300">├── 2026-10-25_Invoice #INV-2026-0418.msg</div>
+                <div class="pl-12 text-emerald-400">└── Invoice.pdf</div>
               </div>
             </div>
 
             <!-- Storage Destination Options -->
             <div class="flex gap-2 text-[10px] text-gray-300">
-              <span class="px-2 py-1 rounded bg-[#1e1e28] border border-[#30303e]">💻 Local C: / D:</span>
-              <span class="px-2 py-1 rounded bg-[#1e1e28] border border-[#30303e]">🖧 Network Share</span>
-              <span class="px-2 py-1 rounded bg-[#1e1e28] border border-[#30303e]">🗄️ NAS File Server</span>
+              <span class="px-2 py-1 rounded bg-[#1e1e28] border border-[#30303e]">Local C: / D:</span>
+              <span class="px-2 py-1 rounded bg-[#1e1e28] border border-[#30303e]">Network Share</span>
+              <span class="px-2 py-1 rounded bg-[#1e1e28] border border-[#30303e]">NAS File Server</span>
             </div>
           </div>
 
@@ -465,8 +464,8 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
           <div id="visualStage5" class="w-full flex-col items-center gap-5 hidden transition-all duration-500">
             <!-- Mock Windows Notification Toast -->
             <div class="w-full max-w-sm p-3.5 rounded-2xl bg-[#1f1f2e] border border-cyan-500/40 shadow-xl flex items-start gap-3">
-              <div class="w-8 h-8 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-base shrink-0">
-                ✓
+              <div class="w-8 h-8 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold shrink-0">
+                OK
               </div>
               <div class="text-xs">
                 <div class="font-bold text-white">Email to Folder — บันทึกสำเร็จ</div>
@@ -485,7 +484,7 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
                 <span class="font-mono text-[10px] text-gray-300">2026-10-25 00:50</span>
                 <span class="text-cyan-400">Invoice to Finance</span>
                 <button class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px] border border-emerald-500/30">
-                  📊 Export CSV
+                  Export CSV
                 </button>
               </div>
             </div>
@@ -707,6 +706,6 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
   </script>
 
   <div class="gh"><a href="https://github.com" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span class="th">เว็บไซต์นี้โฮสต์ด้วย GitHub</span><span class="en">This website is hosted on GitHub</span></a></div>
-  <footer class="dk"><div class="wrap"><div>© 2026 Email to Folder Dev Team · emailtofolder.com</div><div>📍 Bangkok, Thailand · 📞 094-562-0859</div></div></footer>
+  <footer class="dk"><div class="wrap"><div>© 2026 Email to Folder Dev Team · emailtofolder.com</div><div>Bangkok, Thailand · 094-562-0859</div></div></footer>
 </body>
 </html>

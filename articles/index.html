@@ -103,7 +103,8 @@ h1{font-size:clamp(32px,5vw,52px);font-weight:800;line-height:1.22;margin:0 auto
 .articles-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:24px;margin:30px 0 80px}
 .art-card{display:flex;flex-direction:column;background:#ffffff;border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:transform .25s,box-shadow .25s,border-color .25s;box-shadow:0 2px 8px rgba(0,0,0,.03)}
 .art-card:hover{transform:translateY(-5px);border-color:rgba(10,132,255,.35);box-shadow:0 16px 32px rgba(0,0,0,.08)}
-.art-thumb{height:160px;background:linear-gradient(135deg,#131625,#1f2438);position:relative;display:flex;align-items:center;justify-content:center;color:#fff;font-size:46px;overflow:hidden}
+.art-thumb{height:160px;background:linear-gradient(135deg,#131625,#1f2438);position:relative;display:flex;align-items:center;justify-content:center;color:#38bdf8;overflow:hidden}
+.art-thumb svg{width:46px;height:46px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;position:relative;z-index:1}
 .art-thumb::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at center,rgba(10,132,255,.2),transparent 70%)}
 .art-body{padding:24px;flex:1;display:flex;flex-direction:column}
 .art-meta{display:flex;gap:10px;align-items:center;font-size:12px;color:var(--mute);margin-bottom:12px}
@@ -158,7 +159,6 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
   <header class="header-hero">
     <div class="wrap">
       <div class="badge">
-        <span>📚</span>
         <span class="th">Email Knowledge Hub & IT Guides</span>
         <span class="en">Email Knowledge Hub & IT Guides</span>
       </div>
@@ -174,10 +174,10 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
       <!-- Category Filter Tabs -->
       <div class="filter-bar">
         <button class="filter-btn active" onclick="filterCat('all')"><span class="th">ทั้งหมด (9)</span><span class="en">All Guides (9)</span></button>
-        <button class="filter-btn" onclick="filterCat('security')"><span class="th">🔒 ความปลอดภัย & PDPA</span><span class="en">🔒 Security & PDPA</span></button>
-        <button class="filter-btn" onclick="filterCat('storage')"><span class="th">💾 จัดการความจุ & NAS</span><span class="en">💾 Storage & NAS</span></button>
-        <button class="filter-btn" onclick="filterCat('productivity')"><span class="th">⚡ บัญชี & ออโตเมชั่น</span><span class="en">⚡ Productivity & Workflow</span></button>
-        <button class="filter-btn" onclick="filterCat('howto')"><span class="th">🛠️ วิธีตั้งค่า & แก้ปัญหา</span><span class="en">🛠️ How-To & Fixes</span></button>
+        <button class="filter-btn" onclick="filterCat('security')"><span class="th">ความปลอดภัย & PDPA</span><span class="en">Security & PDPA</span></button>
+        <button class="filter-btn" onclick="filterCat('storage')"><span class="th">จัดการความจุ & NAS</span><span class="en">Storage & NAS</span></button>
+        <button class="filter-btn" onclick="filterCat('productivity')"><span class="th">บัญชี & ออโตเมชั่น</span><span class="en">Productivity & Workflow</span></button>
+        <button class="filter-btn" onclick="filterCat('howto')"><span class="th">วิธีตั้งค่า & แก้ปัญหา</span><span class="en">How-To & Fixes</span></button>
       </div>
     </div>
   </header>
@@ -189,12 +189,12 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
       <!-- Article 1: Security & Compliance -->
       <article class="art-card" data-cat="security">
         <div class="art-thumb">
-          <span>🛡️</span>
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
         <div class="art-body">
           <div class="art-meta">
             <span class="tag sec">Security & PDPA</span>
-            <span>⏱ 6 นาทีอ่าน</span>
+            <span>6 นาทีอ่าน</span>
           </div>
           <h2 class="art-title">
             <a href="email-security-compliance-guide.html">
@@ -216,12 +216,12 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
       <!-- Article 2: Phishing & BEC -->
       <article class="art-card" data-cat="security">
         <div class="art-thumb">
-          <span>🎣</span>
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
         </div>
         <div class="art-body">
           <div class="art-meta">
             <span class="tag sec">Security & Fraud</span>
-            <span>⏱ 7 นาทีอ่าน</span>
+            <span>7 นาทีอ่าน</span>
           </div>
           <h2 class="art-title">
             <a href="email-phishing-and-bec-prevention-guide.html">
@@ -243,12 +243,12 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
       <!-- Article 3: Zero Inbox -->
       <article class="art-card" data-cat="productivity">
         <div class="art-thumb">
-          <span>📥</span>
+          <svg viewBox="0 0 24 24"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
         </div>
         <div class="art-body">
           <div class="art-meta">
             <span class="tag how">How-To & Inbox</span>
-            <span>⏱ 5 นาทีอ่าน</span>
+            <span>5 นาทีอ่าน</span>
           </div>
           <h2 class="art-title">
             <a href="how-to-organize-outlook-zero-inbox.html">
@@ -270,12 +270,12 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
       <!-- Article 4: PST / OST Limit Fix -->
       <article class="art-card" data-cat="storage">
         <div class="art-thumb">
-          <span>⚠️</span>
+          <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
         </div>
         <div class="art-body">
           <div class="art-meta">
             <span class="tag sto">Storage & Troubleshooting</span>
-            <span>⏱ 6 นาทีอ่าน</span>
+            <span>6 นาทีอ่าน</span>
           </div>
           <h2 class="art-title">
             <a href="how-to-fix-outlook-pst-ost-file-size-limit.html">
@@ -297,12 +297,12 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
       <!-- Article 5: NAS Backup Guide -->
       <article class="art-card" data-cat="storage">
         <div class="art-thumb">
-          <span>🖴</span>
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
         </div>
         <div class="art-body">
           <div class="art-meta">
             <span class="tag sto">NAS & Archiving</span>
-            <span>⏱ 6 นาทีอ่าน</span>
+            <span>6 นาทีอ่าน</span>
           </div>
           <h2 class="art-title">
             <a href="email-backup-to-nas-synology-qnap-guide.html">
@@ -324,12 +324,12 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
       <!-- Article 6: Accounting & Finance Tricks -->
       <article class="art-card" data-cat="productivity">
         <div class="art-thumb">
-          <span>💼</span>
+          <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
         </div>
         <div class="art-body">
           <div class="art-meta">
             <span class="tag tip">Finance & Productivity</span>
-            <span>⏱ 7 นาทีอ่าน</span>
+            <span>7 นาทีอ่าน</span>
           </div>
           <h2 class="art-title">
             <a href="5-email-tricks-for-accounting-finance.html">
@@ -351,12 +351,12 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
       <!-- Article 7: Invoice & PO Automation -->
       <article class="art-card" data-cat="productivity">
         <div class="art-thumb">
-          <span>🧾</span>
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
         </div>
         <div class="art-body">
           <div class="art-meta">
             <span class="tag tip">Workflow Automation</span>
-            <span>⏱ 6 นาทีอ่าน</span>
+            <span>6 นาทีอ่าน</span>
           </div>
           <h2 class="art-title">
             <a href="automate-invoice-and-po-email-sorting.html">
@@ -378,12 +378,12 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
       <!-- Article 8: Gmail App Password -->
       <article class="art-card" data-cat="howto">
         <div class="art-thumb">
-          <span>🔑</span>
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
         </div>
         <div class="art-body">
           <div class="art-meta">
             <span class="tag how">Setup & Security</span>
-            <span>⏱ 4 นาทีอ่าน</span>
+            <span>4 นาทีอ่าน</span>
           </div>
           <h2 class="art-title">
             <a href="gmail-app-password-imap-setup-guide.html">
@@ -405,12 +405,12 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
       <!-- Article 9: MSG vs EML -->
       <article class="art-card" data-cat="storage">
         <div class="art-thumb">
-          <span>📑</span>
+          <svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
         </div>
         <div class="art-body">
           <div class="art-meta">
             <span class="tag sto">Storage & Formats</span>
-            <span>⏱ 6 นาทีอ่าน</span>
+            <span>6 นาทีอ่าน</span>
           </div>
           <h2 class="art-title">
             <a href="msg-vs-eml-difference-and-best-format.html">
@@ -439,14 +439,14 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
         <span class="en">Download Email to Folder for free. Extract attachments, organize directories, and keep 100% data privacy on your local machine.</span>
       </p>
       <a class="btn" href="../downloads/EmailToFolder-Setup.exe" download>
-        <span class="th">📥 ดาวน์โหลด Setup.exe ฟรี (~82 MB)</span>
-        <span class="en">📥 Download Setup.exe Free (~82 MB)</span>
+        <span class="th">ดาวน์โหลด Setup.exe ฟรี (~82 MB)</span>
+        <span class="en">Download Setup.exe Free (~82 MB)</span>
       </a>
     </div>
   </main>
 
   <div class="gh"><a href="https://github.com" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span class="th">เว็บไซต์นี้โฮสต์ด้วย GitHub</span><span class="en">This website is hosted on GitHub</span></a></div>
-  <footer class="dk"><div class="wrap"><div>© 2026 Email to Folder Dev Team · emailtofolder.com</div><div>📍 Bangkok, Thailand · 📞 094-562-0859</div></div></footer>
+  <footer class="dk"><div class="wrap"><div>© 2026 Email to Folder Dev Team · emailtofolder.com</div><div>Bangkok, Thailand · 094-562-0859</div></div></footer>
 
   <script>
     (function(){

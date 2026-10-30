@@ -188,7 +188,8 @@ html[lang=th] h2{line-height:1.25;letter-spacing:-.01em}
 .bc::before{content:"";position:absolute;inset:0;background:radial-gradient(380px circle at var(--mx,50%) var(--my,0),rgba(10,132,255,.2),transparent 60%);opacity:0;transition:.3s}
 .bc:hover::before{opacity:1}
 .bc>*{position:relative}
-.ic{font-size:38px;display:inline-block;animation:fl 4s ease-in-out infinite}
+.ic{width:48px;height:48px;border-radius:14px;background:rgba(10,132,255,.1);color:var(--brand);display:inline-grid;place-items:center}
+.ic svg{width:24px;height:24px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
 .bc h3{font-size:24px;margin:16px 0 8px;letter-spacing:-.02em}.bc p{margin:0;color:var(--mute);font-size:16px}
 .big{font-size:clamp(46px,7vw,82px);font-weight:800;letter-spacing:-.04em;line-height:1}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:56px;position:relative}
@@ -388,31 +389,19 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 <span class="pill rv"><span class="th">Enterprise Email Archiving Solution</span><span class="en">Enterprise Email Archiving Solution</span></span>
 <h1 class="rv d1"><span class="th">จัดเก็บอีเมลลงโฟลเดอร์<br>ให้เอง <span class="grad">แบบอัตโนมัติ</span></span><span class="en">Every email.<br>Right <span class="grad">Folder</span>. Automatically.</span></h1>
 <p class="lead rv d2"><span class="th">ซอฟต์แวร์สำหรับองค์กร บันทึกอีเมลและไฟล์แนบลงโฟลเดอร์ตามกฎที่คุณกำหนด ค้นหาง่าย ตรวจสอบย้อนหลังได้ พร้อมทีมงานปรับแต่งและดูแลให้เป็นรายกรณี</span><span class="en">Software and solutions that turn scattered emails into an organized, searchable, auditable archive — supported case by case.</span></p>
-<div class="cta rv d3"><a class="btn" href="downloads/EmailToFolder-Setup.exe" download><span class="th">⚡ ดาวน์โหลดทดลองใช้ฟรี (.exe)</span><span class="en">⚡ Download Free Trial (.exe)</span></a><a class="btn ghost" href="#contact"><span class="th">ขอราคา Enterprise</span><span class="en">Enterprise Quote</span></a></div>
+<div class="cta rv d3"><a class="btn" href="downloads/EmailToFolder-Setup.exe" download><span class="th">ดาวน์โหลดทดลองใช้ฟรี (.exe)</span><span class="en">Download Free Trial (.exe)</span></a><a class="btn ghost" href="#contact"><span class="th">ขอราคา Enterprise</span><span class="en">Enterprise Quote</span></a></div>
 <div style="margin-top:16px; font-size:13px; color:var(--mute);" class="rv d3">
-  <span class="th">🎁 <strong>ทดลองใช้ฟรี 100 ฉบับ/เดือน</strong> (ระบบรีเซ็ตโควตาใหม่ให้อัตโนมัติทุกวันที่ 1 ของเดือน) · รองรับ Windows 10/11</span>
-  <span class="en">🎁 <strong>Free 100 emails/month</strong> (auto-resets on the 1st of every month) · Windows 10/11</span>
-</div>
-<div style="margin-top:14px; display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
-  <a href="status.html#email-api" style="display:inline-flex; align-items:center; gap:7px; padding:7px 15px; border-radius:999px; background:rgba(10,132,255,.15); border:1px solid rgba(10,132,255,.4); color:#60a5fa; font-size:12.5px; font-weight:700; transition:.2s;">
-    <span>🛡️</span>
-    <span class="th">ใหม่! Email Security API (สแกนเมลปลอม SPF/DMARC/Header) →</span>
-    <span class="en">NEW: Free Email Security Audit API →</span>
-  </a>
-  <a href="status.html#vuln-feed" style="display:inline-flex; align-items:center; gap:7px; padding:7px 15px; border-radius:999px; background:rgba(239,68,68,.15); border:1px solid rgba(239,68,68,.4); color:#fca5a5; font-size:12.5px; font-weight:700; transition:.2s;">
-    <span>🚨</span>
-    <span class="th">ฟีดข่าวช่องโหว่อีเมล (CVE / Outlook Vulnerability Feed) →</span>
-    <span class="en">Live Email Vulnerability Feed (CVE / KEV) →</span>
-  </a>
+  <span class="th"><strong>ทดลองใช้ฟรี 100 ฉบับ/เดือน</strong> (ระบบรีเซ็ตโควตาใหม่ให้อัตโนมัติทุกวันที่ 1 ของเดือน) · รองรับ Windows 10/11</span>
+  <span class="en"><strong>Free 100 emails/month</strong> (auto-resets on the 1st of every month) · Windows 10/11</span>
 </div>
 
 <div class="stage rv d3">
-<div class="fc c1">📎 Invoice.pdf</div><div class="fc c2">📂 Finance / Invoices ✓</div><div class="fc c3">✉ Contract_v3.eml</div><div class="fc c4">📊 Report.xlsx</div>
+<div class="fc c1">Invoice.pdf</div><div class="fc c2">Finance / Invoices</div><div class="fc c3">Contract_v3.eml</div><div class="fc c4">Report.xlsx</div>
 <div class="float"><div class="tilt" id="tilt"><div class="app">
 <div class="tb"><b></b><b></b><b></b><span>Email to Folder — Enterprise</span></div>
 <div class="bd">
 <div class="cl"><h6><span class="th">โฟลเดอร์ปลายทาง</span><span class="en">Target folders</span></h6>
-<div class="fo a3">📁 Projects / 2026-A</div><div class="fo a1">📁 Finance / Invoices</div><div class="fo a2">📁 Legal / Contracts</div><div class="fo a4">📁 HR</div><div class="fo">📁 Clients</div><div class="fo">📁 Archive</div></div>
+<div class="fo a3">Projects / 2026-A</div><div class="fo a1">Finance / Invoices</div><div class="fo a2">Legal / Contracts</div><div class="fo a4">HR</div><div class="fo">Clients</div><div class="fo">Archive</div></div>
 <div class="cl"><h6>Inbox</h6>
 <div class="ml a1"><strong>Invoice #INV-2026-0418</strong><p>accounting@vendor.co.th</p><span class="chip">→ Finance / Invoices</span></div>
 <div class="ml a2"><strong>Contract Draft v3</strong><p>legal@partner.com</p><span class="chip">→ Legal / Contracts</span></div>
@@ -421,7 +410,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 <div class="cl"><h6><span class="th">กฎอัตโนมัติ</span><span class="en">Auto rules</span></h6>
 <div class="ru"><b>Subject contains "Invoice"</b>→ Finance/Invoices</div>
 <div class="ru"><b>From @projecta.co.th</b>→ 2026-A</div>
-<div class="ok">✓ <span id="cnt">1,284</span> <span class="th">ฉบับที่บันทึกแล้ว</span><span class="en">emails saved</span></div></div>
+<div class="ok"><span id="cnt">1,284</span> <span class="th">ฉบับที่บันทึกแล้ว</span><span class="en">emails saved</span></div></div>
 </div></div></div></div>
 </div>
 </div></div>
@@ -433,12 +422,12 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 <h2 class="rv d1"><span class="th">ทำให้เรื่องอีเมล<br><span class="grad">เป็นเรื่องง่าย</span></span><span class="en">Make email <span class="grad">effortless</span>.</span></h2>
 <p class="sub rv d2"><span class="th">ออกแบบมาเพื่อองค์กรที่ต้องการความเป็นระเบียบและทำงานร่วมกันเป็นทีม</span><span class="en">Designed for organizations that need order and smooth teamwork.</span></p>
 <div class="bento">
-<div class="bc x rv"><div class="ic">📥</div><h3><span class="th">บันทึกอัตโนมัติ ตั้งกฎครั้งเดียว</span><span class="en">Automatic saving. Set a rule once.</span></h3><p><span class="th">อีเมลและไฟล์แนบถูกจัดเก็บลงโฟลเดอร์ที่ถูกต้องทันที ไม่ต้องลากวางเอง</span><span class="en">Emails and attachments land in the right folder instantly — no more drag and drop.</span></p></div>
+<div class="bc x rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div><h3><span class="th">บันทึกอัตโนมัติ ตั้งกฎครั้งเดียว</span><span class="en">Automatic saving. Set a rule once.</span></h3><p><span class="th">อีเมลและไฟล์แนบถูกจัดเก็บลงโฟลเดอร์ที่ถูกต้องทันที ไม่ต้องลากวางเอง</span><span class="en">Emails and attachments land in the right folder instantly — no more drag and drop.</span></p></div>
 <div class="bc rv d1"><div class="big grad">24/7</div><h3><span class="th">ทำงานต่อเนื่อง</span><span class="en">Always running</span></h3><p><span class="th">ระบบทำงานเบื้องหลังตลอดเวลา</span><span class="en">Works quietly in the background.</span></p></div>
-<div class="bc w rv"><div class="ic">🗂</div><h3><span class="th">ตามโครงสร้างองค์กร</span><span class="en">Fits your structure</span></h3><p><span class="th">จัดเก็บตามโปรเจกต์ แผนก หรือลูกค้า รองรับ Local, Network Drive และ Server</span><span class="en">File by project, department or client — local, network drive or server.</span></p></div>
-<div class="bc w rv d1"><div class="ic">🔎</div><h3><span class="th">ค้นหาและตรวจสอบย้อนหลัง</span><span class="en">Search and audit</span></h3><p><span class="th">ค้นหาอีเมลเก่าได้รวดเร็ว พร้อมบันทึกประวัติเพื่อการตรวจสอบ</span><span class="en">Find old emails fast, with a storage log for audits.</span></p></div>
-<div class="bc w rv"><div class="ic">🔒</div><h3><span class="th">ปลอดภัย ควบคุมได้</span><span class="en">Secure and in control</span></h3><p><span class="th">กำหนดสิทธิ์การเข้าถึง และเก็บข้อมูลในระบบของคุณเอง</span><span class="en">Set permissions and keep data inside your own environment.</span></p></div>
-<div class="bc w rv d1"><div class="ic">🧩</div><h3><span class="th">ปรับแต่งได้ตามต้องการ</span><span class="en">Fully customizable</span></h3><p><span class="th">ปรับกฎ รูปแบบชื่อไฟล์ และ Workflow ให้เข้ากับงานจริง</span><span class="en">Tune rules, file naming and workflows to your real work.</span></p></div>
+<div class="bc w rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div><h3><span class="th">ตามโครงสร้างองค์กร</span><span class="en">Fits your structure</span></h3><p><span class="th">จัดเก็บตามโปรเจกต์ แผนก หรือลูกค้า รองรับ Local, Network Drive และ Server</span><span class="en">File by project, department or client — local, network drive or server.</span></p></div>
+<div class="bc w rv d1"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><h3><span class="th">ค้นหาและตรวจสอบย้อนหลัง</span><span class="en">Search and audit</span></h3><p><span class="th">ค้นหาอีเมลเก่าได้รวดเร็ว พร้อมบันทึกประวัติเพื่อการตรวจสอบ</span><span class="en">Find old emails fast, with a storage log for audits.</span></p></div>
+<div class="bc w rv"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><h3><span class="th">ปลอดภัย ควบคุมได้</span><span class="en">Secure and in control</span></h3><p><span class="th">กำหนดสิทธิ์การเข้าถึง และเก็บข้อมูลในระบบของคุณเอง</span><span class="en">Set permissions and keep data inside your own environment.</span></p></div>
+<div class="bc w rv d1"><div class="ic"><svg viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg></div><h3><span class="th">ปรับแต่งได้ตามต้องการ</span><span class="en">Fully customizable</span></h3><p><span class="th">ปรับกฎ รูปแบบชื่อไฟล์ และ Workflow ให้เข้ากับงานจริง</span><span class="en">Tune rules, file naming and workflows to your real work.</span></p></div>
 </div></div></section>
 
 <section id="how" style="background:var(--bg2)"><div class="wrap" style="text-align:center">
@@ -452,7 +441,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 </div>
 <div style="margin-top:28px;" class="rv d3">
   <a class="btn ghost" href="infographic.html" style="font-size:13px; display:inline-flex; align-items:center; gap:8px;">
-    <span>✨</span> <span class="th">ดู Infographic อนิเมชันการทำงานแบบ Interactive</span><span class="en">View Interactive Workflow Infographic</span> <span>→</span>
+    <span class="th">ดู Infographic อนิเมชันการทำงานแบบ Interactive</span><span class="en">View Interactive Workflow Infographic</span> <span>→</span>
   </a>
 </div>
 </div></section>
@@ -471,7 +460,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
       <div class="bc w rv" style="text-align:left; border-color:rgba(10,132,255,.4); background:#111116;">
         <div style="display:flex; justify-content:space-between; align-items:center;">
           <div class="chip" style="margin-top:0; font-size:12px; padding:4px 12px;">Free Trial Edition</div>
-          <span style="font-size:12px; color:var(--teal); font-weight:600;">✓ ฟรีตลอดไป (Free Forever)</span>
+          <span style="font-size:12px; color:var(--teal); font-weight:600;">ฟรีตลอดไป (Free Forever)</span>
         </div>
         <h3 style="font-size:32px; margin:16px 0 6px;">100 <span style="font-size:16px; font-weight:500; color:var(--mute);"><span class="th">ฉบับ/เดือน</span><span class="en">emails/month</span></span></h3>
         <p style="font-size:13px; color:var(--mute); margin-bottom:20px;">
@@ -479,15 +468,15 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
           <span class="en">Auto-resets on the 1st of every month. No credit card required.</span>
         </p>
         <ul style="list-style:none; padding:0; margin:0 0 24px; display:grid; gap:10px; font-size:13px; color:#e1e1e6;">
-          <li>✓ <span class="th">รองรับ <strong>Microsoft Outlook Classic (MAPI)</strong> ดึงอัตโนมัติไม่ต้องใช้รหัสผ่าน</span><span class="en">Supports <strong>Microsoft Outlook Classic (MAPI)</strong> — no password needed</span></li>
-          <li>✓ <span class="th">รองรับ Gmail, Google Workspace & Office 365 (IMAP)</span><span class="en">Supports Gmail, Google Workspace & Office 365 (IMAP)</span></li>
-          <li>✓ <span class="th">ตั้งกฎได้ทั้ง All Emails, Subject, Sender, To/CC, Body & Attachment</span><span class="en">Auto-routing by All Emails, Subject, Sender, To/CC, Body & Attachments</span></li>
-          <li>✓ <span class="th">บันทึกเป็น .msg / .eml พร้อมสกัดไฟล์แนบ & ส่งออก CSV Audit Log</span><span class="en">Saves .msg / .eml, extracts attachments & CSV Audit Export</span></li>
-          <li>✓ <span class="th">ปุ่ม Sync Now ซิงก์ทันที + จัดโฟลเดอร์ตามปี/เดือน หรือผู้ส่ง</span><span class="en">1-Click Sync Now + Year/Month or Sender folder hierarchy</span></li>
+          <li>• <span class="th">รองรับ <strong>Microsoft Outlook Classic (MAPI)</strong> ดึงอัตโนมัติไม่ต้องใช้รหัสผ่าน</span><span class="en">Supports <strong>Microsoft Outlook Classic (MAPI)</strong> — no password needed</span></li>
+          <li>• <span class="th">รองรับ Gmail, Google Workspace & Office 365 (IMAP)</span><span class="en">Supports Gmail, Google Workspace & Office 365 (IMAP)</span></li>
+          <li>• <span class="th">ตั้งกฎได้ทั้ง All Emails, Subject, Sender, To/CC, Body & Attachment</span><span class="en">Auto-routing by All Emails, Subject, Sender, To/CC, Body & Attachments</span></li>
+          <li>• <span class="th">บันทึกเป็น .msg / .eml พร้อมสกัดไฟล์แนบ & ส่งออก CSV Audit Log</span><span class="en">Saves .msg / .eml, extracts attachments & CSV Audit Export</span></li>
+          <li>• <span class="th">ปุ่ม Sync Now ซิงก์ทันที + จัดโฟลเดอร์ตามปี/เดือน หรือผู้ส่ง</span><span class="en">1-Click Sync Now + Year/Month or Sender folder hierarchy</span></li>
         </ul>
         <a class="btn" href="downloads/EmailToFolder-Setup.exe" download style="width:100%; text-align:center;">
-          <span class="th">📥 ดาวน์โหลด Setup.exe ฟรี (~82 MB)</span>
-          <span class="en">📥 Download Setup.exe Free (~82 MB)</span>
+          <span class="th">ดาวน์โหลด Setup.exe ฟรี (~82 MB)</span>
+          <span class="en">Download Setup.exe Free (~82 MB)</span>
         </a>
         <div style="font-size:11px; color:var(--mute); text-align:center; margin-top:8px;">
           Windows 10 / 11 (64-bit) · <strong style="color:var(--mint);">v1.3.0 (Run #4)</strong> · Updated 2026-10-25
@@ -506,15 +495,15 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
           <span class="en">For departments & enterprises requiring unlimited archival and compliance.</span>
         </p>
         <ul style="list-style:none; padding:0; margin:0 0 24px; display:grid; gap:10px; font-size:13px; color:#e1e1e6;">
-          <li>✓ <span class="th"><strong>ไม่จำกัดจำนวนอีเมล</strong> (Unlimited Processing)</span><span class="en"><strong>Unlimited email archiving</strong></span></li>
-          <li>✓ <span class="th">รองรับ Network Drive, NAS และ Server ส่วนกลาง</span><span class="en">Centralized Network Drive, NAS & Server support</span></li>
-          <li>✓ <span class="th">ปรับแต่งรูปแบบการตั้งชื่อไฟล์และกฎเฉพาะองค์กร</span><span class="en">Custom naming conventions & ERP workflows</span></li>
-          <li>✓ <span class="th">ประวัติการจัดเก็บละเอียดสำหรับงาน Audit & Compliance</span><span class="en">Full audit trails & compliance logs</span></li>
-          <li>✓ <span class="th">ทีมงานติดตั้ง ดูแล และซัพพอร์ตโดยเฉพาะ</span><span class="en">Dedicated installation & technical support</span></li>
+          <li>• <span class="th"><strong>ไม่จำกัดจำนวนอีเมล</strong> (Unlimited Processing)</span><span class="en"><strong>Unlimited email archiving</strong></span></li>
+          <li>• <span class="th">รองรับ Network Drive, NAS และ Server ส่วนกลาง</span><span class="en">Centralized Network Drive, NAS & Server support</span></li>
+          <li>• <span class="th">ปรับแต่งรูปแบบการตั้งชื่อไฟล์และกฎเฉพาะองค์กร</span><span class="en">Custom naming conventions & ERP workflows</span></li>
+          <li>• <span class="th">ประวัติการจัดเก็บละเอียดสำหรับงาน Audit & Compliance</span><span class="en">Full audit trails & compliance logs</span></li>
+          <li>• <span class="th">ทีมงานติดตั้ง ดูแล และซัพพอร์ตโดยเฉพาะ</span><span class="en">Dedicated installation & technical support</span></li>
         </ul>
         <a class="btn ghost" href="#contact" style="width:100%; text-align:center; border:1px solid var(--line);">
-          <span class="th">💬 ติดต่อขอใบเสนอราคา / ปรึกษาทีมงาน</span>
-          <span class="en">💬 Contact for Pricing & Demo</span>
+          <span class="th">ติดต่อขอใบเสนอราคา / ปรึกษาทีมงาน</span>
+          <span class="en">Contact for Pricing & Demo</span>
         </a>
         <div style="font-size:11px; color:var(--mute); text-align:center; margin-top:8px;">
           <span class="th">โทร 094-562-0859 หรืออีเมล teraphanmail@gmail.com</span>
@@ -526,8 +515,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
       <div class="bc x rv d2" style="text-align:left; min-height:0; background:linear-gradient(135deg,#ffffff 0%,#f4f8ff 100%); border:1px solid rgba(10,132,255,.28); display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; padding:28px 32px;">
         <div style="flex:1 1 460px;">
           <div style="display:inline-flex; align-items:center; gap:8px; margin-bottom:10px;">
-            <span class="chip" style="margin-top:0; font-size:11.5px; padding:4px 12px; background:rgba(10,132,255,.12); color:var(--brand);">🧩 NEW · Chrome Extension (Manifest V3)</span>
-            <span style="font-size:12px; color:#059669; font-weight:700;">✓ Gmail API + Microsoft Graph</span>
+            <span class="chip" style="margin-top:0; font-size:11.5px; padding:4px 12px; background:rgba(10,132,255,.12); color:var(--brand);">NEW · Chrome Extension (Manifest V3)</span>
+            <span style="font-size:12px; color:#059669; font-weight:700;">Gmail API + Microsoft Graph</span>
           </div>
           <h3 style="font-size:24px; margin:0 0 8px; color:var(--ink);">
             <span class="th">Email to Folder for Chrome — ส่วนขยายสำหรับ Gmail &amp; Outlook Web</span>
@@ -540,8 +529,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
         </div>
         <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
           <a class="btn" href="downloads/EmailToFolder-Chrome-Extension.zip" download style="padding:12px 22px; font-size:14px;">
-            <span class="th">📦 ดาวน์โหลด Chrome Extension (.zip)</span>
-            <span class="en">📦 Download Chrome Extension (.zip)</span>
+            <span class="th">ดาวน์โหลด Chrome Extension (.zip)</span>
+            <span class="en">Download Chrome Extension (.zip)</span>
           </a>
           <a class="btn ghost" href="extension.html" style="padding:12px 20px; font-size:14px; border:1px solid rgba(10,132,255,.3);">
             <span class="th">คู่มือติดตั้ง &amp; ตั้งค่า OAuth →</span>
@@ -554,17 +543,17 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
     <!-- Quick Compatibility & FAQ Cards -->
     <div class="bento" style="margin-top:24px; text-align:left;">
       <div class="bc rv" style="min-height:0; padding:24px;">
-        <div style="font-size:26px; margin-bottom:8px;">💻</div>
+        <div class="ic" style="margin-bottom:10px;"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
         <h3 style="font-size:18px; margin:0 0 6px;"><span class="th">Outlook Classic (MAPI)</span><span class="en">Outlook Classic (MAPI)</span></h3>
         <p style="font-size:13px;"><span class="th">ตรวจจับโปรไฟล์ Outlook Classic ในเครื่องอัตโนมัติ ไม่ต้องกรอกรหัสผ่าน ดึงอีเมลเป็นไฟล์ .msg และแยกไฟล์แนบทันที</span><span class="en">Auto-detects your local Outlook Classic profile with zero password configuration and exports .msg + attachments.</span></p>
       </div>
       <div class="bc rv d1" style="min-height:0; padding:24px;">
-        <div style="font-size:26px; margin-bottom:8px;">🇬</div>
+        <div class="ic" style="margin-bottom:10px;"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
         <h3 style="font-size:18px; margin:0 0 6px;"><span class="th">Gmail & Google Workspace</span><span class="en">Gmail & Workspace</span></h3>
         <p style="font-size:13px;"><span class="th">เชื่อมต่อผ่าน IMAP Secure ด้วย App Password ซิงก์อีเมลเบื้องหลังแบบ Real-time IDLE ตลอด 24 ชั่วโมง</span><span class="en">Connects via IMAP with App Password for 24/7 real-time background archiving.</span></p>
       </div>
       <div class="bc rv d2" style="min-height:0; padding:24px;">
-        <div style="font-size:26px; margin-bottom:8px;">🏢</div>
+        <div class="ic" style="margin-bottom:10px;"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div>
         <h3 style="font-size:18px; margin:0 0 6px;"><span class="th">Office 365 & Mail Server</span><span class="en">Office 365 & Custom IMAP</span></h3>
         <p style="font-size:13px;"><span class="th">รองรับเซิร์ฟเวอร์อีเมลบริษัททุกรูปแบบ จัดเก็บลงได้ทั้ง Local Folder, Network Share และ NAS</span><span class="en">Works with any corporate IMAP server and saves directly to Local Drives, Network Shares, or NAS.</span></p>
       </div>
@@ -575,33 +564,6 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 <!-- Live Global Email Server Status Section -->
 <section id="email-status" style="background:var(--bg); border-top:1px solid var(--line); padding:85px 0;">
   <div class="wrap">
-    <!-- Top Prominent Banner: Email Security API & Live Vulnerability Feed -->
-    <div style="margin-bottom:28px; background:linear-gradient(135deg,#0d1527 0%,#16102c 100%); border:2px solid rgba(56,189,248,.45); border-radius:24px; padding:24px 28px; color:#f8fafc; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:18px; box-shadow:0 18px 45px rgba(10,132,255,.16);">
-      <div style="flex:1 1 520px; text-align:left;">
-        <div style="display:inline-flex; align-items:center; gap:8px; padding:4px 12px; border-radius:999px; background:rgba(239,68,68,.2); border:1px solid rgba(239,68,68,.5); color:#fecaca; font-size:11.5px; font-weight:800; margin-bottom:10px; letter-spacing:.03em;">
-          <span style="width:8px;height:8px;border-radius:50%;background:#ef4444;box-shadow:0 0 8px #ef4444;display:inline-block;"></span>
-          <span>NEW · EMAIL SECURITY API &amp; LIVE CVE VULNERABILITY FEED</span>
-        </div>
-        <h3 style="margin:0 0 8px; font-size:clamp(19px,2.5vw,23px); color:#fff; line-height:1.3;">
-          <span class="th">🛡️ Email Security API (สแกนอีเมลปลอม SPF/DMARC/Header) &amp; ฟีดข่าวช่องโหว่อีเมล (CVE / CISA KEV)</span>
-          <span class="en">🛡️ Free Email Security Audit API &amp; Live Email Vulnerability Feed (CVE / CISA KEV)</span>
-        </h3>
-        <p style="margin:0; font-size:13.5px; color:#cbd5e1; line-height:1.55;">
-          <span class="th">ตรวจสอบความน่าเชื่อถือของอีเมลคู่ค้าก่อนเปิดไฟล์แนบ วิเคราะห์ Raw Header ป้องกันอีเมลหลอกโอนเงิน (BEC) และติดตามข่าวช่องโหว่ <b>CVE-2024-21413 (MonikerLink)</b>, <b>CVE-2023-23397</b>, <b>SMTP Smuggling</b> แบบเรียลไทม์</span>
-          <span class="en">Audit sender domains against BEC spoofing, inspect raw RFC 5322 headers, and subscribe to real-time Outlook, Gmail, Exchange &amp; SMTP vulnerability advisories via JSON &amp; RSS.</span>
-        </p>
-      </div>
-      <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
-        <a href="status.html#email-api" class="btn" style="background:linear-gradient(135deg,#0a84ff,#30d5c8); color:#fff; padding:12px 22px; font-size:14px; font-weight:700; box-shadow:0 8px 24px rgba(10,132,255,.4);">
-          <span class="th">⚡ เปิด Email Security API →</span>
-          <span class="en">⚡ Open Email Security API →</span>
-        </a>
-        <a href="status.html#vuln-feed" class="btn" style="background:linear-gradient(135deg,#dc2626,#f59e0b); color:#fff; padding:12px 22px; font-size:14px; font-weight:700; box-shadow:0 8px 24px rgba(220,38,38,.35);">
-          <span class="th">🚨 ดูฟีดข่าวช่องโหว่อีเมล (CVE Feed) →</span>
-          <span class="en">🚨 View Vulnerability Feed →</span>
-        </a>
-      </div>
-    </div>
 
     <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:20px; flex-wrap:wrap; margin-bottom:28px;">
       <div>
@@ -681,34 +643,6 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
     </a>
 
     <div id="homeStatusGrid" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:14px;"></div>
-
-    <!-- Email User Security API & Live Vulnerability Feed Banner -->
-    <div style="margin-top:24px; background:linear-gradient(135deg,#0d1527 0%,#130f26 100%); border:1px solid rgba(239,68,68,.35); border-radius:22px; padding:22px 26px; color:#f8fafc; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:18px; box-shadow:0 16px 40px rgba(0,0,0,.18);">
-      <div style="flex:1 1 520px;">
-        <div style="display:inline-flex; align-items:center; gap:8px; padding:4px 12px; border-radius:999px; background:rgba(239,68,68,.16); border:1px solid rgba(239,68,68,.4); color:#fca5a5; font-size:11.5px; font-weight:700; margin-bottom:8px;">
-          <span style="width:7px;height:7px;border-radius:50%;background:#ef4444;box-shadow:0 0 8px #ef4444;"></span>
-          <span>NEW · EMAIL SECURITY API &amp; LIVE CVE VULNERABILITY FEED</span>
-        </div>
-        <h3 style="margin:0 0 6px; font-size:20px; color:#fff;">
-          <span class="th">🛡️ ฟรี API ตรวจสอบความปลอดภัยอีเมล (SPF/DMARC/Header Spoofing) &amp; ฟีดข่าวช่องโหว่อีเมล (CVE / KEV)</span>
-          <span class="en">🛡️ Free Email Security Audit API &amp; Live Email Vulnerability Feed (CVE / CISA KEV)</span>
-        </h3>
-        <p style="margin:0; font-size:13.5px; color:#cbd5e1;">
-          <span class="th">ตรวจสอบอีเมลคู่ค้าก่อนเปิดไฟล์แนบ วิเคราะห์ Header ป้องกันอีเมลปลอม (BEC) และติดตามข่าวช่องโหว่ <b>CVE-2024-21413 (MonikerLink)</b>, <b>CVE-2023-23397</b>, <b>SMTP Smuggling</b> แบบเรียลไทม์ผ่าน JSON / RSS</span>
-          <span class="en">Audit sender domains against BEC spoofing, inspect raw RFC 5322 headers, and subscribe to real-time Outlook, Gmail, Exchange &amp; SMTP vulnerability advisories via JSON &amp; RSS.</span>
-        </p>
-      </div>
-      <div style="display:flex; gap:10px; flex-wrap:wrap;">
-        <a href="status.html#email-api" class="btn sm" style="background:linear-gradient(135deg,#0a84ff,#30d5c8); color:#fff; padding:11px 20px; font-size:13.5px;">
-          <span class="th">⚡ ทดลองใช้ Email Security API →</span>
-          <span class="en">⚡ Try Email Security API →</span>
-        </a>
-        <a href="status.html#vuln-feed" class="btn ghost sm" style="border:1px solid rgba(255,255,255,.25); color:#fff; padding:11px 18px; font-size:13.5px;">
-          <span class="th">🚨 ดูฟีดข่าวช่องโหว่อีเมล (CVE Feed)</span>
-          <span class="en">🚨 View Vulnerability Feed</span>
-        </a>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -726,7 +660,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
       <div class="bc w rv" style="text-align:left; background:var(--bg2);">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
           <span class="chip" style="margin:0; background:rgba(239,68,68,.12); color:#dc2626;">Security & PDPA</span>
-          <span style="font-size:12px; color:var(--mute);">⏱ 6 min read</span>
+          <span style="font-size:12px; color:var(--mute);">6 min read</span>
         </div>
         <h3 style="font-size:20px; line-height:1.35; margin:0 0 10px;">
           <a href="articles/email-security-compliance-guide.html">
@@ -747,7 +681,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
       <div class="bc w rv d1" style="text-align:left; background:var(--bg2);">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
           <span class="chip" style="margin:0; background:rgba(10,132,255,.12); color:var(--brand);">Zero-Inbox Guide</span>
-          <span style="font-size:12px; color:var(--mute);">⏱ 5 min read</span>
+          <span style="font-size:12px; color:var(--mute);">5 min read</span>
         </div>
         <h3 style="font-size:20px; line-height:1.35; margin:0 0 10px;">
           <a href="articles/how-to-organize-outlook-zero-inbox.html">
@@ -768,7 +702,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
       <div class="bc x rv d2" style="text-align:left; background:var(--bg2);">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
           <span class="chip" style="margin:0; background:rgba(138,92,255,.12); color:var(--vio);">Productivity Tricks</span>
-          <span style="font-size:12px; color:var(--mute);">⏱ 7 min read</span>
+          <span style="font-size:12px; color:var(--mute);">7 min read</span>
         </div>
         <h3 style="font-size:20px; line-height:1.35; margin:0 0 10px;">
           <a href="articles/5-email-tricks-for-accounting-finance.html">
@@ -801,7 +735,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
     <!-- Section Header -->
     <div style="text-align:center; max-width:820px; margin:0 auto 50px;">
       <div class="badge rv" style="background:rgba(48,213,200,.14); color:var(--teal); border:1px solid rgba(48,213,200,.3); padding:6px 16px; font-size:12px; font-weight:700;">
-        <span>✦</span> <span class="th">OFFICIAL MASCOT & CYBER GUARDIAN</span><span class="en">OFFICIAL MASCOT & CYBER GUARDIAN</span>
+        <span class="th">OFFICIAL MASCOT & CYBER GUARDIAN</span><span class="en">OFFICIAL MASCOT & CYBER GUARDIAN</span>
       </div>
       <h2 class="rv d1" style="font-size:clamp(32px,5.5vw,56px); font-weight:800; line-height:1.2; margin:16px 0 18px; color:#fff;">
         <span class="th">พบกับ <span class="grad">EmailMan</span><br>ฮีโร่และมาสคอตประจำ Email to Folder</span>
@@ -821,7 +755,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
         <div>
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
             <span style="font-size:12px; font-weight:700; color:var(--teal); letter-spacing:1px; text-transform:uppercase;">
-              <span>🤖</span> <span class="th">ข้อมูลประจำตัวมาสคอต</span><span class="en">Character Dossier</span>
+              <span class="th">ข้อมูลประจำตัวมาสคอต</span><span class="en">Character Dossier</span>
             </span>
             <span style="background:rgba(10,132,255,.2); color:var(--brand); padding:3px 10px; border-radius:999px; font-size:11px; font-weight:700;">STATUS: ACTIVE 24/7</span>
           </div>
@@ -835,22 +769,22 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
           <!-- Tactical Feature Grid -->
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:24px;">
             <div style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:14px; padding:12px 14px;">
-              <div style="font-size:16px; margin-bottom:4px;">🚀</div>
+              <div style="font-size:11px; font-weight:800; color:var(--brand); letter-spacing:.05em; margin-bottom:4px;">IMAP IDLE</div>
               <div style="font-size:12px; font-weight:700; color:#fff;"><span class="th">ไอพ่น IMAP IDLE</span><span class="en">IMAP Thrusters</span></div>
               <div style="font-size:11px; color:#9ca3af;"><span class="th">ตรวจจับเมลใน 0.5 วินาที</span><span class="en">Push detect in 0.5s</span></div>
             </div>
             <div style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:14px; padding:12px 14px;">
-              <div style="font-size:16px; margin-bottom:4px;">🛡️</div>
+              <div style="font-size:11px; font-weight:800; color:var(--teal); letter-spacing:.05em; margin-bottom:4px;">TLS / AES-256</div>
               <div style="font-size:12px; font-weight:700; color:#fff;"><span class="th">เกราะ TLS / AES-256</span><span class="en">TLS 1.3 Armor</span></div>
               <div style="font-size:11px; color:#9ca3af;"><span class="th">เก็บในเครื่อง ไม่ส่งออกนอก</span><span class="en">100% On-Premise</span></div>
             </div>
             <div style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:14px; padding:12px 14px;">
-              <div style="font-size:16px; margin-bottom:4px;">📁</div>
+              <div style="font-size:11px; font-weight:800; color:var(--vio); letter-spacing:.05em; margin-bottom:4px;">AUTO-ROUTE</div>
               <div style="font-size:12px; font-weight:700; color:#fff;"><span class="th">ช่องเก็บไฟล์อัจฉริยะ</span><span class="en">Cargo Bay</span></div>
               <div style="font-size:11px; color:#9ca3af;"><span class="th">แยก PDF, Excel, .MSG</span><span class="en">Auto-route attachments</span></div>
             </div>
             <div style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:14px; padding:12px 14px;">
-              <div style="font-size:16px; margin-bottom:4px;">⚡</div>
+              <div style="font-size:11px; font-weight:800; color:#38bdf8; letter-spacing:.05em; margin-bottom:4px;">ZERO-INBOX</div>
               <div style="font-size:12px; font-weight:700; color:#fff;"><span class="th">Zero-Inbox Power</span><span class="en">Zero-Inbox Force</span></div>
               <div style="font-size:11px; color:#9ca3af;"><span class="th">จัดระเบียบตามกฎอัตโนมัติ</span><span class="en">Rules & audit logging</span></div>
             </div>
@@ -879,7 +813,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
         <div>
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
             <span style="font-size:12px; font-weight:700; color:var(--brand); letter-spacing:1px; text-transform:uppercase;">
-              <span>🕹️</span> <span class="th">สถานีทดสอบจำลองภารกิจ</span><span class="en">Mission Simulator Station</span>
+              <span class="th">สถานีทดสอบจำลองภารกิจ</span><span class="en">Mission Simulator Station</span>
             </span>
             <span style="background:rgba(48,213,200,.15); color:var(--teal); padding:3px 10px; border-radius:999px; font-size:11px; font-weight:700;">RETRO 2D PIXEL ARCADE</span>
           </div>
@@ -900,25 +834,24 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
             <div style="position:absolute; inset:0; background:linear-gradient(rgba(18,16,16,0) 50%,rgba(0,0,0,.4) 50%); background-size:100% 4px; pointer-events:none; opacity:.7;"></div>
             
             <div style="font-family:'Press Start 2P', monospace, monospace; font-size:11px; color:var(--teal); margin-bottom:12px; letter-spacing:1px;">
-              ⚡ READY PLAYER ONE ⚡
+              READY PLAYER ONE
             </div>
 
             <!-- Arcade Snapshot Preview Graphic -->
-            <div style="display:flex; justify-content:center; align-items:center; gap:20px; padding:16px 0;">
-              <div style="font-size:28px; animation:fl 3s ease-in-out infinite;">✉️</div>
-              <div style="font-size:14px; color:var(--brand); font-weight:bold;">━━━━►</div>
-              <div style="font-size:24px; animation:fl 4s ease-in-out infinite;">👾</div>
-              <div style="font-size:24px; animation:fl 3.5s ease-in-out infinite;">📎</div>
-              <div style="font-size:14px; color:var(--teal); font-weight:bold;">━━━━►</div>
-              <div style="font-size:28px;">📁</div>
+            <div style="display:flex; justify-content:center; align-items:center; gap:14px; padding:16px 0; font-family:monospace; font-size:12px; font-weight:700; color:#e2e8f0;">
+              <span style="padding:6px 10px; border-radius:8px; background:rgba(10,132,255,.2); border:1px solid rgba(10,132,255,.4); color:#60a5fa;">PACKET</span>
+              <span style="color:var(--brand);">---&gt;</span>
+              <span style="padding:6px 10px; border-radius:8px; background:rgba(239,68,68,.18); border:1px solid rgba(239,68,68,.35); color:#f87171;">FIREWALL</span>
+              <span style="color:var(--teal);">---&gt;</span>
+              <span style="padding:6px 10px; border-radius:8px; background:rgba(48,213,200,.18); border:1px solid rgba(48,213,200,.4); color:var(--teal);">FOLDER</span>
             </div>
 
             <div style="display:flex; justify-content:center; gap:16px; font-size:11px; color:#a1a1aa; margin-top:8px;">
-              <span>🔊 8-Bit Web Audio</span>
+              <span>8-Bit Web Audio</span>
               <span>•</span>
-              <span>📺 CRT Phosphor Filter</span>
+              <span>CRT Phosphor Filter</span>
               <span>•</span>
-              <span>📱 PC / Mobile Ready</span>
+              <span>PC / Mobile Ready</span>
             </div>
           </div>
         </div>
@@ -926,12 +859,12 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
         <!-- Call to Action Buttons -->
         <div style="margin-top:28px; display:flex; flex-direction:column; gap:12px;">
           <a href="game.html" class="btn" style="background:linear-gradient(135deg,var(--teal),var(--brand)); color:#07080d; font-weight:800; font-size:15px; text-align:center; padding:15px 28px; box-shadow:0 10px 30px rgba(48,213,200,.4);">
-            <span class="th">🕹️ เล่นเกม EmailMan ทันที (Play Free Minigame) →</span>
-            <span class="en">🕹️ Play EmailMan Minigame Free →</span>
+            <span class="th">เล่นเกม EmailMan ทันที (Play Free Minigame) →</span>
+            <span class="en">Play EmailMan Minigame Free →</span>
           </a>
           <div style="text-align:center; font-size:12px; color:#6b7280;">
-            <span class="th">✨ เล่นได้ทันทีบนเบราว์เซอร์ ไม่ต้องติดตั้ง 100% Client-Side บน GitHub Pages</span>
-            <span class="en">✨ Instant Play in browser · No install required · 100% on GitHub Pages</span>
+            <span class="th">เล่นได้ทันทีบนเบราว์เซอร์ ไม่ต้องติดตั้ง 100% Client-Side บน GitHub Pages</span>
+            <span class="en">Instant Play in browser · No install required · 100% on GitHub Pages</span>
           </div>
         </div>
       </div>
@@ -944,10 +877,10 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 <div><div class="eb">Case by Case</div><h2><span class="th">ซัพพอร์ตเฉพาะองค์กร<br><span class="grad">Custom ตามที่ต้องการ</span></span><span class="en">Support built around you.<br><span class="grad">Customized your way.</span></span></h2>
 <p><span class="th">ทุกองค์กรมีกระบวนการไม่เหมือนกัน เราจึงปรับฟีเจอร์และ Workflow ให้ตรงกับการใช้งานจริง พร้อมดูแลหลังการติดตั้ง</span><span class="en">Every organization works differently, so we tailor features and workflows to your real use and support you after deployment.</span></p></div>
 <ul>
-<li>✓ <span class="th">ปรับกฎและรูปแบบการตั้งชื่อไฟล์</span><span class="en">Custom rules and file naming</span></li>
-<li>✓ <span class="th">เชื่อมต่อระบบภายในองค์กร</span><span class="en">Integration with internal systems</span></li>
-<li>✓ <span class="th">พัฒนาฟีเจอร์เพิ่มตามโจทย์</span><span class="en">Extra features built to your brief</span></li>
-<li>✓ <span class="th">ทีมซัพพอร์ตดูแลต่อเนื่อง</span><span class="en">Ongoing dedicated support</span></li>
+<li><span class="th">ปรับกฎและรูปแบบการตั้งชื่อไฟล์</span><span class="en">Custom rules and file naming</span></li>
+<li><span class="th">เชื่อมต่อระบบภายในองค์กร</span><span class="en">Integration with internal systems</span></li>
+<li><span class="th">พัฒนาฟีเจอร์เพิ่มตามโจทย์</span><span class="en">Extra features built to your brief</span></li>
+<li><span class="th">ทีมซัพพอร์ตดูแลต่อเนื่อง</span><span class="en">Ongoing dedicated support</span></li>
 </ul></div></div></div></section>
 
 <section id="contact" class="ct dk"><div class="orb o1" style="opacity:.3"></div><div class="orb o2" style="opacity:.3"></div>
@@ -998,7 +931,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 </main>
 
 <div class="gh"><a href="https://github.com" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span class="th">เว็บไซต์นี้โฮสต์ด้วย GitHub</span><span class="en">This website is hosted on GitHub</span></a></div>
-<footer class="dk"><div class="wrap"><div>© 2026 Email to Folder Dev Team · emailtofolder.com</div><div>📍 Bangkok, Thailand · 📞 094-562-0859</div></div></footer>
+<footer class="dk"><div class="wrap"><div>© 2026 Email to Folder Dev Team · emailtofolder.com</div><div>Bangkok, Thailand · 094-562-0859</div></div></footer>
 
 <script>
 (function(){

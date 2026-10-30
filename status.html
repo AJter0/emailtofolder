@@ -440,21 +440,6 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
         <span class="en">Real-time operational telemetry, edge ping (ms), and MX verification across all 12 global Origin Server clusters for <b>Gmail (Google Workspace)</b> and <b>Microsoft Outlook (Microsoft 365 / Exchange Online)</b>.</span>
       </p>
 
-      <!-- Quick Jump Banner to Email Security API & Live Vulnerability Feed -->
-      <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:-8px auto 24px;">
-        <a href="#email-api" class="btn sm" style="background:linear-gradient(135deg,#0a84ff,#30d5c8);color:#fff;padding:10px 20px;font-size:13.5px;box-shadow:0 8px 22px rgba(10,132,255,.3);">
-          <span class="th">🛡️ ไปที่ Email Security &amp; Anti-Spoofing API Console ↓</span>
-          <span class="en">🛡️ Jump to Email Security API Console ↓</span>
-        </a>
-        <a href="#vuln-feed" class="btn sm" style="background:linear-gradient(135deg,#dc2626,#f59e0b);color:#fff;padding:10px 20px;font-size:13.5px;box-shadow:0 8px 22px rgba(220,38,38,.28);">
-          <span class="th">🚨 ไปที่ฟีดข่าวช่องโหว่อีเมล (Live CVE / KEV Feed) ↓</span>
-          <span class="en">🚨 Jump to Live Email Vulnerability Feed ↓</span>
-        </a>
-        <a href="api/email-vulnerabilities.json" target="_blank" rel="noopener" class="btn ghost sm" style="border:1px solid var(--line);padding:10px 16px;font-size:13px;">
-          <span>📄 JSON API (<code>/api/email-vulnerabilities.json</code>) ↗</span>
-        </a>
-      </div>
-
       <!-- 4-Card KPI Summary Bar -->
       <div class="kpi-grid">
         <div class="kpi-card">
@@ -674,7 +659,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
       <div class="api-console" id="email-api">
         <div class="api-head">
           <div>
-            <span class="api-badge">⚡ OPEN EMAIL SECURITY &amp; DELIVERABILITY API v1.0</span>
+            <span class="api-badge">OPEN EMAIL SECURITY &amp; DELIVERABILITY API v1.0</span>
             <h2 style="margin:10px 0 6px;font-size:clamp(20px,3vw,26px);color:#fff;">
               <span class="th">API สำหรับผู้ใช้งานอีเมล: ตรวจสอบความปลอดภัยอีเมล, สแกนอีเมลปลอม (BEC) &amp; วิเคราะห์ Header</span>
               <span class="en">Email User Utility API: Spoofing Risk Audit, Disposable Detector &amp; Header Phishing Analyzer</span>
@@ -685,9 +670,9 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
             </div>
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <a href="api/email-security-api.js" target="_blank" rel="noopener" class="reg-btn" style="text-decoration:none;">📦 SDK: <code>/api/email-security-api.js</code></a>
-            <a href="api/email-vulnerabilities.json" target="_blank" rel="noopener" class="reg-btn" style="text-decoration:none;">📄 JSON Feed: <code>/api/email-vulnerabilities.json</code></a>
-            <a href="api/email-vulnerabilities.xml" target="_blank" rel="noopener" class="reg-btn" style="text-decoration:none;">📡 RSS: <code>/api/email-vulnerabilities.xml</code></a>
+            <a href="api/email-security-api.js" target="_blank" rel="noopener" class="reg-btn" style="text-decoration:none;">SDK: <code>/api/email-security-api.js</code></a>
+            <a href="api/email-vulnerabilities.json" target="_blank" rel="noopener" class="reg-btn" style="text-decoration:none;">JSON Feed: <code>/api/email-vulnerabilities.json</code></a>
+            <a href="api/email-vulnerabilities.xml" target="_blank" rel="noopener" class="reg-btn" style="text-decoration:none;">RSS: <code>/api/email-vulnerabilities.xml</code></a>
           </div>
         </div>
 
@@ -711,8 +696,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
           <form class="domain-form" id="apiAuditForm" style="margin-bottom:12px;">
             <input type="text" class="domain-input" id="apiAuditInput" value="accounting@gmail.com" placeholder="พิมพ์อีเมลผู้ส่ง เช่น billing@vendor.co.th, ceo@outlook.com หรือ mailinator.com" style="background:#070c18;color:#fff;border-color:rgba(56,189,248,.35);" required>
             <button type="submit" class="btn sm" style="padding:11px 22px;font-size:14px;">
-              <span class="th">⚡ เรียก API ตรวจสอบอีเมล</span>
-              <span class="en">⚡ Run Email Security API</span>
+              <span class="th">เรียก API ตรวจสอบอีเมล</span>
+              <span class="en">Run Email Security API</span>
             </button>
           </form>
           <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;font-size:12px;color:#94a3b8;align-items:center;">
@@ -745,15 +730,15 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
               <span class="en">Paste raw RFC 5322 email headers from Outlook or Gmail to detect Return-Path mismatch, Reply-To hijacking, and CVE-2024-49040 spoofing:</span>
             </span>
             <div style="display:flex;gap:6px;flex-wrap:wrap;">
-              <button type="button" class="reg-btn" id="loadSpoofSampleBtn"><span class="th">🚨 โหลดตัวอย่างเมลปลอม (BEC Spoof)</span><span class="en">🚨 Load Spoofed BEC Sample</span></button>
-              <button type="button" class="reg-btn" id="loadCleanSampleBtn"><span class="th">✅ โหลดตัวอย่างเมลปลอดภัย</span><span class="en">✅ Load Clean Header Sample</span></button>
+              <button type="button" class="reg-btn" id="loadSpoofSampleBtn"><span class="th">โหลดตัวอย่างเมลปลอม (BEC Spoof)</span><span class="en">Load Spoofed BEC Sample</span></button>
+              <button type="button" class="reg-btn" id="loadCleanSampleBtn"><span class="th">โหลดตัวอย่างเมลปลอดภัย</span><span class="en">Load Clean Header Sample</span></button>
             </div>
           </div>
           <textarea class="api-textarea" id="apiHeaderInput" placeholder="From: CEO <ceo@company.co.th>&#10;Return-Path: <bounce@untrusted-mailer.xyz>&#10;Reply-To: <wire-transfer@attacker-domain.com>&#10;Subject: Urgent Invoice Payment&#10;Authentication-Results: mx.google.com; spf=fail; dmarc=fail"></textarea>
           <div style="margin:12px 0 16px;">
             <button type="button" class="btn sm" id="runHeaderApiBtn" style="padding:10px 22px;font-size:13.5px;">
-              <span class="th">🔍 วิเคราะห์ Header ด้วย API ทันที</span>
-              <span class="en">🔍 Analyze Email Header Now</span>
+              <span class="th">วิเคราะห์ Header ด้วย API ทันที</span>
+              <span class="en">Analyze Email Header Now</span>
             </button>
           </div>
           <div class="api-split">
@@ -826,8 +811,8 @@ https://emailtofolder.com/api/email-vulnerabilities.xml</pre>
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
             <button type="button" class="btn ghost sm" id="syncNvdLiveBtn" style="border:1px solid var(--line);font-size:12.5px;padding:8px 14px;">
-              <span class="th">🔄 ดึงข้อมูลล่าสุดจาก NIST NVD API</span>
-              <span class="en">🔄 Sync Live NIST NVD API</span>
+              <span class="th">ดึงข้อมูลล่าสุดจาก NIST NVD API</span>
+              <span class="en">Sync Live NIST NVD API</span>
             </button>
             <a href="api/email-vulnerabilities.json" target="_blank" rel="noopener" class="retest-btn" style="padding:7px 13px;font-size:12px;">JSON API ↗</a>
             <a href="api/email-vulnerabilities.xml" target="_blank" rel="noopener" class="retest-btn" style="padding:7px 13px;font-size:12px;">RSS Feed ↗</a>
@@ -857,7 +842,7 @@ https://emailtofolder.com/api/email-vulnerabilities.xml</pre>
 </main>
 
 <div class="gh"><a href="https://github.com/AJter0/emailtofolder" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span class="th">เว็บไซต์นี้โฮสต์ด้วย GitHub</span><span class="en">This website is hosted on GitHub</span></a></div>
-<footer class="dk"><div class="wrap"><div>© 2026 Email to Folder Dev Team · emailtofolder.com</div><div>📍 Bangkok, Thailand · 📞 094-562-0859</div></div></footer>
+<footer class="dk"><div class="wrap"><div>© 2026 Email to Folder Dev Team · emailtofolder.com</div><div>Bangkok, Thailand · 094-562-0859</div></div></footer>
 
 <script src="api/email-security-api.js"></script>
 <script>
@@ -1485,7 +1470,7 @@ https://emailtofolder.com/api/email-vulnerabilities.xml</pre>
 
     resBox.innerHTML =
       '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">' +
-        '<div style="font-size:16px;font-weight:700;">🌐 '+esc(dom)+' — <span style="color:var(--brand)">'+esc(detectedPlatform)+'</span></div>' +
+        '<div style="font-size:16px;font-weight:700;">'+esc(dom)+' — <span style="color:var(--brand)">'+esc(detectedPlatform)+'</span></div>' +
         stBadge +
       '</div>' +
       '<div class="dr-grid">' +
@@ -1549,7 +1534,7 @@ https://emailtofolder.com/api/email-vulnerabilities.xml</pre>
       vis.innerHTML =
         '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px;">' +
           '<div>' +
-            '<div style="font-size:17px;font-weight:800;color:#fff;">📧 '+esc(res.input)+'</div>' +
+            '<div style="font-size:17px;font-weight:800;color:#fff;">'+esc(res.input)+'</div>' +
             '<div style="font-size:12px;color:#38bdf8;margin-top:2px;">Gateway: '+esc(res.mail_gateway)+' · '+res.latency_ms+' ms</div>' +
           '</div>' +
           '<span class="score-pill '+pillCls+'">Grade '+esc(res.security_grade)+' ('+res.security_score+'/100) · '+riskLbl+'</span>' +
@@ -1572,7 +1557,7 @@ https://emailtofolder.com/api/email-vulnerabilities.xml</pre>
           findings.map(function(f){ return '<div>'+esc(f)+'</div>'; }).join('') +
         '</div>' +
         '<div style="background:rgba(10,132,255,.15);border:1px solid rgba(10,132,255,.35);border-radius:10px;padding:9px 12px;font-size:12px;color:#93c5fd;">' +
-          '💡 '+esc(res.recommended_rule_th) +
+          esc(res.recommended_rule_th) +
         '</div>';
     }
   }
@@ -1597,7 +1582,7 @@ https://emailtofolder.com/api/email-vulnerabilities.xml</pre>
     copyApiBtn.addEventListener('click', function(){
       var txt = document.getElementById('apiAuditJson').textContent;
       if(navigator.clipboard) navigator.clipboard.writeText(txt);
-      copyApiBtn.textContent = 'Copied ✓';
+      copyApiBtn.textContent = 'Copied';
       setTimeout(function(){ copyApiBtn.textContent = 'Copy JSON'; }, 1800);
     });
   }
@@ -1715,16 +1700,16 @@ https://emailtofolder.com/api/email-vulnerabilities.xml</pre>
             '<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">' +
               '<span class="cve-badge">'+esc(v.cve)+'</span>' +
               (v.codename ? '<span style="font-size:12px;font-weight:700;color:var(--brand);">'+esc(v.codename)+'</span>' : '') +
-              (v.kev ? '<span class="kev-tag">🔥 CISA KEV</span>' : '') +
+              (v.kev ? '<span class="kev-tag">CISA KEV</span>' : '') +
             '</div>' +
             '<span class="cvss-tag '+esc(v.severity)+'">CVSS '+esc(v.cvss)+' · '+esc(v.severity)+'</span>' +
           '</div>' +
-          '<div style="font-size:11.5px;color:var(--mute);font-weight:600;margin:8px 0 4px;">🎯 '+esc(v.product)+' · Published: '+esc(v.published)+'</div>' +
+          '<div style="font-size:11.5px;color:var(--mute);font-weight:600;margin:8px 0 4px;">'+esc(v.product)+' · Published: '+esc(v.published)+'</div>' +
           '<h3 class="vc-title">'+esc(title)+'</h3>' +
           '<p class="vc-desc" style="margin-top:6px;">'+esc(desc)+'</p>' +
         '</div>' +
         '<div>' +
-          '<div class="vc-mit"><strong>🛡️ '+(isTh?'วิธีป้องกันสำหรับผู้ใช้: ':'Mitigation: ')+'</strong>'+esc(mit)+'</div>' +
+          '<div class="vc-mit"><strong>'+(isTh?'วิธีป้องกันสำหรับผู้ใช้: ':'Mitigation: ')+'</strong>'+esc(mit)+'</div>' +
           '<div class="vc-foot" style="margin-top:10px;">' +
             '<div class="vc-tags">'+(v.tags||[]).map(function(t){ return '<span class="vc-tag">#'+esc(t)+'</span>'; }).join('')+'</div>' +
             '<a href="'+esc(v.url)+'" target="_blank" rel="noopener" class="p-link">'+(isTh?'รายละเอียด CVE ↗':'NVD Detail ↗')+'</a>' +
@@ -1777,17 +1762,17 @@ https://emailtofolder.com/api/email-vulnerabilities.xml</pre>
           var d = await r.json();
           var count = (d.vulnerabilities || []).length;
           stBox.textContent = isTh
-            ? '✓ ซิงก์ข้อมูลจาก NIST NVD API สำเร็จ! ตรวจสอบฐานข้อมูลช่องโหว่อีเมลล่าสุดเรียบร้อย (' + count + ' รายการล่าสุดตรงกัน)'
-            : '✓ Synced with live NIST NVD API! Verified latest Outlook/Email CVE records (' + count + ' recent entries checked).';
+            ? 'ซิงก์ข้อมูลจาก NIST NVD API สำเร็จ ตรวจสอบฐานข้อมูลช่องโหว่อีเมลล่าสุดเรียบร้อย (' + count + ' รายการล่าสุดตรงกัน)'
+            : 'Synced with live NIST NVD API! Verified latest Outlook/Email CVE records (' + count + ' recent entries checked).';
         }else{
           stBox.textContent = isTh
-            ? '✓ อัปเดตฟีดข่าวจาก /api/email-vulnerabilities.json เรียบร้อยแล้ว (' + VULN_ITEMS.length + ' รายการสำคัญ)'
-            : '✓ Refreshed advisories from /api/email-vulnerabilities.json (' + VULN_ITEMS.length + ' active advisories).';
+            ? 'อัปเดตฟีดข่าวจาก /api/email-vulnerabilities.json เรียบร้อยแล้ว (' + VULN_ITEMS.length + ' รายการสำคัญ)'
+            : 'Refreshed advisories from /api/email-vulnerabilities.json (' + VULN_ITEMS.length + ' active advisories).';
         }
       }catch(e){
         stBox.textContent = isTh
-          ? '✓ โหลดข้อมูลล่าสุดจาก Local Threat Feed API (/api/email-vulnerabilities.json) ครบ ' + VULN_ITEMS.length + ' รายการ'
-          : '✓ Loaded ' + VULN_ITEMS.length + ' verified advisories from /api/email-vulnerabilities.json.';
+          ? 'โหลดข้อมูลล่าสุดจาก Local Threat Feed API (/api/email-vulnerabilities.json) ครบ ' + VULN_ITEMS.length + ' รายการ'
+          : 'Loaded ' + VULN_ITEMS.length + ' verified advisories from /api/email-vulnerabilities.json.';
       }
     });
   }

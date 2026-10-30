@@ -173,55 +173,55 @@
 
     if (mxRecords.length > 0) {
       score += 30;
-      findingsTh.push('✓ พบเซิร์ฟเวอร์รับ-ส่งอีเมล (MX Records ' + mxRecords.length + ' รายการ) ผ่าน ' + mailGateway);
-      findingsEn.push('✓ Active MX Records (' + mxRecords.length + ') routed via ' + mailGateway);
+      findingsTh.push('[OK] พบเซิร์ฟเวอร์รับ-ส่งอีเมล (MX Records ' + mxRecords.length + ' รายการ) ผ่าน ' + mailGateway);
+      findingsEn.push('[OK] Active MX Records (' + mxRecords.length + ') routed via ' + mailGateway);
     } else {
-      findingsTh.push('✗ ไม่พบ MX Record สำหรับโดเมนนี้ ไม่สามารถรับอีเมลได้ตามปกติ');
-      findingsEn.push('✗ No MX records found — domain cannot receive standard email');
+      findingsTh.push('[FAIL] ไม่พบ MX Record สำหรับโดเมนนี้ ไม่สามารถรับอีเมลได้ตามปกติ');
+      findingsEn.push('[FAIL] No MX records found — domain cannot receive standard email');
     }
 
     if (spfRecord) {
       if (spfMode.indexOf('-all') !== -1) {
         score += 30;
-        findingsTh.push('✓ ตั้งค่า SPF แบบเข้มงวด (-all) ป้องกันการปลอมแปลงเซิร์ฟเวอร์ส่งเมลได้ดีเยี่ยม');
-        findingsEn.push('✓ Strict SPF policy (-all) blocks unauthorized sender IPs');
+        findingsTh.push('[OK] ตั้งค่า SPF แบบเข้มงวด (-all) ป้องกันการปลอมแปลงเซิร์ฟเวอร์ส่งเมลได้ดีเยี่ยม');
+        findingsEn.push('[OK] Strict SPF policy (-all) blocks unauthorized sender IPs');
       } else if (spfMode.indexOf('~all') !== -1) {
         score += 22;
-        findingsTh.push('✓ มีการตั้งค่า SPF (~all SoftFail) แนะนำให้เปลี่ยนเป็น -all เพื่อความปลอดภัยสูงสุด');
-        findingsEn.push('✓ SPF SoftFail (~all) enabled; consider upgrading to -all');
+        findingsTh.push('[OK] มีการตั้งค่า SPF (~all SoftFail) แนะนำให้เปลี่ยนเป็น -all เพื่อความปลอดภัยสูงสุด');
+        findingsEn.push('[OK] SPF SoftFail (~all) enabled; consider upgrading to -all');
       } else {
         score += 10;
-        findingsTh.push('⚠ มี SPF Record แต่ไม่ได้กำหนดการบล็อก (-all / ~all) ที่รัดกุม');
-        findingsEn.push('⚠ SPF record present but lacks strict -all or ~all enforcement');
+        findingsTh.push('[WARN] มี SPF Record แต่ไม่ได้กำหนดการบล็อก (-all / ~all) ที่รัดกุม');
+        findingsEn.push('[WARN] SPF record present but lacks strict -all or ~all enforcement');
       }
     } else {
-      findingsTh.push('✗ ไม่มีระเบียน SPF (TXT) ผู้โจมตีอาจแอบอ้างชื่อโดเมนนี้ส่งอีเมลปลอมได้');
-      findingsEn.push('✗ Missing SPF record — vulnerable to sender spoofing');
+      findingsTh.push('[FAIL] ไม่มีระเบียน SPF (TXT) ผู้โจมตีอาจแอบอ้างชื่อโดเมนนี้ส่งอีเมลปลอมได้');
+      findingsEn.push('[FAIL] Missing SPF record — vulnerable to sender spoofing');
     }
 
     if (dmarcRecord) {
       if (dmarcPolicy === 'reject') {
         score += 40;
-        findingsTh.push('✓ ตั้งค่า DMARC สูงสุด (p=reject) สั่งบล็อกอีเมลปลอมแปลง (Phishing/BEC) ทันที 100%');
-        findingsEn.push('✓ Maximum DMARC protection (p=reject) actively blocks spoofed emails');
+        findingsTh.push('[OK] ตั้งค่า DMARC สูงสุด (p=reject) สั่งบล็อกอีเมลปลอมแปลง (Phishing/BEC) ทันที 100%');
+        findingsEn.push('[OK] Maximum DMARC protection (p=reject) actively blocks spoofed emails');
       } else if (dmarcPolicy === 'quarantine') {
         score += 30;
-        findingsTh.push('✓ ตั้งค่า DMARC (p=quarantine) คัดกรองอีเมลต้องสงสัยเข้าโฟลเดอร์ขยะ (Spam)');
-        findingsEn.push('✓ DMARC policy (p=quarantine) routes suspicious emails to Spam/Junk');
+        findingsTh.push('[OK] ตั้งค่า DMARC (p=quarantine) คัดกรองอีเมลต้องสงสัยเข้าโฟลเดอร์ขยะ (Spam)');
+        findingsEn.push('[OK] DMARC policy (p=quarantine) routes suspicious emails to Spam/Junk');
       } else {
         score += 15;
-        findingsTh.push('⚠ มี DMARC แต่ตั้งเป็นโหมดสังเกตการณ์ (p=none) ยังไม่บล็อกอีเมลปลอมแปลงอัตโนมัติ');
-        findingsEn.push('⚠ DMARC is in monitoring mode (p=none) and does not block spoofed emails yet');
+        findingsTh.push('[WARN] มี DMARC แต่ตั้งเป็นโหมดสังเกตการณ์ (p=none) ยังไม่บล็อกอีเมลปลอมแปลงอัตโนมัติ');
+        findingsEn.push('[WARN] DMARC is in monitoring mode (p=none) and does not block spoofed emails yet');
       }
     } else {
-      findingsTh.push('✗ ไม่พบระเบียน DMARC (_dmarc.' + domain + ') เสี่ยงต่อการถูกปลอมแปลงอีเมลสวมรอย (CEO Fraud / BEC)');
-      findingsEn.push('✗ Missing DMARC record (_dmarc.' + domain + ') — high risk of BEC domain spoofing');
+      findingsTh.push('[FAIL] ไม่พบระเบียน DMARC (_dmarc.' + domain + ') เสี่ยงต่อการถูกปลอมแปลงอีเมลสวมรอย (CEO Fraud / BEC)');
+      findingsEn.push('[FAIL] Missing DMARC record (_dmarc.' + domain + ') — high risk of BEC domain spoofing');
     }
 
     if (isDisposable) {
       score = Math.min(score, 15);
-      findingsTh.unshift('🚨 คำเตือน: โดเมนนี้เป็นบริการอีเมลชั่วคราว (Disposable / Burner Email) ไม่ควรรับเอกสารการเงินหรือใบแจ้งหนี้');
-      findingsEn.unshift('🚨 ALERT: Disposable / Burner email provider detected — do not trust for invoices or finance');
+      findingsTh.unshift('[ALERT] คำเตือน: โดเมนนี้เป็นบริการอีเมลชั่วคราว (Disposable / Burner Email) ไม่ควรรับเอกสารการเงินหรือใบแจ้งหนี้');
+      findingsEn.unshift('[ALERT] Disposable / Burner email provider detected — do not trust for invoices or finance');
     }
 
     var grade = score >= 90 ? 'A+' : score >= 80 ? 'A' : score >= 65 ? 'B' : score >= 45 ? 'C' : 'F';
@@ -348,32 +348,32 @@
 
     if (fromDomain && returnPathDomain && fromDomain !== returnPathDomain) {
       riskScore += 35;
-      warningsTh.push('⚠ โดเมน From (' + fromDomain + ') ไม่ตรงกับ Return-Path (' + returnPathDomain + ') อาจเป็นการส่งผ่านระบบอื่นหรือปลอมแปลงหัวจดหมาย');
-      warningsEn.push('⚠ From domain (' + fromDomain + ') does not align with Return-Path (' + returnPathDomain + ')');
+      warningsTh.push('[WARN] โดเมน From (' + fromDomain + ') ไม่ตรงกับ Return-Path (' + returnPathDomain + ') อาจเป็นการส่งผ่านระบบอื่นหรือปลอมแปลงหัวจดหมาย');
+      warningsEn.push('[WARN] From domain (' + fromDomain + ') does not align with Return-Path (' + returnPathDomain + ')');
     }
 
     if (fromDomain && replyToDomain && fromDomain !== replyToDomain) {
       riskScore += 40;
-      warningsTh.push('🚨 พบการตั้งค่า Reply-To ข้ามโดเมน (' + replyToDomain + ') ซึ่งเป็นเทคนิคยอดนิยมในการหลอกโอนเงิน (BEC / Invoice Fraud)');
-      warningsEn.push('🚨 Cross-domain Reply-To (' + replyToDomain + ') detected — common indicator of BEC / Invoice Fraud');
+      warningsTh.push('[ALERT] พบการตั้งค่า Reply-To ข้ามโดเมน (' + replyToDomain + ') ซึ่งเป็นเทคนิคยอดนิยมในการหลอกโอนเงิน (BEC / Invoice Fraud)');
+      warningsEn.push('[ALERT] Cross-domain Reply-To (' + replyToDomain + ') detected — common indicator of BEC / Invoice Fraud');
     }
 
     if (spfAuth === 'FAIL' || dkimAuth === 'FAIL' || dmarcAuth === 'FAIL') {
       riskScore += 50;
-      warningsTh.push('🚨 การตรวจสอบสิทธิ์อีเมลไม่ผ่าน (SPF=' + spfAuth + ', DKIM=' + dkimAuth + ', DMARC=' + dmarcAuth + ') ห้ามคลิกลิงก์หรือเปิดไฟล์แนบเด็ดขาด');
-      warningsEn.push('🚨 Authentication failure detected (SPF=' + spfAuth + ', DKIM=' + dkimAuth + ', DMARC=' + dmarcAuth + ')');
+      warningsTh.push('[ALERT] การตรวจสอบสิทธิ์อีเมลไม่ผ่าน (SPF=' + spfAuth + ', DKIM=' + dkimAuth + ', DMARC=' + dmarcAuth + ') ห้ามคลิกลิงก์หรือเปิดไฟล์แนบเด็ดขาด');
+      warningsEn.push('[ALERT] Authentication failure detected (SPF=' + spfAuth + ', DKIM=' + dkimAuth + ', DMARC=' + dmarcAuth + ')');
     }
 
     // Check for CVE-2024-49040 multiple From addresses / P2 spoofing signs
     if ((fromRaw.match(/@/g) || []).length > 1) {
       riskScore += 60;
-      warningsTh.push('🚨 ตรวจพบรูปแบบส่วนหัว From ซ้อนกันหลายอีเมล เข้าข่ายช่องโหว่ CVE-2024-49040 (Exchange P2 Header Spoofing)');
-      warningsEn.push('🚨 Multiple addresses in From header — matches CVE-2024-49040 (Exchange P2 FROM Spoofing) pattern');
+      warningsTh.push('[ALERT] ตรวจพบรูปแบบส่วนหัว From ซ้อนกันหลายอีเมล เข้าข่ายช่องโหว่ CVE-2024-49040 (Exchange P2 Header Spoofing)');
+      warningsEn.push('[ALERT] Multiple addresses in From header — matches CVE-2024-49040 (Exchange P2 FROM Spoofing) pattern');
     }
 
     if (warningsTh.length === 0) {
-      warningsTh.push('✓ โครงสร้าง Header ปกติ โดเมนผู้ส่งสอดคล้องกันและไม่พบสัญญาณการปลอมแปลง');
-      warningsEn.push('✓ Header alignment looks clean with no spoofing anomalies detected');
+      warningsTh.push('[OK] โครงสร้าง Header ปกติ โดเมนผู้ส่งสอดคล้องกันและไม่พบสัญญาณการปลอมแปลง');
+      warningsEn.push('[OK] Header alignment looks clean with no spoofing anomalies detected');
     }
 
     riskScore = Math.min(100, riskScore);

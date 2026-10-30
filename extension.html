@@ -201,7 +201,8 @@ html[lang=th] h2{line-height:1.25;letter-spacing:-.01em}
 .bc::before{content:"";position:absolute;inset:0;background:radial-gradient(380px circle at var(--mx,50%) var(--my,0),rgba(10,132,255,.2),transparent 60%);opacity:0;transition:.3s}
 .bc:hover::before{opacity:1}
 .bc>*{position:relative}
-.ic{font-size:38px;display:inline-block;animation:fl 4s ease-in-out infinite}
+.ic{width:46px;height:46px;border-radius:14px;background:rgba(10,132,255,.1);color:var(--brand);display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(10,132,255,.18)}
+.ic svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .bc h3{font-size:24px;margin:16px 0 8px;letter-spacing:-.02em}.bc p{margin:0;color:var(--mute);font-size:16px}
 .bc ul{margin:12px 0 0;padding:0 0 0 18px;color:var(--mute);font-size:14px;display:grid;gap:4px}
 .big{font-size:clamp(46px,7vw,82px);font-weight:800;letter-spacing:-.04em;line-height:1}
@@ -309,32 +310,32 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
 <div class="hero dk">
 <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
 <div class="wrap">
-<span class="pill rv">🧩 <span class="th">ใหม่! ส่วนขยายสำหรับ Chrome · Edge · Brave</span><span class="en">New! Extension for Chrome · Edge · Brave</span></span>
+<span class="pill rv"><span class="th">ใหม่! ส่วนขยายสำหรับ Chrome · Edge · Brave</span><span class="en">New! Extension for Chrome · Edge · Brave</span></span>
 <h1 class="rv d1"><span class="th">Email to Folder<br><span class="grad">for Chrome</span></span><span class="en">Email to Folder<br><span class="grad">for Chrome</span></span></h1>
 <p class="lead rv d2"><span class="th">จัดเก็บอีเมล <strong>Gmail</strong> และ <strong>Outlook / Office 365</strong> ลงโฟลเดอร์อัตโนมัติตามกฎ บันทึกเป็นไฟล์ .eml พร้อมสกัดไฟล์แนบ — ทำงานในเบราว์เซอร์ 100% ไม่ต้องติดตั้งโปรแกรม ใช้ได้ทั้ง macOS, Windows, Linux และ ChromeOS</span><span class="en">Automatically save <strong>Gmail</strong> and <strong>Outlook / Office 365</strong> emails into folders by rule — as .eml files with extracted attachments. Runs 100% in your browser, no install needed, on macOS, Windows, Linux and ChromeOS.</span></p>
-<div class="cta rv d3"><a class="btn" href="downloads/EmailToFolder-Chrome-Extension.zip" download><span class="th">🧩 ดาวน์โหลดส่วนขยายฟรี (.zip)</span><span class="en">🧩 Download Free Extension (.zip)</span></a><a class="btn ghost" href="#install"><span class="th">คู่มือติดตั้ง →</span><span class="en">Install guide →</span></a></div>
+<div class="cta rv d3"><a class="btn" href="downloads/EmailToFolder-Chrome-Extension.zip" download><span class="th">ดาวน์โหลดส่วนขยายฟรี (.zip)</span><span class="en">Download Free Extension (.zip)</span></a><a class="btn ghost" href="#install"><span class="th">คู่มือติดตั้ง →</span><span class="en">Install guide →</span></a></div>
 <div style="margin-top:16px; font-size:13px; color:var(--mute);" class="rv d3">
-  <span class="th">🎁 <strong>ฟรี 100 ฉบับ/เดือน</strong> (รีเซ็ตทุกวันที่ 1) · 🔒 ประมวลผลในเครื่อง ไม่มีเซิร์ฟเวอร์กลาง · สิทธิ์อ่านอย่างเดียว</span>
-  <span class="en">🎁 <strong>Free 100 emails/month</strong> (resets on the 1st) · 🔒 Processed locally, no server · Read-only access</span>
+  <span class="th"><strong>ฟรี 100 ฉบับ/เดือน</strong> (รีเซ็ตทุกวันที่ 1) · ประมวลผลในเครื่อง ไม่มีเซิร์ฟเวอร์กลาง · สิทธิ์อ่านอย่างเดียว</span>
+  <span class="en"><strong>Free 100 emails/month</strong> (resets on the 1st) · Processed locally, no server · Read-only access</span>
 </div>
 
 <div class="stage rv d3" aria-hidden="true">
-<div class="fc c1">📎 Invoice.pdf</div><div class="fc c2">📂 Finance/2026/10 ✓</div><div class="fc c3">✉ Quotation_v2.eml</div><div class="fc c4">🔒 Local only</div>
+<div class="fc c1">Invoice.pdf</div><div class="fc c2">Finance/2026/10</div><div class="fc c3">Quotation_v2.eml</div><div class="fc c4">Local only</div>
 <div class="float"><div class="pop">
-  <div class="pop-h"><img src="favicon.svg" alt="" width="26" height="26"><b>Email to Folder</b><span class="pop-v">v1.0</span><span class="pop-g">⚙</span></div>
+  <div class="pop-h"><img src="favicon.svg" alt="" width="26" height="26"><b>Email to Folder</b><span class="pop-v">v1.0</span><span class="pop-g" style="font-size:11px;font-weight:600">Options</span></div>
   <div class="pop-b">
     <div class="pop-q">
       <div class="pop-ql"><span><span class="th">โควตาฟรี</span><span class="en">Free quota</span></span><b>12 / 100 <span class="th">ฉบับเดือนนี้</span><span class="en">emails this month</span></b></div>
       <div class="qbar"><i></i></div>
     </div>
-    <div class="acc"><div class="acc-i g">G</div><div class="acc-t"><strong>Gmail</strong><small>finance.team@gmail.com</small></div><span class="acc-s">✓ <span class="th">เชื่อมต่อแล้ว</span><span class="en">Connected</span></span></div>
-    <div class="acc"><div class="acc-i o">O</div><div class="acc-t"><strong>Outlook</strong><small>accounting@company.onmicrosoft.com</small></div><span class="acc-s">✓ <span class="th">เชื่อมต่อแล้ว</span><span class="en">Connected</span></span></div>
-    <button class="pop-sync" type="button" tabindex="-1">⟳ Sync Now</button>
+    <div class="acc"><div class="acc-i g">G</div><div class="acc-t"><strong>Gmail</strong><small>finance.team@gmail.com</small></div><span class="acc-s"><span class="th">เชื่อมต่อแล้ว</span><span class="en">Connected</span></span></div>
+    <div class="acc"><div class="acc-i o">O</div><div class="acc-t"><strong>Outlook</strong><small>accounting@company.onmicrosoft.com</small></div><span class="acc-s"><span class="th">เชื่อมต่อแล้ว</span><span class="en">Connected</span></span></div>
+    <button class="pop-sync" type="button" tabindex="-1">Sync Now</button>
     <div class="pop-l">
       <h6><span class="th">ล่าสุด</span><span class="en">Recent</span></h6>
-      <div class="lg"><span>📄 Invoice #2026-114 → <em>Finance/2026/10</em></span><time>12:04</time></div>
-      <div class="lg"><span>📜 Contract Draft v3 → <em>Legal/partner.com</em></span><time>11:52</time></div>
-      <div class="lg"><span>📊 Site Report W42 → <em>Projects/2026-A</em></span><time>11:30</time></div>
+      <div class="lg"><span>Invoice #2026-114 → <em>Finance/2026/10</em></span><time>12:04</time></div>
+      <div class="lg"><span>Contract Draft v3 → <em>Legal/partner.com</em></span><time>11:52</time></div>
+      <div class="lg"><span>Site Report W42 → <em>Projects/2026-A</em></span><time>11:30</time></div>
     </div>
   </div>
 </div></div>
@@ -348,15 +349,15 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
 <h2 class="rv d1"><span class="th">พลังของ Desktop<br><span class="grad">ในเบราว์เซอร์ของคุณ</span></span><span class="en">Desktop power,<br><span class="grad">right in your browser.</span></span></h2>
 <p class="sub rv d2"><span class="th">ใช้ Rule Engine ชุดเดียวกับโปรแกรม Desktop เชื่อมต่อผ่าน API ทางการของ Google และ Microsoft</span><span class="en">The same rule engine as the desktop app, connected through Google's and Microsoft's official APIs.</span></p>
 <div class="bento">
-<div class="bc w rv"><div class="ic">✉️</div><h3><span class="th">Gmail API ทางการ</span><span class="en">Official Gmail API</span></h3><p><span class="th">เชื่อมต่อ Gmail และ Google Workspace ด้วย OAuth ของ Google โดยตรง ไม่ต้องใช้ App Password ไม่ต้องเปิด IMAP ขอสิทธิ์ <code>gmail.readonly</code> เท่านั้น</span><span class="en">Connect Gmail and Google Workspace with Google OAuth — no App Password, no IMAP. Only the <code>gmail.readonly</code> scope is requested.</span></p></div>
-<div class="bc w rv d1"><div class="ic">🏢</div><h3><span class="th">Outlook / Office 365</span><span class="en">Outlook / Office 365</span></h3><p><span class="th">รองรับ Outlook.com, Hotmail และ Microsoft 365 ขององค์กรผ่าน <strong>Microsoft Graph</strong> ด้วยสิทธิ์ <code>Mail.Read</code> แบบ Delegated</span><span class="en">Works with Outlook.com, Hotmail and work Microsoft 365 accounts via <strong>Microsoft Graph</strong> using delegated <code>Mail.Read</code>.</span></p></div>
-<div class="bc x rv"><div class="ic">⚡</div><h3><span class="th">กฎคัดแยกอัจฉริยะ — เอนจินเดียวกับ Desktop</span><span class="en">Smart rules — same engine as desktop</span></h3><p><span class="th">ตั้งเงื่อนไขได้ทั้ง หัวข้อ (Subject), ผู้ส่ง (From), ผู้รับ (To/CC), เนื้อหา (Body), มีไฟล์แนบ, ชื่อไฟล์แนบ หรือทุกอีเมล — ระบบตรวจตามลำดับและใช้ <strong>กฎแรกที่ตรง (first match wins)</strong></span><span class="en">Match on Subject, From, To/CC, Body, has attachment, attachment name, or all emails — evaluated in order, <strong>first match wins</strong>.</span></p></div>
-<div class="bc rv d1"><div class="ic">🗂</div><h3><span class="th">โฟลเดอร์ย่อย 4 แบบ</span><span class="en">4 subfolder modes</span></h3><ul><li><span class="th">ปี/เดือน</span><span class="en">Year/Month</span> <code>2026/10</code></li><li><span class="th">ตามผู้ส่ง</span><span class="en">By sender</span></li><li><span class="th">แยกรายอีเมล</span><span class="en">Per-email folder</span></li><li><span class="th">บันทึกตรง</span><span class="en">Direct</span></li></ul></div>
-<div class="bc rv"><div class="ic">📎</div><h3><span class="th">.eml + ไฟล์แนบ</span><span class="en">.eml + attachments</span></h3><p><span class="th">บันทึกอีเมลต้นฉบับ .eml และสกัดไฟล์แนบ (PDF, Excel, Word) ลง <code>Downloads/EmailToFolder/...</code></span><span class="en">Saves the original .eml and extracts attachments (PDF, Excel, Word) into <code>Downloads/EmailToFolder/...</code></span></p></div>
-<div class="bc rv d1"><div class="ic">🔄</div><h3><span class="th">ซิงก์อัตโนมัติ</span><span class="en">Auto-sync</span></h3><p><span class="th">ทำงานเบื้องหลังทุก N นาที พร้อมปุ่ม <strong>Save to Folder</strong> ใน Gmail และ Outlook Web และลากวางไฟล์ .eml ในป๊อปอัปได้</span><span class="en">Runs in the background every N minutes, adds a <strong>Save to Folder</strong> button in Gmail &amp; Outlook Web, and accepts drag-and-drop .eml in the popup.</span></p></div>
-<div class="bc rv d2"><div class="ic">📜</div><h3><span class="th">Audit Log + CSV</span><span class="en">Audit log + CSV</span></h3><p><span class="th">บันทึกประวัติทุกฉบับ ส่งออก CSV แบบ UTF-8 BOM เปิดภาษาไทยใน Excel ได้ทันที</span><span class="en">Every saved email is logged; export to CSV with UTF-8 BOM so Excel opens Thai text correctly.</span></p></div>
+<div class="bc w rv"><div class="ic"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div><h3><span class="th">Gmail API ทางการ</span><span class="en">Official Gmail API</span></h3><p><span class="th">เชื่อมต่อ Gmail และ Google Workspace ด้วย OAuth ของ Google โดยตรง ไม่ต้องใช้ App Password ไม่ต้องเปิด IMAP ขอสิทธิ์ <code>gmail.readonly</code> เท่านั้น</span><span class="en">Connect Gmail and Google Workspace with Google OAuth — no App Password, no IMAP. Only the <code>gmail.readonly</code> scope is requested.</span></p></div>
+<div class="bc w rv d1"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 9h3M15 13h3M15 17h3"/></svg></div><h3><span class="th">Outlook / Office 365</span><span class="en">Outlook / Office 365</span></h3><p><span class="th">รองรับ Outlook.com, Hotmail และ Microsoft 365 ขององค์กรผ่าน <strong>Microsoft Graph</strong> ด้วยสิทธิ์ <code>Mail.Read</code> แบบ Delegated</span><span class="en">Works with Outlook.com, Hotmail and work Microsoft 365 accounts via <strong>Microsoft Graph</strong> using delegated <code>Mail.Read</code>.</span></p></div>
+<div class="bc x rv"><div class="ic"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><h3><span class="th">กฎคัดแยกอัจฉริยะ — เอนจินเดียวกับ Desktop</span><span class="en">Smart rules — same engine as desktop</span></h3><p><span class="th">ตั้งเงื่อนไขได้ทั้ง หัวข้อ (Subject), ผู้ส่ง (From), ผู้รับ (To/CC), เนื้อหา (Body), มีไฟล์แนบ, ชื่อไฟล์แนบ หรือทุกอีเมล — ระบบตรวจตามลำดับและใช้ <strong>กฎแรกที่ตรง (first match wins)</strong></span><span class="en">Match on Subject, From, To/CC, Body, has attachment, attachment name, or all emails — evaluated in order, <strong>first match wins</strong>.</span></p></div>
+<div class="bc rv d1"><div class="ic"><svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div><h3><span class="th">โฟลเดอร์ย่อย 4 แบบ</span><span class="en">4 subfolder modes</span></h3><ul><li><span class="th">ปี/เดือน</span><span class="en">Year/Month</span> <code>2026/10</code></li><li><span class="th">ตามผู้ส่ง</span><span class="en">By sender</span></li><li><span class="th">แยกรายอีเมล</span><span class="en">Per-email folder</span></li><li><span class="th">บันทึกตรง</span><span class="en">Direct</span></li></ul></div>
+<div class="bc rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg></div><h3><span class="th">.eml + ไฟล์แนบ</span><span class="en">.eml + attachments</span></h3><p><span class="th">บันทึกอีเมลต้นฉบับ .eml และสกัดไฟล์แนบ (PDF, Excel, Word) ลง <code>Downloads/EmailToFolder/...</code></span><span class="en">Saves the original .eml and extracts attachments (PDF, Excel, Word) into <code>Downloads/EmailToFolder/...</code></span></p></div>
+<div class="bc rv d1"><div class="ic"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg></div><h3><span class="th">ซิงก์อัตโนมัติ</span><span class="en">Auto-sync</span></h3><p><span class="th">ทำงานเบื้องหลังทุก N นาที พร้อมปุ่ม <strong>Save to Folder</strong> ใน Gmail และ Outlook Web และลากวางไฟล์ .eml ในป๊อปอัปได้</span><span class="en">Runs in the background every N minutes, adds a <strong>Save to Folder</strong> button in Gmail &amp; Outlook Web, and accepts drag-and-drop .eml in the popup.</span></p></div>
+<div class="bc rv d2"><div class="ic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><h3><span class="th">Audit Log + CSV</span><span class="en">Audit log + CSV</span></h3><p><span class="th">บันทึกประวัติทุกฉบับ ส่งออก CSV แบบ UTF-8 BOM เปิดภาษาไทยใน Excel ได้ทันที</span><span class="en">Every saved email is logged; export to CSV with UTF-8 BOM so Excel opens Thai text correctly.</span></p></div>
 <div class="bc w rv"><div class="big grad">100</div><h3><span class="th">ฉบับฟรีทุกเดือน</span><span class="en">free emails every month</span></h3><p><span class="th">โควตาเดียวกับโปรแกรม Desktop รีเซ็ตอัตโนมัติทุกวันที่ 1 ของเดือน ไม่ต้องใช้บัตรเครดิต</span><span class="en">Same quota as the desktop app — auto-resets on the 1st of each month. No credit card.</span></p></div>
-<div class="bc w rv d1"><div class="ic">🔒</div><h3><span class="th">ความเป็นส่วนตัวมาก่อน</span><span class="en">Privacy first</span></h3><p><span class="th">ประมวลผลทั้งหมดภายในเบราว์เซอร์ของคุณ ไม่มีเซิร์ฟเวอร์กลาง อีเมลไม่ผ่านเรา ขอสิทธิ์แบบอ่านอย่างเดียว (read-only) และ Token เก็บในเครื่องเท่านั้น</span><span class="en">Everything is processed locally in your browser. No middle server, your mail never touches us, read-only scopes, and tokens stay on your device.</span></p></div>
+<div class="bc w rv d1"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><h3><span class="th">ความเป็นส่วนตัวมาก่อน</span><span class="en">Privacy first</span></h3><p><span class="th">ประมวลผลทั้งหมดภายในเบราว์เซอร์ของคุณ ไม่มีเซิร์ฟเวอร์กลาง อีเมลไม่ผ่านเรา ขอสิทธิ์แบบอ่านอย่างเดียว (read-only) และ Token เก็บในเครื่องเท่านั้น</span><span class="en">Everything is processed locally in your browser. No middle server, your mail never touches us, read-only scopes, and tokens stay on your device.</span></p></div>
 </div>
 </div></section>
 
@@ -367,7 +368,7 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
 <p class="sub rv d2" style="margin:0 auto"><span class="th">เลือกตัวที่เหมาะกับงาน — หรือใช้ทั้งสองแบบร่วมกันก็ได้</span><span class="en">Pick what fits your workflow — or use both together.</span></p>
 <div class="tw rv d2">
 <table class="cmp">
-<thead><tr><th></th><th>💻 <span class="th">โปรแกรม Desktop</span><span class="en">Desktop app</span></th><th>🧩 Chrome Extension <span class="tag">NEW</span></th></tr></thead>
+<thead><tr><th></th><th><span class="th">โปรแกรม Desktop</span><span class="en">Desktop app</span></th><th>Chrome Extension <span class="tag">NEW</span></th></tr></thead>
 <tbody>
 <tr><td><span class="th">แหล่งอีเมล</span><span class="en">Email sources</span></td><td>Outlook Classic (MAPI), Gmail / Office 365 (IMAP IDLE)</td><td>Gmail API + Microsoft Graph (Outlook / Office 365)</td></tr>
 <tr><td><span class="th">รูปแบบไฟล์</span><span class="en">File format</span></td><td><span class="th">.msg แท้ (Outlook) / .eml + ไฟล์แนบ</span><span class="en">Native .msg (Outlook) / .eml + attachments</span></td><td><span class="th">.eml + ไฟล์แนบ</span><span class="en">.eml + attachments</span></td></tr>
@@ -393,19 +394,19 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
 <li class="rv"><div><h3><span class="th">เปิดหน้า Extensions</span><span class="en">Open the Extensions page</span></h3><p><span class="th">พิมพ์ <code>chrome://extensions</code> ในแถบที่อยู่แล้วกด Enter</span><span class="en">Type <code>chrome://extensions</code> in the address bar and press Enter.</span></p></div></li>
 <li class="rv"><div><h3><span class="th">เปิด Developer mode</span><span class="en">Turn on Developer mode</span></h3><p><span class="th">เปิดสวิตช์ <strong>Developer mode</strong> ที่มุมขวาบน</span><span class="en">Toggle <strong>Developer mode</strong> in the top-right corner.</span></p></div></li>
 <li class="rv"><div><h3>Load unpacked</h3><p><span class="th">กด <strong>Load unpacked</strong> แล้วเลือกโฟลเดอร์ <code>chrome-extension</code> ที่แตกไว้</span><span class="en">Click <strong>Load unpacked</strong> and select the unzipped <code>chrome-extension</code> folder.</span></p></div></li>
-<li class="rv"><div><h3><span class="th">ปักหมุดส่วนขยาย</span><span class="en">Pin the extension</span></h3><p><span class="th">กดไอคอนจิ๊กซอว์ 🧩 บนแถบเครื่องมือ แล้วกดหมุด 📌 ข้าง Email to Folder</span><span class="en">Click the puzzle icon 🧩 in the toolbar and pin 📌 Email to Folder.</span></p></div></li>
+<li class="rv"><div><h3><span class="th">ปักหมุดส่วนขยาย</span><span class="en">Pin the extension</span></h3><p><span class="th">กดไอคอนส่วนขยายบนแถบเครื่องมือ แล้วกดปักหมุดข้าง Email to Folder</span><span class="en">Click the Extensions icon in the toolbar and pin Email to Folder.</span></p></div></li>
 </ol>
 </div>
 <div class="side rv d2">
 <div class="bc" style="background:#fff">
-<div class="ic">🪪</div>
+<div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="7" y1="15" x2="11" y2="15"/><line x1="7" y1="11" x2="17" y2="11"/></svg></div>
 <h3><span class="th">Extension ID แบบคงที่</span><span class="en">Fixed Extension ID</span></h3>
 <p><span class="th">ส่วนขยายมี ID คงที่เสมอ ไม่ว่าติดตั้งบนเครื่องไหน จึงใช้ Redirect URI เดียวกันในการตั้งค่า Google Cloud และ Azure ได้ทันที</span><span class="en">The extension always has the same ID on every machine, so the same Redirect URI works for both Google Cloud and Azure setup.</span></p>
 <div class="codes">
 <div class="code"><span class="k">Extension ID</span><code>cidokheholdhfghadmjihmmdfoibipoh</code><button class="cp" type="button" data-copy="cidokheholdhfghadmjihmmdfoibipoh"><span class="th">คัดลอก</span><span class="en">Copy</span></button></div>
 <div class="code"><span class="k">Redirect URI</span><code>https://cidokheholdhfghadmjihmmdfoibipoh.chromiumapp.org/</code><button class="cp" type="button" data-copy="https://cidokheholdhfghadmjihmmdfoibipoh.chromiumapp.org/"><span class="th">คัดลอก</span><span class="en">Copy</span></button></div>
 </div>
-<div class="note"><span class="th">💡 หลังติดตั้ง ให้ตั้งค่าบัญชีอย่างน้อยหนึ่งบัญชี: <a href="#google" style="color:var(--brand);font-weight:600">Gmail</a> หรือ <a href="#microsoft" style="color:var(--brand);font-weight:600">Outlook / Office 365</a></span><span class="en">💡 After installing, set up at least one account: <a href="#google" style="color:var(--brand);font-weight:600">Gmail</a> or <a href="#microsoft" style="color:var(--brand);font-weight:600">Outlook / Office 365</a>.</span></div>
+<div class="note"><span class="th">หลังติดตั้ง ให้ตั้งค่าบัญชีอย่างน้อยหนึ่งบัญชี: <a href="#google" style="color:var(--brand);font-weight:600">Gmail</a> หรือ <a href="#microsoft" style="color:var(--brand);font-weight:600">Outlook / Office 365</a></span><span class="en">After installing, set up at least one account: <a href="#google" style="color:var(--brand);font-weight:600">Gmail</a> or <a href="#microsoft" style="color:var(--brand);font-weight:600">Outlook / Office 365</a>.</span></div>
 </div>
 </div>
 </div>
@@ -431,8 +432,8 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
 <div class="code"><span class="k">Scope</span><code>https://www.googleapis.com/auth/gmail.readonly</code><button class="cp" type="button" data-copy="https://www.googleapis.com/auth/gmail.readonly"><span class="th">คัดลอก</span><span class="en">Copy</span></button></div>
 <div class="code"><span class="k">Redirect URI</span><code>https://cidokheholdhfghadmjihmmdfoibipoh.chromiumapp.org/</code><button class="cp" type="button" data-copy="https://cidokheholdhfghadmjihmmdfoibipoh.chromiumapp.org/"><span class="th">คัดลอก</span><span class="en">Copy</span></button></div>
 </div>
-<div class="note warn"><span class="th"><b>⚠️ หมายเหตุเรื่อง Restricted scope</b><br><code>gmail.readonly</code> เป็น Scope ประเภท Restricted ของ Google — ในโหมด <b>Testing</b> เพิ่ม Test user ได้สูงสุด 100 คน เพียงพอสำหรับใช้งานภายในทีม/องค์กร หากจะเผยแพร่สาธารณะบน Chrome Web Store ต้องผ่านการยืนยัน (Verification) จาก Google ก่อน</span><span class="en"><b>⚠️ About restricted scopes</b><br><code>gmail.readonly</code> is a Google restricted scope. In <b>Testing</b> mode you can add up to 100 test users — fine for internal team use. Public distribution on the Chrome Web Store requires Google verification.</span></div>
-<div class="note"><span class="th">💡 ใช้ Google Workspace? เลือก <b>Internal</b> ในหน้า consent screen ผู้ใช้ทุกคนในโดเมนใช้ได้ทันทีโดยไม่ต้องเพิ่ม Test user</span><span class="en">💡 On Google Workspace? Choose <b>Internal</b> on the consent screen and everyone in your domain can connect without being added as a test user.</span></div>
+<div class="note warn"><span class="th"><b>หมายเหตุเรื่อง Restricted scope</b><br><code>gmail.readonly</code> เป็น Scope ประเภท Restricted ของ Google — ในโหมด <b>Testing</b> เพิ่ม Test user ได้สูงสุด 100 คน เพียงพอสำหรับใช้งานภายในทีม/องค์กร หากจะเผยแพร่สาธารณะบน Chrome Web Store ต้องผ่านการยืนยัน (Verification) จาก Google ก่อน</span><span class="en"><b>About restricted scopes</b><br><code>gmail.readonly</code> is a Google restricted scope. In <b>Testing</b> mode you can add up to 100 test users — fine for internal team use. Public distribution on the Chrome Web Store requires Google verification.</span></div>
+<div class="note"><span class="th">ใช้ Google Workspace? เลือก <b>Internal</b> ในหน้า consent screen ผู้ใช้ทุกคนในโดเมนใช้ได้ทันทีโดยไม่ต้องเพิ่ม Test user</span><span class="en">On Google Workspace? Choose <b>Internal</b> on the consent screen and everyone in your domain can connect without being added as a test user.</span></div>
 </div>
 </div>
 </div></section>
@@ -457,8 +458,8 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
 <div class="code"><span class="k">Redirect URI</span><code>https://cidokheholdhfghadmjihmmdfoibipoh.chromiumapp.org/</code><button class="cp" type="button" data-copy="https://cidokheholdhfghadmjihmmdfoibipoh.chromiumapp.org/"><span class="th">คัดลอก</span><span class="en">Copy</span></button></div>
 <div class="code"><span class="k">Permissions</span><code>Mail.Read User.Read offline_access</code><button class="cp" type="button" data-copy="Mail.Read User.Read offline_access"><span class="th">คัดลอก</span><span class="en">Copy</span></button></div>
 </div>
-<div class="note"><span class="th"><b>🏷️ Tenant ID (ไม่บังคับ)</b><br>ค่าเริ่มต้นคือ <code>common</code> ซึ่งรองรับทั้งบัญชีองค์กรและบัญชีส่วนตัว หากต้องการจำกัดเฉพาะองค์กรของคุณ ให้กรอก Directory (tenant) ID ในช่อง Tenant ID ของหน้า Options</span><span class="en"><b>🏷️ Tenant ID (optional)</b><br>Defaults to <code>common</code>, which accepts both work and personal accounts. To restrict sign-in to your organization, enter your Directory (tenant) ID in the Tenant ID field on the Options page.</span></div>
-<div class="note warn"><span class="th"><b>⚠️ ต้องเลือก Platform เป็น SPA</b><br>หากเลือก “Web” จะเกิดข้อผิดพลาด AADSTS9002327 / invalid_request ระหว่างแลก Token — ส่วนขยายใช้ Authorization Code + PKCE แบบ SPA</span><span class="en"><b>⚠️ Platform must be SPA</b><br>Choosing “Web” causes AADSTS9002327 / invalid_request during token exchange — the extension uses SPA-style Authorization Code + PKCE.</span></div>
+<div class="note"><span class="th"><b>Tenant ID (ไม่บังคับ)</b><br>ค่าเริ่มต้นคือ <code>common</code> ซึ่งรองรับทั้งบัญชีองค์กรและบัญชีส่วนตัว หากต้องการจำกัดเฉพาะองค์กรของคุณ ให้กรอก Directory (tenant) ID ในช่อง Tenant ID ของหน้า Options</span><span class="en"><b>Tenant ID (optional)</b><br>Defaults to <code>common</code>, which accepts both work and personal accounts. To restrict sign-in to your organization, enter your Directory (tenant) ID in the Tenant ID field on the Options page.</span></div>
+<div class="note warn"><span class="th"><b>ต้องเลือก Platform เป็น SPA</b><br>หากเลือก “Web” จะเกิดข้อผิดพลาด AADSTS9002327 / invalid_request ระหว่างแลก Token — ส่วนขยายใช้ Authorization Code + PKCE แบบ SPA</span><span class="en"><b>Platform must be SPA</b><br>Choosing “Web” causes AADSTS9002327 / invalid_request during token exchange — the extension uses SPA-style Authorization Code + PKCE.</span></div>
 </div>
 </div>
 </div></section>
@@ -481,15 +482,15 @@ html[lang=th] .nav [data-l=th],html[lang=en] .nav [data-l=en]{background:#1d1d1f
 <div><div class="eb">Email to Folder</div><h2><span class="th">ต้องการ .msg, NAS<br><span class="grad">หรือเรียลไทม์?</span></span><span class="en">Need .msg, NAS<br><span class="grad">or real-time?</span></span></h2>
 <p><span class="th">โปรแกรม Desktop สำหรับ Windows รองรับ Outlook Classic (MAPI), IMAP IDLE แบบเรียลไทม์ และบันทึกลงโฟลเดอร์ใดก็ได้ รวมถึง NAS และ Network Drive — ฟรี 100 ฉบับ/เดือนเช่นกัน</span><span class="en">The Windows desktop app supports Outlook Classic (MAPI), real-time IMAP IDLE, and saves to any folder including NAS and network drives — also free for 100 emails/month.</span></p></div>
 <div style="display:grid;gap:12px">
-<a class="btn" href="index.html#download" style="text-align:center"><span class="th">💻 ดาวน์โหลดโปรแกรม Desktop</span><span class="en">💻 Get the Desktop app</span></a>
-<a class="btn ghost" href="index.html#contact" style="text-align:center;border:1px solid rgba(255,255,255,.18);color:#fff"><span class="th">💬 ติดต่อทีมงาน / Enterprise</span><span class="en">💬 Contact us / Enterprise</span></a>
-<a class="btn ghost" href="downloads/EmailToFolder-Chrome-Extension.zip" download style="text-align:center;color:#6cb4ff"><span class="th">🧩 ดาวน์โหลดส่วนขยาย (.zip)</span><span class="en">🧩 Download extension (.zip)</span></a>
+<a class="btn" href="index.html#download" style="text-align:center"><span class="th">ดาวน์โหลดโปรแกรม Desktop</span><span class="en">Get the Desktop app</span></a>
+<a class="btn ghost" href="index.html#contact" style="text-align:center;border:1px solid rgba(255,255,255,.18);color:#fff"><span class="th">ติดต่อทีมงาน / Enterprise</span><span class="en">Contact us / Enterprise</span></a>
+<a class="btn ghost" href="downloads/EmailToFolder-Chrome-Extension.zip" download style="text-align:center;color:#6cb4ff"><span class="th">ดาวน์โหลดส่วนขยาย (.zip)</span><span class="en">Download extension (.zip)</span></a>
 </div>
 </div></div></div></section>
 </main>
 
 <div class="gh"><a href="https://github.com" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.540 2.29 6.53 5.47 7.590.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.130-.28-.15-.68-.52-.01-.53.63-.01 1.080.58 1.230.82.72 1.21 1.870.87 2.330.66.07-.52.28-.87.51-1.07-1.78-.2-3.640-.89-3.640-3.950 0-.87.31-1.59.82-2.150-.08-.2-.36-1.020.08-2.120 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.040 2.2-.82 2.2-.82.44 1.1.16 1.920.08 2.120.51.56.82 1.270.82 2.150 0 3.070-1.870 3.750-3.650 3.950.29.25.54.73.54 1.480 0 1.070-.01 1.930-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span class="th">เว็บไซต์นี้โฮสต์ด้วย GitHub</span><span class="en">This website is hosted on GitHub</span></a></div>
-<footer class="dk"><div class="wrap"><div>© 2026 Email to Folder Dev Team · emailtofolder.com</div><div>📍 Bangkok, Thailand · 📞 094-562-0859</div></div></footer>
+<footer class="dk"><div class="wrap"><div>© 2026 Email to Folder Dev Team · emailtofolder.com</div><div>Bangkok, Thailand · 094-562-0859</div></div></footer>
 
 <script>
 (function(){
@@ -515,7 +516,7 @@ document.querySelectorAll("[data-copy]").forEach(function(b){
   var orig=b.innerHTML;
   b.addEventListener("click",function(){
     var t=b.getAttribute("data-copy");
-    function done(){b.classList.add("ok");b.innerHTML='✓ <span class="th">คัดลอกแล้ว</span><span class="en">Copied</span>';clearTimeout(b._t);b._t=setTimeout(function(){b.classList.remove("ok");b.innerHTML=orig},1600)}
+    function done(){b.classList.add("ok");b.innerHTML='<span class="th">คัดลอกแล้ว</span><span class="en">Copied</span>';clearTimeout(b._t);b._t=setTimeout(function(){b.classList.remove("ok");b.innerHTML=orig},1600)}
     if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(done,function(){if(fallbackCopy(t))done()})}
     else if(fallbackCopy(t)){done()}
   });
